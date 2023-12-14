@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "10784846687",
+    "project_id": "rakelvator",
+    "storage_bucket": "rakelvator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10784846687:android:0399a73ffa4a398d9e3cea",
+        "android_client_info": {
+          "package_name": "com.rakelevators.codgoo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvg-9ixi6qW3GVEa5e4T6owkIlQ0bPKIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
