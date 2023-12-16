@@ -4,7 +4,6 @@ import 'package:cnattendance/screen/projectscreen/tasklistscreen/tasklistscontro
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class TaskListScreen extends StatelessWidget {
   const TaskListScreen({super.key});
@@ -32,9 +31,11 @@ class TaskListScreen extends StatelessWidget {
                 children: [
                   Card(
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),),),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
                     color: Colors.white12,
                     elevation: 0,
                     margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -54,18 +55,19 @@ class TaskListScreen extends StatelessWidget {
                                   },
                                   child: Card(
                                     elevation: 0,
-                                    color: model.selected.value == 'All'
-                                        ? Colors.white24
-                                        : Colors.transparent,
+                                    color: model.selected.value == 'All' ? Colors.white24 : Colors.transparent,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 15,),
+                                        vertical: 8.0,
+                                        horizontal: 15,
+                                      ),
                                       child: Text(
                                         'All'.tr,
                                         style: const TextStyle(
-                                            color: Color(0xff635F54),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,),
+                                          color: Color(0xff635F54),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -77,18 +79,19 @@ class TaskListScreen extends StatelessWidget {
                                   },
                                   child: Card(
                                     elevation: 0,
-                                    color: model.selected.value == 'In Progress'
-                                        ? Colors.white24
-                                        : Colors.transparent,
+                                    color: model.selected.value == 'In Progress' ? Colors.white24 : Colors.transparent,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 15,),
+                                        vertical: 8.0,
+                                        horizontal: 15,
+                                      ),
                                       child: Text(
                                         'In_progress'.tr,
                                         style: const TextStyle(
-                                            color: Color(0xff635F54),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,),
+                                          color: Color(0xff635F54),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -100,18 +103,19 @@ class TaskListScreen extends StatelessWidget {
                                   },
                                   child: Card(
                                     elevation: 0,
-                                    color: model.selected.value == 'Completed'
-                                        ? Colors.white24
-                                        : Colors.transparent,
+                                    color: model.selected.value == 'Completed' ? Colors.white24 : Colors.transparent,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 15,),
+                                        vertical: 8.0,
+                                        horizontal: 15,
+                                      ),
                                       child: Text(
                                         'Completed'.tr,
                                         style: const TextStyle(
-                                            color: Color(0xff635F54),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,),
+                                          color: Color(0xff635F54),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -123,18 +127,19 @@ class TaskListScreen extends StatelessWidget {
                                   },
                                   child: Card(
                                     elevation: 0,
-                                    color: model.selected.value == 'On Hold'
-                                        ? Colors.white24
-                                        : Colors.transparent,
+                                    color: model.selected.value == 'On Hold' ? Colors.white24 : Colors.transparent,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 15,),
+                                        vertical: 8.0,
+                                        horizontal: 15,
+                                      ),
                                       child: Text(
                                         'On_Hold'.tr,
                                         style: const TextStyle(
-                                            color: Color(0xff635F54),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,),
+                                          color: Color(0xff635F54),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -146,18 +151,19 @@ class TaskListScreen extends StatelessWidget {
                                   },
                                   child: Card(
                                     elevation: 0,
-                                    color: model.selected.value == 'Cancelled'
-                                        ? Colors.white24
-                                        : Colors.transparent,
+                                    color: model.selected.value == 'Cancelled' ? Colors.white24 : Colors.transparent,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 15,),
+                                        vertical: 8.0,
+                                        horizontal: 15,
+                                      ),
                                       child: Text(
                                         'Cancelled'.tr,
                                         style: const TextStyle(
-                                            color: Color(0xff635F54),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,),
+                                          color: Color(0xff635F54),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -169,18 +175,19 @@ class TaskListScreen extends StatelessWidget {
                                   },
                                   child: Card(
                                     elevation: 0,
-                                    color: model.selected.value == 'Not Started'
-                                        ? Colors.white24
-                                        : Colors.transparent,
+                                    color: model.selected.value == 'Not Started' ? Colors.white24 : Colors.transparent,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 15,),
+                                        vertical: 8.0,
+                                        horizontal: 15,
+                                      ),
                                       child: Text(
                                         'Not_Started'.tr,
                                         style: const TextStyle(
-                                            color: Color(0xff635F54),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,),
+                                          color: Color(0xff635F54),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -203,8 +210,7 @@ class TaskListScreen extends StatelessWidget {
                               child: Container(),
                             )
                           : Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: ListView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(),
                                 primary: false,
@@ -213,31 +219,36 @@ class TaskListScreen extends StatelessWidget {
                                   final Task item = model.filteredList[index];
                                   return InkWell(
                                     onTap: () {
-                                      Get.to(const TaskDetailScreen(),
-                                          arguments: {'id': item.id},);
+                                      Get.to(
+                                        const TaskDetailScreen(),
+                                        arguments: {'id': item.id},
+                                      );
                                     },
                                     child: Card(
-                                      margin:
-                                          const EdgeInsets.symmetric(vertical: 10),
+                                      margin: const EdgeInsets.symmetric(vertical: 10),
                                       shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10),),),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                      ),
                                       color: const Color(0xfffff8f8),
                                       elevation: 0,
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 10,),
+                                          horizontal: 15,
+                                          vertical: 10,
+                                        ),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               maxLines: 1,
                                               item.name!,
                                               style: const TextStyle(
-                                                  color: Color(0xff635F54),
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,),
+                                                color: Color(0xff635F54),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                             const SizedBox(
                                               height: 10,
@@ -256,10 +267,10 @@ class TaskListScreen extends StatelessWidget {
                                                   maxLines: 1,
                                                   item.projectName!,
                                                   style: const TextStyle(
-                                                      color: Color(0xff635F54),
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,),
+                                                    color: Color(0xff635F54),
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -271,45 +282,41 @@ class TaskListScreen extends StatelessWidget {
                                               height: 0,
                                             ),
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
                                                   '${item.date!}-${item.endDate!}',
                                                   style: const TextStyle(
-                                                      color: Color(0xff635F54),
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.normal,),
+                                                    color: Color(0xff635F54),
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.normal,
+                                                  ),
                                                 ),
                                                 Card(
                                                   elevation: 0,
-                                                  color: item.status ==
-                                                          'In Progress'
-                                                      ? HexColor('#80C1E1C1')
-                                                      : item.status ==
-                                                              'Not Started'
-                                                          ? HexColor('#C9CC3F')
-                                                          : item.status ==
-                                                                  'On Hold'
-                                                              ? HexColor(
-                                                                  '#93C572',)
-                                                              : HexColor(
-                                                                  '#3cb116',),
+                                                  color: item.status == 'In Progress'
+                                                      ? const Color(0xff80C1E1C1)
+                                                      : item.status == 'Not Started'
+                                                          ? const Color(0xffC9CC3F)
+                                                          : item.status == 'On Hold'
+                                                              ? const Color(
+                                                                  0xff93C572,
+                                                                )
+                                                              : const Color(
+                                                                  0xff3cb116,
+                                                                ),
                                                   child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8.0,
-                                                        vertical: 5,),
+                                                    padding: const EdgeInsets.symmetric(
+                                                      horizontal: 8.0,
+                                                      vertical: 5,
+                                                    ),
                                                     child: Text(
                                                       item.status!,
                                                       style: const TextStyle(
-                                                          color:
-                                                              Color(0xff635F54),
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight
-                                                              .normal,),
+                                                        color: Color(0xff635F54),
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.normal,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

@@ -3,7 +3,6 @@ import 'package:cnattendance/widget/customalertdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
 
@@ -24,7 +23,9 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
       setState(() {
         isLoading = true;
         EasyLoading.show(
-            status: 'Requesting...', maskType: EasyLoadingMaskType.black,);
+          status: 'Requesting...',
+          maskType: EasyLoadingMaskType.black,
+        );
       });
       final status = await provider.getCheckInStatus();
       if (status) {
@@ -70,7 +71,9 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
       isLoading = true;
       setState(() {
         EasyLoading.show(
-            status: 'Requesting...', maskType: EasyLoadingMaskType.black,);
+          status: 'Requesting...',
+          maskType: EasyLoadingMaskType.black,
+        );
       });
       final status = await provider.getCheckInStatus();
       if (status) {
@@ -132,14 +135,15 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
                     style: const TextStyle(fontSize: 18, color: Color(0xff635F54)),
                   ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        size: 20,
-                        color: Color(0xff635F54),
-                      ),),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      size: 20,
+                      color: Color(0xff635F54),
+                    ),
+                  ),
                 ],
               ),
               Padding(
@@ -151,40 +155,44 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
                       child: Container(
                         padding: const EdgeInsets.only(right: 5, left: 5),
                         child: TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: HexColor('#635F54'),
-                                shape: ButtonBorder(),),
-                            onPressed: () async {
-                              isEnabled ? onCheckIn() : null;
-                              isEnabled = false;
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Text(
-                                'check_in'.tr,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xff635F54),
+                            shape: ButtonBorder(),
+                          ),
+                          onPressed: () async {
+                            isEnabled ? onCheckIn() : null;
+                            isEnabled = false;
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              'check_in'.tr,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.only(left: 5, right: 5),
                         child: TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: HexColor('#635F54'),
-                                shape: ButtonBorder(),),
-                            onPressed: () {
-                              isEnabled ? onCheckOut() : null;
-                              isEnabled = false;
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Text(
-                                'check_out'.tr,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xff635F54),
+                            shape: ButtonBorder(),
+                          ),
+                          onPressed: () {
+                            isEnabled ? onCheckOut() : null;
+                            isEnabled = false;
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              'check_out'.tr,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],

@@ -6,7 +6,6 @@ import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -77,7 +76,14 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         EasyLoading.show(status: 'Changing', maskType: EasyLoadingMaskType.black);
       });
       final response = await Provider.of<ProfileProvider>(context, listen: false).updateProfile(
-          _nameController.text, _emailController.text, _addressController.text, _dobController.text, getGender(), _phoneController.text, File(''),);
+        _nameController.text,
+        _emailController.text,
+        _addressController.text,
+        _dobController.text,
+        getGender(),
+        _phoneController.text,
+        File(''),
+      );
 
       if (!mounted) {
         return;
@@ -145,7 +151,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(20),
           child: TextButton(
-            style: TextButton.styleFrom(backgroundColor: HexColor('#635F54'), shape: ButtonBorder(), fixedSize: const Size(double.maxFinite, 55)),
+            style: TextButton.styleFrom(backgroundColor: Color(0xff635F54), shape: ButtonBorder(), fixedSize: const Size(double.maxFinite, 55)),
             onPressed: () {
               validateValue();
             },

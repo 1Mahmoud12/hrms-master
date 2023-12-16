@@ -5,7 +5,6 @@ import 'package:cnattendance/utils/extensions.dart';
 import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
 class AttendanceToggle extends StatefulWidget {
@@ -65,25 +64,25 @@ class AttendanceToggleState extends State<AttendanceToggle> {
                   buttonHeight: 40,
                   buttonWidth: 110,
                   buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                  buttonDecoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
+                  buttonDecoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10),
                     ),
-                    color: HexColor('#FFFFFF'),
+                    color: Color(0xffFFFFFF),
                   ),
                   buttonElevation: 0,
                   itemHeight: 40,
                   itemPadding: const EdgeInsets.only(left: 14, right: 14),
                   dropdownMaxHeight: 200,
-                  dropdownDecoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
+                  dropdownDecoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10),
                     ),
-                    color: HexColor('#FFFFFF'),
+                    color: Color(0xffFFFFFF),
                   ),
                   scrollbarRadius: const Radius.circular(40),
                   scrollbarThickness: 6,

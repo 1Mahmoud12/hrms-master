@@ -7,7 +7,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -27,15 +26,16 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
   bool isLoading = false;
 
   void issueLeave() async {
-    if (time.text.isNotEmpty &&
-        reason.text.isNotEmpty &&
-        selectedValue != null) {
+    if (time.text.isNotEmpty && reason.text.isNotEmpty && selectedValue != null) {
       showLoader();
       try {
         isLoading = true;
-        final response =
-            await Provider.of<LeaveProvider>(context, listen: false).issueLeave(
-                time.text, time.text, reason.text, selectedValue!.id,);
+        final response = await Provider.of<LeaveProvider>(context, listen: false).issueLeave(
+          time.text,
+          time.text,
+          reason.text,
+          selectedValue!.id,
+        );
 
         if (!mounted) {
           return;
@@ -43,23 +43,28 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
         isLoading = false;
         dismissLoader();
         Navigator.pop(context);
-        showDialog(context: context, builder: (context) {
-          return Dialog(
-            child: CustomAlertDialog(response.message),
-          );
-        },);
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              child: CustomAlertDialog(response.message),
+            );
+          },
+        );
       } catch (e) {
-        showDialog(context: context, builder: (context) {
-          return Dialog(
-            child: CustomAlertDialog(e.toString()),
-          );
-        },);
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              child: CustomAlertDialog(e.toString()),
+            );
+          },
+        );
         isLoading = false;
         dismissLoader();
       }
     } else {
-      NavigationService()
-          .showSnackBar('Leave Status', 'Field must not be empty');
+      NavigationService().showSnackBar('Leave Status', 'Field must not be empty');
     }
   }
 
@@ -72,7 +77,9 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
   void showLoader() {
     setState(() {
       EasyLoading.show(
-          status: 'Requesting...', maskType: EasyLoadingMaskType.black,);
+        status: 'Requesting...',
+        maskType: EasyLoadingMaskType.black,
+      );
     });
   }
 
@@ -80,7 +87,7 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
   Widget build(BuildContext context) {
     final provider = Provider.of<LeaveProvider>(context);
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         return !isLoading;
       },
       child: Container(
@@ -98,27 +105,46 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        size: 20,
-                        color: Colors.white,
-                      ),),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      isExpanded: true,
-                      hint: const Row(
-                        children: [
-                          Expanded(
+                width: MediaQuery.of(context).size.width,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton2(
+                    isExpanded: true,
+                    hint: const Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Select Leave Type',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    items: provider.leaveList
+                        .where((element) => element.status)
+                        .where((element) => element.isEarlyLeave)
+                        .map(
+                          (item) => DropdownMenuItem<Leave>(
+                            value: item,
                             child: Text(
-                              'Select Leave Type',
-                              style: TextStyle(
+                              item.name,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -126,34 +152,18 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        ],
-                      ),
-                      items: provider.leaveList
-                          .where((element) => element.status)
-                          .where((element) => element.isEarlyLeave)
-                          .map((item) => DropdownMenuItem<Leave>(
-                                value: item,
-                                child: Text(
-                                  item.name,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),)
-                          .toList(),
-                      value: selectedValue,
-                      onChanged: (value) {
-                        selectedValue = value as Leave?;
-                        if (selectedValue != null) {
-                          setState(() {});
-                        }
-                      },
-                   
-                    ),
-                  ),),
+                        )
+                        .toList(),
+                    value: selectedValue,
+                    onChanged: (value) {
+                      selectedValue = value as Leave?;
+                      if (selectedValue != null) {
+                        setState(() {});
+                      }
+                    },
+                  ),
+                ),
+              ),
               gaps(10),
               TextField(
                 controller: time,
@@ -168,13 +178,17 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                 ),
                 readOnly: true,
                 //set it true, so that user will not able to edit text
@@ -184,8 +198,13 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
                     initialTime: TimeOfDay.now(),
                   );
                   var current = DateTime.now();
-                  current = DateTime.utc(current.year, current.month, current.day,
-                      timeOfDay!.hour, timeOfDay.minute,);
+                  current = DateTime.utc(
+                    current.year,
+                    current.month,
+                    current.day,
+                    timeOfDay!.hour,
+                    timeOfDay.minute,
+                  );
                   time.text = DateFormat('yyyy-MM-dd HH:mm:ss').format(current);
                 },
               ),
@@ -206,13 +225,17 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                  ),
                 ),
               ),
               gaps(20),
@@ -220,21 +243,22 @@ class EarlyLeaveSheetState extends State<EarlyLeaveSheet> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(left: 5),
                 child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: HexColor('#036eb7'),
-                      padding: EdgeInsets.zero,
-                      shape: ButtonBorder(),
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xff036eb7),
+                    padding: EdgeInsets.zero,
+                    shape: ButtonBorder(),
+                  ),
+                  onPressed: () {
+                    issueLeave();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'Request Leave',
+                      style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
-                      issueLeave();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Text(
-                        'Request Leave',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),),
+                  ),
+                ),
               ),
             ],
           ),

@@ -5,7 +5,6 @@ import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -47,17 +46,21 @@ class SupportScreen extends StatelessWidget {
                     padding: EdgeInsets.all(20),
                     child: Column(
                       children: [
-                        Icon(Icons.support_agent_rounded,
-                            color: Colors.white, size: 60,),
+                        Icon(
+                          Icons.support_agent_rounded,
+                          color: Colors.white,
+                          size: 60,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
                           'Help Desk',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,),
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(
@@ -97,29 +100,25 @@ class SupportScreen extends StatelessWidget {
                                   value: e.name,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0,),
+                                      horizontal: 8.0,
+                                    ),
                                     child: Text(
                                       e.name,
                                       style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,),
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 );
                               }).toList(),
-                              value: model.selected.value.name == ''
-                                  ? null
-                                  : model.selected.value.name,
+                              value: model.selected.value.name == '' ? null : model.selected.value.name,
                               onChanged: (value) {
-                                print(value);
+                                debugPrint(value.toString());
 
-                                final result = model.departments
-                                    .where((dep) => dep.name == value)
-                                    .toList();
-                                result.isNotEmpty
-                                    ? model.selected.value = result[0]
-                                    : model.selected.value;
+                                final result = model.departments.where((dep) => dep.name == value).toList();
+                                result.isNotEmpty ? model.selected.value = result[0] : model.selected.value;
                               },
                               icon: const Icon(
                                 Icons.arrow_forward_ios_outlined,
@@ -129,30 +128,29 @@ class SupportScreen extends StatelessWidget {
                               iconDisabledColor: Colors.grey,
                               buttonHeight: 50,
                               buttonWidth: 160,
-                              buttonPadding:
-                                  const EdgeInsets.only(left: 14, right: 14),
-                              buttonDecoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),),
-                                color: HexColor('#FFFFFF'),
+                              buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                              buttonDecoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10),
+                                ),
+                                color: Color(0xffFFFFFF),
                               ),
                               buttonElevation: 0,
                               itemHeight: 40,
-                              itemPadding:
-                                  const EdgeInsets.only(left: 14, right: 14),
+                              itemPadding: const EdgeInsets.only(left: 14, right: 14),
                               dropdownMaxHeight: 200,
-                              dropdownDecoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),),
-                                color: HexColor('#FFFFFF'),
+                              dropdownDecoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10),
+                                ),
+                                color: Color(0xffFFFFFF),
                               ),
                               scrollbarRadius: const Radius.circular(40),
                               scrollbarThickness: 6,
                               scrollbarAlwaysShow: true,
-                              offset: const Offset(0, 0),
                             ),
                           ),
                         ),
@@ -176,21 +174,29 @@ class SupportScreen extends StatelessWidget {
                           fillColor: Colors.white24,
                           filled: true,
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -218,21 +224,29 @@ class SupportScreen extends StatelessWidget {
                           fillColor: Colors.white24,
                           filled: true,
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -241,22 +255,23 @@ class SupportScreen extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: HexColor('#036eb7'),
-                              padding: EdgeInsets.zero,
-                              shape: ButtonBorder(),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xff036eb7),
+                            padding: EdgeInsets.zero,
+                            shape: ButtonBorder(),
+                          ),
+                          onPressed: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            model.onSubmitClicked(1);
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(color: Colors.white),
                             ),
-                            onPressed: () {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                              model.onSubmitClicked(1);
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),),
+                          ),
+                        ),
                       ),
                     ],
                   ),

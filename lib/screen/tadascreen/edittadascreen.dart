@@ -2,7 +2,6 @@ import 'package:cnattendance/provider/edittadacontroller.dart';
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class EditTadaScreen extends StatelessWidget {
   const EditTadaScreen({super.key});
@@ -42,10 +41,11 @@ class EditTadaScreen extends StatelessWidget {
             // ),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: HexColor('#635f54'),
+                backgroundColor: const Color(0xff635f54),
                 padding: EdgeInsets.zero,
                 shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(29)),),
+                  borderRadius: BorderRadius.all(Radius.circular(29)),
+                ),
               ),
               onPressed: () {
                 FocusManager.instance.primaryFocus?.unfocus();
@@ -99,23 +99,29 @@ class EditTadaScreen extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                       focusedErrorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                       errorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -149,23 +155,29 @@ class EditTadaScreen extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                       focusedErrorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                       errorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -198,23 +210,29 @@ class EditTadaScreen extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                       focusedErrorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                       errorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),),),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -247,22 +265,25 @@ class EditTadaScreen extends StatelessWidget {
                             },
                             tileColor: Colors.white12,
                             shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),),),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                              ),
+                            ),
                             minVerticalPadding: 10,
                             title: Text(
                               file.url,
                               style: const TextStyle(color: Colors.black),
                             ),
                             trailing: GestureDetector(
-                                onTap: () {
-                                  model.removeAttachment(file.id, index);
-                                },
-                                child: const Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                ),),
+                              onTap: () {
+                                model.removeAttachment(file.id, index);
+                              },
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -288,15 +309,16 @@ class EditTadaScreen extends StatelessWidget {
                       model.onFileClicked();
                     },
                     child: const Card(
-                        shape: CircleBorder(),
-                        color: Color(0xff635F54),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),),
+                      shape: CircleBorder(),
+                      color: Color(0xff635F54),
+                      child: Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                   Obx(
                     () => ListView.builder(
@@ -307,9 +329,11 @@ class EditTadaScreen extends StatelessWidget {
                         final file = model.fileList[index];
                         return ListTile(
                           shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),),),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
                           onTap: () {
                             model.launchFile(file.path!);
                           },
@@ -318,13 +342,14 @@ class EditTadaScreen extends StatelessWidget {
                             style: const TextStyle(color: Colors.white),
                           ),
                           trailing: GestureDetector(
-                              onTap: () {
-                                model.removeItem(index);
-                              },
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                              ),),
+                            onTap: () {
+                              model.removeItem(index);
+                            },
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
                         );
                       },
                     ),

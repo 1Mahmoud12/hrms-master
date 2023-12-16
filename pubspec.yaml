@@ -24,6 +24,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   device_info_plus: ^9.0.3
   expandable: ^5.0.1
+  flutter_expanded_tile: ^0.3.7
   flutter_web_browser: ^0.17.1
   percent_indicator: ^4.0.1
   persistent_bottom_nav_bar_v2: ^4.2.8
@@ -42,7 +43,6 @@ dependencies:
   firebase_messaging: ^14.6.7
   overlay_support: ^2.0.1
   flutter_ringtone_player: ^3.2.0
-  hexcolor: ^3.0.1
   fl_chart: ^0.63.0
   overlay_loading_progress: ^1.0.0
   slide_digital_clock: ^1.0.2
@@ -93,40 +93,25 @@ change_app_package_name:
 flutter:
   uses-material-design: true
   fonts:
-    - family: inter
+    - family: Urbanist
       fonts:
-        - asset: assets/fonts/Inter-Black.ttf
-        - asset: assets/fonts/Inter-BlackItalic.ttf
-        - asset: assets/fonts/Inter-Bold.ttf
-        - asset: assets/fonts/Inter-BoldItalic.ttf
-        - asset: assets/fonts/Inter-ExtraBold.ttf
-        - asset: assets/fonts/Inter-ExtraBoldItalic.ttf
-        - asset: assets/fonts/Inter-ExtraLightItalic.ttf
-        - asset: assets/fonts/Inter-Italic.ttf
-        - asset: assets/fonts/Inter-Light.ttf
-        - asset: assets/fonts/Inter-Medium.ttf
-        - asset: assets/fonts/Inter-MediumItalic.ttf
-        - asset: assets/fonts/Inter-Regular.ttf
-        - asset: assets/fonts/Inter-SemiBold.ttf
-        - asset: assets/fonts/Inter-SemiBoldItalic.ttf
-        - asset: assets/fonts/Inter-Thin.ttf
-        - asset: assets/fonts/InterDisplay-Black.ttf
-        - asset: assets/fonts/InterDisplay-BlackItalic.ttf
-        - asset: assets/fonts/InterDisplay-BoldItalic.ttf
-        - asset: assets/fonts/InterDisplay-ExtraBold.ttf
-        - asset: assets/fonts/InterDisplay-ExtraBoldItalic.ttf
-        - asset: assets/fonts/InterDisplay-ExtraLight.ttf
-        - asset: assets/fonts/InterDisplay-ExtraLightItalic.ttf
-        - asset: assets/fonts/InterDisplay-Italic.ttf
-        - asset: assets/fonts/InterDisplay-Light.ttf
-        - asset: assets/fonts/InterDisplay-LightItalic.ttf
-        - asset: assets/fonts/InterDisplay-Medium.ttf
-        - asset: assets/fonts/InterDisplay-MediumItalic.ttf
-        - asset: assets/fonts/InterDisplay-Regular.ttf
-        - asset: assets/fonts/InterDisplay-SemiBold.ttf
-        - asset: assets/fonts/InterDisplay-SemiBoldItalic.ttf
-        - asset: assets/fonts/InterDisplay-Thin.ttf
-        - asset: assets/fonts/InterDisplay-ThinItalic.ttf
+        - asset: assets/fonts/Urbanist-Black.ttf
+        - asset: assets/fonts/Urbanist-BlackItalic.ttf
+        - asset: assets/fonts/Urbanist-Bold.ttf
+        - asset: assets/fonts/Urbanist-BoldItalic.ttf
+        - asset: assets/fonts/Urbanist-ExtraBold.ttf
+        - asset: assets/fonts/Urbanist-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Urbanist-Italic.ttf
+        - asset: assets/fonts/Urbanist-Light.ttf
+        - asset: assets/fonts/Urbanist-LightItalic.ttf
+        - asset: assets/fonts/Urbanist-Regular.ttf
+        - asset: assets/fonts/Urbanist-SemiBold.ttf
+        - asset: assets/fonts/Urbanist-SemiBoldItalic.ttf
+        - asset: assets/fonts/Urbanist-Thin.ttf
+        - asset: assets/fonts/Urbanist-ThinItalic.ttf
+        - asset: assets/fonts/UrbanistGX.ttf
+
+
 
 
   assets:

@@ -21,14 +21,14 @@ class Auth with ChangeNotifier {
       // var fcm = await FirebaseMessaging.instance.getToken();
 
       final fcm = await FirebaseMessaging.instance.getToken();
-      debugPrint('fcm $fcm');
+      debugPrint('fcm $username $password ${await DeviceUUid().getUniqueDeviceId()}');
       final response = await http.post(
         uri,
         headers: headers,
         body: {
           'username': username,
           'password': password,
-          'fcm_token': 'fcm',
+          'fcm_token': fcm,
           'device_type': Platform.isIOS ? 'ios' : 'android',
           'uuid': await DeviceUUid().getUniqueDeviceId(),
         },

@@ -36,7 +36,6 @@ import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:in_app_notification/in_app_notification.dart';
 import 'package:provider/provider.dart';
 
@@ -97,8 +96,8 @@ void main() async {
           child: ListTile(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             leading: const SizedBox(height: double.infinity, child: Icon(Icons.notifications)),
-            iconColor: HexColor('#011754'),
-            textColor: HexColor('#011754'),
+            iconColor: const Color(0xff011754),
+            textColor: const Color(0xff011754),
             minVerticalPadding: 10,
             minLeadingWidth: 0,
             tileColor: Colors.white,
@@ -151,7 +150,7 @@ void configLoading() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -227,7 +226,7 @@ class _MyAppState extends State<MyApp> {
                 theme: ThemeData(
                   useMaterial3: true,
                   canvasColor: const Color.fromRGBO(255, 255, 255, 1),
-                  fontFamily: 'inter',
+                  fontFamily: 'Urbanist',
                   primarySwatch: Colors.blue,
                   scaffoldBackgroundColor: AppColors.scaffoldBackGround,
                   appBarTheme: const AppBarTheme(

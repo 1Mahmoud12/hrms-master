@@ -7,7 +7,6 @@ import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -28,16 +27,16 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
   TextEditingController startDate = TextEditingController();
 
   void issueLeave() async {
-    if (endDate.text.isNotEmpty &&
-        startDate.text.isNotEmpty &&
-        reason.text.isNotEmpty &&
-        selectedValue != null) {
+    if (endDate.text.isNotEmpty && startDate.text.isNotEmpty && reason.text.isNotEmpty && selectedValue != null) {
       try {
         showLoader();
         isLoading = true;
-        final response =
-            await Provider.of<LeaveProvider>(context, listen: false).issueLeave(
-                startDate.text, endDate.text, reason.text, selectedValue!.id,);
+        final response = await Provider.of<LeaveProvider>(context, listen: false).issueLeave(
+          startDate.text,
+          endDate.text,
+          reason.text,
+          selectedValue!.id,
+        );
 
         if (!mounted) {
           return;
@@ -66,8 +65,7 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
         );
       }
     } else {
-      NavigationService()
-          .showSnackBar('Leave Status', 'Field must not be empty');
+      NavigationService().showSnackBar('Leave Status', 'Field must not be empty');
     }
   }
 
@@ -80,7 +78,9 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
   void showLoader() {
     setState(() {
       EasyLoading.show(
-          status: 'Requesting...', maskType: EasyLoadingMaskType.black,);
+        status: 'Requesting...',
+        maskType: EasyLoadingMaskType.black,
+      );
     });
   }
 
@@ -106,27 +106,45 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        size: 20,
-                        color: Colors.white,
-                      ),),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      isExpanded: true,
-                      hint: const Row(
-                        children: [
-                          Expanded(
+                width: MediaQuery.of(context).size.width,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton2(
+                    isExpanded: true,
+                    hint: const Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Select Leave Type',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    items: provider.leaveList
+                        .where((element) => element.status)
+                        .map(
+                          (item) => DropdownMenuItem<Leave>(
+                            value: item,
                             child: Text(
-                              'Select Leave Type',
-                              style: TextStyle(
+                              item.name,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -134,32 +152,18 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        ],
-                      ),
-                      items: provider.leaveList
-                          .where((element) => element.status)
-                          .map((item) => DropdownMenuItem<Leave>(
-                                value: item,
-                                child: Text(
-                                  item.name,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),)
-                          .toList(),
-                      value: selectedValue,
-                      onChanged: (value) {
-                        selectedValue = value as Leave?;
-                        if (selectedValue != null) {
-                          setState(() {});
-                        }
-                      },
-                    ),
-                  ),),
+                        )
+                        .toList(),
+                    value: selectedValue,
+                    onChanged: (value) {
+                      selectedValue = value as Leave?;
+                      if (selectedValue != null) {
+                        setState(() {});
+                      }
+                    },
+                  ),
+                ),
+              ),
               gaps(10),
               TextField(
                 controller: startDate,
@@ -174,42 +178,51 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                 ),
                 readOnly: true,
                 //set it true, so that user will not able to edit text
                 onTap: () async {
                   final DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1950),
-                      //DateTime.now() - not to allow to choose before today.
-                      lastDate: DateTime(2100),);
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1950),
+                    //DateTime.now() - not to allow to choose before today.
+                    lastDate: DateTime(2100),
+                  );
 
                   if (pickedDate != null) {
                     print(
-                        pickedDate,); //pickedDate output format => 2021-03-10 00:00:00.000
-                    final String formattedDate =
-                        DateFormat('yyyy-MM-dd hh:mm:ss').format(pickedDate);
+                      pickedDate,
+                    ); //pickedDate output format => 2021-03-10 00:00:00.000
+                    final String formattedDate = DateFormat('yyyy-MM-dd hh:mm:ss').format(pickedDate);
                     print(
-                        formattedDate,); //formatted date output using intl package =>  2021-03-16
+                      formattedDate,
+                    ); //formatted date output using intl package =>  2021-03-16
                     setState(() {
-                      startDate.text =
-                          formattedDate; //set output date to TextField value.
+                      startDate.text = formattedDate; //set output date to TextField value.
                     });
                   } else {}
                 },
@@ -228,42 +241,51 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                 ),
                 readOnly: true,
                 //set it true, so that user will not able to edit text
                 onTap: () async {
                   final DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1950),
-                      //DateTime.now() - not to allow to choose before today.
-                      lastDate: DateTime(2100),);
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1950),
+                    //DateTime.now() - not to allow to choose before today.
+                    lastDate: DateTime(2100),
+                  );
 
                   if (pickedDate != null) {
                     print(
-                        pickedDate,); //pickedDate output format => 2021-03-10 00:00:00.000
-                    final String formattedDate =
-                        DateFormat('yyyy-MM-dd hh:mm:ss').format(pickedDate);
+                      pickedDate,
+                    ); //pickedDate output format => 2021-03-10 00:00:00.000
+                    final String formattedDate = DateFormat('yyyy-MM-dd hh:mm:ss').format(pickedDate);
                     print(
-                        formattedDate,); //formatted date output using intl package =>  2021-03-16
+                      formattedDate,
+                    ); //formatted date output using intl package =>  2021-03-16
                     setState(() {
-                      endDate.text =
-                          formattedDate; //set output date to TextField value.
+                      endDate.text = formattedDate; //set output date to TextField value.
                     });
                   } else {}
                 },
@@ -285,21 +307,29 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                 ),
               ),
               gaps(20),
@@ -307,21 +337,22 @@ class IssueLeaveSheetState extends State<IssueLeaveSheet> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(left: 5),
                 child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: HexColor('#036eb7'),
-                      padding: EdgeInsets.zero,
-                      shape: ButtonBorder(),
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xff036eb7),
+                    padding: EdgeInsets.zero,
+                    shape: ButtonBorder(),
+                  ),
+                  onPressed: () {
+                    issueLeave();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'Request Leave',
+                      style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
-                      issueLeave();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Text(
-                        'Request Leave',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),),
+                  ),
+                ),
               ),
             ],
           ),

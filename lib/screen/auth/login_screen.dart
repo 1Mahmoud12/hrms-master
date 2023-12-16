@@ -41,7 +41,7 @@ class LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
-    _form.currentState!.dispose();
+    //_form.currentState!.dispose();
     super.dispose();
   }
 
@@ -63,10 +63,12 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
+    debugPrint("a22dsdssd");
     setState(() {
       _isLoading = true;
       EasyLoading.show(status: 'Signing in..', maskType: EasyLoadingMaskType.black);
     });
+    Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
 
     try {
       final response = await Provider.of<Auth>(context, listen: false).login(_usernameController.text, _passwordController.text);
@@ -79,7 +81,6 @@ class LoginScreenState extends State<LoginScreen> {
       //     .pushNamedAndRemoveUntil(DashboardScreen.routeName, (route) => false);
       debugPrint("a22dsdssd ${response.data.user.roleId}${response.data.user.roleId == '4'}");
       if (response.data.user.roleId == '4') {
-        Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
       } else {
         Navigator.of(context).pushNamedAndRemoveUntil(MenuScreen.routeName, (route) => false);
       }
@@ -196,7 +197,7 @@ class LoginScreenState extends State<LoginScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacement(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Signup(),

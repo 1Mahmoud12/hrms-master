@@ -8,7 +8,6 @@ import 'package:cnattendance/screen/projectscreen/tasklistscreen/tasklistscreen.
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -105,14 +104,14 @@ class ProjectScreen extends StatelessWidget {
                   progressColor:
                       // ignore: invalid_use_of_protected_member
                       (model.overview.value['progress']! / 100) <= .25
-                          ? HexColor('#C1E1C1')
+                          ? Color(0xffC1E1C1)
                           // ignore: invalid_use_of_protected_member
                           : (model.overview.value['progress']! / 100) <= .50
-                              ? HexColor('#C9CC3F')
+                              ? Color(0xffC9CC3F)
                               // ignore: invalid_use_of_protected_member
                               : (model.overview.value['progress']! / 100) <= .75
-                                  ? HexColor('#93C572')
-                                  : HexColor('#3cb116'),
+                                  ? Color(0xff93C572)
+                                  : Color(0xff3cb116),
                 ),
               ),
             ),
@@ -309,12 +308,12 @@ class ProjectScreen extends StatelessWidget {
                                 barRadius: const Radius.circular(20),
                                 backgroundColor: Colors.black12,
                                 progressColor: item.progress <= 25
-                                    ? HexColor('#C1E1C1')
+                                    ? Color(0xffC1E1C1)
                                     : item.progress <= 50
-                                        ? HexColor('#C9CC3F')
+                                        ? Color(0xffC9CC3F)
                                         : item.progress <= 75
-                                            ? HexColor('#93C572')
-                                            : HexColor('#3cb116'),
+                                            ? Color(0xff93C572)
+                                            : Color(0xff3cb116),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -472,12 +471,12 @@ class ProjectScreen extends StatelessWidget {
                                   Card(
                                     elevation: 0,
                                     color: item.status == 'In Progress'
-                                        ? HexColor('#80C1E1C1')
+                                        ? Color(0xff80C1E1C1)
                                         : item.status == 'Not Started'
-                                            ? HexColor('#C9CC3F')
+                                            ? Color(0xffC9CC3F)
                                             : item.status == 'On Hold'
-                                                ? HexColor('#93C572')
-                                                : HexColor('#3cb116'),
+                                                ? Color(0xff93C572)
+                                                : Color(0xff3cb116),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0,

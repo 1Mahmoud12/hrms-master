@@ -18,7 +18,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -112,7 +111,7 @@ class DashboardProvider with ChangeNotifier {
       } else {
         EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
         logout();
-        print('false_status');
+        debugPrint('false_status');
         final errorMessage = responseData['message'];
         EasyLoading.dismiss();
 
@@ -214,7 +213,7 @@ class DashboardProvider with ChangeNotifier {
     final int minGone = (min % 60).toInt();
     final int hour = min ~/ 60;
 
-    print('$hour hr $minGone min');
+    debugPrint('$hour hr $minGone min');
     return '$hour hr $minGone min';
   }
 
@@ -245,11 +244,15 @@ class DashboardProvider with ChangeNotifier {
     final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $token'};
 
     try {
-      final response = await http.post(uri, headers: headers, body: {
-        'router_bssid': await WifiInfo().info.getWifiBSSID() ?? '',
-        'check_in_latitude': locationStatus['latitude'].toString(),
-        'check_in_longitude': locationStatus['longitude'].toString(),
-      },);
+      final response = await http.post(
+        uri,
+        headers: headers,
+        body: {
+          'router_bssid': await WifiInfo().info.getWifiBSSID() ?? '',
+          'check_in_latitude': locationStatus['latitude'].toString(),
+          'check_in_longitude': locationStatus['longitude'].toString(),
+        },
+      );
       debugPrint(locationStatus['latitude'].toString());
       debugPrint(locationStatus['longitude'].toString());
       debugPrint(await WifiInfo().wifiBSSID() ?? '');
@@ -261,10 +264,13 @@ class DashboardProvider with ChangeNotifier {
         final attendanceResponse = AttendanceStatusResponse.fromJson(responseData);
         debugPrint(attendanceResponse.toString());
 
-        updateAttendanceStatus(EmployeeTodayAttendance(
+        updateAttendanceStatus(
+          EmployeeTodayAttendance(
             checkInAt: attendanceResponse.data.checkInAt,
             checkOutAt: attendanceResponse.data.checkOutAt,
-            productionTime: attendanceResponse.data.productiveTimeInMin,),);
+            productionTime: attendanceResponse.data.productiveTimeInMin,
+          ),
+        );
 
         return attendanceResponse;
       } else {
@@ -283,18 +289,20 @@ class DashboardProvider with ChangeNotifier {
     final convertedDate = DateFormat('yyyy-MM-dd').parse(date);
 
     await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-            id: Random().nextInt(1000000),
-            // -1 is replaced by a random number
-            channelKey: 'digital_hr_channel',
-            title: 'Hello There',
-            body: message,
-            payload: {'notificationId': '1234567890'},),
-        actionButtons: [
-          NotificationActionButton(key: 'REDIRECT', label: 'Open'),
-          NotificationActionButton(key: 'DISMISS', label: 'Dismiss', isDangerousOption: true),
-        ],
-        schedule: NotificationCalendar.fromDate(date: DateTime(convertedDate.year, convertedDate.month, convertedDate.day, hour, minute - 15)),);
+      content: NotificationContent(
+        id: Random().nextInt(1000000),
+        // -1 is replaced by a random number
+        channelKey: 'digital_hr_channel',
+        title: 'Hello There',
+        body: message,
+        payload: {'notificationId': '1234567890'},
+      ),
+      actionButtons: [
+        NotificationActionButton(key: 'REDIRECT', label: 'Open'),
+        NotificationActionButton(key: 'DISMISS', label: 'Dismiss', isDangerousOption: true),
+      ],
+      schedule: NotificationCalendar.fromDate(date: DateTime(convertedDate.year, convertedDate.month, convertedDate.day, hour, minute - 15)),
+    );
   }
 
   Future<AttendanceStatusResponse> checkOutAttendance() async {
@@ -306,11 +314,15 @@ class DashboardProvider with ChangeNotifier {
     final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $token'};
 
     try {
-      final response = await http.post(uri, headers: headers, body: {
-        'router_bssid': await WifiInfo().wifiBSSID() ?? '',
-        'check_out_latitude': locationStatus['latitude'].toString(),
-        'check_out_longitude': locationStatus['longitude'].toString(),
-      },);
+      final response = await http.post(
+        uri,
+        headers: headers,
+        body: {
+          'router_bssid': await WifiInfo().wifiBSSID() ?? '',
+          'check_out_latitude': locationStatus['latitude'].toString(),
+          'check_out_longitude': locationStatus['longitude'].toString(),
+        },
+      );
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);
@@ -318,10 +330,13 @@ class DashboardProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         final attendanceResponse = AttendanceStatusResponse.fromJson(responseData);
 
-        updateAttendanceStatus(EmployeeTodayAttendance(
+        updateAttendanceStatus(
+          EmployeeTodayAttendance(
             checkInAt: attendanceResponse.data.checkInAt,
             checkOutAt: attendanceResponse.data.checkOutAt,
-            productionTime: attendanceResponse.data.productiveTimeInMin,),);
+            productionTime: attendanceResponse.data.productiveTimeInMin,
+          ),
+        );
 
         return attendanceResponse;
       } else {
@@ -333,17 +348,21 @@ class DashboardProvider with ChangeNotifier {
     }
   }
 
-  final Color leftBarColor = HexColor('#FFFFFF');
+  final Color leftBarColor = const Color(0xffFFFFFF);
 
   final double width = 15;
 
   BarChartGroupData makeGroupData(int x, double y1) {
-    return BarChartGroupData(barsSpace: 4, x: x, barRods: [
-      BarChartRodData(
-        toY: y1,
-        color: leftBarColor,
-        width: width,
-      ),
-    ],);
+    return BarChartGroupData(
+      barsSpace: 4,
+      x: x,
+      barRods: [
+        BarChartRodData(
+          toY: y1,
+          color: leftBarColor,
+          width: width,
+        ),
+      ],
+    );
   }
 }

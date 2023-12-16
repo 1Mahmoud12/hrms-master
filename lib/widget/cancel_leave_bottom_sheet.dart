@@ -1,11 +1,10 @@
 import 'package:cnattendance/provider/leaveprovider.dart';
 import 'package:cnattendance/utils/navigationservice.dart';
+import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
-import 'package:cnattendance/widget/buttonborder.dart';
 
 class CancelLeaveBottomSheet extends StatefulWidget {
   int id;
@@ -26,10 +25,9 @@ class CancelLeaveBottomSheetState extends State<CancelLeaveBottomSheet> {
       setState(() {
         showLoader();
       });
-      final leaveData = Provider.of<LeaveProvider>(context,listen: false);
+      final leaveData = Provider.of<LeaveProvider>(context, listen: false);
 
-      final response =
-          await leaveData.cancelLeave(id);
+      final response = await leaveData.cancelLeave(id);
 
       setState(() {
         dismissLoader();
@@ -59,8 +57,9 @@ class CancelLeaveBottomSheetState extends State<CancelLeaveBottomSheet> {
   void showLoader() {
     setState(() {
       EasyLoading.show(
-          status: 'Canceling, Please Wait..',
-          maskType: EasyLoadingMaskType.black,);
+        status: 'Canceling, Please Wait..',
+        maskType: EasyLoadingMaskType.black,
+      );
     });
   }
 
@@ -82,14 +81,15 @@ class CancelLeaveBottomSheetState extends State<CancelLeaveBottomSheet> {
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      size: 20,
-                      color: Colors.white,
-                    ),),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
               ],
             ),
             const Padding(
@@ -108,38 +108,42 @@ class CancelLeaveBottomSheetState extends State<CancelLeaveBottomSheet> {
                     child: Container(
                       padding: const EdgeInsets.only(right: 5),
                       child: TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: HexColor('#036eb7'),
-                              shape: ButtonBorder(),),
-                          onPressed: () async {
-                            logout();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: const Text(
-                              'Confirm',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),),
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xff036eb7),
+                          shape: ButtonBorder(),
+                        ),
+                        onPressed: () async {
+                          logout();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: const Text(
+                            'Confirm',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.only(left: 5),
                       child: TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: HexColor('#036eb7'),
-                              shape: ButtonBorder(),),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: const Text(
-                              'Go back',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),),
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xff036eb7),
+                          shape: ButtonBorder(),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: const Text(
+                            'Go back',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

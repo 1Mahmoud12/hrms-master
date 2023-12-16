@@ -2,7 +2,6 @@ import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class CreateIssueSheet extends StatefulWidget {
   const CreateIssueSheet({super.key});
@@ -12,8 +11,6 @@ class CreateIssueSheet extends StatefulWidget {
 }
 
 class CreateIssueSheetState extends State<CreateIssueSheet> {
-
-
   bool isLoading = false;
 
   TextEditingController title = TextEditingController();
@@ -28,7 +25,9 @@ class CreateIssueSheetState extends State<CreateIssueSheet> {
   void showLoader() {
     setState(() {
       EasyLoading.show(
-          status: 'Requesting...', maskType: EasyLoadingMaskType.black,);
+        status: 'Requesting...',
+        maskType: EasyLoadingMaskType.black,
+      );
     });
   }
 
@@ -41,7 +40,11 @@ class CreateIssueSheetState extends State<CreateIssueSheet> {
       child: Container(
         decoration: RadialDecoration(),
         padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,top: 10,left: 20,right: 20,),
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          top: 10,
+          left: 20,
+          right: 20,
+        ),
         child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -54,14 +57,15 @@ class CreateIssueSheetState extends State<CreateIssueSheet> {
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        size: 20,
-                        color: Colors.white,
-                      ),),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
               TextField(
@@ -77,21 +81,29 @@ class CreateIssueSheetState extends State<CreateIssueSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                 ),
               ),
               gaps(10),
@@ -111,21 +123,29 @@ class CreateIssueSheetState extends State<CreateIssueSheet> {
                   fillColor: Colors.white24,
                   filled: true,
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),),),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                 ),
               ),
               gaps(20),
@@ -133,21 +153,20 @@ class CreateIssueSheetState extends State<CreateIssueSheet> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(left: 5),
                 child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: HexColor('#036eb7'),
-                      padding: EdgeInsets.zero,
-                      shape: ButtonBorder(),
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xff036eb7),
+                    padding: EdgeInsets.zero,
+                    shape: ButtonBorder(),
+                  ),
+                  onPressed: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'Submit Ticket',
+                      style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
-
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Text(
-                        'Submit Ticket',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),),
+                  ),
+                ),
               ),
             ],
           ),

@@ -4,7 +4,6 @@ import 'package:cnattendance/utils/navigationservice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
 
@@ -176,7 +175,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
                       padding: const EdgeInsets.only(right: 5, left: 5),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: HexColor('#635F54'),
+                          backgroundColor: const Color(0xff635F54),
                           shape: ButtonBorder(),
                         ),
                         onPressed: () async {
@@ -197,7 +196,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: HexColor('#635F54'),
+                          backgroundColor: const Color(0xff635F54),
                           shape: ButtonBorder(),
                         ),
                         onPressed: () {

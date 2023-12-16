@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String title;
@@ -48,10 +47,11 @@ class CustomAlertDialog extends StatelessWidget {
             // ),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: HexColor('#635f54'),
+                backgroundColor: const Color(0xff635f54),
                 padding: EdgeInsets.zero,
                 shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(29)),),
+                  borderRadius: BorderRadius.all(Radius.circular(29)),
+                ),
               ),
               onPressed: () {
                 FocusManager.instance.primaryFocus?.unfocus();

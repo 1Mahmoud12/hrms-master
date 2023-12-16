@@ -1,6 +1,5 @@
 import 'package:cnattendance/widget/cancel_leave_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class LeaveDetailRow extends StatelessWidget {
   final int id;
@@ -11,31 +10,31 @@ class LeaveDetailRow extends StatelessWidget {
   final String authorization;
   final String requestedAt;
 
-  const LeaveDetailRow(
-      {super.key, required this.id,
-      required this.name,
-      required this.from,
-      required this.to,
-      required this.status,
-      required this.authorization,
-      required this.requestedAt,});
+  const LeaveDetailRow({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.from,
+    required this.to,
+    required this.status,
+    required this.authorization,
+    required this.requestedAt,
+  });
 
   @override
   Widget build(BuildContext context) {
-
-
-    void onLeaveCancelledClicked(int id){
-
-        showModalBottomSheet(
-            context: context,
-            useRootNavigator: true,
-            builder: (context) {
-              return CancelLeaveBottomSheet(id);
-            },);
+    void onLeaveCancelledClicked(int id) {
+      showModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        builder: (context) {
+          return CancelLeaveBottomSheet(id);
+        },
+      );
     }
 
     return ClipRRect(
-      borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
+      borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
       child: Container(
         color: Colors.white12,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -60,7 +59,7 @@ class LeaveDetailRow extends StatelessWidget {
                   ),
                   Text(
                     authorization == '' ? 'N/A' : 'By: $authorization',
-                    style: TextStyle(color: HexColor('#036eb7'), fontSize: 12),
+                    style: TextStyle(color: const Color(0xff036eb7), fontSize: 12),
                   ),
                 ],
               ),
@@ -79,15 +78,14 @@ class LeaveDetailRow extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      if(status.toLowerCase() == 'pending'){
+                      if (status.toLowerCase() == 'pending') {
                         onLeaveCancelledClicked(id);
                       }
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         color: getStatus(),
                         child: Text(
                           status,
