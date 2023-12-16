@@ -4,7 +4,7 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/supportlistresponse/supportlistresponse.dart';
 import 'package:cnattendance/model/support.dart';
 import 'package:cnattendance/screen/profile/supportdetailscreen.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class SupportListController extends GetxController {
   ];
 
   Future<void> getSupportList() async {
-    final uri = Uri.parse('${Constant.SUPPORT_LIST_URL}?per_page=50&page=1');
+    final uri = Uri.parse('${EndPoints.SUPPORT_LIST_URL}?per_page=50&page=1');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -59,8 +59,19 @@ class SupportListController extends GetxController {
 
           print('----date');
           print(date);
-          list.add(Support(support.title, support.description, support.query_date, support.status, support.requested_department, formatteddateDay,
-              formattedDate, support.updated_by, support.updated_at,),);
+          list.add(
+            Support(
+              support.title,
+              support.description,
+              support.query_date,
+              support.status,
+              support.requested_department,
+              formatteddateDay,
+              formattedDate,
+              support.updated_by,
+              support.updated_at,
+            ),
+          );
         }
 
         supportList.value = list;

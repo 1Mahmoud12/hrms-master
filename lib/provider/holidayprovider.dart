@@ -4,7 +4,7 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/hollidays/HolidayResponse.dart';
 import 'package:cnattendance/data/source/network/model/hollidays/Holidays.dart';
 import 'package:cnattendance/model/holiday.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -22,20 +22,20 @@ class HolidayProvider with ChangeNotifier {
   void holidayListFilter() {
     _holidayListFilter.clear();
     if (toggleValue == 0) {
-      _holidayListFilter.addAll(_holidayList
-          .where((element) => element.dateTime.isAfter(DateTime.now()))
-          .toList(),);
+      _holidayListFilter.addAll(
+        _holidayList.where((element) => element.dateTime.isAfter(DateTime.now())).toList(),
+      );
     } else {
-      _holidayListFilter.addAll(_holidayList
-          .where((element) => element.dateTime.isBefore(DateTime.now()))
-          .toList().reversed,);
+      _holidayListFilter.addAll(
+        _holidayList.where((element) => element.dateTime.isBefore(DateTime.now())).toList().reversed,
+      );
     }
 
     notifyListeners();
   }
 
   Future<HolidayResponse> getHolidays() async {
-    final uri = Uri.parse(Constant.HOLIDAYS_API);
+    final uri = Uri.parse(EndPoints.HOLIDAYS_API);
 
     final Preferences preferences = Preferences();
 
@@ -74,13 +74,16 @@ class HolidayProvider with ChangeNotifier {
     for (final item in data ?? []) {
       final DateTime tempDate = DateFormat('yyyy-MM-dd').parse(item.eventDate);
       print(DateFormat('MMMM').format(tempDate));
-      _holidayList.add(Holiday(
+      _holidayList.add(
+        Holiday(
           id: item.id,
           day: tempDate.day.toString(),
           month: DateFormat('MMM').format(tempDate),
           title: item.event,
           description: item.description,
-          dateTime: tempDate,),);
+          dateTime: tempDate,
+        ),
+      );
     }
     notifyListeners();
   }

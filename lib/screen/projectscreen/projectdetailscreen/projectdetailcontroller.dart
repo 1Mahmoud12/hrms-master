@@ -6,7 +6,7 @@ import 'package:cnattendance/model/attachment.dart';
 import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/model/task.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -33,7 +33,8 @@ class ProjectDetailController extends GetxController {
 
   Future<String> getProjectOverview() async {
     final uri = Uri.parse(
-        "${Constant.PROJECT_DETAIL_URL}/${Get.arguments["id"]}",);
+      "${EndPoints.PROJECT_DETAIL_URL}/${Get.arguments["id"]}",
+    );
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -44,7 +45,7 @@ class ProjectDetailController extends GetxController {
     };
 
     try {
-      EasyLoading.show(status: 'Loading',maskType: EasyLoadingMaskType.black);
+      EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
       final response = await http.get(
         uri,
         headers: headers,
@@ -61,48 +62,53 @@ class ProjectDetailController extends GetxController {
         final List<Member> members = [];
         memberImages.clear();
         for (final member in projectResponse.data.assigned_member) {
-          members.add(Member(member.id, member.name, member.avatar,post: member.post));
+          members.add(Member(member.id, member.name, member.avatar, post: member.post));
           memberImages.add(member.avatar);
         }
 
         final List<Member> leaders = [];
         leaderImages.clear();
         for (final member in projectResponse.data.project_leader) {
-          leaders.add(Member(member.id, member.name, member.avatar,post: member.post));
+          leaders.add(Member(member.id, member.name, member.avatar, post: member.post));
           leaderImages.add(member.avatar);
         }
 
         final List<Attachment> attachments = [];
         for (final attachment in projectResponse.data.attachments) {
-          if(attachment.type == 'image'){
+          if (attachment.type == 'image') {
             attachments.add(Attachment(0, attachment.attachment_url, 'image'));
-          }else{
+          } else {
             attachments.add(Attachment(0, attachment.attachment_url, 'file'));
           }
         }
 
         final Project response = Project(
-            projectResponse.data.id,
-            projectResponse.data.name,
-            projectResponse.data.description,
-            projectResponse.data.start_date,
-            projectResponse.data.priority,
-            projectResponse.data.status,
-            projectResponse.data.progress_percent,
-            projectResponse.data.assigned_task_count,
-            members,
-            leaders,attachments,);
+          projectResponse.data.id,
+          projectResponse.data.name,
+          projectResponse.data.description,
+          projectResponse.data.start_date,
+          projectResponse.data.priority,
+          projectResponse.data.status,
+          projectResponse.data.progress_percent,
+          projectResponse.data.assigned_task_count,
+          members,
+          leaders,
+          attachments,
+        );
 
         final List<Task> taskList = [];
         print(projectResponse.data.assigned_task_detail.length);
         for (final task in projectResponse.data.assigned_task_detail) {
-          taskList.add(Task(
+          taskList.add(
+            Task(
               task.task_id,
               task.task_name,
               projectResponse.data.name,
               task.start_date,
               task.deadline,
-              task.status,),);
+              task.status,
+            ),
+          );
         }
 
         response.tasks.addAll(taskList);
@@ -119,7 +125,6 @@ class ProjectDetailController extends GetxController {
     }
   }
 
-
   @override
   void onInit() {
     getProjectOverview();
@@ -127,9 +132,8 @@ class ProjectDetailController extends GetxController {
   }
 
   Future<void> launchUrls(String _url) async {
-    if (!await launchUrl(Uri.parse(_url),mode: LaunchMode.externalApplication)) {
+    if (!await launchUrl(Uri.parse(_url), mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $_url');
     }
   }
-
 }

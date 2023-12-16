@@ -3,12 +3,11 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/connect.dart';
 import 'package:cnattendance/data/source/network/model/about/Aboutresponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 
-class AboutRepository{
+class AboutRepository {
   Future<Aboutresponse> getContent(String value) async {
-
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
 
@@ -19,7 +18,7 @@ class AboutRepository{
     };
 
     try {
-      final response = await Connect().getResponse('${Constant.CONTENT_URL}/$value/', headers);
+      final response = await Connect().getResponse('${EndPoints.CONTENT_URL}/$value/', headers);
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);

@@ -5,7 +5,7 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/leaveissue/IssueLeaveResponse.dart';
 import 'package:cnattendance/data/source/network/model/tadadetail/tadadetailresponse.dart';
 import 'package:cnattendance/model/attachment.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -41,8 +41,7 @@ class EditTadaController extends GetxController {
   }
 
   Future<String> getTadaDetail() async {
-    final uri =
-        Uri.parse("${Constant.TADA_DETAIL_URL}/${Get.arguments["tadaId"]}");
+    final uri = Uri.parse("${EndPoints.TADA_DETAIL_URL}/${Get.arguments["tadaId"]}");
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -95,7 +94,7 @@ class EditTadaController extends GetxController {
 
   Future<String> editTada() async {
     try {
-      final uri = Uri.parse(Constant.TADA_UPDATE_URL);
+      final uri = Uri.parse(EndPoints.TADA_UPDATE_URL);
 
       final Preferences preferences = Preferences();
       final String token = await preferences.getToken();
@@ -121,8 +120,11 @@ class EditTadaController extends GetxController {
         final length = await file.length();
 
         final multipartFile = http.MultipartFile(
-            'attachments[]', stream, length,
-            filename: filed.name,);
+          'attachments[]',
+          stream,
+          length,
+          filename: filed.name,
+        );
         requests.files.add(multipartFile);
       }
 
@@ -157,7 +159,7 @@ class EditTadaController extends GetxController {
   }
 
   Future<void> removeAttachment(int id, int index) async {
-    final uri = Uri.parse('${Constant.TADA_DELETE_ATTACHMENT_URL}/$id');
+    final uri = Uri.parse('${EndPoints.TADA_DELETE_ATTACHMENT_URL}/$id');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -203,8 +205,10 @@ class EditTadaController extends GetxController {
   }
 
   Future<void> launchUrls(String _url) async {
-    if (!await launchUrl(Uri.parse(_url),
-        mode: LaunchMode.externalApplication,)) {
+    if (!await launchUrl(
+      Uri.parse(_url),
+      mode: LaunchMode.externalApplication,
+    )) {
       throw Exception('Could not launch $_url');
     }
   }

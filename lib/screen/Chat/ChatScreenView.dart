@@ -1,7 +1,7 @@
 import 'package:cnattendance/Controller/ChatScreenViewController.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/Chat/userchat/chatui.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +58,7 @@ class ChatScreenView extends StatelessWidget {
                           if (userImage == 'uploads/user/avatar/') {
                             userImage = 'color';
                           } else {
-                            userImage = '${Constant.production}$userImage';
+                            userImage = '${EndPoints.production}$userImage';
                           }
 
                           return Padding(

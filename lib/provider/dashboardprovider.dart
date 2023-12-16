@@ -10,7 +10,7 @@ import 'package:cnattendance/data/source/network/model/dashboard/EmployeeTodayAt
 import 'package:cnattendance/data/source/network/model/dashboard/Overview.dart';
 import 'package:cnattendance/data/source/network/model/logout/Logoutresponse.dart';
 import 'package:cnattendance/screen/auth/login_screen.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/locationstatus.dart';
 import 'package:cnattendance/utils/wifiinfo.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -68,7 +68,7 @@ class DashboardProvider with ChangeNotifier {
   }
 
   Future<Dashboardresponse> getDashboard() async {
-    final uri = Uri.parse(Constant.DASHBOARD_URL);
+    final uri = Uri.parse(EndPoints.DASHBOARD_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -123,7 +123,7 @@ class DashboardProvider with ChangeNotifier {
   }
 
   Future<Logoutresponse> logout() async {
-    final uri = Uri.parse(Constant.LOGOUT_URL);
+    final uri = Uri.parse(EndPoints.LOGOUT_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -157,8 +157,8 @@ class DashboardProvider with ChangeNotifier {
     for (final item in employeeWeeklyReport) {
       if (item != null) {
         final int hr = (item['productive_time_in_min'] / 60).toInt();
-        if (hr > Constant.TOTAL_WORKING_HOUR) {
-          _weeklyReport.add(Constant.TOTAL_WORKING_HOUR);
+        if (hr > EndPoints.TOTAL_WORKING_HOUR) {
+          _weeklyReport.add(EndPoints.TOTAL_WORKING_HOUR);
         } else {
           _weeklyReport.add(hr);
         }
@@ -202,7 +202,7 @@ class DashboardProvider with ChangeNotifier {
 
   double calculateProdHour(int value) {
     final double hour = value / 60;
-    final double hr = hour / Constant.TOTAL_WORKING_HOUR;
+    final double hr = hour / EndPoints.TOTAL_WORKING_HOUR;
 
     return hr > 1 ? 1 : hr;
   }
@@ -236,7 +236,7 @@ class DashboardProvider with ChangeNotifier {
   }
 
   Future<AttendanceStatusResponse> checkInAttendance() async {
-    final uri = Uri.parse(Constant.CHECK_IN_URL);
+    final uri = Uri.parse(EndPoints.CHECK_IN_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -306,7 +306,7 @@ class DashboardProvider with ChangeNotifier {
   }
 
   Future<AttendanceStatusResponse> checkOutAttendance() async {
-    final uri = Uri.parse(Constant.CHECK_OUT_URL);
+    final uri = Uri.parse(EndPoints.CHECK_OUT_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

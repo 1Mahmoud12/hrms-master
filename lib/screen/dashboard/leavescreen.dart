@@ -1,5 +1,5 @@
 import 'package:cnattendance/provider/leaveprovider.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:cnattendance/widget/headerprofile.dart';
 import 'package:cnattendance/widget/leavescreen/leave_list_dashboard.dart';
@@ -70,77 +70,79 @@ class LeaveScreenState extends State<LeaveScreen> {
       child: Scaffold(
         // backgroundColor: Colors.transparent,
         body: SafeArea(
-            child: RefreshIndicator(
-          onRefresh: () {
-            return initialState();
-          },
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const HeaderProfile(),
-                  Container(
+          child: RefreshIndicator(
+            onRefresh: () {
+              return initialState();
+            },
+            child: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const HeaderProfile(),
+                    Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       width: double.infinity,
                       child: const Text(
                         'Leave',
                         style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),),
-                  const LeaveListDashboard(),
-                  Visibility(
-                    visible: isVisible,
-                    child: const Padding(padding: EdgeInsets.symmetric(horizontal: 20), child: LeaveButton()),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Visibility(
-                    visible: isVisible,
-                    child: const Text(
-                      'Recent Leave Activity',
-                      style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Stack(
-                    children: [
-                      Align(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-                          child: Card(
-                            color: Colors.white12,
-                            shape: ButtonBorder(),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: Column(
-                                children: [
-                                  Visibility(
-                                    visible: isVisible,
-                                    child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10), child: LeavetypeFilter()),
-                                  ),
-                                  Visibility(visible: isVisible, child: const LeaveListDetailsDashboard()),
-                                ],
+                    const LeaveListDashboard(),
+                    Visibility(
+                      visible: isVisible,
+                      child: const Padding(padding: EdgeInsets.symmetric(horizontal: 20), child: LeaveButton()),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Visibility(
+                      visible: isVisible,
+                      child: const Text(
+                        'Recent Leave Activity',
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Stack(
+                      children: [
+                        Align(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+                            child: Card(
+                              color: Colors.white12,
+                              shape: ButtonBorder(),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 50),
+                                child: Column(
+                                  children: [
+                                    Visibility(
+                                      visible: isVisible,
+                                      child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10), child: LeavetypeFilter()),
+                                    ),
+                                    Visibility(visible: isVisible, child: const LeaveListDetailsDashboard()),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Align(
-                        child: Visibility(
-                          visible: isVisible,
-                          child: const Padding(padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10), child: ToggleLeaveTime()),
+                        Align(
+                          child: Visibility(
+                            visible: isVisible,
+                            child: const Padding(padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10), child: ToggleLeaveTime()),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),),
+        ),
       ),
     );
   }

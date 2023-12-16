@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/meeting/MeetingDomain.dart';
 import 'package:cnattendance/data/source/network/model/meeting/MeetingReponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,10 +18,12 @@ class MeetingProvider extends ChangeNotifier {
   }
 
   Future<MeetingReponse> getMeetingList() async {
-    final uri = Uri.parse(Constant.MEETING_URL).replace(queryParameters: {
-      'page': page.toString(),
-      'per_page': per_page.toString(),
-    },);
+    final uri = Uri.parse(EndPoints.MEETING_URL).replace(
+      queryParameters: {
+        'page': page.toString(),
+        'per_page': per_page.toString(),
+      },
+    );
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

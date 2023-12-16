@@ -7,7 +7,7 @@ import 'package:cnattendance/data/source/network/model/leavetype/Leavetyperespon
 import 'package:cnattendance/data/source/network/model/leavetypedetail/leave_type_detail.dart';
 import 'package:cnattendance/model/LeaveDetail.dart';
 import 'package:cnattendance/model/leave.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -63,7 +63,7 @@ class RequestProvider with ChangeNotifier {
 
     try {
       final response = await https.get(
-        Uri.parse(Constant.USER_REQUEST),
+        Uri.parse(EndPoints.USER_REQUEST),
         headers: headers,
       );
       // final response = await http.get(uri);
@@ -107,7 +107,7 @@ class RequestProvider with ChangeNotifier {
   Future getRequestDetail() async {
     EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
 
-    final uri = Uri.parse(Constant.USER_REQUEST_VIEW);
+    final uri = Uri.parse(EndPoints.USER_REQUEST_VIEW);
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
 
@@ -162,7 +162,7 @@ class RequestProvider with ChangeNotifier {
   }
 
   Future<IssueLeaveResponse> issueLeave(String from, String to, String reason, int leaveId) async {
-    final uri = Uri.parse(Constant.USER_REQUEST_STORE);
+    final uri = Uri.parse(EndPoints.USER_REQUEST_STORE);
     EasyLoading.show(status: ' Please Wait..', maskType: EasyLoadingMaskType.black);
 
     final Preferences preferences = Preferences();
@@ -208,7 +208,7 @@ class RequestProvider with ChangeNotifier {
   }
 
   Future<IssueLeaveResponse> cancelLeave(int leaveId) async {
-    final uri = Uri.parse('${Constant.CANCEL_LEAVE}/$leaveId');
+    final uri = Uri.parse('${EndPoints.CANCEL_LEAVE}/$leaveId');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

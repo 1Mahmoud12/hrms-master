@@ -4,7 +4,7 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/support/SupportResponse.dart';
 import 'package:cnattendance/model/department.dart';
 import 'package:cnattendance/screen/profile/supportlistscreen.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/widget/customalertdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -28,7 +28,10 @@ class SupportController extends GetxController {
       if (selected.value.id != 0) {
         print(titleController.text);
         sendSupportMessage(
-            titleController.text, descriptionController.text, department,);
+          titleController.text,
+          descriptionController.text,
+          department,
+        );
       } else {
         showToast('Please select a department');
       }
@@ -36,8 +39,11 @@ class SupportController extends GetxController {
   }
 
   Future<SupportResponse> sendSupportMessage(
-      String title, String description, int department,) async {
-    final uri = Uri.parse(Constant.SUPPORT_URL);
+    String title,
+    String description,
+    int department,
+  ) async {
+    final uri = Uri.parse(EndPoints.SUPPORT_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -50,13 +56,18 @@ class SupportController extends GetxController {
     print(selected.value.name);
     try {
       EasyLoading.show(
-          status: 'Submitting, Please Wait...',
-          maskType: EasyLoadingMaskType.black,);
-      final response = await http.post(uri, headers: headers, body: {
-        'title': title,
-        'description': description,
-        'department_id': department.toString(),
-      },);
+        status: 'Submitting, Please Wait...',
+        maskType: EasyLoadingMaskType.black,
+      );
+      final response = await http.post(
+        uri,
+        headers: headers,
+        body: {
+          'title': title,
+          'description': description,
+          'department_id': department.toString(),
+        },
+      );
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);
@@ -70,13 +81,14 @@ class SupportController extends GetxController {
         descriptionController.clear();
 
         Get.dialog(
-            Container(
-                margin: const EdgeInsets.all(20),
-                width: double.infinity,
-                height: 500,
-                child:
-                    Center(child: CustomAlertDialog(supportResponse.message)),),
-            barrierDismissible: false,);
+          Container(
+            margin: const EdgeInsets.all(20),
+            width: double.infinity,
+            height: 500,
+            child: Center(child: CustomAlertDialog(supportResponse.message)),
+          ),
+          barrierDismissible: false,
+        );
         return supportResponse;
       } else {
         final errorMessage = responseData['message'];
@@ -89,7 +101,7 @@ class SupportController extends GetxController {
   }
 
   Future<void> getDepartments() async {
-    final uri = Uri.parse(Constant.DEPARTMENT_LIST_URL);
+    final uri = Uri.parse(EndPoints.DEPARTMENT_LIST_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

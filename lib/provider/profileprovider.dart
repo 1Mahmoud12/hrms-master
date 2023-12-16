@@ -6,9 +6,9 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/profile/Profile.dart';
 import 'package:cnattendance/data/source/network/model/profile/Profileresponse.dart';
 import 'package:cnattendance/model/profile.dart' as up;
-import 'package:cnattendance/utils/constant.dart';
-import 'package:http/http.dart' as http;
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 
 class ProfileProvider with ChangeNotifier {
@@ -33,7 +33,7 @@ class ProfileProvider with ChangeNotifier {
   }
 
   Future<Profileresponse> getProfile() async {
-    final uri = Uri.parse(Constant.PROFILE_URL);
+    final uri = Uri.parse(EndPoints.PROFILE_URL);
 
     final Preferences preferences = Preferences();
 
@@ -103,7 +103,7 @@ class ProfileProvider with ChangeNotifier {
     String phone,
     File avatar,
   ) async {
-    final uri = Uri.parse(Constant.EDIT_PROFILE_URL);
+    final uri = Uri.parse(EndPoints.EDIT_PROFILE_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

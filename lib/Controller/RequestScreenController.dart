@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/leaveissue/IssueLeaveResponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -40,7 +40,7 @@ class RequestController extends GetxController {
     String reason,
     int leaveId,
   ) async {
-    final uri = Uri.parse(Constant.USER_REQUEST_STORE);
+    final uri = Uri.parse(EndPoints.USER_REQUEST_STORE);
     EasyLoading.show(
       status: ' Please Wait..',
       maskType: EasyLoadingMaskType.black,

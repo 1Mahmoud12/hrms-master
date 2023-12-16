@@ -1,4 +1,4 @@
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/widget/log_out_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -34,25 +34,29 @@ class Services extends StatelessWidget {
                 openBrowserTab();
               } else if (name == 'Log Out') {
                 showModalBottomSheet(
-                    context: context,
-                    useRootNavigator: true,
-                    builder: (context) {
-                      return const LogOutBottomSheet();
-                    },);
+                  context: context,
+                  useRootNavigator: true,
+                  builder: (context) {
+                    return const LogOutBottomSheet();
+                  },
+                );
               } else if (name == 'Issue Ticket') {
                 showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    useRootNavigator: true,
-                    builder: (context) {
-                      return const CreateIssueSheet();
-                    },);
+                  context: context,
+                  isScrollControlled: true,
+                  useRootNavigator: true,
+                  builder: (context) {
+                    return const CreateIssueSheet();
+                  },
+                );
               } else {
                 print('object');
-                pushNewScreen(context,
-                    screen: route,
-                    withNavBar: false,
-                    pageTransitionAnimation: PageTransitionAnimation.fade,);
+                pushNewScreen(
+                  context,
+                  screen: route,
+                  withNavBar: false,
+                  pageTransitionAnimation: PageTransitionAnimation.fade,
+                );
               }
             },
             selected: true,
@@ -70,7 +74,7 @@ class Services extends StatelessWidget {
 
   openBrowserTab() async {
     await FlutterWebBrowser.openWebPage(
-      url: Constant.PRIVACY_POLICY_URL,
+      url: EndPoints.PRIVACY_POLICY_URL,
       customTabsOptions: const CustomTabsOptions(
         colorScheme: CustomTabsColorScheme.dark,
         shareState: CustomTabsShareState.on,

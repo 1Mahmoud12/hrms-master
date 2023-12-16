@@ -5,7 +5,7 @@ import 'package:cnattendance/data/source/network/model/projectlist/projectlistre
 import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailscreen.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class ProjectListScreenController extends GetxController {
   final selected = 'All'.obs;
 
   Future<String> getProjectOverview() async {
-    final uri = Uri.parse(Constant.PROJECT_LIST_URL);
+    final uri = Uri.parse(EndPoints.PROJECT_LIST_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -28,7 +28,7 @@ class ProjectListScreenController extends GetxController {
     };
 
     try {
-      EasyLoading.show(status: 'Loading',maskType: EasyLoadingMaskType.black);
+      EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
       final response = await http.get(
         uri,
         headers: headers,
@@ -53,7 +53,8 @@ class ProjectListScreenController extends GetxController {
             leaders.add(Member(member.id, member.name, member.avatar));
           }
 
-          projectList.add(Project(
+          projectList.add(
+            Project(
               project.id,
               project.name,
               project.description,
@@ -63,7 +64,10 @@ class ProjectListScreenController extends GetxController {
               project.progress_percent,
               project.assigned_task_count,
               members,
-              leaders,[],),);
+              leaders,
+              [],
+            ),
+          );
         }
 
         filterList();
@@ -80,18 +84,17 @@ class ProjectListScreenController extends GetxController {
     }
   }
 
-  void filterList(){
+  void filterList() {
     filteredList.clear();
-    if(selected.value == 'All'){
+    if (selected.value == 'All') {
       filteredList.addAll(projectList);
-    }else{
-      for(final project in projectList){
-        if(project.status == selected.value){
+    } else {
+      for (final project in projectList) {
+        if (project.status == selected.value) {
           filteredList.add(project);
         }
       }
     }
-
   }
 
   void onProjectClicked(Project value) {

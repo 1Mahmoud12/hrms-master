@@ -1,7 +1,7 @@
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/presentation/view/widgets/mission_flip.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 
 class KnowUs extends StatelessWidget {
   const KnowUs({super.key});

@@ -5,4 +5,6 @@ class AppRoute {
   static const String detailsMaintenanceWidget = '/DetailsMaintenanceWidget';
   static const String detailsElevators = '/DetailsElevators';
   static const String progressScreen = '/ProgressScreen';
+  static const String detailsMaintenance = '/DetailsMaintenance';
+  static const String paymentMaintenanceValue = '/PaymentMaintenanceValue';
 }

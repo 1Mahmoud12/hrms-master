@@ -2,11 +2,16 @@ import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/widgets/card_project.dart';
+import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/state.dart';
+import 'package:cnattendance/screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/presentation/view/widgets/slide_widget.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
-import 'package:cnattendance/widget/headerprofile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomeScreenEmployer extends StatelessWidget {
@@ -14,6 +19,8 @@ class HomeScreenEmployer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ExpandedTileController expandedTileController = ExpandedTileController();
+
     return Scaffold(
       extendBody: true,
       body: SingleChildScrollView(
@@ -21,13 +28,19 @@ class HomeScreenEmployer extends StatelessWidget {
         child: Column(
           children: [
             30.ESH(),
-            const HeaderProfile(),
+            //const HeaderProfile(),
             SizedBox(
               // width: MediaQuery.of(context).size.width,
               height: context.screenHeight * .25,
               child: const Center(child: SliderWidget()),
             ),
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(
+                    10.r,
+                  )),
+              padding: EdgeInsets.all(10.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -53,6 +66,25 @@ Inspired by the Saudi Vision 2030, which aims to transform the Kingdom’s econo
                 ].paddingDirectional(bottom: context.screenHeight * .02),
               ),
             ),
+            /* BlocBuilder<MainBlocHomeCustomerCubit, MainBlocHomeCustomerState>(
+              builder: (context, state) {
+                final cubit = MainBlocHomeCustomerCubit.of(context);
+                return SizedBox(
+                  height: cubit.isExpandedKnows ? context.screenHeight : context.screenHeight * .1,
+                  child: ExpandedTileList.builder(
+                    itemCount: 1,
+                    itemBuilder: (context, index, controller) => ExpandedTile(
+                      title: const Text('KnowUs'),
+                      content: const KnowUs(),
+                      controller: controller,
+                      onTap: () {
+                        cubit.changeState();
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),*/
             SizedBox(
               width: context.screenWidth,
               child: ElevatedButton(

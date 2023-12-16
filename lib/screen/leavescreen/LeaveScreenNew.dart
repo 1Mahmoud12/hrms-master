@@ -3,7 +3,7 @@ import 'package:cnattendance/provider/leaveprovider.dart';
 import 'package:cnattendance/screen/leavescreen/components/Leaverequestbutton.dart';
 import 'package:cnattendance/screen/profile/NotificationScreen.dart';
 import 'package:cnattendance/utils/assets.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:cnattendance/widget/leavescreen/leave_list_dashboard.dart';
 import 'package:cnattendance/widget/leavescreen/leave_list_detail_dashboard.dart';
@@ -80,7 +80,8 @@ class _LeaveScreenNewState extends State<LeaveScreenNew> {
               padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: InkWell(
                 onTap: () {
-                  pushNewScreen(context, screen: const NotificationScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
+                  pushNewScreen(context,
+                      screen: const NotificationScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
                 child: SvgPicture.asset(Assets.notification),
               ),

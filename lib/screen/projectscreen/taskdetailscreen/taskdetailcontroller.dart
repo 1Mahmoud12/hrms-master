@@ -6,7 +6,7 @@ import 'package:cnattendance/data/source/network/model/taskdetail/taskdetail.dar
 import 'package:cnattendance/model/checklist.dart';
 import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/task.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -16,8 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../model/attachment.dart';
 
 class TaskDetailController extends GetxController {
-  Rx<Task> taskDetail =
-      Task.all(0, '', '', '', '', '', '', '', 0, 0, false, [], [], []).obs;
+  Rx<Task> taskDetail = Task.all(0, '', '', '', '', '', '', '', 0, 0, false, [], [], []).obs;
 
   RxList memberImages = [].obs;
   RxList leaderImages = [].obs;
@@ -26,7 +25,8 @@ class TaskDetailController extends GetxController {
     print("id ha ${Get.arguments["id"]}");
 
     final uri = Uri.parse(
-        "${Constant.TASK_DETAIL_URL}/${Get.arguments["id"]}",);
+      "${EndPoints.TASK_DETAIL_URL}/${Get.arguments["id"]}",
+    );
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -59,14 +59,21 @@ class TaskDetailController extends GetxController {
         memberImages.clear();
         for (final member in taskResponse.data.assigned_member) {
           members.add(
-              Member(member.id, member.name, member.avatar, post: member.post),);
+            Member(member.id, member.name, member.avatar, post: member.post),
+          );
           memberImages.add(member.avatar);
         }
 
         final List<Checklist> checkLists = [];
         for (final checkList in taskResponse.data.checklists) {
-          checkLists.add(Checklist(checkList.id, checkList.task_id,
-              checkList.name, checkList.is_completed,),);
+          checkLists.add(
+            Checklist(
+              checkList.id,
+              checkList.task_id,
+              checkList.name,
+              checkList.is_completed,
+            ),
+          );
         }
 
         final List<Attachment> attachments = [];
@@ -79,20 +86,21 @@ class TaskDetailController extends GetxController {
         }
 
         final task = Task.all(
-            taskResponse.data.task_id,
-            taskResponse.data.task_name,
-            taskResponse.data.project_name,
-            taskResponse.data.description,
-            taskResponse.data.start_date,
-            taskResponse.data.deadline,
-            taskResponse.data.priority,
-            taskResponse.data.status,
-            taskResponse.data.task_progress_percent,
-            taskResponse.data.task_comments.length,
-            taskResponse.data.has_checklist,
-            members,
-            checkLists,
-            attachments,);
+          taskResponse.data.task_id,
+          taskResponse.data.task_name,
+          taskResponse.data.project_name,
+          taskResponse.data.description,
+          taskResponse.data.start_date,
+          taskResponse.data.deadline,
+          taskResponse.data.priority,
+          taskResponse.data.status,
+          taskResponse.data.task_progress_percent,
+          taskResponse.data.task_comments.length,
+          taskResponse.data.has_checklist,
+          members,
+          checkLists,
+          attachments,
+        );
 
         taskDetail.value = task;
         return taskResponse;
@@ -108,8 +116,7 @@ class TaskDetailController extends GetxController {
   }
 
   Future<bool> checkListToggle(String checkListId) async {
-    final uri =
-        Uri.parse('${Constant.UPDATE_CHECKLIST_TOGGLE_URL}/$checkListId');
+    final uri = Uri.parse('${EndPoints.UPDATE_CHECKLIST_TOGGLE_URL}/$checkListId');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -132,8 +139,7 @@ class TaskDetailController extends GetxController {
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        final taskResponse =
-            CheckListStatusToggleResponse.fromJson(responseData);
+        final taskResponse = CheckListStatusToggleResponse.fromJson(responseData);
 
         return true;
       } else {
@@ -148,7 +154,7 @@ class TaskDetailController extends GetxController {
   }
 
   Future<bool> checkListTaskToggle(String taskId) async {
-    final uri = Uri.parse('${Constant.UPDATE_TASK_TOGGLE_URL}/$taskId');
+    final uri = Uri.parse('${EndPoints.UPDATE_TASK_TOGGLE_URL}/$taskId');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -186,8 +192,10 @@ class TaskDetailController extends GetxController {
   }
 
   Future<void> launchUrls(String _url) async {
-    if (!await launchUrl(Uri.parse(_url),
-        mode: LaunchMode.externalApplication,)) {
+    if (!await launchUrl(
+      Uri.parse(_url),
+      mode: LaunchMode.externalApplication,
+    )) {
       throw Exception('Could not launch $_url');
     }
   }

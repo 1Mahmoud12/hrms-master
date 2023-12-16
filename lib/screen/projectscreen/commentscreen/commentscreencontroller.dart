@@ -10,7 +10,7 @@ import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/mention.dart';
 import 'package:cnattendance/model/reply.dart';
 import 'package:cnattendance/model/sendcomment.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_mentions/flutter_mentions.dart' as fm;
@@ -59,7 +59,7 @@ class CommentScreenController extends GetxController {
   }
 
   Future<void> getComments([double position = 0]) async {
-    final uri = Uri.parse('${Constant.GET_COMMENT_URL}?per_page=$PER_PAGE&page=$page&task_id=${Get.arguments['taskId']}');
+    final uri = Uri.parse('${EndPoints.GET_COMMENT_URL}?per_page=$PER_PAGE&page=$page&task_id=${Get.arguments['taskId']}');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -145,7 +145,7 @@ class CommentScreenController extends GetxController {
     if (commentController.text.isEmpty) {
       return;
     }
-    final uri = Uri.parse(Constant.SAVE_COMMENT_URL);
+    final uri = Uri.parse(EndPoints.SAVE_COMMENT_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -278,7 +278,7 @@ class CommentScreenController extends GetxController {
   }
 
   Future<void> deleteComment(String id) async {
-    final uri = Uri.parse('${Constant.DELETE_COMMENT_URL}/$id');
+    final uri = Uri.parse('${EndPoints.DELETE_COMMENT_URL}/$id');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -307,7 +307,7 @@ class CommentScreenController extends GetxController {
   }
 
   Future<void> deleteReply(String id) async {
-    final uri = Uri.parse('${Constant.DELETE_REPLY_URL}/$id');
+    final uri = Uri.parse('${EndPoints.DELETE_REPLY_URL}/$id');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

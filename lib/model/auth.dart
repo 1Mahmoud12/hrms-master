@@ -3,16 +3,16 @@ import 'dart:io';
 
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/login/Loginresponse.dart';
-import 'package:cnattendance/utils/constant.dart';
 import 'package:cnattendance/utils/deviceuuid.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Auth with ChangeNotifier {
   Future<Loginresponse> login(String username, String password) async {
-    final uri = Uri.parse(Constant.LOGIN_URL);
-    debugPrint(Constant.LOGIN_URL);
+    final uri = Uri.parse(EndPoints.LOGIN_URL);
+    debugPrint(EndPoints.LOGIN_URL);
 
     final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8'};
 

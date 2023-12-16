@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/connect.dart';
 import 'package:cnattendance/data/source/network/model/rules/CompanyRulesReponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 
-class CompanyRuleRepository{
+class CompanyRuleRepository {
   Future<CompanyRulesReponse> getContent() async {
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -18,7 +18,7 @@ class CompanyRuleRepository{
     };
 
     try {
-      final response = await Connect().getResponse(Constant.RULES_API, headers);
+      final response = await Connect().getResponse(EndPoints.RULES_API, headers);
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);

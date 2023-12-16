@@ -5,7 +5,7 @@ import 'package:cnattendance/data/source/network/model/employeeleavecalendar/Emp
 import 'package:cnattendance/data/source/network/model/employeeleavecalendarbyday/employee_leaves_by_day.dart';
 import 'package:cnattendance/data/source/network/model/employeeleavecalendarbyday/EmployeeLeavesByDayResponse.dart';
 import 'package:cnattendance/model/LeaveByDay.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,13 +23,17 @@ class LeaveCalendarProvider with ChangeNotifier {
   }
 
   Future<Employeeleavecalendarresponse> getLeaves() async {
-    final uri = Uri.parse(Constant.LEAVE_CALENDAR_API);
+    final uri = Uri.parse(EndPoints.LEAVE_CALENDAR_API);
 
     final Preferences preferences = Preferences();
 
     final String token = await preferences.getToken();
 
-    final Map<String, String> headers = {'Content-Type': 'application/json', 'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $token'};
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    };
 
     try {
       final response = await http.get(uri, headers: headers);
@@ -63,13 +67,17 @@ class LeaveCalendarProvider with ChangeNotifier {
   }
 
   Future<EmployeeLeavesByDayResponse> getLeavesByDay(String value) async {
-    final uri = Uri.parse(Constant.LEAVE_CALENDAR_BY_DAY_API).replace(queryParameters: {'leave_date': value});
+    final uri = Uri.parse(EndPoints.LEAVE_CALENDAR_BY_DAY_API).replace(queryParameters: {'leave_date': value});
 
     final Preferences preferences = Preferences();
 
     final String token = await preferences.getToken();
 
-    final Map<String, String> headers = {'Content-Type': 'application/json', 'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $token'};
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    };
 
     try {
       final response = await http.get(uri, headers: headers);

@@ -5,7 +5,7 @@ import 'package:cnattendance/data/source/network/model/projectdashboard/ProjectD
 import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/model/task.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,8 +21,7 @@ class ProjectDashboardController extends GetxController {
   RxList projectList = [].obs;
 
   Future<String> getProjectOverview() async {
-    final uri =
-        Uri.parse('${Constant.PROJECT_DASHBOARD_URL}?tasks=10&projects=3');
+    final uri = Uri.parse('${EndPoints.PROJECT_DASHBOARD_URL}?tasks=10&projects=3');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -47,16 +46,21 @@ class ProjectDashboardController extends GetxController {
         taskList.clear();
         projectList.clear();
 
-        overview.value['progress'] =
-            projectResponse.data.progress.progress_in_percent;
-        overview.value['total_task'] =
-            projectResponse.data.progress.total_task_assigned;
-        overview.value['task_completed'] =
-            projectResponse.data.progress.total_task_completed;
+        overview.value['progress'] = projectResponse.data.progress.progress_in_percent;
+        overview.value['total_task'] = projectResponse.data.progress.total_task_assigned;
+        overview.value['task_completed'] = projectResponse.data.progress.total_task_completed;
 
         for (final task in projectResponse.data.assigned_task) {
-          taskList.add(Task(task.task_id, task.task_name, task.project_name,
-              task.start_date, task.end_date, task.status,),);
+          taskList.add(
+            Task(
+              task.task_id,
+              task.task_name,
+              task.project_name,
+              task.start_date,
+              task.end_date,
+              task.status,
+            ),
+          );
         }
 
         final List<Member> members = [];
@@ -65,8 +69,8 @@ class ProjectDashboardController extends GetxController {
             members.add(Member(member.id, member.name, member.avatar));
           }
 
-
-          projectList.add(Project(
+          projectList.add(
+            Project(
               project.id,
               project.project_name,
               '',
@@ -76,7 +80,10 @@ class ProjectDashboardController extends GetxController {
               project.project_progress_percent,
               project.assigned_task_count,
               members,
-              [],[],),);
+              [],
+              [],
+            ),
+          );
         }
 
         return 'Loaded';

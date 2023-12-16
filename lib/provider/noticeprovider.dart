@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/notice/NoticeDomain.dart';
 import 'package:cnattendance/data/source/network/model/notice/NoticeResponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:cnattendance/model/notification.dart' as Not;
@@ -20,10 +20,12 @@ class NoticeProvider with ChangeNotifier {
   }
 
   Future<NoticeResponse> getNotice() async {
-    final uri = Uri.parse(Constant.NOTICE_URL).replace(queryParameters: {
-      'page': page.toString(),
-      'per_page': per_page.toString(),
-    },);
+    final uri = Uri.parse(EndPoints.NOTICE_URL).replace(
+      queryParameters: {
+        'page': page.toString(),
+        'per_page': per_page.toString(),
+      },
+    );
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -61,15 +63,17 @@ class NoticeProvider with ChangeNotifier {
 
     if (data.isNotEmpty) {
       for (final item in data) {
-        final DateTime tempDate =
-            DateFormat('yyyy-MM-dd').parse(item.noticePublishedDate);
-        _notificationList.add(Not.Notification(
+        final DateTime tempDate = DateFormat('yyyy-MM-dd').parse(item.noticePublishedDate);
+        _notificationList.add(
+          Not.Notification(
             id: item.id,
             title: item.noticeTitle,
             description: item.description,
             month: DateFormat('MMM').format(tempDate),
             day: tempDate.day,
-            date: tempDate,),);
+            date: tempDate,
+          ),
+        );
       }
 
       page += page;

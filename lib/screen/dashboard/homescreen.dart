@@ -2,7 +2,7 @@ import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/data/source/network/model/login/User.dart';
 import 'package:cnattendance/provider/dashboardprovider.dart';
 import 'package:cnattendance/provider/prefprovider.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/locationstatus.dart';
 import 'package:cnattendance/widget/headerprofile.dart';
 import 'package:cnattendance/widget/homescreen/checkattendance.dart';

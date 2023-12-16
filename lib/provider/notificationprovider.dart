@@ -4,7 +4,7 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/notification/NotifiactionDomain.dart';
 import 'package:cnattendance/data/source/network/model/notification/NotificationResponse.dart';
 import 'package:cnattendance/model/notification.dart' as Not;
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -28,15 +28,21 @@ class NotificationProvider with ChangeNotifier {
   }
 
   Future<NotificationResponse> getNotification() async {
-    final uri = Uri.parse(Constant.NOTIFICATION_URL).replace(queryParameters: {
-      'page': page.toString(),
-      'per_page': per_page.toString(),
-    },);
+    final uri = Uri.parse(EndPoints.NOTIFICATION_URL).replace(
+      queryParameters: {
+        'page': page.toString(),
+        'per_page': per_page.toString(),
+      },
+    );
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
 
-    final Map<String, String> headers = {'Content-Type': 'application/json', 'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $token'};
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    };
 
     try {
       final response = await http.get(uri, headers: headers);
@@ -66,13 +72,16 @@ class NotificationProvider with ChangeNotifier {
     if (data.isNotEmpty) {
       for (final item in data) {
         final DateTime tempDate = DateFormat('yyyy-MM-dd').parse(item.notificationPublishedDate);
-        _notificationList.add(Not.Notification(
+        _notificationList.add(
+          Not.Notification(
             id: item.id,
             title: item.notificationTitle,
             description: item.description,
             month: DateFormat('MMM').format(tempDate),
             day: tempDate.day,
-            date: tempDate,),);
+            date: tempDate,
+          ),
+        );
       }
 
       page += page;

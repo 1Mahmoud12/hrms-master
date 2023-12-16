@@ -8,7 +8,7 @@ import 'package:cnattendance/data/source/network/model/leavetypedetail/leave_typ
 import 'package:cnattendance/data/source/network/model/leavetypedetail/leave_type_details_response.dart';
 import 'package:cnattendance/model/LeaveDetail.dart';
 import 'package:cnattendance/model/leave.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
@@ -54,19 +54,22 @@ class LeaveProvider with ChangeNotifier {
   }
 
   List<LeaveDetail> get leaveDetailList {
-    _leaveDetailList.add(LeaveDetail(
+    _leaveDetailList.add(
+      LeaveDetail(
         id: 1,
         name: 'name',
         leave_from: DateTime.now().toString(),
         leave_to: DateTime.now().toString(),
         requested_date: DateTime.now().toString(),
         authorization: 'authorization',
-        status: 'TestRequest',),);
+        status: 'TestRequest',
+      ),
+    );
     return [..._leaveDetailList];
   }
 
   Future<Leavetyperesponse> getLeaveType() async {
-    final uri = Uri.parse(Constant.LEAVE_TYPE_URL);
+    final uri = Uri.parse(EndPoints.LEAVE_TYPE_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -106,23 +109,28 @@ class LeaveProvider with ChangeNotifier {
     _leaveList.clear();
 
     for (final leave in leaveList) {
-      _leaveList.add(Leave(
+      _leaveList.add(
+        Leave(
           id: int.parse(leave.leaveTypeId),
           name: leave.leaveTypeName,
           allocated: leave.leaveTaken,
           total: int.parse(leave.totalLeaveAllocated),
           status: leave.leaveTypeStatus,
-          isEarlyLeave: leave.earlyExit,),);
+          isEarlyLeave: leave.earlyExit,
+        ),
+      );
     }
 
     notifyListeners();
   }
 
   Future<Leavetypedetailreponse> getLeaveTypeDetail() async {
-    final uri = Uri.parse(Constant.LEAVE_TYPE_DETAIL_URL).replace(queryParameters: {
-      'month': _selectedMonth != 0 ? _selectedMonth.toString() : '',
-      'leave_type': _selectedType != 0 ? _selectedType.toString() : '',
-    },);
+    final uri = Uri.parse(EndPoints.LEAVE_TYPE_DETAIL_URL).replace(
+      queryParameters: {
+        'month': _selectedMonth != 0 ? _selectedMonth.toString() : '',
+        'leave_type': _selectedType != 0 ? _selectedType.toString() : '',
+      },
+    );
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -158,21 +166,24 @@ class LeaveProvider with ChangeNotifier {
     _leaveDetailList.clear();
 
     for (final leave in leaveList) {
-      _leaveDetailList.add(LeaveDetail(
+      _leaveDetailList.add(
+        LeaveDetail(
           id: leave.id,
           name: leave.leaveTypeName,
           leave_from: leave.leaveFrom,
           leave_to: leave.leaveTo,
           requested_date: leave.leaveRequestedDate,
           authorization: leave.statusUpdatedBy,
-          status: leave.status,),);
+          status: leave.status,
+        ),
+      );
     }
 
     notifyListeners();
   }
 
   Future<IssueLeaveResponse> issueLeave(String from, String to, String reason, int leaveId) async {
-    final uri = Uri.parse(Constant.ISSUE_LEAVE);
+    final uri = Uri.parse(EndPoints.ISSUE_LEAVE);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -180,12 +191,16 @@ class LeaveProvider with ChangeNotifier {
     final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $token'};
 
     try {
-      final response = await http.post(uri, headers: headers, body: {
-        'leave_from': from,
-        'leave_to': to,
-        'leave_type_id': leaveId.toString(),
-        'reasons': reason,
-      },);
+      final response = await http.post(
+        uri,
+        headers: headers,
+        body: {
+          'leave_from': from,
+          'leave_to': to,
+          'leave_type_id': leaveId.toString(),
+          'reasons': reason,
+        },
+      );
 
       final responseData = json.decode(response.body);
       if (response.statusCode == 200) {
@@ -204,7 +219,7 @@ class LeaveProvider with ChangeNotifier {
   }
 
   Future<IssueLeaveResponse> cancelLeave(int leaveId) async {
-    final uri = Uri.parse('${Constant.CANCEL_LEAVE}/$leaveId');
+    final uri = Uri.parse('${EndPoints.CANCEL_LEAVE}/$leaveId');
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

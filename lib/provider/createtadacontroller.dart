@@ -1,6 +1,5 @@
-
 import 'package:cnattendance/repositories/tadarepository.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -36,7 +35,7 @@ class CreateTadaController extends GetxController {
   }
 
   Future<String> createTada() async {
-    EasyLoading.show(status: 'Loading',maskType: EasyLoadingMaskType.black);
+    EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
     final response = await repository.createTada(titleController.text, descriptionController.text, expensesController.text, fileList);
     debugPrint(response.toString());
@@ -56,5 +55,4 @@ class CreateTadaController extends GetxController {
   void removeItem(int index) {
     fileList.removeAt(index);
   }
-
 }

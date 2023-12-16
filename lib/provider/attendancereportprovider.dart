@@ -3,7 +3,7 @@ import 'package:cnattendance/data/source/network/model/attendancereport/Employee
 import 'package:cnattendance/model/employeeattendancereport.dart';
 import 'package:cnattendance/model/month.dart';
 import 'package:cnattendance/repositories/attendancereportrepository.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -105,7 +105,7 @@ class AttendanceReportProvider with ChangeNotifier {
       _todayReport['production_hour'] = '$hour hr $minGone min';
 
       final double hours = value / 60;
-      final hrPercent = hours / Constant.TOTAL_WORKING_HOUR;
+      final hrPercent = hours / EndPoints.TOTAL_WORKING_HOUR;
       _todayReport['production_percent'] = hrPercent > 1.0 ? 1.0 : hrPercent;
 
       notifyListeners();
@@ -126,7 +126,7 @@ class AttendanceReportProvider with ChangeNotifier {
       _todayReport['production_hour'] = '$hour hr $minGone min';
 
       final double hours = value / 60;
-      final hrPercent = hours / Constant.TOTAL_WORKING_HOUR;
+      final hrPercent = hours / EndPoints.TOTAL_WORKING_HOUR;
       _todayReport['production_percent'] = hrPercent > 1.0 ? 1.0 : hrPercent;
 
       notifyListeners();

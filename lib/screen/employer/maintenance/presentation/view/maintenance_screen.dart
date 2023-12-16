@@ -1,13 +1,16 @@
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/custom_floating_action_button_maintenance.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class MaintenanceScreen extends StatelessWidget {
   const MaintenanceScreen({super.key});
@@ -27,163 +30,207 @@ class MaintenanceScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(context.screenWidth * .04),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              /*Stack(
-                alignment: Alignment.center,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(Assets.cardPlans),
-                  Column(
+                  BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
+                    builder: (context, state) {
+                      final cubit = MainBlocMaintenanceCubit.of(context);
+                      return ToggleSwitch(
+                        cornerRadius: 20,
+                        activeBgColor: const [AppColors.primaryColor],
+                        activeFgColor: Colors.white,
+                        inactiveFgColor: AppColors.primaryColor,
+                        inactiveBgColor: AppColors.greyWhite,
+                        minWidth: context.screenWidth * 0.4,
+                        minHeight: 34,
+                        initialLabelIndex: cubit.indexList,
+                        totalSwitches: 3,
+                        onToggle: (index) {
+                          cubit.indexList = index!;
+                          cubit.changeIndex(index: index);
+                        },
+                        customTextStyles: [
+                          Styles.style14500
+                              .copyWith(color: cubit.indexList == 0 ? AppColors.white : AppColors.primaryColor, fontWeight: FontWeight.w700),
+                          Styles.style14500
+                              .copyWith(color: cubit.indexList == 1 ? AppColors.white : AppColors.primaryColor, fontWeight: FontWeight.w700),
+                          Styles.style14500
+                              .copyWith(color: cubit.indexList == 2 ? AppColors.white : AppColors.primaryColor, fontWeight: FontWeight.w700),
+                        ],
+                        labels: cubit.maintenanceLabels,
+                      );
+                    },
+                  ),
+                  /*Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Text(
-                        'Simple, transparent pricing',
-                        style: Styles.style18700.copyWith(color: AppColors.white),
-                      ),
-                      Text(
-                        'No contracts. No surprise fees.',
-                        style: Styles.style12400.copyWith(color: AppColors.white),
+                      Image.asset(Assets.cardPlans),
+                      Column(
+                        children: [
+                          Text(
+                            'Simple, transparent pricing',
+                            style: Styles.style18700.copyWith(color: AppColors.white),
+                          ),
+                          Text(
+                            'No contracts. No surprise fees.',
+                            style: Styles.style12400.copyWith(color: AppColors.white),
+                          ),
+                        ],
                       ),
                     ],
+                  ),*/
+                  10.ESH(),
+                  BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
+                    builder: (context, state) => Center(
+                      child: Text(
+                        MainBlocMaintenanceCubit.of(context).maintenanceLabels[MainBlocMaintenanceCubit.of(context).indexList].tr,
+                        style: Styles.style18700.copyWith(color: AppColors.primaryColor),
+                      ),
+                    ),
                   ),
-                ],
-              ),*/
-              Text(
-                'Maintenance contracts'.tr,
-                style: Styles.style16700,
-              ),
-              10.ESH(),
-              ...List.generate(
-                7,
-                (index) => GestureDetector(
-                  onTap: () {
-                    final arguments = {
-                      'nameMaintenanceReport': nameMaintenanceReport,
-                      'startDate': '24 Aug',
-                      'location': location,
-                      'numberElevators': numberElevators,
-                    };
-                    Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(context.screenWidth * .04),
-                    margin: EdgeInsets.all(context.screenWidth * .02),
-                    decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: context.screenHeight * .01, horizontal: context.screenWidth * .02),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            //borderRadius: BorderRadius.circular(10.r),
-                            color: AppColors.cBackGroundDateMaintenance,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '${nameMaintenanceReport.split(' ').first[0]}${nameMaintenanceReport.split(' ').length > 1 ? nameMaintenanceReport.split(' ').last[0] : ''}',
-                              style: Styles.styleHeader.copyWith(color: AppColors.cDateMaintenance),
-                            ),
-                          ),
-                        ),
-                        10.ESW(),
-                        Column(
+                  5.ESH(),
+                  ...List.generate(
+                    7,
+                    (index) => GestureDetector(
+                      onTap: () {
+                        final arguments = {
+                          'nameMaintenanceReport': nameMaintenanceReport,
+                          'startDate': '24 Aug',
+                          'location': location,
+                          'numberElevators': numberElevators,
+                        };
+                        Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(context.screenWidth * .04),
+                        margin: EdgeInsets.all(context.screenWidth * .02),
+                        decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              nameMaintenanceReport,
-                              style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Elevators :',
-                                  style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  '$numberElevators',
-                                  style: Styles.style14400.copyWith(color: AppColors.textColor),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                // const Icon(Icons.location_on_outlined, color: AppColors.subTextColor),
-
-                                Text(
-                                  '14/Aug/2023 ==> 15/Sep/2024',
-                                  style: Styles.style14500.copyWith(color: AppColors.subTextColor.withOpacity(.8), fontWeight: FontWeight.w700),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                // const Icon(Icons.location_on_outlined, color: AppColors.subTextColor),
-
-                                Text(
-                                  'Status: ',
-                                  style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
-                                ),
-                                5.ESW(),
-                                Text(
-                                  'In progress',
-                                  style: Styles.style14500.copyWith(color: AppColors.green, fontWeight: FontWeight.w700),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Location: ',
-                                  style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
-                                ),
-                                5.ESW(),
-                                Text(
-                                  'Cairo,Egypt',
-                                  style: Styles.style14500.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w500),
-                                ),
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  color: AppColors.primaryColor,
-                                  size: context.screenWidth * .05,
-                                ),
-                              ],
-                            ),
-                            5.ESH(),
-                            SizedBox(
-                              width: context.screenWidth * .5,
-                              child: TextButton(
-                                onPressed: null,
-                                style: ButtonStyle(
-                                    elevation: const MaterialStatePropertyAll(20),
-                                    shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
-                                        side: BorderSide(color: AppColors.grey), borderRadius: BorderRadius.circular(20.r))),
-                                    backgroundColor: const MaterialStatePropertyAll(AppColors.white)),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: context.screenHeight * .01, horizontal: context.screenWidth * .02),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                //borderRadius: BorderRadius.circular(10.r),
+                                color: AppColors.cBackGroundDateMaintenance,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Show Reports',
-                                  style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                                  '${nameMaintenanceReport.split(' ').first[0]}${nameMaintenanceReport.split(' ').length > 1 ? nameMaintenanceReport.split(' ').last[0] : ''}',
+                                  style: Styles.styleHeader.copyWith(color: AppColors.cDateMaintenance),
                                 ),
                               ),
                             ),
-                          ].paddingDirectional(bottom: 5),
+                            10.ESW(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  nameMaintenanceReport,
+                                  style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Elevators :',
+                                      style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      '$numberElevators',
+                                      style: Styles.style14400.copyWith(color: AppColors.textColor),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    // const Icon(Icons.location_on_outlined, color: AppColors.subTextColor),
+
+                                    Text(
+                                      '14/Aug/2023 ==> 15/Sep/2024',
+                                      style: Styles.style14500.copyWith(color: AppColors.subTextColor.withOpacity(.8), fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    // const Icon(Icons.location_on_outlined, color: AppColors.subTextColor),
+
+                                    Text(
+                                      'Status: ',
+                                      style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
+                                    ),
+                                    5.ESW(),
+                                    Text(
+                                      'In progress',
+                                      style: Styles.style14500.copyWith(color: AppColors.green, fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'Location: ',
+                                      style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
+                                    ),
+                                    5.ESW(),
+                                    Text(
+                                      'Cairo,Egypt',
+                                      style: Styles.style14500.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w500),
+                                    ),
+                                    Icon(
+                                      Icons.location_on_outlined,
+                                      color: AppColors.primaryColor,
+                                      size: context.screenWidth * .05,
+                                    ),
+                                  ],
+                                ),
+                                5.ESH(),
+                                SizedBox(
+                                  width: context.screenWidth * .5,
+                                  child: TextButton(
+                                    onPressed: null,
+                                    style: ButtonStyle(
+                                      elevation: const MaterialStatePropertyAll(20),
+                                      shape: MaterialStatePropertyAll(
+                                        ContinuousRectangleBorder(
+                                          side: BorderSide(color: AppColors.grey),
+                                          borderRadius: BorderRadius.circular(20.r),
+                                        ),
+                                      ),
+                                      backgroundColor: const MaterialStatePropertyAll(AppColors.white),
+                                    ),
+                                    child: Text(
+                                      'Show Reports',
+                                      style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                                    ),
+                                  ),
+                                ),
+                              ].paddingDirectional(bottom: 5),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
+              const CustomFloatingActionButtonMaintenance(),
             ],
           ),
         ),
       ),
     );
   }
-
+/*
   Future<void> _launchUrl(_url) async {
     try {
       final bool launched = await launch(
@@ -196,7 +243,7 @@ class MaintenanceScreen extends StatelessWidget {
       );
       debugPrint('Inside catch');
     }
-  }
+  }*/
 }
 
 /*
@@ -254,6 +301,7 @@ const PropertyFlip(
                 ),
               ),
  */
+/*
 class PropertyFlip extends StatelessWidget {
   final backimg;
   final misheading;
@@ -419,3 +467,4 @@ class PropertyComp extends StatelessWidget {
     }
   }
 }
+*/

@@ -292,6 +292,7 @@ class MoreScreenNew extends StatelessWidget {
                 //  pushNewScreen(context, screen: SecurityCheckScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
               },
             ),
+            50.ESH(),
             /*Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
             child: Container(

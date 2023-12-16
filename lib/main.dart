@@ -20,6 +20,7 @@ import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/all_project_details.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/progress_screen.dart';
+import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
 import 'package:cnattendance/screen/profile/payslipdetailscreen.dart';
@@ -31,6 +32,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
@@ -40,8 +42,11 @@ import 'package:in_app_notification/in_app_notification.dart';
 import 'package:provider/provider.dart';
 
 import 'screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
+import 'screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'screen/employer/maintenance/presentation/view/details_elevators.dart';
+import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_report.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_widget.dart';
+import 'screen/employer/maintenance/presentation/view/widgets/payment_maintenance_value.dart';
 import 'utils/Language/language.dart';
 
 void main() async {
@@ -209,57 +214,69 @@ class _MyAppState extends State<MyApp> {
             create: (ctx) => PaySlipProvider(),
           ),
         ],
-        child: Portal(
-          child: InAppNotification(
-            child: GestureDetector(
-              onTap: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
-              onVerticalDragDown: (details) {
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
-              child: GetMaterialApp(
-                locale: const Locale('en', 'US'),
-                translations: Language(),
-                navigatorKey: NavigationService.navigatorKey,
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  useMaterial3: true,
-                  canvasColor: const Color.fromRGBO(255, 255, 255, 1),
-                  fontFamily: 'Urbanist',
-                  primarySwatch: Colors.blue,
-                  scaffoldBackgroundColor: AppColors.scaffoldBackGround,
-                  appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.transparent,
-                    centerTitle: true,
-                    iconTheme: IconThemeData(color: Colors.black),
-                    elevation: 0,
-                    // brightness: Brightness.light,
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarColor: Colors.black,
-                      statusBarIconBrightness: Brightness.light,
-                    ),
-                    // titleTextStyle: Styles.styleHeader,
-                  ),
-                ),
-                initialRoute: '/',
-                routes: {
-                  '/': (_) => const SplashScreen(),
-                  HomeDashboardScreen.routeName: (_) => HomeDashboardScreen(),
-                  LoginScreen.routeName: (_) => const LoginScreen(),
-                  // AppRoute.dashboardScreen: (_) => DashboardScreen(),
-                  AppRoute.cardDetailsProject: (_) => const AllProjectDetails(),
-                  AppRoute.knowUs: (_) => const KnowUs(),
-                  AppRoute.detailsMaintenanceWidget: (_) => const DetailsMaintenanceWidget(),
-                  AppRoute.detailsElevators: (_) => const DetailsElevators(),
-                  AppRoute.progressScreen: (_) => const ProgressScreen(),
-                  ProfileScreen.routeName: (_) => const ProfileScreen(),
-                  EditProfileScreen.routeName: (_) => const EditProfileScreen(),
-                  MeetingDetailScreen.routeName: (_) => const MeetingDetailScreen(),
-                  PaySlipDetailScreen.routeName: (_) => const PaySlipDetailScreen(),
-                  MenuScreen.routeName: (_) => MenuScreen(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => MainBlocHomeCustomerCubit(),
+            ),
+            BlocProvider(
+              create: (context) => MainBlocMaintenanceCubit(),
+            ),
+          ],
+          child: Portal(
+            child: InAppNotification(
+              child: GestureDetector(
+                onTap: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                 },
-                builder: EasyLoading.init(),
+                onVerticalDragDown: (details) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+                child: GetMaterialApp(
+                  locale: const Locale('en', 'US'),
+                  translations: Language(),
+                  navigatorKey: NavigationService.navigatorKey,
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeData(
+                    useMaterial3: true,
+                    canvasColor: const Color.fromRGBO(255, 255, 255, 1),
+                    fontFamily: 'Urbanist',
+                    primarySwatch: Colors.blue,
+                    scaffoldBackgroundColor: AppColors.scaffoldBackGround,
+                    appBarTheme: const AppBarTheme(
+                      backgroundColor: Colors.transparent,
+                      centerTitle: true,
+                      iconTheme: IconThemeData(color: Colors.black),
+                      elevation: 0,
+                      // brightness: Brightness.light,
+                      systemOverlayStyle: SystemUiOverlayStyle(
+                        statusBarColor: Colors.black,
+                        statusBarIconBrightness: Brightness.light,
+                      ),
+                      // titleTextStyle: Styles.styleHeader,
+                    ),
+                  ),
+                  initialRoute: '/',
+                  routes: {
+                    '/': (_) => const SplashScreen(),
+                    HomeDashboardScreen.routeName: (_) => HomeDashboardScreen(),
+                    LoginScreen.routeName: (_) => const LoginScreen(),
+                    // AppRoute.dashboardScreen: (_) => DashboardScreen(),
+                    AppRoute.cardDetailsProject: (_) => const AllProjectDetails(),
+                    AppRoute.knowUs: (_) => const KnowUs(),
+                    AppRoute.detailsMaintenanceWidget: (_) => const DetailsMaintenanceWidget(),
+                    AppRoute.detailsElevators: (_) => const DetailsElevators(),
+                    AppRoute.progressScreen: (_) => const ProgressScreen(),
+                    AppRoute.detailsMaintenance: (_) => const DetailsMaintenance(),
+                    AppRoute.paymentMaintenanceValue: (_) => const PaymentMaintenanceValue(),
+                    ProfileScreen.routeName: (_) => const ProfileScreen(),
+                    EditProfileScreen.routeName: (_) => const EditProfileScreen(),
+                    MeetingDetailScreen.routeName: (_) => const MeetingDetailScreen(),
+                    PaySlipDetailScreen.routeName: (_) => const PaySlipDetailScreen(),
+                    MenuScreen.routeName: (_) => MenuScreen(),
+                  },
+                  builder: EasyLoading.init(),
+                ),
               ),
             ),
           ),

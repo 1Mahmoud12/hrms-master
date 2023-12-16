@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/logout/Logoutresponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,7 +16,7 @@ class MoreScreenProvider with ChangeNotifier {
         'Accept': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
       };
-      final uri = Uri.parse(Constant.DEACTIVATE_URL);
+      final uri = Uri.parse(EndPoints.DEACTIVATE_URL);
       final response = await http.post(
         uri,
         headers: headers,
@@ -38,7 +38,7 @@ class MoreScreenProvider with ChangeNotifier {
   }
 
   Future<Logoutresponse> logout() async {
-    final uri = Uri.parse(Constant.LOGOUT_URL);
+    final uri = Uri.parse(EndPoints.LOGOUT_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Constant {
+class EndPoints {
   static const production = 'https://hr.dar-bayat.com/';
+
   // http://127.0.0.1:8000/api/login
 
   /// Change value based on your need.
@@ -61,6 +62,7 @@ class Constant {
   static const SUPPORT_LIST_URL = '$API_URL/support/get-user-query-lists';
 
   static const CHAT_ALL_USERS = '$API_URL/users/chat';
+
   // static const USER_REQUEST = "$API_URL/request-types";
   static const USER_REQUEST = '$API_URL/request-types?type=unpaid';
   static const USER_REQUEST_PAID = '$API_URL/request-types?type=paid';
@@ -77,7 +79,9 @@ extension StringExtension on String {
   }
 }
 
-void showToast(String message) {
+void showToast(
+  String message,
+) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_LONG,

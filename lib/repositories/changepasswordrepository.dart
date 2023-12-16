@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/connect.dart';
 import 'package:cnattendance/data/source/network/model/changepassword/ChangePasswordResponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 
-class ChangePasswordRepository{
+class ChangePasswordRepository {
   Future<ChangePasswordResponse> changePassword(
-      String old, String newPassword, String confirm,) async {
+    String old,
+    String newPassword,
+    String confirm,
+  ) async {
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
 
@@ -24,7 +27,7 @@ class ChangePasswordRepository{
     };
 
     try {
-      final response = await Connect().postResponse(Constant.CHANGE_PASSWORD_API, headers, body);
+      final response = await Connect().postResponse(EndPoints.CHANGE_PASSWORD_API, headers, body);
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);

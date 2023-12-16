@@ -3,24 +3,24 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/tasklistresponse/tasklistresponse.dart';
 import 'package:cnattendance/model/task.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class TaskListController extends GetxController{
+class TaskListController extends GetxController {
   final taskList = <Task>[].obs;
   final filteredList = <Task>[].obs;
   final selected = 'All'.obs;
 
-  void filterList(){
+  void filterList() {
     filteredList.clear();
-    if(selected.value == 'All'){
+    if (selected.value == 'All') {
       filteredList.addAll(taskList);
-    }else{
-      for(final project in taskList){
-        if(project.status == selected.value){
+    } else {
+      for (final project in taskList) {
+        if (project.status == selected.value) {
           filteredList.add(project);
         }
       }
@@ -28,7 +28,7 @@ class TaskListController extends GetxController{
   }
 
   Future<String> getTaskList() async {
-    final uri = Uri.parse(Constant.TASK_LIST_URL);
+    final uri = Uri.parse(EndPoints.TASK_LIST_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -39,7 +39,7 @@ class TaskListController extends GetxController{
     };
 
     try {
-      EasyLoading.show(status: 'Loading',maskType: EasyLoadingMaskType.black);
+      EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
       final response = await http.get(
         uri,
         headers: headers,
@@ -54,8 +54,16 @@ class TaskListController extends GetxController{
         final taskResponse = tasklistresponse.fromJson(responseData);
 
         for (final task in taskResponse.data) {
-          taskList.add(Task(task.task_id, task.task_name, task.project_name,
-              task.start_date, task.end_date, task.status,),);
+          taskList.add(
+            Task(
+              task.task_id,
+              task.task_name,
+              task.project_name,
+              task.start_date,
+              task.end_date,
+              task.status,
+            ),
+          );
         }
 
         filterList();

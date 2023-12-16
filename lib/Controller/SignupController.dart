@@ -4,7 +4,7 @@ import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/login/Loginresponse.dart';
 import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -32,7 +32,7 @@ class SignupController extends GetxController {
   void signupUser() async {
     try {
       EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
-      final uri = Uri.parse(Constant.SIGNUP_URL);
+      final uri = Uri.parse(EndPoints.SIGNUP_URL);
       final response = await http.post(
         uri,
         body: {'name': usernameController.text, 'email': emailcontroller.text, 'password': phonecontroller.text, 'phone': phonecontroller.text},

@@ -6,7 +6,7 @@ import 'package:cnattendance/data/source/network/connect.dart';
 import 'package:cnattendance/data/source/network/model/leaveissue/IssueLeaveResponse.dart';
 import 'package:cnattendance/data/source/network/model/tadadetail/tadadetailresponse.dart';
 import 'package:cnattendance/data/source/network/model/tadalist/tadalistresponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -22,8 +22,7 @@ class TadaRepository {
     };
 
     try {
-      final response =
-          await Connect().getResponse(Constant.TADA_LIST_URL, headers);
+      final response = await Connect().getResponse(EndPoints.TADA_LIST_URL, headers);
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);
@@ -55,8 +54,7 @@ class TadaRepository {
 
     try {
       final int tadaIds = int.parse(tadaId);
-      final response = await Connect()
-          .getResponse('${Constant.TADA_DETAIL_URL}/$tadaIds', headers);
+      final response = await Connect().getResponse('${EndPoints.TADA_DETAIL_URL}/$tadaIds', headers);
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);
@@ -77,9 +75,13 @@ class TadaRepository {
     }
   }
 
-  Future<IssueLeaveResponse> createTada(String title, String description,
-      String expenses, List<PlatformFile> fileList,) async {
-    final uri = Uri.parse(Constant.TADA_STORE_URL);
+  Future<IssueLeaveResponse> createTada(
+    String title,
+    String description,
+    String expenses,
+    List<PlatformFile> fileList,
+  ) async {
+    final uri = Uri.parse(EndPoints.TADA_STORE_URL);
 
     final Preferences preferences = Preferences();
     final String token = await preferences.getToken();
@@ -104,8 +106,12 @@ class TadaRepository {
       final stream = http.ByteStream(Stream.castFrom(file.openRead()));
       final length = await file.length();
 
-      final multipartFile = http.MultipartFile('attachments[]', stream, length,
-          filename: filed.name,);
+      final multipartFile = http.MultipartFile(
+        'attachments[]',
+        stream,
+        length,
+        filename: filed.name,
+      );
       requests.files.add(multipartFile);
     }
     final responseStream = await requests.send();

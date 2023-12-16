@@ -13,16 +13,19 @@ class CustomTextFormField extends StatefulWidget {
   final bool? password;
   final int? maxLines;
   final TextInputType? textInputType;
+  final Color? fillColor;
 
-  const CustomTextFormField(
-      {super.key,
-      required this.controller,
-      required this.hintText,
-      this.suffixIcon,
-      this.prefixIcon,
-      this.password = false,
-      this.maxLines,
-      this.textInputType,});
+  const CustomTextFormField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.password = false,
+    this.maxLines,
+    this.textInputType,
+    this.fillColor,
+  });
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -72,16 +75,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintStyle: const TextStyle(color: AppColors.textColorTextFormField),
         prefixIcon: widget.prefixIcon,
         labelStyle: const TextStyle(color: Colors.black),
-        fillColor: AppColors.fillColorTextFormField,
+        fillColor: widget.fillColor ?? AppColors.fillColorTextFormField,
         filled: true,
         enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-            borderSide: BorderSide(color: Colors.white),),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
+          borderSide: BorderSide(color: Colors.white),
+        ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
@@ -94,11 +98,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
         focusedErrorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10), bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10),),),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
+        ),
         errorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10), bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10),),),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
+        ),
         suffixIcon: widget.password != null && widget.password!
             ? Padding(
                 padding: const EdgeInsets.all(10.0).w,

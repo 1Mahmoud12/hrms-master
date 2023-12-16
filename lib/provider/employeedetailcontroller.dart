@@ -3,30 +3,31 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/employeedetailresponse/Data.dart';
 import 'package:cnattendance/data/source/network/model/employeedetailresponse/employeedetailresponse.dart';
-import 'package:cnattendance/utils/constant.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:cnattendance/model/profile.dart' as up;
 import 'package:http/http.dart' as http;
 
-class EmployeeDetailController extends GetxController{
-  Rx<up.Profile>  profile = up.Profile(
-      id: 0,
-      avatar: '',
-      name: '',
-      username: '',
-      email: '',
-      post: '',
-      phone: '',
-      dob: '',
-      gender: '',
-      address: '',
-      bankName: '',
-      bankNumber: '',
-      joinedDate: '',).obs;
-  
+class EmployeeDetailController extends GetxController {
+  Rx<up.Profile> profile = up.Profile(
+    id: 0,
+    avatar: '',
+    name: '',
+    username: '',
+    email: '',
+    post: '',
+    phone: '',
+    dob: '',
+    gender: '',
+    address: '',
+    bankName: '',
+    bankNumber: '',
+    joinedDate: '',
+  ).obs;
+
   Future<employeedetailresponse> getEmployeeDetail(String id) async {
-    final uri = Uri.parse('${Constant.EMPLOYEE_PROFILE_URL}/$id');
+    final uri = Uri.parse('${EndPoints.EMPLOYEE_PROFILE_URL}/$id');
 
     final Preferences preferences = Preferences();
 
@@ -40,8 +41,9 @@ class EmployeeDetailController extends GetxController{
 
     try {
       EasyLoading.show(
-          status: 'Loading....',
-          maskType: EasyLoadingMaskType.black,);
+        status: 'Loading....',
+        maskType: EasyLoadingMaskType.black,
+      );
       final response = await http.get(uri, headers: headers);
       EasyLoading.dismiss();
       final responseData = json.decode(response.body);
