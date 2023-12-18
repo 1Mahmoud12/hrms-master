@@ -15,12 +15,17 @@ import 'package:cnattendance/provider/prefprovider.dart';
 import 'package:cnattendance/provider/profileprovider.dart';
 import 'package:cnattendance/provider/requestleaveprovider.dart';
 import 'package:cnattendance/provider/requestpaidprovider.dart';
-import 'package:cnattendance/screen/auth/login_screen.dart';
+import 'package:cnattendance/screen/addElevator/presentation/manager/mainBlocElevator/cubit.dart';
+import 'package:cnattendance/screen/addMaintenance/presentation/manager/mainBlocMaintenanceContract/cubit.dart';
+import 'package:cnattendance/screen/addMaintenance/presentation/view/add_maintenance_contract.dart';
+import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
+import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/all_project_details.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/progress_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
 import 'package:cnattendance/screen/profile/payslipdetailscreen.dart';
@@ -41,9 +46,12 @@ import 'package:get/get.dart';
 import 'package:in_app_notification/in_app_notification.dart';
 import 'package:provider/provider.dart';
 
+import 'core/utils/constants.dart';
+import 'screen/addElevator/presentation/view/add_elevator.dart';
+import 'screen/employer/allProject/presentation/view/widgets/details_contract_project.dart';
 import 'screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
 import 'screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
-import 'screen/employer/maintenance/presentation/view/details_elevators.dart';
+import 'screen/employer/maintenance/presentation/view/widgets/all_details_elevator.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_report.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_widget.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/payment_maintenance_value.dart';
@@ -77,8 +85,10 @@ void main() async {
   } else {
     debugPrint('User declined or has not accepted permission');
   }
-  final fcm = await FirebaseMessaging.instance.getToken();
-  debugPrint('fcm $fcm');
+  fcmToken = await FirebaseMessaging.instance.getToken() ?? '';
+  debugPrint('fcm $fcmToken');
+  await Preferences.init();
+
   await NotificationUtility.initializeAwesomeNotification();
 
   AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
@@ -222,6 +232,15 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => MainBlocMaintenanceCubit(),
             ),
+            BlocProvider(
+              create: (context) => LoginCubit(),
+            ),
+            BlocProvider(
+              create: (context) => MainBlocMaintenanceContractCubit(),
+            ),
+            BlocProvider(
+              create: (context) => MainBlocElevatorCubit(),
+            ),
           ],
           child: Portal(
             child: InAppNotification(
@@ -265,10 +284,15 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.cardDetailsProject: (_) => const AllProjectDetails(),
                     AppRoute.knowUs: (_) => const KnowUs(),
                     AppRoute.detailsMaintenanceWidget: (_) => const DetailsMaintenanceWidget(),
-                    AppRoute.detailsElevators: (_) => const DetailsElevators(),
+                    //  AppRoute.detailsElevators: (_) => const DetailsElevators(),
                     AppRoute.progressScreen: (_) => const ProgressScreen(),
+                    AppRoute.allDetailsElevator: (_) => const AllDetailsElevator(),
                     AppRoute.detailsMaintenance: (_) => const DetailsMaintenance(),
                     AppRoute.paymentMaintenanceValue: (_) => const PaymentMaintenanceValue(),
+                    AppRoute.allDetailsReport: (_) => const AllDetailsReport(),
+                    AppRoute.detailsContractProject: (_) => const DetailsContractProject(),
+                    AppRoute.addElevator: (_) => const AddElevator(),
+                    AppRoute.addMaintenanceContract: (_) => const AddMaintenanceContract(),
                     ProfileScreen.routeName: (_) => const ProfileScreen(),
                     EditProfileScreen.routeName: (_) => const EditProfileScreen(),
                     MeetingDetailScreen.routeName: (_) => const MeetingDetailScreen(),
@@ -276,6 +300,7 @@ class _MyAppState extends State<MyApp> {
                     MenuScreen.routeName: (_) => MenuScreen(),
                   },
                   builder: EasyLoading.init(),
+                  // home: const AddElevator(),
                 ),
               ),
             ),

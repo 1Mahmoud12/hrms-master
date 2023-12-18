@@ -1,18 +1,25 @@
+import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/view/details_elevators.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/details_elevator.dart';
+import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
-import 'package:expandable_text/expandable_text.dart';
+import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HeaderDetailsContract extends StatelessWidget {
   final String startDate;
   final String endDate;
   final String location;
-  final int numberElevators;
 
-  const HeaderDetailsContract({super.key, required this.startDate, required this.endDate, required this.location, required this.numberElevators});
+  const HeaderDetailsContract({
+    super.key,
+    required this.startDate,
+    required this.endDate,
+    required this.location,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,55 +27,24 @@ class HeaderDetailsContract extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          color: Colors.black12,
-          padding: EdgeInsets.all(context.screenWidth * .02),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.r),
+            color: Colors.white,
+          ),
+          padding: EdgeInsets.all(context.screenWidth * .03),
+          margin: EdgeInsets.all(context.screenWidth * .03),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  text: 'Start Date : ',
-                  style: Styles.style16700.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
-                  children: [TextSpan(text: '$startDate 2024', style: Styles.style14400.copyWith(color: AppColors.subTextColor))],
-                ),
+              Text(
+                'Details',
+                style: Styles.style14500.copyWith(color: Colors.black),
               ),
-              RichText(
-                text: TextSpan(
-                  text: 'End Date : ',
-                  style: Styles.style16700.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
-                  children: [TextSpan(text: '2 Dec 2024', style: Styles.style14400.copyWith(color: AppColors.subTextColor))],
-                ),
-              ),
-              Row(
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      text: 'Location : ',
-                      style: Styles.style16700.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
-                      children: [TextSpan(text: location, style: Styles.style14400.copyWith(color: AppColors.primaryColor))],
-                    ),
-                  ),
-                  Icon(
-                    Icons.location_on_outlined,
-                    color: AppColors.primaryColor,
-                    size: context.screenWidth * .05,
-                  ),
-                ],
-              ),
-              RichText(
-                text: TextSpan(
-                  text: 'Finished elevators : ',
-                  style: Styles.style16700.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
-                  children: [TextSpan(text: '${numberElevators - 5}', style: Styles.style14400.copyWith(color: AppColors.subTextColor))],
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  text: 'status: ',
-                  style: Styles.style16700.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
-                  children: [TextSpan(text: 'in progress', style: Styles.style14400.copyWith(color: AppColors.green, fontWeight: FontWeight.w500))],
-                ),
-              ),
+              const DetailsElevatorRow(nameDetails: 'Maintenance Engineer ', executeDetails: 'Eman Saber'),
+              const DetailsElevatorRow(nameDetails: 'contract Date ', executeDetails: '24th Sep 2023'),
+              const DetailsElevatorRow(nameDetails: 'Customer Name', executeDetails: 'Jane Doe'),
+              const DetailsElevatorRow(nameDetails: 'Phone', executeDetails: '01127260336'),
+              const DetailsElevatorRow(nameDetails: 'Examination Date:', executeDetails: '24th Sep 2023'),
             ].paddingDirectional(bottom: context.screenHeight * .01),
           ),
         ),
@@ -86,36 +62,85 @@ class HeaderDetailsContract extends StatelessWidget {
             ),
           ),
         ),*/
-        Padding(
-          padding: EdgeInsets.all(context.screenWidth * .02),
-          child: Container(
-            //constraints: BoxConstraints(maxWidth: context.screenWidth * .9),
-            padding: EdgeInsets.all(context.screenWidth * .02),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.grey,
-              ),
-              borderRadius: BorderRadius.circular(15.r),
-            ),
-            child: Wrap(
-              children: [
-                Text(
-                  'Description:-',
-                  style: Styles.style14500.copyWith(color: Colors.black, fontWeight: FontWeight.w700),
-                ),
-                ExpandableText(
-                  detailsReport,
-                  expandText: 'see more',
-                  linkStyle: Styles.style12400.copyWith(fontWeight: FontWeight.w600, color: Colors.black),
-                  style: Styles.style12400,
-                  maxLines: 22,
-                  collapseText: 'see less',
-                ),
-              ],
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .03),
+            child: Text(
+              'Elevator report History',
+              style: Styles.styleHeader,
             ),
           ),
         ),
-      ].paddingDirectional(bottom: context.screenHeight * .02),
+        SizedBox(
+          height: context.screenHeight * .58,
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                final arguments = {
+                  'maintenanceEngineer': 'Name Technical',
+                  'customerName': 'Customer Name',
+                  'address': 'Egypt, Assut',
+                  'phone': '120932437435',
+                  'reportDate': '24th Sep 2023',
+                  'description': 'Description',
+                  'elevatorName': 'Elevator 1',
+                };
+                Navigator.pushNamed(context, AppRoute.allDetailsReport, arguments: arguments);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: Colors.white,
+                ),
+                padding: const EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.cBorderDecoration),
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(10.w),
+                      child: SvgPicture.asset(Assets.FileSVG),
+                    ),
+                    15.ESW(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name Report',
+                          style: Styles.style18700,
+                        ),
+                        SizedBox(
+                          width: context.screenWidth * .65,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'By Name Technical',
+                                style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                              ),
+                              Text(
+                                '14 Marc',
+                                style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.arrow_forward_ios_sharp),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ].paddingDirectional(bottom: context.screenHeight * .01),
     );
   }
 }

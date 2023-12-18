@@ -41,7 +41,7 @@ class SignupController extends GetxController {
       debugPrint('response data ==>>>>$responsedata');
       if (responsedata['status'] == true) {
         final Preferences preferences = Preferences();
-        final responseJson = Loginresponse.fromJson(responsedata);
+        final responseJson = LoginResponse.fromJson(responsedata);
         await preferences.saveUser(responseJson.data);
 
         usernameController.clear();

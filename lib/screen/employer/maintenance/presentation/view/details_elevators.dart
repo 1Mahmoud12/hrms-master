@@ -23,12 +23,14 @@ class DetailsElevators extends StatelessWidget {
         padding: EdgeInsets.all(context.screenWidth * .02),
         children: [
           RichText(
-              text: TextSpan(
-                  text: 'Date of preparation of the report: ',
-                  style: Styles.style14400,
-                  children: [TextSpan(text: date, style: Styles.style14400.copyWith(color: AppColors.subTextColor))])),
+            text: TextSpan(
+              text: 'Date of preparation of the report: ',
+              style: Styles.style14400,
+              children: [TextSpan(text: date, style: Styles.style14400.copyWith(color: AppColors.subTextColor))],
+            ),
+          ),
           10.ESH(),
-          Text(detailsReport)
+          Text(detailsReport),
         ],
       ),
     );

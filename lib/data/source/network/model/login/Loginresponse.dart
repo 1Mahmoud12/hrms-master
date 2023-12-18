@@ -1,23 +1,20 @@
-import 'package:flutter/material.dart';
-
 import 'Login.dart';
 
-class Loginresponse {
+class LoginResponse {
   bool status;
   String message;
   int statusCode;
   Login data;
 
-  Loginresponse({
+  LoginResponse({
     required this.status,
     required this.message,
     required this.statusCode,
     required this.data,
   });
 
-  factory Loginresponse.fromJson(dynamic json) {
-    debugPrint('Json $json');
-    return Loginresponse(
+  factory LoginResponse.fromJson(dynamic json) {
+    return LoginResponse(
       status: json['status'],
       message: json['message'],
       statusCode: json['status_code'],

@@ -1,6 +1,7 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
-import 'package:cnattendance/core/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SliderCustom extends StatefulWidget {
   final double valueSlider;
@@ -14,11 +15,37 @@ class SliderCustom extends StatefulWidget {
 class _SliderCustomState extends State<SliderCustom> {
   @override
   Widget build(BuildContext context) {
-    double valueSlider = widget.valueSlider;
+    final double valueSlider = widget.valueSlider;
 
     return Row(
       children: [
         Expanded(
+          child: CircularPercentIndicator(
+            radius: 20,
+            lineWidth: 3.0,
+            animation: true,
+            percent: valueSlider / 100,
+            center: Text(
+              '$valueSlider%',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.sp),
+            ),
+            /*footer: const Text(
+              'Sales this week',
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+            ),*/
+            circularStrokeCap: CircularStrokeCap.round,
+            progressColor: AppColors.primaryColor,
+          ),
+        ),
+        const Icon(Icons.arrow_forward_ios_sharp),
+      ],
+    );
+  }
+}
+
+/*
+ Expanded(
           child: SliderTheme(
             data: SliderThemeData(
               thumbShape: const RoundSliderOverlayShape(overlayRadius: 1),
@@ -42,10 +69,7 @@ class _SliderCustomState extends State<SliderCustom> {
           '$valueSlider %',
           style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
         ),
-      ],
-    );
-  }
-}
+*/
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {
   @override

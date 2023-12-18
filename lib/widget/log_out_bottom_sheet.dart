@@ -1,13 +1,12 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/provider/morescreenprovider.dart';
-import 'package:cnattendance/screen/auth/login_screen.dart';
+import 'package:cnattendance/data/source/datastore/preferences.dart';
+import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/utils/navigationservice.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class LogOutBottomSheet extends StatefulWidget {
   const LogOutBottomSheet({super.key});
@@ -19,10 +18,12 @@ class LogOutBottomSheet extends StatefulWidget {
 class LogOutBottomSheetState extends State<LogOutBottomSheet> {
   void logout() async {
     try {
-      setState(() {
+      /* setState(() {
         showLoader();
-      });
-      final response = await Provider.of<MoreScreenProvider>(context, listen: false).logout();
+      });*/
+      //final response = await Provider.of<MoreScreenProvider>(context, listen: false).logout();
+      Preferences.deleteSaved(key: 'genderUser');
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
 
       setState(() {
         dismissLoader();
@@ -30,7 +31,7 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
       if (!mounted) {
         return;
       }
-      if (response.statusCode == 200 || response.statusCode == 401) {
+      /*if (response.statusCode == 200 || response.statusCode == 401) {
         Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (BuildContext context) {
@@ -39,7 +40,7 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
           ),
           (_) => false,
         );
-      }
+      }*/
     } catch (e) {
       NavigationService().showSnackBar('Log out Alert', e.toString());
       setState(() {
@@ -77,14 +78,15 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
                   style: Styles.style16700,
                 ),
                 IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      size: 20,
-                      color: Colors.black,
-                    ),),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
               ],
             ),
             Padding(
@@ -103,34 +105,36 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
                     child: Container(
                       padding: const EdgeInsets.only(right: 5, left: 5),
                       child: TextButton(
-                          style: TextButton.styleFrom(backgroundColor: AppColors.primaryColor, shape: ButtonBorder()),
-                          onPressed: () async {
-                            logout();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
-                              'Confirm'.tr,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),),
+                        style: TextButton.styleFrom(backgroundColor: AppColors.primaryColor, shape: ButtonBorder()),
+                        onPressed: () async {
+                          logout();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            'Confirm'.tr,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: TextButton(
-                          style: TextButton.styleFrom(backgroundColor: AppColors.primaryColor, shape: ButtonBorder()),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
-                              'Goback'.tr,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),),
+                        style: TextButton.styleFrom(backgroundColor: AppColors.primaryColor, shape: ButtonBorder()),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            'Goback'.tr,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

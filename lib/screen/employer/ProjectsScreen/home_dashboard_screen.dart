@@ -13,6 +13,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../maintenance/presentation/view/widgets/custom_floating_action_button_maintenance.dart';
 import 'projects_screen.dart';
 
 final ZoomDrawerController za = ZoomDrawerController();
@@ -88,22 +89,31 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
         ),*/
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       extendBody: true,
-      bottomNavigationBar: AnimatedNotchBottomBar(
-        notchBottomBarController: _controller,
-        bottomBarItems: [
-          BottomBarItem(inActiveItem: SvgPicture.asset(Assets.unSelectedHome), activeItem: SvgPicture.asset(Assets.selectedHome)),
-          BottomBarItem(inActiveItem: SvgPicture.asset(Assets.maintenance), activeItem: SvgPicture.asset(Assets.selectedMaintenance)),
-          BottomBarItem(inActiveItem: SvgPicture.asset(Assets.unSelectMessage), activeItem: SvgPicture.asset(Assets.selectedMessage)),
-          BottomBarItem(inActiveItem: SvgPicture.asset(Assets.projects), activeItem: SvgPicture.asset(Assets.selectedProjects)),
-          BottomBarItem(inActiveItem: SvgPicture.asset(Assets.unSelectedMenu), activeItem: SvgPicture.asset(Assets.selectedMenu)),
-        ],
-        onTap: (value) {
-          selectedIndex = value;
-          _controller.index = value;
-          //_pageController.jumpToPage(value);
+      bottomNavigationBar: SizedBox(
+        height: context.screenHeight * .4,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // if (selectedIndex == 1) const CustomFloatingActionButtonMaintenance(),
+            AnimatedNotchBottomBar(
+              notchBottomBarController: _controller,
+              bottomBarItems: [
+                BottomBarItem(inActiveItem: SvgPicture.asset(Assets.unSelectedHome), activeItem: SvgPicture.asset(Assets.selectedHome)),
+                BottomBarItem(inActiveItem: SvgPicture.asset(Assets.maintenance), activeItem: SvgPicture.asset(Assets.selectedMaintenance)),
+                BottomBarItem(inActiveItem: SvgPicture.asset(Assets.unSelectMessage), activeItem: SvgPicture.asset(Assets.selectedMessage)),
+                BottomBarItem(inActiveItem: SvgPicture.asset(Assets.projects), activeItem: SvgPicture.asset(Assets.selectedProjects)),
+                BottomBarItem(inActiveItem: SvgPicture.asset(Assets.unSelectedMenu), activeItem: SvgPicture.asset(Assets.selectedMenu)),
+              ],
+              onTap: (value) {
+                selectedIndex = value;
+                _controller.index = value;
+                //_pageController.jumpToPage(value);
 
-          print(selectedIndex);
-        },
+                print(selectedIndex);
+              },
+            ),
+          ],
+        ),
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

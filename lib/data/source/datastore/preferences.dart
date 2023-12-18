@@ -13,19 +13,23 @@ class Preferences with ChangeNotifier {
   final String roleId = 'role_id';
   final String userAuth = 'user_auth';
   final String appInEnglish = 'eng_date';
+  static SharedPreferences? prefs;
+
+  static Future<void> init() async {
+    prefs = await SharedPreferences.getInstance();
+  }
 
   Future<bool> saveUser(Login data) async {
     // Obtain shared preferences.
     final User user = data.user;
-    final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString(userToken, data.tokens);
-    await prefs.setInt(userId, user.id);
-    await prefs.setString(roleId, user.roleId);
-    await prefs.setString(userAvatar, user.avatar);
-    await prefs.setString(userEmail, user.email);
-    await prefs.setString(userName, user.username);
-    await prefs.setString(userFullName, user.name);
+    await prefs!.setString(userToken, data.tokens);
+    await prefs!.setInt(userId, user.id);
+    await prefs!.setString(roleId, user.roleId);
+    await prefs!.setString(userAvatar, user.avatar);
+    await prefs!.setString(userEmail, user.email);
+    await prefs!.setString(userName, user.username);
+    await prefs!.setString(userFullName, user.name);
 
     notifyListeners();
 
@@ -33,15 +37,13 @@ class Preferences with ChangeNotifier {
   }
 
   void saveBasicUser(User user) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    await prefs.setInt(userId, user.id);
-    await prefs.setString(userAvatar, user.avatar);
-    await prefs.setString(userEmail, user.email);
-    await prefs.setString(roleId, user.roleId);
-    await prefs.setString(userName, user.username);
-    await prefs.setString(userFullName, user.name);
-    await prefs.setString(userFullName, user.name);
+    await prefs!.setInt(userId, user.id);
+    await prefs!.setString(userAvatar, user.avatar);
+    await prefs!.setString(userEmail, user.email);
+    await prefs!.setString(roleId, user.roleId);
+    await prefs!.setString(userName, user.username);
+    await prefs!.setString(userFullName, user.name);
+    await prefs!.setString(userFullName, user.name);
 
     notifyListeners();
   }
@@ -60,6 +62,28 @@ class Preferences with ChangeNotifier {
     await prefs.setBool(appInEnglish, true);
 
     notifyListeners();
+  }
+
+  static Future<bool> setSaved({required dynamic value, required String key}) async {
+    if (value is String) {
+      return await prefs!.setString(key, value);
+    }
+    if (value is bool) {
+      return await prefs!.setBool(key, value);
+    }
+    if (value is int) {
+      return await prefs!.setInt(key, value);
+    }
+
+    return await prefs!.setDouble(key, value);
+  }
+
+  static dynamic getSaved({required String key}) {
+    return prefs!.get(key);
+  }
+
+  static Future<dynamic> deleteSaved({required String key}) async {
+    return await prefs!.remove(key);
   }
 
   void saveUserAuth({required bool value}) async {

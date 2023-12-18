@@ -48,8 +48,7 @@ class PaymentMaintenanceValue extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (MainBlocMaintenanceCubit.of(context).image == null)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Center(
                 child: CustomTextButton(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +70,9 @@ class PaymentMaintenanceValue extends StatelessWidget {
               Center(
                 child: Image.file(
                   MainBlocMaintenanceCubit.of(context).image!,
-                  width: context.screenWidth * .95,
+                  width: context.screenWidth * .9,
+                  height: context.screenHeight * .3,
+                  fit: BoxFit.fill,
                 ),
               )
           ],

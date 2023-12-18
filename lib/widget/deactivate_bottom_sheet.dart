@@ -1,11 +1,11 @@
 import 'package:cnattendance/provider/morescreenprovider.dart';
-import 'package:cnattendance/screen/auth/login_screen.dart';
+import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/utils/navigationservice.dart';
+import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:cnattendance/widget/buttonborder.dart';
 
 class DeactivemodalSheet extends StatefulWidget {
   const DeactivemodalSheet({super.key});
@@ -65,6 +65,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
 
   final password = TextEditingController();
   final _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(

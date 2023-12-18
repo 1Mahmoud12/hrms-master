@@ -26,7 +26,6 @@ dependencies:
   expandable: ^5.0.1
   flutter_expanded_tile: ^0.3.7
   flutter_web_browser: ^0.17.1
-  percent_indicator: ^4.0.1
   persistent_bottom_nav_bar_v2: ^4.2.8
   toggle_switch: ^2.0.1
   dropdown_button3: ^3.0.0
@@ -80,6 +79,10 @@ dependencies:
   file_picker: ^6.1.1
   images_picker: ^1.2.11
   path_provider: ^2.0.15
+
+  dartz: any
+
+  percent_indicator: ^4.2.3
 
 
 

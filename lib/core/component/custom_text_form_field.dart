@@ -1,5 +1,6 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/utils/assets.dart';
+import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,6 +15,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final TextInputType? textInputType;
   final Color? fillColor;
+  final double? fontSizeHintText;
 
   const CustomTextFormField({
     super.key,
@@ -25,6 +27,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.textInputType,
     this.fillColor,
+    this.fontSizeHintText,
   });
 
   @override
@@ -57,6 +60,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    ///You must add [[width]] in SizeBox before use it
     return TextFormField(
       obscureText: _obscureText,
       controller: widget.controller,
@@ -72,7 +76,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       cursorColor: AppColors.textColorTextFormField,
       decoration: InputDecoration(
         hintText: widget.hintText.tr,
-        hintStyle: const TextStyle(color: AppColors.textColorTextFormField),
+        hintStyle: TextStyle(color: AppColors.textColorTextFormField, fontSize: (widget.fontSizeHintText ?? 14).sp),
         prefixIcon: widget.prefixIcon,
         labelStyle: const TextStyle(color: Colors.black),
         fillColor: widget.fillColor ?? AppColors.fillColorTextFormField,
@@ -129,7 +133,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                         ),
                 ),
               )
-            : widget.suffixIcon ?? const SizedBox(),
+            : widget.suffixIcon,
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:cnattendance/Controller/SignupController.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/screen/auth/login_screen.dart';
+import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';

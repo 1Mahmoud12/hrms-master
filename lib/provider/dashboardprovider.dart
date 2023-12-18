@@ -9,7 +9,7 @@ import 'package:cnattendance/data/source/network/model/dashboard/Dashboardrespon
 import 'package:cnattendance/data/source/network/model/dashboard/EmployeeTodayAttendance.dart';
 import 'package:cnattendance/data/source/network/model/dashboard/Overview.dart';
 import 'package:cnattendance/data/source/network/model/logout/Logoutresponse.dart';
-import 'package:cnattendance/screen/auth/login_screen.dart';
+import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/locationstatus.dart';
 import 'package:cnattendance/utils/wifiinfo.dart';

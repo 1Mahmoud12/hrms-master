@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
-import 'package:cnattendance/screen/auth/login_screen.dart';
+import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
@@ -17,19 +17,23 @@ class SplashScreen extends StatefulWidget {
   State<StatefulWidget> createState() => SplashState();
 }
 
-class SplashState extends State<SplashScreen> {
+class SplashState extends State<SplashScreen> with TickerProviderStateMixin {
+  late Animation<double> animation;
+  late AnimationController controller;
+
   @override
   void initState() {
+    controller = AnimationController(vsync: this, duration: const Duration(seconds: 3))..forward();
+    animation = CurvedAnimation(parent: controller, curve: Curves.linear);
     Timer(
       const Duration(milliseconds: 1500),
       () async {
-        final Preferences preferences = Preferences();
-        if (await preferences.getToken() == '') {
+        genderUser = Preferences.getSaved(key: 'genderUser') ?? '';
+        if (genderUser == '') {
           Navigator.pushReplacementNamed(context, LoginScreen.routeName);
         } else {
-          final _userName = await preferences.getUser();
-          debugPrint('cvbnjmk,2 ${_userName.roleId}');
-          if (_userName.roleId == '4') {
+          debugPrint('cvbnjmk,2 $genderUser');
+          if (genderUser == RoleId.customer.toString()) {
             Navigator.pushReplacementNamed(context, HomeDashboardScreen.routeName);
           } else {
             Get.offAll(MenuScreen());
@@ -42,16 +46,31 @@ class SplashState extends State<SplashScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose(); // Dispose the AnimationController
+    //timer.cancel(); // Cancel the Timer
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(color: AppColors.scaffoldBackGround),
-      child: Center(
-        child: Image.asset(
-          Assets.appLogo,
-          //color: AppColors.primaryColor,
-          width: context.screenWidth * .6,
-          //  height: 220,
-        ),
+    return Scaffold(
+      //backgroundColor: Colors.white,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ScaleTransition(
+            scale: animation,
+            child: Center(
+              child: Image.asset(
+                Assets.appLogo,
+                width: context.screenWidth * .6,
+                //  height: 220,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

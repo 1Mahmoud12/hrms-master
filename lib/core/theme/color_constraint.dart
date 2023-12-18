@@ -14,6 +14,7 @@ class AppColors {
   static const selectedCharData = Color(0xff82CAE0);
   static const unSelectedCharData = Color(0xff292D30);
   static const fillColorTextFormField = Color(0xffF5F6FA);
+  static const cFillColorDropDownButton = Color(0xffe5e4f4);
   static const textColorTextFormField = Color(0xff939FBE);
   static const greyWhite = Color(0xffF0F2F5);
   static const colorNumber = Color(0xff344054);
@@ -24,5 +25,6 @@ class AppColors {
   static const cPlusNumber = Color(0xff7F56D9);
   static const cLightPlusNumber = Color(0xffF9F5FF);
   static const cDateMaintenance = Color(0xff20affe);
+  static const cBorderDecoration = Color(0xffEEEEEE);
   static const cBackGroundDateMaintenance = Color(0xffe8f6ff);
 }

@@ -66,4 +66,7 @@ class Assets {
   static const userCheck = 'assets/icons/svg/userCheck.svg';
   static const users = 'assets/icons/svg/users.svg';
   static const plusIcon = 'assets/icons/svg/Plus.svg';
+  static const FileSVG = 'assets/icons/svg/File.svg';
+  static const addMaintenance = 'assets/icons/svg/addMaintenance.svg';
+  static const detailsContract = 'assets/icons/svg/detailsContract.svg';
 }

@@ -8,7 +8,6 @@ import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -64,7 +63,7 @@ class _GoogleMapWithoutScaffoldState extends State<GoogleMapWithoutScaffold> {
         currentLocation!.longitude,
       );
       locationCache = '${placeMarks[0].locality}';
-      widget.cubit.changeState();
+      widget.cubit.changeElevatorType();
 
       debugPrint('currentLocation ${placeMarks[0].locality}');
     } catch (e) {
@@ -117,6 +116,7 @@ class _GoogleMapWithoutScaffoldState extends State<GoogleMapWithoutScaffold> {
             },
           ),
         ),
+        10.ESH(),
         CustomTextButton(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

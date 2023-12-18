@@ -12,7 +12,7 @@ class EndPoints {
   static const API_URL = '${MAIN_URL}api';
   static const PRIVACY_POLICY_URL = '${MAIN_URL}privacy';
 
-  static const LOGIN_URL = '$API_URL/login';
+  static const loginUrl = '$API_URL/login';
   static const DEACTIVATE_URL = '$API_URL/users/deactive';
   static const SIGNUP_URL = '$API_URL/users/creating';
   static const LOGOUT_URL = '$API_URL/logout';

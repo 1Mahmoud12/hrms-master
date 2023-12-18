@@ -226,24 +226,64 @@ class StatusDetailsProject extends StatelessWidget {
             };
             Navigator.pushNamed(context, AppRoute.progressScreen, arguments: arguments);
           },
-          child: Row(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    SvgPicture.asset(Assets.progress),
-                    20.ESW(),
-                    Text(
-                      'Progress',
-                      style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
-                    ),
-                  ],
+          child: Container(
+            padding: EdgeInsets.all(5.w),
+            decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10.r)),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        Assets.progress,
+                        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                      ),
+                      20.ESW(),
+                      Text(
+                        'Progress',
+                        style: Styles.style14400.copyWith(color: AppColors.textColor),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Expanded(
-                child: SliderCustom(valueSlider: 80),
-              ),
-            ],
+                const Expanded(
+                  child: SliderCustom(valueSlider: 80),
+                ),
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            final arguments = {
+              'progressRatio': 80,
+            };
+            Navigator.pushNamed(context, AppRoute.detailsContractProject, arguments: arguments);
+          },
+          child: Container(
+            padding: EdgeInsets.all(10.w),
+            decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10.r)),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        Assets.detailsContract,
+                        width: context.screenWidth * .06,
+                        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                      ),
+                      20.ESW(),
+                      Text(
+                        'Details Contract',
+                        style: Styles.style14400.copyWith(color: AppColors.textColor),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.arrow_forward_ios_sharp),
+              ],
+            ),
           ),
         ),
       ].paddingDirectional(start: 20.w, top: 10.h),

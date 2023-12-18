@@ -1,4 +1,3 @@
-import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ItemShowModalBottomSheet extends StatelessWidget {
   final String titleShowModalBottomSheet;
   final Function onPress;
+
   const ItemShowModalBottomSheet({super.key, required this.titleShowModalBottomSheet, required this.onPress});
 
   @override
@@ -19,12 +19,19 @@ class ItemShowModalBottomSheet extends StatelessWidget {
         width: context.screenWidth,
         padding: EdgeInsets.all(10.w),
         margin: EdgeInsets.all(10.w),
-        decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r), border: Border.all(color: AppColors.grey)),
-        child: Center(
-          child: Text(
-            titleShowModalBottomSheet,
-            style: Styles.style16700.copyWith(color: AppColors.primaryColor),
-          ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        child: Row(
+          children: [
+            Text(
+              titleShowModalBottomSheet,
+              style: Styles.style16700.copyWith(fontSize: 14.sp),
+            ),
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios_sharp)
+          ],
         ),
       ),
     );
