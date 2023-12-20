@@ -8,6 +8,7 @@ class CustomTextButton extends StatefulWidget {
   final Color? backgroundColor;
   final Function onPress;
   final double? width;
+  final double? borderRadius;
 
   const CustomTextButton({
     super.key,
@@ -15,6 +16,7 @@ class CustomTextButton extends StatefulWidget {
     required this.onPress,
     this.backgroundColor,
     this.width,
+    this.borderRadius,
   });
 
   @override
@@ -34,7 +36,8 @@ class _CustomTextButtonState extends State<CustomTextButton> {
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(widget.backgroundColor ?? AppColors.white),
           shape: MaterialStatePropertyAll(
-            ContinuousRectangleBorder(side: BorderSide(color: AppColors.grey), borderRadius: BorderRadius.circular(30.r)),
+            ContinuousRectangleBorder(
+                side: const BorderSide(color: AppColors.primaryColor), borderRadius: BorderRadius.circular(widget.borderRadius ?? 10.r)),
           ),
         ),
         child: widget.child,

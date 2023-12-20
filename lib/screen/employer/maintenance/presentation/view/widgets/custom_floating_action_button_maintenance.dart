@@ -21,48 +21,51 @@ class CustomFloatingActionButtonMaintenance extends StatelessWidget {
           builder: (context) => Theme(
             data: ThemeData(useMaterial3: false),
             child: AlertDialog(
+              insetPadding: EdgeInsets.zero,
               backgroundColor: AppColors.scaffoldBackGround,
               titlePadding: const EdgeInsets.only(top: 10).w,
               contentPadding: EdgeInsets.zero,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
               title: Center(
                 child: Text(
-                  'Select Request',
-                  style: Styles.style18700.copyWith(color: AppColors.primaryColor),
+                  'Select Maintenance Type',
+                  style: Styles.style18700.copyWith(color: Colors.black),
                 ),
               ),
               content: Container(
-                width: context.screenWidth * .99,
+                width: context.screenWidth * .92,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                child: Row(
                   children: [
                     ItemShowModalBottomSheet(
-                      titleShowModalBottomSheet: 'Emergency maintenance request',
+                      titleShowModalBottomSheet: 'Emergency request',
                       onPress: () {
                         final arguments = {
                           'nameStatus': 'Emergency maintenance request',
                         };
                         Navigator.pushNamed(context, AppRoute.detailsMaintenance, arguments: arguments);
                       },
+                      assetName: Assets.emergencyRequest,
                     ),
                     ItemShowModalBottomSheet(
-                      titleShowModalBottomSheet: 'Malfunction maintenance',
+                      titleShowModalBottomSheet: 'Malfunction request',
                       onPress: () {
                         final arguments = {
                           'nameStatus': 'Malfunction maintenance',
                         };
                         Navigator.pushNamed(context, AppRoute.detailsMaintenance, arguments: arguments);
                       },
+                      assetName: Assets.malfunctionRequest,
                     ),
                     ItemShowModalBottomSheet(
-                      titleShowModalBottomSheet: 'Request periodic maintenance',
+                      titleShowModalBottomSheet: 'periodic maintenance',
                       onPress: () {
                         final arguments = {
                           'nameStatus': 'Request periodic maintenance',
                         };
                         Navigator.pushNamed(context, AppRoute.addMaintenanceContract, arguments: arguments);
                       },
+                      assetName: Assets.maintenancePeriodic,
                     ),
                     10.ESH(),
                   ],
@@ -72,23 +75,18 @@ class CustomFloatingActionButtonMaintenance extends StatelessWidget {
           ),
         );
       },
-      child: Center(
-        child: Container(
-          width: context.screenWidth * .64,
-          decoration: BoxDecoration(
-              //shape: BoxShape.circle,
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.circular(20.r)),
-          padding: EdgeInsets.all(15.w),
-          child: Row(
-            children: [
-              SvgPicture.asset(Assets.addMaintenance),
-              5.ESW(),
-              Text(
-                'Maintenance Request',
-                style: Styles.style16700.copyWith(color: AppColors.white),
-              ),
-            ],
+      child: Padding(
+        padding: EdgeInsets.only(right: context.screenWidth * .09),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Container(
+            decoration: BoxDecoration(
+                //shape: BoxShape.circle,
+
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(20.r)),
+            padding: EdgeInsets.all(15.w),
+            child: SvgPicture.asset(Assets.addMaintenance),
           ),
         ),
       ),

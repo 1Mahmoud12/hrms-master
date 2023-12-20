@@ -12,4 +12,5 @@ class AppRoute {
   static const String detailsContractProject = '/DetailsContractProject';
   static const String addElevator = '/AddElevator';
   static const String addMaintenanceContract = '/AddMaintenanceContract';
+  static const String emergencyMalfunctionScreen = '/EmergencyMalfunctionScreen';
 }

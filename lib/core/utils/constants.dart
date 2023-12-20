@@ -11,4 +11,6 @@ enum RoleId {
   mechanics,
 }
 
+enum Malfunction { In_Progress, Pending, Finished }
+
 String? genderUser;

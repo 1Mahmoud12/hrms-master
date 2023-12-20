@@ -4,10 +4,12 @@ import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -39,7 +41,10 @@ class _GoogleMapWithoutScaffoldState extends State<GoogleMapWithoutScaffold> {
       currentLocation,
       11.0, // adjust zoom level as needed
     );
-    _markers[0] = Marker(markerId: const MarkerId('myMarker'), position: LatLng(currentLocation.latitude, currentLocation.longitude));
+    _markers[0] = Marker(
+      markerId: const MarkerId('myMarker'),
+      position: LatLng(currentLocation.latitude, currentLocation.longitude),
+    );
 
     final GoogleMapController googleMapController = await _controller.future;
     googleMapController.animateCamera(cameraUpdate);
@@ -63,7 +68,7 @@ class _GoogleMapWithoutScaffoldState extends State<GoogleMapWithoutScaffold> {
         currentLocation!.longitude,
       );
       locationCache = '${placeMarks[0].locality}';
-      widget.cubit.changeElevatorType();
+      widget.cubit.changeState();
 
       debugPrint('currentLocation ${placeMarks[0].locality}');
     } catch (e) {
@@ -118,10 +123,11 @@ class _GoogleMapWithoutScaffoldState extends State<GoogleMapWithoutScaffold> {
         ),
         10.ESH(),
         CustomTextButton(
+          backgroundColor: AppColors.scaffoldBackGround,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.location_on_outlined),
+              SvgPicture.asset(Assets.location),
               5.ESW(),
               Text(
                 'Detect my location',

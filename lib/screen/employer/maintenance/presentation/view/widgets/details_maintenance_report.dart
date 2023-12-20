@@ -7,6 +7,7 @@ import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/attachment.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class _DetailsMaintenanceState extends State<DetailsMaintenance> {
             ),
           ),
           GoogleMapWithoutScaffold(cubit: MainBlocMaintenanceCubit.of(context)),
+          const AttachmentsReportCustomer()
         ].paddingDirectional(
           start: 10.w,
           end: 10.w,

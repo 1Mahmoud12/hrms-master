@@ -94,7 +94,7 @@ class HeaderDetailsContract extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.r),
                   color: Colors.white,
                 ),
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(3.0),
                 margin: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
@@ -110,9 +110,18 @@ class HeaderDetailsContract extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Name Report',
-                          style: Styles.style18700,
+                        Row(
+                          children: [
+                            Text(
+                              'Report 1',
+                              style: Styles.style18700,
+                            ),
+                            5.ESW(),
+                            Text(
+                              'By Name Technical',
+                              style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           width: context.screenWidth * .65,
@@ -120,11 +129,7 @@ class HeaderDetailsContract extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'By Name Technical',
-                                style: Styles.style12400.copyWith(color: AppColors.subTextColor),
-                              ),
-                              Text(
-                                '14 Marc',
+                                'March 2023 ',
                                 style: Styles.style12400.copyWith(color: AppColors.subTextColor),
                               ),
                             ],
@@ -133,7 +138,7 @@ class HeaderDetailsContract extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    const Icon(Icons.arrow_forward_ios_sharp),
+                    SvgPicture.asset(Assets.arrowIOS),
                   ],
                 ),
               ),

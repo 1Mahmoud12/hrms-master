@@ -17,7 +17,7 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   // toggle switch
   int indexList = 0;
 
-  List<String> maintenanceLabels = ['Emergency maintenance request', 'Malfunction maintenance', 'Request periodic maintenance'];
+  List<String> maintenanceLabels = ['Emergency', 'Malfunction ', 'Periodic Maintenance'];
 
   void changeIndex({required int index}) {
     indexList = index;
@@ -26,6 +26,19 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
 
   final picker = ImagePicker();
   File? image;
+
+  void imageFileClear() async {
+    image = File('');
+
+    emit(ClearImageState());
+  }
+
+  void imagesAttachmentClear({required int index}) async {
+    imagesAttachment.removeAt(index);
+
+    emit(ClearImageState());
+  }
+
   void selectImage() async {
     emit(SelectImageLoadingState());
     final pickedFile = await picker.pickImage(
@@ -37,9 +50,28 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
     final XFile? xFilePick = pickedFile;
     if (xFilePick != null) {
       image = File(xFilePick.path);
+
       emit(SelectImageSuccessState());
     } else {
       emit(SelectImageErrorState());
     }
+  }
+
+  List<File> imagesAttachment = [];
+
+  void selectMoreImages() async {
+    emit(SelectImageLoadingState());
+    final pickedFile = await picker.pickMultiImage(
+      imageQuality: 100, // To set quality of images
+      maxHeight: 1000, // To set maxHeight of images that you want in your app
+      maxWidth: 1000,
+    ); // To set maxHeight of images that you want in your app
+    final List<XFile> xFilePick = pickedFile;
+
+    for (final element in xFilePick) {
+      imagesAttachment.add(File(element.path));
+    }
+
+    emit(SelectImageSuccessState());
   }
 }

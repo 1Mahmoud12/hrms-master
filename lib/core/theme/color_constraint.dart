@@ -27,4 +27,5 @@ class AppColors {
   static const cDateMaintenance = Color(0xff20affe);
   static const cBorderDecoration = Color(0xffEEEEEE);
   static const cBackGroundDateMaintenance = Color(0xffe8f6ff);
+  static const cBackGroundIconMaintenance = Color(0xffD0DEFC);
 }

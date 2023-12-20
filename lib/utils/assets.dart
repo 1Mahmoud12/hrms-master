@@ -69,4 +69,21 @@ class Assets {
   static const FileSVG = 'assets/icons/svg/File.svg';
   static const addMaintenance = 'assets/icons/svg/addMaintenance.svg';
   static const detailsContract = 'assets/icons/svg/detailsContract.svg';
+
+  // maintenance
+  static const emergencyRequest = 'assets/icons/svg/emergencyRequest.svg';
+  static const maintenancePeriodic = 'assets/icons/svg/maintenancePeriodic.svg';
+  static const malfunctionRequest = 'assets/icons/svg/MalfunctionRequest.svg';
+  static const arrowMaintenance = 'assets/icons/svg/arrowMaintenance.svg';
+  static const location = 'assets/icons/svg/location.svg';
+  static const clock = 'assets/icons/svg/clock.svg';
+  static const status = 'assets/icons/svg/status.svg';
+  static const blueMarker = 'assets/icons/svg/blueMarker.svg';
+  static const arrowIOS = 'assets/icons/svg/arrowIOS.svg';
+  static const edit = 'assets/icons/svg/edit.svg';
+  static const productsUsed = 'assets/icons/svg/productsUsed.svg';
+
+  //temporary
+  static const attachment = 'assets/icons/attachment.png';
+  static const recieipt = 'assets/icons/recieipt.png';
 }

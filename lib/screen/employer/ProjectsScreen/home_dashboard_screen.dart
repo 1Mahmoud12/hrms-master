@@ -94,7 +94,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // if (selectedIndex == 1) const CustomFloatingActionButtonMaintenance(),
+            if (selectedIndex == 1) const CustomFloatingActionButtonMaintenance(),
             AnimatedNotchBottomBar(
               notchBottomBarController: _controller,
               bottomBarItems: [

@@ -51,6 +51,7 @@ import 'screen/addElevator/presentation/view/add_elevator.dart';
 import 'screen/employer/allProject/presentation/view/widgets/details_contract_project.dart';
 import 'screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
 import 'screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
+import 'screen/employer/maintenance/presentation/view/emergency_malfunction_screen.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/all_details_elevator.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_report.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_widget.dart';
@@ -290,6 +291,7 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.detailsMaintenance: (_) => const DetailsMaintenance(),
                     AppRoute.paymentMaintenanceValue: (_) => const PaymentMaintenanceValue(),
                     AppRoute.allDetailsReport: (_) => const AllDetailsReport(),
+                    AppRoute.emergencyMalfunctionScreen: (_) => const EmergencyMalfunctionScreen(),
                     AppRoute.detailsContractProject: (_) => const DetailsContractProject(),
                     AppRoute.addElevator: (_) => const AddElevator(),
                     AppRoute.addMaintenanceContract: (_) => const AddMaintenanceContract(),

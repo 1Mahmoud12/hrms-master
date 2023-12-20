@@ -11,3 +11,5 @@ class SelectImageLoadingState extends MainBlocMaintenanceState {}
 class SelectImageSuccessState extends MainBlocMaintenanceState {}
 
 class SelectImageErrorState extends MainBlocMaintenanceState {}
+
+class ClearImageState extends MainBlocMaintenanceState {}
