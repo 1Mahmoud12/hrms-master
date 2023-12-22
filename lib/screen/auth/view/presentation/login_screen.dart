@@ -1,25 +1,22 @@
 import 'dart:ui';
 
+import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
-import 'package:cnattendance/model/auth.dart';
 import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
 import 'package:cnattendance/screen/auth/view/manager/login/state.dart';
 import 'package:cnattendance/screen/auth/view/presentation/signup_screen.dart';
-import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -159,16 +156,31 @@ class LoginScreenState extends State<LoginScreen> {
 
                       button(),
                       CustomTextButton(
-                        child: const Text('customer'),
-                        onPress: () {
-                          Preferences.setSaved(value: RoleId.customer.toString(), key: 'genderUser');
+                        child: Text(RoleId.customer.name),
+                        onPress: () async {
+                          genderUser = RoleId.customer.name;
+                          await Preferences.setSaved(value: RoleId.customer.name, key: 'genderUser');
+                          MainBlocHomeCubit.of(context).changeToCustomer();
+
                           Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
                         },
                       ),
                       CustomTextButton(
-                        child: const Text('Mechanics'),
-                        onPress: () {
-                          Preferences.setSaved(value: RoleId.mechanics.toString(), key: 'genderUser');
+                        child: Text(RoleId.mechanics.name),
+                        onPress: () async {
+                          genderUser = RoleId.mechanics.name;
+                          await Preferences.setSaved(value: RoleId.mechanics.name, key: 'genderUser');
+                          MainBlocHomeCubit.of(context).changeToEmployer();
+                          Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+                        },
+                      ),
+                      CustomTextButton(
+                        child: Text(RoleId.technical.name),
+                        onPress: () async {
+                          genderUser = RoleId.technical.name;
+                          await Preferences.setSaved(value: RoleId.technical.name, key: 'genderUser');
+                          MainBlocHomeCubit.of(context).changeToEmployer();
+
                           Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
                         },
                       ),

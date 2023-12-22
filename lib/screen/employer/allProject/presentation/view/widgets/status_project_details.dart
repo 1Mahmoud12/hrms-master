@@ -1,292 +1,382 @@
-import 'package:cnattendance/core/component/slider.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/manager/overViewProjectBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/manager/overViewProjectBloc/state.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/one_status_row.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
 
 class StatusDetailsProject extends StatelessWidget {
   const StatusDetailsProject({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
+    return BlocProvider(
+      create: (context) => OverViewProjectCubit(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Overview',
+            style: Styles.style16700,
+          ),
+          OneStatusRow(
+            button: true,
+            onPress: () {
+              final arguments = {
+                //  'progressRatio': 80,
+              };
+              Navigator.pushNamed(context, AppRoute.detailsContractProject, arguments: arguments);
+            },
+            assetsName: Assets.detailsContract,
+            nameRow: 'Contract Details',
+          ),
+          InkWell(
+            onTap: () {
+              final arguments = {
+                'progressRatio': 80,
+              };
+              Navigator.pushNamed(context, AppRoute.progressScreen, arguments: arguments);
+            },
+            child: Container(
+              height: context.screenHeight * .094,
+              padding: EdgeInsets.all(10.w),
+              decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
               child: Row(
                 children: [
-                  SvgPicture.asset(Assets.users),
-                  20.ESW(),
-                  Text(
-                    'Teams',
-                    style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
+                  Container(
+                    padding: EdgeInsets.all(10.w),
+                    decoration: BoxDecoration(color: AppColors.cBackGroundIconButton, borderRadius: BorderRadius.circular(8.r)),
+                    child: SvgPicture.asset(
+                      Assets.detailsContract,
+                      colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+                    ),
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Stack(
+                  20.ESW(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ...List.generate(
-                        5,
-                        (index) => Padding(
-                          padding: EdgeInsets.only(left: index * 18.0),
-                          child: Image.asset(Assets.temporaryPerson),
-                        ),
+                      Text(
+                        'Progress',
+                        style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5 * 18.0),
-                        child: Container(
-                          padding: EdgeInsets.all(context.screenWidth * .015),
-                          decoration: const BoxDecoration(color: AppColors.cLightPlusNumber, shape: BoxShape.circle),
-                          child: Text(
-                            '+5',
-                            style: Styles.style12400.copyWith(color: AppColors.cPlusNumber),
+                      /*Text(
+                        'Last Update: 5 mins ago',
+                        style: Styles.style12400.copyWith(fontSize: 9.sp, color: AppColors.textColorTextFormField),
+                      ),*/
+                      SizedBox(
+                        height: context.screenHeight * .002,
+                        width: context.screenWidth * .4,
+                        child: SliderTheme(
+                          data: SliderThemeData(
+                            trackShape: CustomTrackShape(),
+                            //thumbColor: Colors.transparent,
+                            thumbShape: SliderComponentShape.noThumb,
+                            trackHeight: 2,
+                          ),
+                          child: Slider(
+                            value: .8,
+                            onChanged: (value) {},
                           ),
                         ),
                       ),
                     ],
                   ),
+                  // if (anotherWidgetBool) const Spacer(),
+                  //if (anotherWidgetBool) anotherWidget ?? Container(),
+                  const Spacer(),
+                  SvgPicture.asset(Assets.arrowIOS),
                 ],
               ),
             ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  SvgPicture.asset(Assets.oneUser),
-                  20.ESW(),
-                  Text(
-                    'Engineer',
-                    style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
-                  ),
-                ],
-              ),
+          ),
+          OneStatusRow(
+            button: true,
+            onPress: () {
+              Navigator.pushNamed(
+                context,
+                AppRoute.payments,
+              );
+            },
+            assetsName: Assets.payment,
+            nameRow: 'Payments',
+          ),
+          OneStatusRow(
+            button: true,
+            onPress: () {
+              Navigator.pushNamed(context, AppRoute.teamProjectScreen);
+            },
+            assetsName: Assets.users,
+            nameRow: 'Teams',
+            anotherWidget: Row(
+              children: [
+                Stack(
+                  children: [
+                    ...List.generate(
+                      5,
+                      (index) => Padding(
+                        padding: EdgeInsets.only(left: index * 18.0),
+                        child: Image.asset(Assets.temporaryPerson),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5 * 18.0),
+                      child: Container(
+                        padding: EdgeInsets.all(context.screenWidth * .015),
+                        decoration: const BoxDecoration(color: AppColors.cLightPlusNumber, shape: BoxShape.circle),
+                        child: Text(
+                          '+5',
+                          style: Styles.style12400.copyWith(color: AppColors.cPlusNumber),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    constraints: BoxConstraints(maxWidth: context.screenWidth * .3),
-                    child: const Text('Darwish ahmed mohamed eljoijfldj flkjlkfjl;dskjflk', overflow: TextOverflow.ellipsis),
-                  ),
-                  5.ESW(),
-                  Image.asset(Assets.temporaryPerson),
-                ],
-              ),
+          ),
+          OneStatusRow(
+            button: false,
+            assetsName: Assets.oneUser,
+            nameRow: 'Engneer',
+            anotherWidget: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  constraints: BoxConstraints(maxWidth: context.screenWidth * .3),
+                  child: const Text('Darwish ahmed mohamed eljoijfldj flkjlkfjl;dskjflk', overflow: TextOverflow.ellipsis),
+                ),
+                5.ESW(),
+                Image.asset(Assets.temporaryPerson),
+              ],
             ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  SvgPicture.asset(Assets.userCheck),
-                  20.ESW(),
-                  Text(
-                    'Status',
-                    style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8).w,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(50.r), border: Border.all(color: AppColors.primaryColor)),
-                    child: Text(
-                      'TO-DO',
+          ),
+          BlocBuilder<OverViewProjectCubit, OverViewState>(
+            builder: (context, state) {
+              final cubit = OverViewProjectCubit.of(context);
+              return OneStatusRow(
+                button: false,
+                assetsName: Assets.oneUser,
+                nameRow: 'Status',
+                anotherWidget: Row(
+                  children: [
+                    Text(
+                      cubit.status,
                       style: Styles.style14500.copyWith(
                         color: AppColors.primaryColor,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  SvgPicture.asset(Assets.calenderProject),
-                  20.ESW(),
-                  Text(
-                    'Due Date',
-                    style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Text(
-                    'Dec 14,2024',
-                    style: Styles.style14400,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  SvgPicture.asset(Assets.FileProject),
-                  20.ESW(),
-                  Text(
-                    'Attachment',
-                    style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                width: context.screenWidth * .5,
-                height: context.screenHeight * .05,
-                child: ListView(
-                  //s shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8).w,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50.r), border: Border.all(color: AppColors.primaryColor)),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(
-                            Assets.FileProject,
-                            colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
-                          ),
-                          5.ESW(),
-                          Text(
-                            'Name file.pdf',
-                            style: Styles.style14500.copyWith(
-                              color: AppColors.primaryColor,
+                    if (genderUser == RoleId.mechanics.name) 10.ESW(),
+                    if (genderUser == RoleId.mechanics.name)
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => BlocProvider(
+                              create: (context) => OverViewProjectCubit(),
+                              child: BlocBuilder<OverViewProjectCubit, OverViewState>(
+                                builder: (context, state) => AlertDialog(
+                                  backgroundColor: AppColors.scaffoldBackGround,
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Text('In Progress'),
+                                          const Spacer(),
+                                          BlocBuilder<OverViewProjectCubit, OverViewState>(
+                                            builder: (context, state) => Checkbox(
+                                              value: cubit.status == 'In Progress',
+                                              onChanged: (value) {
+                                                OverViewProjectCubit.of(context).changeStatus(newStatus: 'In Progress');
+                                                cubit.changeStatus(newStatus: 'In Progress');
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text('Pending'),
+                                          const Spacer(),
+                                          BlocBuilder<OverViewProjectCubit, OverViewState>(
+                                            builder: (context, state) => Checkbox(
+                                              value: cubit.status == 'Pending',
+                                              onChanged: (value) {
+                                                OverViewProjectCubit.of(context).changeStatus(newStatus: 'Pending');
+                                                cubit.changeStatus(newStatus: 'Pending');
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text('Finished'),
+                                          const Spacer(),
+                                          BlocBuilder<OverViewProjectCubit, OverViewState>(
+                                            builder: (context, state) => Checkbox(
+                                              value: cubit.status == 'Finished',
+                                              onChanged: (value) {
+                                                OverViewProjectCubit.of(context).changeStatus(newStatus: 'Finished');
+                                                cubit.changeStatus(newStatus: 'Finished');
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style:
-                          const ButtonStyle(shape: MaterialStatePropertyAll(LinearBorder.none), padding: MaterialStatePropertyAll(EdgeInsets.zero)),
-                      child: Container(
-                        padding: const EdgeInsets.all(8).w,
-                        decoration:
-                            BoxDecoration(borderRadius: BorderRadius.circular(50.r), border: Border.all(color: AppColors.primaryColor, width: 2)),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SvgPicture.asset(
-                              Assets.plusIcon,
-                              colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
-                            ),
-                            5.ESW(),
-                            Text(
-                              'Add',
-                              style: Styles.style14500.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w700),
-                            ),
-                          ],
+                          );
+                        },
+                        child: SvgPicture.asset(
+                          Assets.edit,
+                          width: context.screenWidth * .04,
+                          colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
                         ),
                       ),
+                  ],
+                ),
+              );
+            },
+          ),
+          BlocBuilder<OverViewProjectCubit, OverViewState>(
+            builder: (context, state) => OneStatusRow(
+              button: false,
+              assetsName: Assets.calenderProject,
+              nameRow: 'Due Date',
+              anotherWidget: Row(
+                children: [
+                  Text(
+                    DateFormat('MMM dd,yyyy').format(OverViewProjectCubit.of(context).dueDate),
+                    style: Styles.style14400,
+                  ),
+                  if (genderUser == RoleId.mechanics.name) 10.ESW(),
+                  if (genderUser == RoleId.mechanics.name)
+                    InkWell(
+                      onTap: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2023),
+                          lastDate: DateTime(2050),
+                        ).then((value) {
+                          OverViewProjectCubit.of(context).changeDate(newDate: value!);
+                        });
+                      },
+                      child: SvgPicture.asset(
+                        Assets.edit,
+                        width: context.screenWidth * .04,
+                        colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+                      ),
                     ),
-                  ].paddingDirectional(end: context.screenWidth * .01),
+                ],
+              ),
+            ),
+          ),
+          if (genderUser == RoleId.mechanics.name)
+            BlocBuilder<OverViewProjectCubit, OverViewState>(
+              builder: (context, state) => OneStatusRow(
+                button: false,
+                assetsName: Assets.FileSVG,
+                nameRow: 'Attachment',
+                anotherWidget: SizedBox(
+                  width: context.screenWidth * .4,
+                  height: context.screenHeight * .04,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      ...List.generate(
+                        OverViewProjectCubit.of(context).filesPicker.length,
+                        (index) => InkWell(
+                          onTap: () async {
+                            OpenFile.open(OverViewProjectCubit.of(context).filesPicker[index].path);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 3).w,
+                            decoration:
+                                BoxDecoration(borderRadius: BorderRadius.circular(8.r), border: Border.all(color: AppColors.primaryColor, width: .7)),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPicture.asset(
+                                  Assets.FileSVG,
+                                  width: context.screenWidth * .04,
+                                  colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+                                ),
+                                5.ESW(),
+                                Text(
+                                  OverViewProjectCubit.of(context)
+                                      .filesPicker[index]
+                                      .path
+                                      .replaceAll('/data/user/0/com.rakelevators.codgoo/cache/file_picker/', ''),
+                                  style: Styles.style12400.copyWith(color: AppColors.primaryColor, fontSize: 10.sp),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          OverViewProjectCubit.of(context).pickAndOpenPdf();
+                        },
+                        style:
+                            const ButtonStyle(shape: MaterialStatePropertyAll(LinearBorder.none), padding: MaterialStatePropertyAll(EdgeInsets.zero)),
+                        child: Container(
+                          padding: const EdgeInsets.all(5).w,
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(color: AppColors.primaryColor, width: 2),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                Assets.addMaintenance,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ].paddingDirectional(end: context.screenWidth * .01),
+                  ),
                 ),
               ),
             ),
-          ],
-        ),
-        InkWell(
-          onTap: () {
-            final arguments = {
-              'progressRatio': 80,
-            };
-            Navigator.pushNamed(context, AppRoute.progressScreen, arguments: arguments);
-          },
-          child: Container(
-            padding: EdgeInsets.all(5.w),
-            decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10.r)),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        Assets.progress,
-                        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                      ),
-                      20.ESW(),
-                      Text(
-                        'Progress',
-                        style: Styles.style14400.copyWith(color: AppColors.textColor),
-                      ),
-                    ],
-                  ),
-                ),
-                const Expanded(
-                  child: SliderCustom(valueSlider: 80),
-                ),
-              ],
-            ),
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            final arguments = {
-              'progressRatio': 80,
-            };
-            Navigator.pushNamed(context, AppRoute.detailsContractProject, arguments: arguments);
-          },
-          child: Container(
-            padding: EdgeInsets.all(10.w),
-            decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10.r)),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        Assets.detailsContract,
-                        width: context.screenWidth * .06,
-                        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                      ),
-                      20.ESW(),
-                      Text(
-                        'Details Contract',
-                        style: Styles.style14400.copyWith(color: AppColors.textColor),
-                      ),
-                    ],
-                  ),
-                ),
-                const Icon(Icons.arrow_forward_ios_sharp),
-              ],
-            ),
-          ),
-        ),
-      ].paddingDirectional(start: 20.w, top: 10.h),
+        ].paddingDirectional(start: 5.w, top: 5.h),
+      ),
     );
+  }
+}
+
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final trackHeight = sliderTheme.trackHeight;
+    final trackLeft = offset.dx;
+    final trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
+    final trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

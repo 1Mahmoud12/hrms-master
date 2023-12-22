@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
@@ -26,19 +27,17 @@ class SplashState extends State<SplashScreen> with TickerProviderStateMixin {
     controller = AnimationController(vsync: this, duration: const Duration(seconds: 3))..forward();
     animation = CurvedAnimation(parent: controller, curve: Curves.linear);
     Timer(
-      const Duration(milliseconds: 1500),
+      const Duration(seconds: 3),
       () async {
-        genderUser = Preferences.getSaved(key: 'genderUser') ?? '';
         if (genderUser == '') {
           Navigator.pushReplacementNamed(context, LoginScreen.routeName);
         } else {
-          debugPrint('cvbnjmk,2 $genderUser');
-          if (genderUser == RoleId.customer.toString()) {
-            Navigator.pushReplacementNamed(context, HomeDashboardScreen.routeName);
+          if (genderUser == RoleId.customer.name) {
+            MainBlocHomeCubit.of(context).changeToCustomer();
           } else {
-            Get.offAll(MenuScreen());
+            MainBlocHomeCubit.of(context).changeToEmployer();
           }
-          // Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+          Navigator.pushReplacementNamed(context, HomeDashboardScreen.routeName);
         }
       },
     );

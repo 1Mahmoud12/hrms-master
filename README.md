@@ -33,21 +33,6 @@ Some of the library used in the project:
 - [network_info_plus   : This plugin allows Flutter apps to discover network info and configure themselves accordingly.](https://pub.de4v/packages/network_info_plus)
 - [Permission handler : This plugin provides a cross-platform (iOS, Android) API to request permissions and check their status. You can also open the device's app settings so users can grant a permission.](https://pub.dev/packages/permission_handler)
 
-Some of the screenshots are below:
-
-<img src="./screenshots/0.jpg" alt="App Logo" width="320"> <img src="./screenshots/1.jpg" alt="App Logo" width="320"> <img src="./screenshots/2.jpg" alt="App Logo" width="320"> 
-
-<img src="./screenshots/3.jpg" alt="App Logo" width="320"> <img src="./screenshots/4.jpg" alt="App Logo" width="320"> <img src="./screenshots/5.jpg" alt="App Logo" width="320">
-
-<img src="./screenshots/6.jpg" alt="App Logo" width="320"> <img src="./screenshots/7.jpg" alt="App Logo" width="320"> <img src="./screenshots/8.jpg" alt="App Logo" width="320">
-
-<img src="./screenshots/9.jpg" alt="App Logo" width="320"> <img src="./screenshots/10.jpg" alt="App Logo" width="320"> <img src="./screenshots/11.jpg" alt="App Logo" width="320">
-
-<img src="./screenshots/12.jpg" alt="App Logo" width="320"> <img src="./screenshots/13.jpg" alt="App Logo" width="320"><img src="./screenshots/14.jpg" alt="App Logo" width="320">
-
-<img src="./screenshots/15.jpg" alt="App Logo" width="320"> <img src="./screenshots/16.jpg" alt="App Logo" width="320"> <img src="./screenshots/17.jpg" alt="App Logo" width="320">
-
-
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.

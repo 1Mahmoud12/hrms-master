@@ -106,10 +106,15 @@ class AddMaintenanceContract extends StatelessWidget {
                   ],
                 ),
                 onPress: () {
-                  final arguments = {'numberElevators': MainBlocMaintenanceContractCubit.of(context).numberController.text};
-                  showToast(MainBlocMaintenanceContractCubit.of(context).numberController.text);
-
-                  Navigator.pushNamed(context, AppRoute.addElevator, arguments: arguments);
+                  final arguments = {
+                    'numberElevators': MainBlocMaintenanceContractCubit.of(context).numberController.text,
+                  };
+                  if (MainBlocMaintenanceContractCubit.of(context).numberController.text != '') {
+                    showToast(MainBlocMaintenanceContractCubit.of(context).numberController.text);
+                    Navigator.pushNamed(context, AppRoute.addElevator, arguments: arguments);
+                  } else {
+                    showToast('You must add number elevators');
+                  }
                 },
               ),
             ),

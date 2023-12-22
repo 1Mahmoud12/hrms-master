@@ -1,4 +1,5 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/provider/prefprovider.dart';
 import 'package:cnattendance/screen/HolidayScreen/holidayscreennew.dart';
 import 'package:cnattendance/screen/MeetingScreen/MeetingScreenNew.dart';
@@ -108,7 +109,7 @@ class MoreScreenNew extends StatelessWidget {
               type: 'Profile'.tr,
               svgvalue: Assets.profile,
               onPressed: () {
-                if (Provider.of<CustomerProvider>(context).roleId != '4') {
+                if (genderUser != RoleId.customer.name) {
                   pushNewScreen(context, screen: const ProfileScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 } else {
                   pushNewScreen(
@@ -134,7 +135,7 @@ class MoreScreenNew extends StatelessWidget {
               pushNewScreen(context, screen: TaskListScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
             },
           ),*/
-            if (Provider.of<CustomerProvider>(context).roleId != '4')
+            if (genderUser != RoleId.customer.name)
               MoreCardoverviewSvgs(
                 type: 'Meeting'.tr,
                 svgvalue: Assets.meeting,
@@ -142,7 +143,7 @@ class MoreScreenNew extends StatelessWidget {
                   pushNewScreen(context, screen: const MeetingScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (Provider.of<CustomerProvider>(context).roleId != '4')
+            if (genderUser != RoleId.customer.name)
               MoreCardoverviewSvgs(
                 type: 'Holiday'.tr,
                 svgvalue: Assets.weekend,
@@ -150,7 +151,7 @@ class MoreScreenNew extends StatelessWidget {
                   pushNewScreen(context, screen: const HolidayScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (Provider.of<CustomerProvider>(context).roleId != '4')
+            if (genderUser != RoleId.customer.name)
               MoreCardoverviewSvgs(
                 type: 'Team_Sheet'.tr,
                 svgvalue: Assets.team,
@@ -159,7 +160,7 @@ class MoreScreenNew extends StatelessWidget {
                       screen: const TeamSheetScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (Provider.of<CustomerProvider>(context).roleId != '4')
+            if (genderUser != RoleId.customer.name)
               MoreCardoverviewSvgs(
                 type: 'Leave_Calendar'.tr,
                 svgvalue: Assets.calender,
@@ -168,7 +169,7 @@ class MoreScreenNew extends StatelessWidget {
                       screen: const LeaveCalendarScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (Provider.of<CustomerProvider>(context).roleId != '4')
+            if (genderUser != RoleId.customer.name)
               MoreCardoverviewSvgs(
                 type: 'Notices'.tr,
                 svgvalue: Assets.notiesMore,
@@ -183,7 +184,7 @@ class MoreScreenNew extends StatelessWidget {
                 pushNewScreen(context, screen: const SupportScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
               },
             ),
-            if (Provider.of<CustomerProvider>(context).roleId != '4')
+            if (genderUser != RoleId.customer.name)
               MoreCardoverviewSvgs(
                 type: 'Tada'.tr,
                 svgvalue: Assets.tada,

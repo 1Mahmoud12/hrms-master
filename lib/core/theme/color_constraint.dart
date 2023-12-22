@@ -28,4 +28,7 @@ class AppColors {
   static const cBorderDecoration = Color(0xffEEEEEE);
   static const cBackGroundDateMaintenance = Color(0xffe8f6ff);
   static const cBackGroundIconMaintenance = Color(0xffD0DEFC);
+  static const cBackGroundDeleteButton = Color(0xffED4141);
+  static const cBackGroundConfirmButton = Color(0xff25BA69);
+  static Color cBackGroundIconButton = const Color(0xff246BFD).withOpacity(.2);
 }

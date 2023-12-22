@@ -17,13 +17,13 @@ class MalfunctionRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(context.screenWidth * .04),
+      padding: EdgeInsets.all(context.screenWidth * .02),
       margin: EdgeInsets.all(context.screenWidth * .02),
       decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
       child: Row(
         children: [
           Badge(
-            smallSize: 10,
+            smallSize: context.screenWidth * .025,
             backgroundColor: status == Malfunction.Pending.name ? AppColors.red : Colors.transparent,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: context.screenHeight * .009, horizontal: context.screenWidth * .02),
@@ -92,7 +92,7 @@ class MalfunctionRequest extends StatelessWidget {
             ].paddingDirectional(bottom: 5),
           ),
           const Spacer(),
-          const Icon(Icons.arrow_forward_ios),
+          SvgPicture.asset(Assets.arrowIOS),
         ],
       ),
     );

@@ -21,13 +21,13 @@ class _SliderCustomState extends State<SliderCustom> {
       children: [
         Expanded(
           child: CircularPercentIndicator(
-            radius: 20,
-            lineWidth: 3.0,
+            radius: 60,
+            lineWidth: 8.0,
             animation: true,
             percent: valueSlider / 100,
             center: Text(
               '$valueSlider%',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.sp),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp, color: AppColors.primaryColor),
             ),
             /*footer: const Text(
               'Sales this week',
@@ -38,7 +38,6 @@ class _SliderCustomState extends State<SliderCustom> {
             progressColor: AppColors.primaryColor,
           ),
         ),
-        const Icon(Icons.arrow_forward_ios_sharp),
       ],
     );
   }

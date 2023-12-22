@@ -18,7 +18,6 @@ class LoginCubit extends Cubit<LoginState> {
   bool get isLoading => _isLoading;
 
   void loginUser({required String userName, required String password, required BuildContext context}) async {
-    debugPrint("loginUser");
     _isLoading = true;
     EasyLoading.show(status: 'Signing in..', maskType: EasyLoadingMaskType.black);
     emit(LoginLoadingState());

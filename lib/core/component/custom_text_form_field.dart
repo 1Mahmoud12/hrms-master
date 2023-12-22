@@ -1,7 +1,7 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/utils/assets.dart';
-import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_utils/get_utils.dart';
@@ -15,7 +15,9 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final TextInputType? textInputType;
   final Color? fillColor;
+  final Color? focusedBorderColor;
   final double? fontSizeHintText;
+  final bool? validationOnNumber;
 
   const CustomTextFormField({
     super.key,
@@ -28,6 +30,8 @@ class CustomTextFormField extends StatefulWidget {
     this.textInputType,
     this.fillColor,
     this.fontSizeHintText,
+    this.focusedBorderColor,
+    this.validationOnNumber,
   });
 
   @override
@@ -72,6 +76,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
         return null;
       },
+      inputFormatters: [
+        if (widget.validationOnNumber != null && widget.validationOnNumber!) FilteringTextInputFormatter.allow(RegExp(r'^\d{0,2}$')),
+      ],
       maxLines: widget.maxLines ?? 1,
       cursorColor: AppColors.textColorTextFormField,
       decoration: InputDecoration(
@@ -90,16 +97,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
           borderSide: BorderSide(color: Colors.white),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.only(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
             bottomLeft: Radius.circular(10),
             bottomRight: Radius.circular(10),
           ),
-          borderSide: BorderSide(
-            color: Color(0xff635F54),
-          ),
+          borderSide: BorderSide(color: widget.focusedBorderColor ?? Colors.black),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.only(

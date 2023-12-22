@@ -55,20 +55,31 @@ class Assets {
 
   // employer
   static const cardPlans = 'assets/images/cardPlans.png';
-  static const temporaryProjects = 'assets/images/temporaryProjects.png';
-  static const temporaryPerson = 'assets/images/temporaryPerson.png';
 
   // project employer
   static const calenderProject = 'assets/icons/svg/calenderProject.svg';
   static const FileProject = 'assets/icons/svg/FileProject.svg';
   static const oneUser = 'assets/icons/svg/oneUser.svg';
   static const progress = 'assets/icons/svg/progress.svg';
+  static const payment = 'assets/icons/svg/payment.svg';
   static const userCheck = 'assets/icons/svg/userCheck.svg';
   static const users = 'assets/icons/svg/users.svg';
   static const plusIcon = 'assets/icons/svg/Plus.svg';
   static const FileSVG = 'assets/icons/svg/File.svg';
   static const addMaintenance = 'assets/icons/svg/addMaintenance.svg';
   static const detailsContract = 'assets/icons/svg/detailsContract.svg';
+
+  // Steps
+  static const stepOne = 'assets/icons/svg/stepOne.svg';
+  static const stepTwo = 'assets/icons/svg/stepTwo.svg';
+  static const stepThree = 'assets/icons/svg/stepThree.svg';
+  static const stepFour = 'assets/icons/svg/stepFour.svg';
+  static const stepFive = 'assets/icons/svg/stepFive.svg';
+
+  // Payments
+  static const paidWallet = 'assets/icons/svg/paidWallet.svg';
+  static const remaining = 'assets/icons/svg/remaining.svg';
+  static const nextPayment = 'assets/icons/svg/nextPayment.svg';
 
   // maintenance
   static const emergencyRequest = 'assets/icons/svg/emergencyRequest.svg';
@@ -82,8 +93,12 @@ class Assets {
   static const arrowIOS = 'assets/icons/svg/arrowIOS.svg';
   static const edit = 'assets/icons/svg/edit.svg';
   static const productsUsed = 'assets/icons/svg/productsUsed.svg';
+  static const trash = 'assets/icons/svg/trash.svg';
+  static const confirm = 'assets/icons/svg/confirm.svg';
 
   //temporary
   static const attachment = 'assets/icons/attachment.png';
   static const recieipt = 'assets/icons/recieipt.png';
+  static const temporaryProjects = 'assets/images/temporaryProjects.png';
+  static const temporaryPerson = 'assets/images/temporaryPerson.png';
 }

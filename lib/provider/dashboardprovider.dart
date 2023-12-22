@@ -16,7 +16,6 @@ import 'package:cnattendance/utils/wifiinfo.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -109,11 +108,11 @@ class DashboardProvider with ChangeNotifier {
 
         return dashboardResponse;
       } else {
-        EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
+        // EasyLoading.show(status: 'Please Wait...', maskType: EasyLoadingMaskType.black);
         logout();
         debugPrint('false_status');
         final errorMessage = responseData['message'];
-        EasyLoading.dismiss();
+        //EasyLoading.dismiss();
 
         throw errorMessage;
       }

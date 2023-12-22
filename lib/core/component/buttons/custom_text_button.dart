@@ -6,8 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomTextButton extends StatefulWidget {
   final Widget child;
   final Color? backgroundColor;
+  final Color? borderColor;
   final Function onPress;
   final double? width;
+  final double? height;
   final double? borderRadius;
 
   const CustomTextButton({
@@ -16,7 +18,9 @@ class CustomTextButton extends StatefulWidget {
     required this.onPress,
     this.backgroundColor,
     this.width,
+    this.height,
     this.borderRadius,
+    this.borderColor,
   });
 
   @override
@@ -28,19 +32,23 @@ class _CustomTextButtonState extends State<CustomTextButton> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width ?? context.screenWidth * .9,
-      child: TextButton(
-        onPressed: () {
-          widget.onPress();
-          //_moveCameraToMyLocation();
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(widget.backgroundColor ?? AppColors.white),
-          shape: MaterialStatePropertyAll(
-            ContinuousRectangleBorder(
-                side: const BorderSide(color: AppColors.primaryColor), borderRadius: BorderRadius.circular(widget.borderRadius ?? 10.r)),
+      height: widget.height ?? context.screenHeight * .05,
+      child: ButtonTheme(
+        child: TextButton(
+          onPressed: () {
+            widget.onPress();
+            //_moveCameraToMyLocation();
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(widget.backgroundColor ?? AppColors.white),
+            shape: MaterialStatePropertyAll(
+              ContinuousRectangleBorder(
+                  side: BorderSide(color: widget.borderColor ?? AppColors.primaryColor),
+                  borderRadius: BorderRadius.circular(widget.borderRadius ?? 10.r)),
+            ),
           ),
+          child: widget.child,
         ),
-        child: widget.child,
       ),
     );
   }

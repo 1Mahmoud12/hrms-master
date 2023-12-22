@@ -1,3 +1,4 @@
+import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
@@ -107,6 +108,7 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
                       child: TextButton(
                         style: TextButton.styleFrom(backgroundColor: AppColors.primaryColor, shape: ButtonBorder()),
                         onPressed: () async {
+                          MainBlocHomeCubit.of(context).changeIndex(index: 0);
                           logout();
                         },
                         child: Container(

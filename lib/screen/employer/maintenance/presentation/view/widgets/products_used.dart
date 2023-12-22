@@ -47,7 +47,7 @@ class ProductsUsed extends StatelessWidget {
                 style: Styles.style16700.copyWith(color: Colors.black),
               ),
               const Spacer(),
-              Text('\$15,000')
+              const Text('\$15,000'),
             ],
           ),
         ),

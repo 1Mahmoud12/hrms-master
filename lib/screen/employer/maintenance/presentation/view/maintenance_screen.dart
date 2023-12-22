@@ -101,26 +101,13 @@ class MaintenanceScreen extends StatelessWidget {
                         'numberElevators': numberElevators,
                         'status': index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
                       };
-                      Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
-                    },
-                    child: MalfunctionRequest(
-                      nameMaintenanceReport: nameMaintenanceReport,
-                      status: index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
-                    ),
-                  ),
-                ),
-              if (MainBlocMaintenanceCubit.of(context).indexList == 2)
-                ...List.generate(
-                  9,
-                  (index) => GestureDetector(
-                    onTap: () {
-                      final arguments = {
-                        'nameMaintenanceReport': nameMaintenanceReport,
-                        'startDate': '24 Aug',
-                        'location': location,
-                        'numberElevators': numberElevators,
-                      };
-                      Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
+                      if (genderUser == RoleId.customer.name) {
+                        Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
+                      } else if (genderUser == RoleId.mechanics.name) {
+                        Navigator.pushNamed(context, AppRoute.maintenanceReportMechanics, arguments: arguments);
+                      } else {
+                        Navigator.pushNamed(context, AppRoute.maintenanceReportTechnical, arguments: arguments);
+                      }
                     },
                     child: MalfunctionRequest(
                       nameMaintenanceReport: nameMaintenanceReport,

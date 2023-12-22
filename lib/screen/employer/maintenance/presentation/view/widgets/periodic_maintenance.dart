@@ -16,7 +16,7 @@ class PeriodicMaintenance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(context.screenWidth * .04),
+      padding: EdgeInsets.all(context.screenWidth * .02),
       margin: EdgeInsets.all(context.screenWidth * .02),
       decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
       child: Row(

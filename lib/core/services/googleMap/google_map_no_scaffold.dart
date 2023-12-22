@@ -68,7 +68,7 @@ class _GoogleMapWithoutScaffoldState extends State<GoogleMapWithoutScaffold> {
         currentLocation!.longitude,
       );
       locationCache = '${placeMarks[0].locality}';
-      widget.cubit.changeState();
+      widget.cubit.changeToCustomer();
 
       debugPrint('currentLocation ${placeMarks[0].locality}');
     } catch (e) {

@@ -1,17 +1,18 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/screen/addElevator/presentation/manager/mainBlocElevator/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropDownMenu extends StatefulWidget {
   final String? selectedItem;
   final List<String> items;
+  final double? width;
 
   const CustomDropDownMenu({
     super.key,
     required this.selectedItem,
     required this.items,
+    this.width,
   });
 
   @override
@@ -31,9 +32,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 1.5,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.r), color: AppColors.cFillColorDropDownButton, border: Border.all(color: Color(0xffF5F6FA))),
+      width: widget.width ?? MediaQuery.of(context).size.width / 1.5,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r), color: AppColors.white, border: Border.all(color: Color(0xffF5F6FA))),
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: DropdownButton<String>(
         underline: Container(),

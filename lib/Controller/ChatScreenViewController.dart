@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cnattendance/data/source/datastore/preferences.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +17,7 @@ class ChatViewScreenController extends GetxController {
 
   Future<List> GetAllChatUsers() async {
     isLoading = true;
-    EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
+    //EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
     final Preferences preferences = Preferences();
     final user = await preferences.getUser();
@@ -34,7 +33,7 @@ class ChatViewScreenController extends GetxController {
       }
     }
     isLoading = false;
-    EasyLoading.dismiss();
+    //EasyLoading.dismiss();
     update();
     return userdata;
   }
