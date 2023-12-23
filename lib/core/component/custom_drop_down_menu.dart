@@ -56,7 +56,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         borderRadius: BorderRadius.circular(15.r),
         autofocus: true,
         focusColor: AppColors.primaryColor,
-        dropdownColor: AppColors.greyWhite,
+        dropdownColor: AppColors.white,
         items: widget.items.map((String item) {
           return DropdownMenuItem<String>(
             value: item,

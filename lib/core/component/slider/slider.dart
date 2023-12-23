@@ -24,6 +24,7 @@ class _SliderCustomState extends State<SliderCustom> {
             radius: 60,
             lineWidth: 8.0,
             animation: true,
+            linearGradient: LinearGradient(colors: [AppColors.primaryColor, AppColors.cBackGroundIconButton]),
             percent: valueSlider / 100,
             center: Text(
               '$valueSlider%',
@@ -35,7 +36,7 @@ class _SliderCustomState extends State<SliderCustom> {
               TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
             ),*/
             circularStrokeCap: CircularStrokeCap.round,
-            progressColor: AppColors.primaryColor,
+            // progressColor: AppColors.primaryColor,
           ),
         ),
       ],

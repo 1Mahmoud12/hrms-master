@@ -78,7 +78,14 @@ class HomeScreenState extends State<HomeScreen> {
           child: SizedBox(
             width: double.infinity,
             child: Column(
-              children: [20.ESH(), const HeaderProfile(), const CheckAttendance(), const OverviewDashboard(), const WeeklyReportChart()],
+              children: [
+                20.ESH(),
+                const HeaderProfile(),
+                const CheckAttendance(),
+                const OverviewDashboard(),
+                const WeeklyReportChart(),
+                80.ESH(),
+              ],
             ),
           ),
         ),

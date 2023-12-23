@@ -53,11 +53,12 @@ class MeetingState extends State<MeetingScreen> {
             title: const Text('Meetings'),
           ),
           body: RefreshIndicator(
-              onRefresh: () {
-                Provider.of<MeetingProvider>(context, listen: false).page = 1;
-                return getMeetingList();
-              },
-              child: const MeetingListView(),),
+            onRefresh: () {
+              Provider.of<MeetingProvider>(context, listen: false).page = 1;
+              return getMeetingList();
+            },
+            child: const MeetingListView(),
+          ),
         ),
       ),
     );

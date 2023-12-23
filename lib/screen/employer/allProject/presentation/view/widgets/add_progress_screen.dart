@@ -4,6 +4,7 @@ import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/state.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/drop_down_progress.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ class AddProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProgressCubit.of(context).nameProgress.clear();
+    ProgressCubit.of(context).valueProgress.clear();
+    ProgressCubit.of(context).descriptionProgress.clear();
+    ProgressCubit.of(context).selectedList = 'In progress';
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,24 +28,25 @@ class AddProgressScreen extends StatelessWidget {
       ),
       persistentFooterButtons: [
         CustomTextButton(
-            backgroundColor: AppColors.primaryColor,
-            onPress: () {
-              if (ProgressCubit.of(context).nameProgress.text != '' &&
-                  ProgressCubit.of(context).valueProgress.text != '' &&
-                  ProgressCubit.of(context).descriptionProgress.text != '') {
-                ProgressCubit.of(context).addProgress();
-                Navigator.pop(context);
-                ProgressCubit.of(context).nameProgress.clear();
-                ProgressCubit.of(context).valueProgress.clear();
-                ProgressCubit.of(context).descriptionProgress.clear();
-              } else {
-                showToast('You must Input all fields');
-              }
-            },
-            child: Text(
-              'Add',
-              style: Styles.style14500.copyWith(color: AppColors.white),
-            ))
+          backgroundColor: AppColors.primaryColor,
+          onPress: () {
+            if (ProgressCubit.of(context).nameProgress.text != '' &&
+                ProgressCubit.of(context).valueProgress.text != '' &&
+                ProgressCubit.of(context).descriptionProgress.text != '') {
+              ProgressCubit.of(context).addProgress();
+              Navigator.pop(context);
+              ProgressCubit.of(context).nameProgress.clear();
+              ProgressCubit.of(context).valueProgress.clear();
+              ProgressCubit.of(context).descriptionProgress.clear();
+            } else {
+              showToast('You must Input all fields');
+            }
+          },
+          child: Text(
+            'Add',
+            style: Styles.style14500.copyWith(color: AppColors.white),
+          ),
+        ),
       ],
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .05),
@@ -49,9 +55,13 @@ class AddProgressScreen extends StatelessWidget {
             builder: (context, state) {
               return SizedBox(
                 width: context.screenWidth * .2,
-                child: CustomTextFormField(controller: ProgressCubit.of(context).nameProgress, hintText: 'Name Progress'),
+                child: CustomTextFormField(fillColor: AppColors.white, controller: ProgressCubit.of(context).nameProgress, hintText: 'Name Progress'),
               );
             },
+          ),
+          BlocBuilder<ProgressCubit, ProgressState>(
+            builder: (context, state) =>
+                CustomDropDownMenuProgress(selectedItem: ProgressCubit.of(context).selectedList, items: ProgressCubit.of(context).statusList),
           ),
           BlocBuilder<ProgressCubit, ProgressState>(
             builder: (context, state) {
@@ -60,6 +70,7 @@ class AddProgressScreen extends StatelessWidget {
                 child: CustomTextFormField(
                   controller: ProgressCubit.of(context).descriptionProgress,
                   hintText: 'Description Progress',
+                  fillColor: AppColors.white,
                   maxLines: 5,
                 ),
               );
@@ -70,10 +81,12 @@ class AddProgressScreen extends StatelessWidget {
               return SizedBox(
                 width: context.screenWidth * .2,
                 child: CustomTextFormField(
-                    validationOnNumber: true,
-                    controller: ProgressCubit.of(context).valueProgress,
-                    hintText: 'Value Progress',
-                    textInputType: TextInputType.number),
+                  fillColor: AppColors.white,
+                  validationOnNumber: true,
+                  controller: ProgressCubit.of(context).valueProgress,
+                  hintText: 'Value Progress',
+                  textInputType: TextInputType.number,
+                ),
               );
             },
           ),

@@ -1,10 +1,12 @@
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/provider/dashboardprovider.dart';
+import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:cnattendance/widget/customalertdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:cnattendance/widget/buttonborder.dart';
 
 class AttedanceBottomSheet extends StatefulWidget {
   const AttedanceBottomSheet({super.key});
@@ -121,7 +123,7 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
         return !isLoading;
       },
       child: Container(
-        decoration: const BoxDecoration(color: Color(0xffcfcdcb)),
+        decoration: BoxDecoration(color: AppColors.scaffoldBackGround, borderRadius: BorderRadius.all(Radius.circular(20.r))),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: SafeArea(
           child: Column(
@@ -156,7 +158,7 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
                         padding: const EdgeInsets.only(right: 5, left: 5),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xff635F54),
+                            backgroundColor: AppColors.primaryColor,
                             shape: ButtonBorder(),
                           ),
                           onPressed: () async {
@@ -178,7 +180,7 @@ class AttendanceBottomSheetState extends State<AttedanceBottomSheet> {
                         padding: const EdgeInsets.only(left: 5, right: 5),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xff635F54),
+                            backgroundColor: AppColors.primaryColor,
                             shape: ButtonBorder(),
                           ),
                           onPressed: () {

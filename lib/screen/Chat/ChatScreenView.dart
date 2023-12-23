@@ -1,5 +1,6 @@
 import 'package:cnattendance/Controller/ChatScreenViewController.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/Chat/userchat/chatui.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class ChatScreenView extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: Get.height * 1,
+                      height: Get.height * .9,
                       width: Get.width * 1,
                       child: ListView.builder(
                         itemCount: chatScreenController.userdata.length,

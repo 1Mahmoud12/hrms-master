@@ -1,5 +1,4 @@
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
-import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/productsNeedBloc/cubit.dart';
@@ -17,57 +16,57 @@ class ProductsNeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsNeedBloc(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Products need',
-            style: Styles.style16700,
-          ),
-          BlocBuilder<ProductsNeedBloc, ProductsNeedState>(
-            builder: (context, state) => Column(
-              children: [
-                ...List.generate(
-                  5,
-                  (index) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.r),
-                    ),
-                    padding: EdgeInsets.all(10.w),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Engine',
-                          style: Styles.style14400.copyWith(color: AppColors.subTextColor),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Products need',
+          style: Styles.style16700,
+        ),
+        BlocBuilder<ProductsNeedBloc, ProductsNeedState>(
+          builder: (context, state) => Column(
+            children: [
+              if (ProductsNeedBloc.of(context).confirmCancelButton)
+                if (ProductsNeedBloc.of(context).trashConfirmPrice)
+                  if (ProductsNeedBloc.of(context).editPrice)
+                    ...List.generate(
+                      5,
+                      (index) => Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.r),
                         ),
-                        const Spacer(),
+                        padding: EdgeInsets.all(10.w),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Engine',
+                              style: Styles.style14400.copyWith(color: AppColors.subTextColor),
+                            ),
+                            const Spacer(),
 
-                        if (ProductsNeedBloc.of(context).confirmCancelButton) confirmCancelButton(context: context),
-                        if (ProductsNeedBloc.of(context).trashConfirmPrice) trashConfirmPrice(context: context),
-                        if (ProductsNeedBloc.of(context).editPrice) editPrice(context: context),
-                        //const Text('\$15,000'),
-                      ],
+                            if (ProductsNeedBloc.of(context).confirmCancelButton) confirmCancelButton(context: context),
+                            if (ProductsNeedBloc.of(context).trashConfirmPrice) trashConfirmPrice(context: context),
+                            if (ProductsNeedBloc.of(context).editPrice) editPrice(context: context),
+                            //const Text('\$15,000'),
+                          ],
+                        ),
+                      ),
                     ),
+              const Divider(),
+              Row(
+                children: [
+                  Text(
+                    'Total',
+                    style: Styles.style16700,
                   ),
-                ),
-                const Divider(),
-                Row(
-                  children: [
-                    Text(
-                      'Total',
-                      style: Styles.style16700,
-                    ),
-                    const Spacer(),
-                    Text('${int.parse(ProductsNeedBloc.of(context).priceController.text) * 5}'),
-                  ],
-                ),
-              ],
-            ),
+                  const Spacer(),
+                  Text('${int.parse(ProductsNeedBloc.of(context).priceController.text) * 5}'),
+                ],
+              ),
+            ],
           ),
-        ].paddingDirectional(bottom: 10.h),
-      ),
+        ),
+      ].paddingDirectional(bottom: 10.h),
     );
   }
 }
@@ -94,7 +93,9 @@ Widget confirmCancelButton({required BuildContext context}) {
       CustomTextButton(
         width: context.screenHeight * .074,
         height: context.screenHeight * .04,
-        onPress: () {},
+        onPress: () {
+          ProductsNeedBloc.of(context).changeState(confirmCancel: false, trashConfirm: false, edit: false);
+        },
         backgroundColor: AppColors.cBackGroundDeleteButton,
         borderColor: Colors.transparent,
         child: Text(
@@ -127,7 +128,7 @@ Widget trashConfirmPrice({required BuildContext context}) {
         onTap: () => ProductsNeedBloc.of(context).changeState(confirmCancel: true, trashConfirm: false, edit: false),
         child: Container(
           decoration: BoxDecoration(color: AppColors.red, borderRadius: BorderRadius.circular(5.r)),
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 6.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
           child: SvgPicture.asset(Assets.trash),
         ),
       ),
@@ -141,7 +142,7 @@ Widget trashConfirmPrice({required BuildContext context}) {
         },
         child: Container(
           decoration: BoxDecoration(color: AppColors.green, borderRadius: BorderRadius.circular(5.r)),
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
           child: SvgPicture.asset(Assets.confirm),
         ),
       ),
@@ -154,13 +155,14 @@ Widget trashConfirmPrice({required BuildContext context}) {
       SizedBox(
         width: context.screenWidth * .15,
         height: context.screenHeight * .05,
-        child: CustomTextFormField(
+        child: TextField(
           controller: ProductsNeedBloc.of(context).priceController,
-          hintText: '',
-          fillColor: AppColors.white,
-          textInputType: TextInputType.number,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: '',
+            fillColor: AppColors.white,
+          ),
           maxLines: 1,
-          focusedBorderColor: Colors.transparent,
         ),
       ),
       10.ESW(),

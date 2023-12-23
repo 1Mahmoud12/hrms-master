@@ -11,6 +11,7 @@ class ProductsNeedBloc extends Cubit<ProductsNeedState> {
   bool confirmCancelButton = true;
   bool trashConfirmPrice = false;
   bool editPrice = false;
+
   void changeState({
     required bool confirmCancel,
     required bool trashConfirm,

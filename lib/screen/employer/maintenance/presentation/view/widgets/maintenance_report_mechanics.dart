@@ -23,12 +23,14 @@ class MaintenanceReportMechanics extends StatelessWidget {
         ),
       ),
       persistentFooterButtons: [
-        CustomTextButton(
-          onPress: () {},
-          backgroundColor: AppColors.primaryColor,
-          child: Text(
-            'submit',
-            style: Styles.style14400.copyWith(color: AppColors.white),
+        Center(
+          child: CustomTextButton(
+            onPress: () {},
+            backgroundColor: AppColors.primaryColor,
+            child: Text(
+              'submit',
+              style: Styles.style14400.copyWith(color: AppColors.white),
+            ),
           ),
         )
       ],

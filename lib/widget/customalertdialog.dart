@@ -1,4 +1,6 @@
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String title;
@@ -8,9 +10,7 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xffcfcdcb),
-      ),
+      decoration: BoxDecoration(color: AppColors.scaffoldBackGround, borderRadius: BorderRadius.all(Radius.circular(20.r))),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -47,7 +47,7 @@ class CustomAlertDialog extends StatelessWidget {
             // ),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: const Color(0xff635f54),
+                backgroundColor: AppColors.primaryColor,
                 padding: EdgeInsets.zero,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(29)),

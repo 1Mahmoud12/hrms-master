@@ -1,6 +1,7 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/widgets/card_project.dart';
 import 'package:cnattendance/utils/extensions.dart';
+import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,6 +23,8 @@ class ProjectsScreen extends StatelessWidget {
             children: [
               const CardProject(valueSlider: 80),
               const CardProject(valueSlider: 20),
+              const CardProject(valueSlider: 20),
+              30.ESH(),
             ].paddingDirectional(bottom: 10.h),
           ),
         ),

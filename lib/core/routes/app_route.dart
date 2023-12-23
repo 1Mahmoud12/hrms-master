@@ -18,4 +18,11 @@ class AppRoute {
   static const String payments = '/PaymentScreen';
   static const String teamProjectScreen = '/TeamProjectScreen';
   static const String addProgressScreen = '/AddProgressScreen';
+  static const String editReportScreen = '/EditReportScreen';
+  static const String chatCustomer = '/ChatCustomer';
+  static const String messagesCustomerScreen = '/MessagesCustomerScreen';
+  static const String editProgressScreen = '/EditProgressScreen';
+  static const String tasksScreen = '/TasksScreen';
+  static const String addTasksScreen = '/AddTasksScreen';
+  static const String editTasksScreen = '/EditTasksScreen';
 }

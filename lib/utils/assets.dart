@@ -80,6 +80,7 @@ class Assets {
   static const paidWallet = 'assets/icons/svg/paidWallet.svg';
   static const remaining = 'assets/icons/svg/remaining.svg';
   static const nextPayment = 'assets/icons/svg/nextPayment.svg';
+  static const tasksSVG = 'assets/icons/svg/tasksSVG.svg';
 
   // maintenance
   static const emergencyRequest = 'assets/icons/svg/emergencyRequest.svg';

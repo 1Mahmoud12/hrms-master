@@ -99,7 +99,7 @@ Inspired by the Saudi Vision 2030, which aims to transform the Kingdom’s econo
                 style: Styles.styleHeader.copyWith(color: AppColors.primaryColor),
               ),
             ),
-            const CardProject(valueSlider: 100),
+            const CardProject(valueSlider: 100), 50.ESH(),
           ],
         ),
       ),

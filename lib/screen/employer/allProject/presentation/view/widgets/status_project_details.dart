@@ -57,7 +57,7 @@ class StatusDetailsProject extends StatelessWidget {
                     padding: EdgeInsets.all(10.w),
                     decoration: BoxDecoration(color: AppColors.cBackGroundIconButton, borderRadius: BorderRadius.circular(8.r)),
                     child: SvgPicture.asset(
-                      Assets.detailsContract,
+                      Assets.progress,
                       colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
                     ),
                   ),
@@ -74,7 +74,7 @@ class StatusDetailsProject extends StatelessWidget {
                         'Last Update: 5 mins ago',
                         style: Styles.style12400.copyWith(fontSize: 9.sp, color: AppColors.textColorTextFormField),
                       ),*/
-                      SizedBox(
+                      /* SizedBox(
                         height: context.screenHeight * .002,
                         width: context.screenWidth * .4,
                         child: SliderTheme(
@@ -89,7 +89,7 @@ class StatusDetailsProject extends StatelessWidget {
                             onChanged: (value) {},
                           ),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                   // if (anotherWidgetBool) const Spacer(),
@@ -100,6 +100,18 @@ class StatusDetailsProject extends StatelessWidget {
               ),
             ),
           ),
+          if (genderUser == RoleId.technical.name || genderUser == RoleId.mechanics.name)
+            OneStatusRow(
+              button: true,
+              onPress: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoute.tasksScreen,
+                );
+              },
+              assetsName: Assets.tasksSVG,
+              nameRow: 'Tasks',
+            ),
           OneStatusRow(
             button: true,
             onPress: () {
@@ -186,6 +198,7 @@ class StatusDetailsProject extends StatelessWidget {
                               create: (context) => OverViewProjectCubit(),
                               child: BlocBuilder<OverViewProjectCubit, OverViewState>(
                                 builder: (context, state) => AlertDialog(
+                                  shape: ContinuousRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50.r))),
                                   backgroundColor: AppColors.scaffoldBackGround,
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -201,6 +214,7 @@ class StatusDetailsProject extends StatelessWidget {
                                                 OverViewProjectCubit.of(context).changeStatus(newStatus: 'In Progress');
                                                 cubit.changeStatus(newStatus: 'In Progress');
                                               },
+                                              activeColor: AppColors.primaryColor,
                                             ),
                                           ),
                                         ],
@@ -216,6 +230,7 @@ class StatusDetailsProject extends StatelessWidget {
                                                 OverViewProjectCubit.of(context).changeStatus(newStatus: 'Pending');
                                                 cubit.changeStatus(newStatus: 'Pending');
                                               },
+                                              activeColor: AppColors.primaryColor,
                                             ),
                                           ),
                                         ],
@@ -231,6 +246,7 @@ class StatusDetailsProject extends StatelessWidget {
                                                 OverViewProjectCubit.of(context).changeStatus(newStatus: 'Finished');
                                                 cubit.changeStatus(newStatus: 'Finished');
                                               },
+                                              activeColor: AppColors.primaryColor,
                                             ),
                                           ),
                                         ],
@@ -273,6 +289,11 @@ class StatusDetailsProject extends StatelessWidget {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2023),
                           lastDate: DateTime(2050),
+                          builder: (context, child) => Theme(
+                              data: Theme.of(context).copyWith(
+                                colorScheme: const ColorScheme.light(primary: AppColors.primaryColor, onBackground: AppColors.white),
+                              ),
+                              child: child!),
                         ).then((value) {
                           OverViewProjectCubit.of(context).changeDate(newDate: value!);
                         });

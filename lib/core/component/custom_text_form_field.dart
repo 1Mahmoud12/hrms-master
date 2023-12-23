@@ -11,6 +11,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final Widget? labelText;
   final bool? password;
   final int? maxLines;
   final TextInputType? textInputType;
@@ -32,6 +33,7 @@ class CustomTextFormField extends StatefulWidget {
     this.fontSizeHintText,
     this.focusedBorderColor,
     this.validationOnNumber,
+    this.labelText,
   });
 
   @override
@@ -83,10 +85,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       cursorColor: AppColors.textColorTextFormField,
       decoration: InputDecoration(
         hintText: widget.hintText.tr,
-        hintStyle: TextStyle(color: AppColors.textColorTextFormField, fontSize: (widget.fontSizeHintText ?? 14).sp),
+        hintStyle: TextStyle(color: AppColors.textColorTextFormField, fontSize: (widget.fontSizeHintText ?? 14).sp, fontWeight: FontWeight.bold),
         prefixIcon: widget.prefixIcon,
+        label: widget.labelText,
         labelStyle: const TextStyle(color: Colors.black),
-        fillColor: widget.fillColor ?? AppColors.fillColorTextFormField,
+        fillColor: AppColors.white,
         filled: true,
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.only(

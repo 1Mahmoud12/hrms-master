@@ -24,6 +24,11 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
     emit(ChangeIndexState());
   }
 
+  PageController pageController = PageController();
+  void changeView() {
+    pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.bounceOut);
+  }
+
   final picker = ImagePicker();
   File? image;
 

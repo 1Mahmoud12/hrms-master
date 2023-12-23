@@ -31,7 +31,6 @@ class MaintenanceScreen extends StatelessWidget {
         builder: (context, state) => SingleChildScrollView(
           padding: EdgeInsets.all(context.screenWidth * .04),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Column(
                 children: [
@@ -45,76 +44,89 @@ class MaintenanceScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              /*Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(Assets.cardPlans),
-                  Column(
+              10.ESH(),
+              SizedBox(
+                height: context.screenHeight * .9,
+                child: BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
+                  builder: (context, state) => PageView(
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    controller: MainBlocMaintenanceCubit.of(context).pageController,
+                    onPageChanged: (value) {
+                      MainBlocMaintenanceCubit.of(context).changeIndex(index: value);
+                    },
                     children: [
-                      Text(
-                        'Simple, transparent pricing',
-                        style: Styles.style18700.copyWith(color: AppColors.white),
+                      ListView.builder(
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            final arguments = {
+                              'nameMaintenanceReport': nameMaintenanceReport,
+                              'startDate': '24 Aug',
+                              'location': location,
+                              'numberElevators': numberElevators,
+                              'status': index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
+                            };
+                            if (genderUser == RoleId.customer.name) {
+                              Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
+                            } else if (genderUser == RoleId.mechanics.name) {
+                              Navigator.pushNamed(context, AppRoute.maintenanceReportMechanics, arguments: arguments);
+                            } else {
+                              Navigator.pushNamed(context, AppRoute.maintenanceReportTechnical, arguments: arguments);
+                            }
+                          },
+                          child: MalfunctionRequest(
+                            nameMaintenanceReport: nameMaintenanceReport,
+                            status: index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
+                          ),
+                        ),
+                        itemCount: 9,
+                        shrinkWrap: true,
                       ),
-                      Text(
-                        'No contracts. No surprise fees.',
-                        style: Styles.style12400.copyWith(color: AppColors.white),
+                      ListView.builder(
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            final arguments = {
+                              'nameMaintenanceReport': nameMaintenanceReport,
+                              'startDate': '24 Aug',
+                              'location': location,
+                              'numberElevators': numberElevators,
+                              'status': index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
+                            };
+                            if (genderUser == RoleId.customer.name) {
+                              Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
+                            } else if (genderUser == RoleId.mechanics.name) {
+                              Navigator.pushNamed(context, AppRoute.maintenanceReportMechanics, arguments: arguments);
+                            } else {
+                              Navigator.pushNamed(context, AppRoute.maintenanceReportTechnical, arguments: arguments);
+                            }
+                          },
+                          child: MalfunctionRequest(
+                            nameMaintenanceReport: nameMaintenanceReport,
+                            status: index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
+                          ),
+                        ),
+                        itemCount: 9,
+                        shrinkWrap: true,
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            final arguments = {
+                              'nameMaintenanceReport': nameMaintenanceReport,
+                              'startDate': '24 Aug',
+                              'location': location,
+                              'numberElevators': numberElevators,
+                            };
+                            Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
+                          },
+                          child: PeriodicMaintenance(nameMaintenanceReport: nameMaintenanceReport, numberElevators: numberElevators.toString()),
+                        ),
+                        itemCount: 5,
                       ),
                     ],
                   ),
-                ],
-              ),*/
-              10.ESH(),
-              /*BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
-                builder: (context, state) => Center(
-                  child: Text(
-                    MainBlocMaintenanceCubit.of(context).maintenanceLabels[MainBlocMaintenanceCubit.of(context).indexList].tr,
-                    style: Styles.style18700.copyWith(color: AppColors.primaryColor),
-                  ),
                 ),
-              ),*/
-              //5.ESH(),
-              if (MainBlocMaintenanceCubit.of(context).indexList == 2)
-                ...List.generate(
-                  9,
-                  (index) => GestureDetector(
-                    onTap: () {
-                      final arguments = {
-                        'nameMaintenanceReport': nameMaintenanceReport,
-                        'startDate': '24 Aug',
-                        'location': location,
-                        'numberElevators': numberElevators,
-                      };
-                      Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
-                    },
-                    child: PeriodicMaintenance(nameMaintenanceReport: nameMaintenanceReport, numberElevators: numberElevators.toString()),
-                  ),
-                ),
-              if (MainBlocMaintenanceCubit.of(context).indexList < 2)
-                ...List.generate(
-                  9,
-                  (index) => GestureDetector(
-                    onTap: () {
-                      final arguments = {
-                        'nameMaintenanceReport': nameMaintenanceReport,
-                        'startDate': '24 Aug',
-                        'location': location,
-                        'numberElevators': numberElevators,
-                        'status': index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
-                      };
-                      if (genderUser == RoleId.customer.name) {
-                        Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
-                      } else if (genderUser == RoleId.mechanics.name) {
-                        Navigator.pushNamed(context, AppRoute.maintenanceReportMechanics, arguments: arguments);
-                      } else {
-                        Navigator.pushNamed(context, AppRoute.maintenanceReportTechnical, arguments: arguments);
-                      }
-                    },
-                    child: MalfunctionRequest(
-                      nameMaintenanceReport: nameMaintenanceReport,
-                      status: index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
-                    ),
-                  ),
-                ),
+              ),
             ],
           ),
         ),

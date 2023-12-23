@@ -16,6 +16,9 @@ import 'package:cnattendance/provider/prefprovider.dart';
 import 'package:cnattendance/provider/profileprovider.dart';
 import 'package:cnattendance/provider/requestleaveprovider.dart';
 import 'package:cnattendance/provider/requestpaidprovider.dart';
+import 'package:cnattendance/screen/Chat/presentation/mainager/supportCustomerBloc/cubit.dart';
+import 'package:cnattendance/screen/Chat/presentation/mainager/view/chatCustomer/chat_customer.dart';
+import 'package:cnattendance/screen/Chat/presentation/mainager/view/chatCustomer/messages_customer_screen.dart';
 import 'package:cnattendance/screen/addElevator/presentation/manager/mainBlocElevator/cubit.dart';
 import 'package:cnattendance/screen/addMaintenance/presentation/manager/mainBlocMaintenanceContract/cubit.dart';
 import 'package:cnattendance/screen/addMaintenance/presentation/view/add_maintenance_contract.dart';
@@ -23,12 +26,21 @@ import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
 import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/manager/commentBLoc/cubit.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/manager/paymentBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/all_project_details.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/tasksScreen/add_tasks_screen.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/tasksScreen/edit_tasks.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/tasksScreen/tasks_screen.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/edit_progress.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/payment_screen.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/progress_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/edit_report_screen.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
 import 'package:cnattendance/screen/profile/payslipdetailscreen.dart';
@@ -56,6 +68,7 @@ import 'screen/employer/allProject/presentation/view/widgets/details_contract_pr
 import 'screen/employer/allProject/presentation/view/widgets/team_project_screen.dart';
 import 'screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
 import 'screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
+import 'screen/employer/maintenance/presentation/manager/productsNeedBloc/cubit.dart';
 import 'screen/employer/maintenance/presentation/view/emergency_malfunction_screen.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/all_details_elevator.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_report.dart';
@@ -254,6 +267,24 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => ProgressCubit(),
             ),
+            BlocProvider(
+              create: (context) => ProductsNeedBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ReportBloc(),
+            ),
+            BlocProvider(
+              create: (context) => SupportCustomerBloc(),
+            ),
+            BlocProvider(
+              create: (context) => PaymentCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CommentCubit(),
+            ),
+            BlocProvider(
+              create: (context) => TasksCubit(),
+            ),
           ],
           child: Portal(
             child: InAppNotification(
@@ -312,6 +343,13 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.addMaintenanceContract: (_) => const AddMaintenanceContract(),
                     AppRoute.teamProjectScreen: (_) => const TeamProjectScreen(),
                     AppRoute.addProgressScreen: (_) => const AddProgressScreen(),
+                    AppRoute.editProgressScreen: (_) => const EditProgressScreen(),
+                    AppRoute.tasksScreen: (_) => const TasksScreen(),
+                    AppRoute.addTasksScreen: (_) => const AddTasksScreen(),
+                    AppRoute.editTasksScreen: (_) => const EditTasksScreen(),
+                    AppRoute.editReportScreen: (_) => const EditReportScreen(),
+                    AppRoute.chatCustomer: (_) => const ChatCustomer(),
+                    AppRoute.messagesCustomerScreen: (_) => const MessagesCustomerScreen(),
                     ProfileScreen.routeName: (_) => const ProfileScreen(),
                     EditProfileScreen.routeName: (_) => const EditProfileScreen(),
                     MeetingDetailScreen.routeName: (_) => const MeetingDetailScreen(),

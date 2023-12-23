@@ -80,11 +80,10 @@ class CustomFloatingActionButtonMaintenance extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerRight,
           child: Container(
-            decoration: BoxDecoration(
-                //shape: BoxShape.circle,
-
-                color: AppColors.primaryColor,
-                borderRadius: BorderRadius.circular(20.r)),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.primaryColor,
+            ),
             padding: EdgeInsets.all(15.w),
             child: SvgPicture.asset(Assets.addMaintenance),
           ),

@@ -231,18 +231,19 @@ class MoreScreenNew extends StatelessWidget {
                 );
               },
             ),
-            MoreCardoverviewSvgs(
-              type: 'Securitiy'.tr,
-              svgvalue: Assets.Security,
-              onPressed: () {
-                pushNewScreen(
-                  context,
-                  screen: const SecurityCheckScreen(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.fade,
-                );
-              },
-            ),
+            if (genderUser != RoleId.customer.name)
+              MoreCardoverviewSvgs(
+                type: 'Securitiy'.tr,
+                svgvalue: Assets.Security,
+                onPressed: () {
+                  pushNewScreen(
+                    context,
+                    screen: const SecurityCheckScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
+                  );
+                },
+              ),
             MoreCardoverviewSvgs(
               type: 'Change_password'.tr,
               svgvalue: Assets.changePassword,
@@ -255,30 +256,32 @@ class MoreScreenNew extends StatelessWidget {
                 );
               },
             ),
-            MoreCardoverviewSvgs(
-              type: 'Financial requests'.tr,
-              svgvalue: Assets.financialRequest,
-              onPressed: () {
-                pushNewScreen(
-                  context,
-                  screen: const SecurityCheckScreen(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.fade,
-                );
-              },
-            ),
-            MoreCardoverviewSvgs(
-              type: 'Administrativa requests'.tr,
-              svgvalue: Assets.AdministrativaRequests,
-              onPressed: () {
-                pushNewScreen(
-                  context,
-                  screen: const SecurityCheckScreen(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.fade,
-                );
-              },
-            ),
+            if (genderUser != RoleId.customer.name)
+              MoreCardoverviewSvgs(
+                type: 'Financial requests'.tr,
+                svgvalue: Assets.financialRequest,
+                onPressed: () {
+                  pushNewScreen(
+                    context,
+                    screen: const SecurityCheckScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
+                  );
+                },
+              ),
+            if (genderUser != RoleId.customer.name)
+              MoreCardoverviewSvgs(
+                type: 'Administrativa requests'.tr,
+                svgvalue: Assets.AdministrativaRequests,
+                onPressed: () {
+                  pushNewScreen(
+                    context,
+                    screen: const SecurityCheckScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
+                  );
+                },
+              ),
             MoreCardoverviewSvgs(
               type: 'Log Out'.tr,
               svgvalue: Assets.logout,

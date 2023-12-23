@@ -38,4 +38,21 @@ class PaymentCubit extends Cubit<PaymentState> {
       emit(PickFileErrorState());
     }
   }
+
+  List<String> upComing = ['20.000', '40.000'];
+  List<String> history = [
+    '50.000',
+    '20.00',
+    '50.000',
+    '20.00',
+    '50.000',
+    '20.00',
+    '50.000',
+    '20.00',
+  ];
+  int toggleIndex = 0;
+  void changeIndex({required int index}) {
+    toggleIndex = index;
+    emit(ChangeIndexState());
+  }
 }
