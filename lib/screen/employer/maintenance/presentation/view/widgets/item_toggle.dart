@@ -22,7 +22,7 @@ class ItemToggle extends StatelessWidget {
         return InkWell(
           onTap: () {
             cubit.changeIndex(index: index);
-            MainBlocMaintenanceCubit.of(context).changeView();
+            MainBlocMaintenanceCubit.of(context).changeView(index);
           },
           child: Container(
             constraints: BoxConstraints(maxWidth: context.screenWidth * .3),

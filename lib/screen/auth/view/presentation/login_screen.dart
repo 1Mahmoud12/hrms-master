@@ -166,6 +166,16 @@ class LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       CustomTextButton(
+                        child: Text(RoleId.client.name),
+                        onPress: () async {
+                          genderUser = RoleId.client.name;
+                          await Preferences.setSaved(value: RoleId.client.name, key: 'genderUser');
+                          MainBlocHomeCubit.of(context).changeToClient();
+
+                          Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+                        },
+                      ),
+                      CustomTextButton(
                         child: Text(RoleId.mechanics.name),
                         onPress: () async {
                           genderUser = RoleId.mechanics.name;

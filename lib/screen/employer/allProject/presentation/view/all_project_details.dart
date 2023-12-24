@@ -1,5 +1,4 @@
-import 'package:cnattendance/core/component/slider/double_slider.dart';
-import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/component/slider/circular_Slider.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/comments.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/status_project_details.dart';
@@ -14,9 +13,9 @@ class AllProjectDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //  final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
-    final String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
-    final String titleProject = 'titleProject'; // arguments['titleProject'] ?? '';
-    final String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
+    const String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
+    const String titleProject = 'titleProject'; // arguments['titleProject'] ?? '';
+    const String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
 
     const int newComments = 8;
     return Scaffold(
@@ -55,7 +54,8 @@ class AllProjectDetails extends StatelessWidget {
               ],
             ),
           ),*/
-          const DoubleCustomSlider(value1: 50, value2: 20, color1: AppColors.primaryColor, color2: AppColors.selectedCharData),
+          PieChartSample2(),
+          //const DoubleCustomSlider(value1: 50, value2: 20, color1: AppColors.primaryColor, color2: AppColors.selectedCharData),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

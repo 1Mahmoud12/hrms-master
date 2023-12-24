@@ -58,6 +58,7 @@ class StatusDetailsProject extends StatelessWidget {
                     decoration: BoxDecoration(color: AppColors.cBackGroundIconButton, borderRadius: BorderRadius.circular(8.r)),
                     child: SvgPicture.asset(
                       Assets.progress,
+                      width: context.screenWidth * .05,
                       colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
                     ),
                   ),
@@ -112,17 +113,18 @@ class StatusDetailsProject extends StatelessWidget {
               assetsName: Assets.tasksSVG,
               nameRow: 'Tasks',
             ),
-          OneStatusRow(
-            button: true,
-            onPress: () {
-              Navigator.pushNamed(
-                context,
-                AppRoute.payments,
-              );
-            },
-            assetsName: Assets.payment,
-            nameRow: 'Payments',
-          ),
+          if (genderUser == RoleId.customer.name)
+            OneStatusRow(
+              button: true,
+              onPress: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoute.payments,
+                );
+              },
+              assetsName: Assets.payment,
+              nameRow: 'Payments',
+            ),
           OneStatusRow(
             button: true,
             onPress: () {
@@ -178,7 +180,7 @@ class StatusDetailsProject extends StatelessWidget {
               final cubit = OverViewProjectCubit.of(context);
               return OneStatusRow(
                 button: false,
-                assetsName: Assets.oneUser,
+                assetsName: Assets.status,
                 nameRow: 'Status',
                 anotherWidget: Row(
                   children: [

@@ -41,7 +41,7 @@ dependencies:
   firebase_messaging: ^14.6.7
   overlay_support: ^2.0.1
   flutter_ringtone_player: ^3.2.0
-  fl_chart: ^0.63.0
+  fl_chart: ^0.64.0
   overlay_loading_progress: ^1.0.0
   slide_digital_clock: ^1.0.2
   get: ^4.6.5
@@ -82,7 +82,7 @@ dependencies:
   dartz: any
 
   percent_indicator: ^4.2.3
-  curved_navigation_bar: ^1.0.3
+  step_progress_indicator: ^1.0.2
 
   printing: ^5.11.1
   screenshot: ^2.1.0

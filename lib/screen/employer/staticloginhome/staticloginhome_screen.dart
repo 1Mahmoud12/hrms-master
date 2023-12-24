@@ -1,11 +1,16 @@
+import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/prefprovider.dart';
+import 'package:cnattendance/screen/employer/staticloginhome/staticcontactformscreen.dart';
+import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:cnattendance/widget/deactivate_bottom_sheet.dart';
 import 'package:cnattendance/widget/log_out_bottom_sheet.dart';
 import 'package:cnattendance/widget/profile/heading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class StaticLoginHomeScreen extends StatefulWidget {
@@ -64,6 +69,15 @@ class _StaticLoginHomeScreenState extends State<StaticLoginHomeScreen> {
                   provider.email,
                   style: Styles.style14400,
                 ),
+                CustomTextButton(
+                  onPress: () {
+                    Get.to(const StaticContactFormScreen());
+                  },
+                  borderRadius: 30,
+                  backgroundColor: AppColors.primaryColor,
+                  child: Text('Support', style: Styles.style16700.copyWith(color: AppColors.white)),
+                ),
+                20.ESH(),
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
@@ -113,14 +127,17 @@ class _StaticLoginHomeScreenState extends State<StaticLoginHomeScreen> {
 //                     ),
 //                   ),
 
-                  child: ListTile(
-                    trailing: const Icon(
-                      Icons.delete,
-                      color: AppColors.primaryColor,
-                    ),
-                    title: Text(
-                      'Delete Account',
-                      style: Styles.style16700.copyWith(color: AppColors.primaryColor),
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r), color: AppColors.white),
+                    child: ListTile(
+                      trailing: const Icon(
+                        Icons.delete,
+                        color: AppColors.primaryColor,
+                      ),
+                      title: Text(
+                        'Delete Account',
+                        style: Styles.style16700.copyWith(color: AppColors.primaryColor),
+                      ),
                     ),
                   ),
                 ),
@@ -141,28 +158,35 @@ class _StaticLoginHomeScreenState extends State<StaticLoginHomeScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.all(40),
-        color: AppColors.white,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.scaffoldBackGround,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
-          ),
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              useRootNavigator: true,
-              builder: (context) {
-                return const LogOutBottomSheet();
-              },
-            );
-          },
-          child: const Text(
-            'Logout',
-            style: TextStyle(color: AppColors.primaryColor, fontWeight: FontWeight.w900),
-          ),
+      floatingActionButton: SizedBox(
+        height: MediaQuery.of(context).size.height * .17,
+        child: Column(
+          children: [
+            Container(
+              width: context.screenWidth,
+              margin: const EdgeInsets.all(40),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor,
+                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                ),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    useRootNavigator: true,
+                    builder: (context) {
+                      return const LogOutBottomSheet();
+                    },
+                  );
+                },
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w900),
+                ),
+              ),
+            ),
+            20.ESH()
+          ],
         ),
       ),
       // bottomNavigationBar: Container(
@@ -187,11 +211,5 @@ class _StaticLoginHomeScreenState extends State<StaticLoginHomeScreen> {
 }
 /*FloatingActionButton(
         backgroundColor: const Color(0xffffffff),
-        onPressed: () {
-          Get.to(const StaticContactFormScreen());
-        },
-        child: const Icon(
-          Icons.phone,
-          color: AppColors.scaffoldBackGround,
-        ),
+
       )*/

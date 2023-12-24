@@ -44,6 +44,7 @@ class OneStatusRow extends StatelessWidget {
               padding: EdgeInsets.all(10.w),
               child: SvgPicture.asset(
                 assetsName,
+                width: context.screenWidth * .05,
                 colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
               ),
             ),

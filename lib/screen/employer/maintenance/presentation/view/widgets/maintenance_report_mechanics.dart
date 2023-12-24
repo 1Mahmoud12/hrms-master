@@ -2,11 +2,9 @@ import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/products_need_mechanics.dart';
-import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MaintenanceReportMechanics extends StatelessWidget {
   const MaintenanceReportMechanics({super.key});
@@ -66,10 +64,6 @@ class MaintenanceReportMechanics extends StatelessWidget {
                     Text(
                       'Maintenance Report',
                       style: Styles.style14400,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: InkWell(onTap: () {}, child: SvgPicture.asset(Assets.edit)),
                     ),
                   ],
                 ),

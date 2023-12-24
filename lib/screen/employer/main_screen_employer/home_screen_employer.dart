@@ -1,6 +1,7 @@
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/widgets/card_project.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/presentation/view/widgets/slide_widget.dart';
 import 'package:cnattendance/utils/extensions.dart';
@@ -78,28 +79,30 @@ Inspired by the Saudi Vision 2030, which aims to transform the Kingdom’s econo
                 );
               },
             ),*/
-            SizedBox(
-              width: context.screenWidth,
-              child: ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, AppRoute.knowUs),
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColors.primaryColor),
-                ),
-                child: Text(
-                  'Know more us',
-                  style: Styles.style16700.copyWith(color: AppColors.white),
+            if (genderUser != RoleId.client.name)
+              SizedBox(
+                width: context.screenWidth,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, AppRoute.knowUs),
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(AppColors.primaryColor),
+                  ),
+                  child: Text(
+                    'Know more us',
+                    style: Styles.style16700.copyWith(color: AppColors.white),
+                  ),
                 ),
               ),
-            ),
             20.ESH(),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Our business'.tr,
-                style: Styles.styleHeader.copyWith(color: AppColors.primaryColor),
+            if (genderUser != RoleId.client.name)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Our business'.tr,
+                  style: Styles.styleHeader.copyWith(color: AppColors.primaryColor),
+                ),
               ),
-            ),
-            const CardProject(valueSlider: 100), 50.ESH(),
+            if (genderUser != RoleId.client.name) const CardProject(valueSlider: 100), 50.ESH(),
           ],
         ),
       ),

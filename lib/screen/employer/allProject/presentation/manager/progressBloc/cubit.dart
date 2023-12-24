@@ -14,7 +14,7 @@ class ProgressCubit extends Cubit<ProgressState> {
   final List<Map<String, dynamic>> steps = [
     {
       'assets': Assets.stepOne,
-      'value': '100',
+      'value': '20',
       'nameStep': 'Step one',
       'description': 'description',
       'chooseStatus': 'Finished',

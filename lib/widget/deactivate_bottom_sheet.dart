@@ -1,9 +1,11 @@
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/provider/morescreenprovider.dart';
 import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/utils/navigationservice.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +72,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      decoration: const BoxDecoration(color: Color(0xffcfcdcb)),
+      decoration: BoxDecoration(color: AppColors.scaffoldBackGround, borderRadius: BorderRadiusDirectional.circular(15.r)),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: SafeArea(
         child: Column(
@@ -82,12 +84,13 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
               children: [
                 const Text(
                   'Deactivate',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: AppColors.textColor),
                 ),
                 IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  color: AppColors.primaryColor,
                   icon: const Icon(
                     Icons.close,
                     size: 20,
@@ -100,7 +103,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
               padding: EdgeInsets.only(bottom: 8.0),
               child: Text(
                 'Are you sure you want to deativate your account?',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: AppColors.subTextColor, fontSize: 18),
               ),
             ),
             Form(
@@ -176,7 +179,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
                       padding: const EdgeInsets.only(right: 5, left: 5),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: const Color(0xff635F54),
+                          backgroundColor: AppColors.primaryColor,
                           shape: ButtonBorder(),
                         ),
                         onPressed: () async {
@@ -197,7 +200,7 @@ class DeactivemodalSheetState extends State<DeactivemodalSheet> {
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: const Color(0xff635F54),
+                          backgroundColor: AppColors.primaryColor,
                           shape: ButtonBorder(),
                         ),
                         onPressed: () {

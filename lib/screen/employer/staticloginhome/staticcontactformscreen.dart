@@ -1,10 +1,14 @@
-import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
+import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
+import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,7 +20,6 @@ class StaticContactFormScreen extends StatefulWidget {
 }
 
 class _StaticContactFormScreenState extends State<StaticContactFormScreen> {
-  @override
   Future<void> contactform() async {
     EasyLoading.show(status: 'Submitting..', maskType: EasyLoadingMaskType.black);
     final uri = Uri.parse('https://hr.dar-bayat.com/api/guest-support/create');
@@ -32,7 +35,6 @@ class _StaticContactFormScreenState extends State<StaticContactFormScreen> {
 
     print('logining = == $response');
 
-    final responseData = json.decode(response.body);
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Submitted to Support')));
       subjectController.clear();
@@ -51,170 +53,53 @@ class _StaticContactFormScreenState extends State<StaticContactFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackGround,
       appBar: AppBar(
-        backgroundColor: AppColors.scaffoldBackGround,
-        title: const Text(
+        title: Text(
           'Support',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+          style: Styles.styleHeader,
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: subjectController,
-                    keyboardType: TextInputType.name,
-                    style: const TextStyle(color: Colors.grey),
-                    validator: (value) {
-                      return null;
-                    },
-                    cursorColor: Colors.white,
-                    decoration: const InputDecoration(
-                      hintText: 'Subject',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      labelStyle: TextStyle(color: Colors.white),
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
+      body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Column(
+              children: [
+                20.ESH(),
+                CustomTextFormField(
+                  controller: subjectController,
+                  hintText: 'Subject'.tr,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomTextFormField(
+                  controller: detailController,
+                  hintText: 'Description'.tr,
+                  maxLines: 5,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  margin: const EdgeInsets.all(40),
+                  child: CustomTextButton(
+                      backgroundColor: AppColors.primaryColor,
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(fontSize: 15.sp, color: AppColors.white, fontWeight: FontWeight.w800),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: detailController,
-                    maxLength: 500,
-                    textAlignVertical: TextAlignVertical.top,
-                    maxLines: 5,
-                    keyboardType: TextInputType.emailAddress,
-                    style: const TextStyle(color: Colors.grey),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Field can't be empty";
-                      }
-                      return null;
-                    },
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      counterStyle: const TextStyle(color: Colors.white),
-                      hintText: 'Description'.tr,
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      labelStyle: const TextStyle(color: Colors.white),
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                      focusedErrorBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    margin: const EdgeInsets.all(40),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xffffffff),
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
-                      ),
-                      onPressed: () {
+                      onPress: () {
                         if (subjectController.text != '' && detailController.text != '') {
                           contactform();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Fill the form first')));
                         }
-                      },
-                      child: const Text(
-                        'Submit',
-                        style: TextStyle(color: AppColors.scaffoldBackGround, fontWeight: FontWeight.w900),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                      }),
+                ),
+              ],
             ),
           ),
         ),

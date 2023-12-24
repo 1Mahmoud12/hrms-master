@@ -4,8 +4,12 @@ import 'package:cnattendance/screen/Chat/presentation/mainager/view/chatCustomer
 import 'package:cnattendance/screen/MoreScreenEmployee/MoreScreenNew.dart';
 import 'package:cnattendance/screen/dashboard/homescreen.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/projects_screen.dart';
+import 'package:cnattendance/screen/employer/contactus/contactus_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/home_screen_employer.dart';
+import 'package:cnattendance/screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/maintenance_screen.dart';
+import 'package:cnattendance/screen/employer/privacypolicy/privacypolicy_screen.dart';
+import 'package:cnattendance/screen/employer/staticloginhome/staticloginhome_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +21,11 @@ class MainBlocHomeCubit extends Cubit<MainBlocHomeState> {
 
   void changeToCustomer() {
     screenList = screenListCustomer;
+    emit(ChangeIndexState());
+  }
+
+  void changeToClient() {
+    screenList = screenListClient;
     emit(ChangeIndexState());
   }
 
@@ -43,6 +52,14 @@ class MainBlocHomeCubit extends Cubit<MainBlocHomeState> {
     const ChatCustomer(),
     const ProjectsScreen(),
     const MoreScreenNew(),
+  ];
+
+  List<Widget> screenListClient = [
+    const HomeScreenEmployer(),
+    const PrivacyPolicyScreen(),
+    const ContactUsScreen(),
+    const KnowUs(),
+    const StaticLoginHomeScreen(),
   ];
   List<Widget> screenList = [
     const HomeScreen(),
