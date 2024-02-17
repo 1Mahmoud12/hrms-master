@@ -37,7 +37,7 @@ class LoginDataSource {
       final responseData = json.decode(response.body);
 
       debugPrint(responseData.toString());
-
+      if (responseData['status'] == false) throw responseData['message'];
       final responseJson = LoginModel.fromJson(responseData);
       await preferencesConstants.saveUser(responseJson);
       userCache = responseJson.data!.user;
