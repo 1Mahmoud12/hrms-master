@@ -12,7 +12,7 @@ class OverviewDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _overview = Provider.of<DashboardProvider>(context).overviewList;
+    final overview = Provider.of<DashboardProvider>(context).overviewList;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -27,10 +27,10 @@ class OverviewDashboard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CardoverviewSvgs(type: 'Presenet'.tr, value: _overview['present']!, svgvalue: Assets.attendance),
+              CardoverviewSvgs(type: 'Presenet'.tr, value: overview['present']!, svgvalue: Assets.attendance),
               CardoverviewSvgsandcolor(
                 type: 'Holiday'.tr,
-                value: _overview['holiday']!,
+                value: overview['holiday']!,
                 svgValue: Assets.holiday,
                 bgcolor: const Color(0xff9E91EF),
               ),
@@ -41,14 +41,14 @@ class OverviewDashboard extends StatelessWidget {
             children: [
               CardoverviewSvgsandcolor(
                 type: 'Leave'.tr,
-                value: _overview['leave']!,
+                value: overview['leave']!,
                 svgValue: Assets.leave,
                 bgcolor: const Color(0xff9E91EF),
               ),
               CardoverviewSvgsandcolor(
                 type: 'Request'.tr,
                 bgcolor: const Color(0xff4E95F6),
-                value: _overview['request']!,
+                value: overview['request']!,
                 svgValue: Assets.request,
               ),
             ],

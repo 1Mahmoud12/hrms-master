@@ -1,16 +1,14 @@
-import 'package:cnattendance/provider/profileprovider.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
 import 'package:cnattendance/widget/cartTitle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class BasicDetail extends StatelessWidget {
   const BasicDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final profile = Provider.of<ProfileProvider>(context).profile;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       width: double.infinity,
@@ -23,11 +21,11 @@ class BasicDetail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardTitle('Phone'.tr, profile.phone),
-              CardTitle('Post'.tr, profile.post),
-              CardTitle('Dateofbirth'.tr, profile.dob),
-              CardTitle('Gender'.tr, profile.gender),
-              CardTitle('Address'.tr, profile.address),
+              CardTitle('Phone'.tr, userCache!.email!),
+              CardTitle('Post'.tr, userCache!.email!),
+              CardTitle('Dateofbirth'.tr, userCache!.email!),
+              CardTitle('Gender'.tr, userCache!.email!),
+              CardTitle('Address'.tr, userCache!.email!),
             ],
           ),
         ),

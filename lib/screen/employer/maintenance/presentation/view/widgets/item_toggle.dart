@@ -1,8 +1,8 @@
+import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
 import 'package:cnattendance/utils/assets.dart';
-import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,41 +21,61 @@ class ItemToggle extends StatelessWidget {
 
         return InkWell(
           onTap: () {
-            cubit.changeIndex(index: index);
-            MainBlocMaintenanceCubit.of(context).changeView(index);
+            final arguments = {
+              'nameEmergency': cubit.maintenanceLabels[index],
+            };
+            Navigator.pushNamed(
+              context,
+              index == 0 || index == 1 ? AppRoute.emergencyScreenItems : AppRoute.periodicMaintenanceScreenItems,
+              arguments: arguments,
+            );
           },
           child: Container(
-            constraints: BoxConstraints(maxWidth: context.screenWidth * .3),
-            padding: EdgeInsets.all(5.w),
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.r),
-              color: cubit.indexList == index ? AppColors.primaryColor : AppColors.white,
+              color: index == 0
+                  ? AppColors.emergencyRequestColor
+                  : index == 1
+                      ? AppColors.malfunctionRequestColor
+                      : AppColors.periodicMaintenanceColor,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SvgPicture.asset(
-                  index == 0
-                      ? Assets.emergencyRequest
-                      : index == 1
-                          ? Assets.malfunctionRequest
-                          : Assets.maintenancePeriodic,
-                  width: context.screenWidth * .05,
-                  colorFilter: ColorFilter.mode(cubit.indexList == index ? AppColors.white : AppColors.primaryColor, BlendMode.srcIn),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: index == 0
+                        ? AppColors.emergencyRequestIconColor
+                        : index == 1
+                            ? AppColors.malfunctionRequestIconColor
+                            : AppColors.periodicMaintenanceIconColor,
+                  ),
+                  child: SvgPicture.asset(
+                    index == 0
+                        ? Assets.emergencyRequest
+                        : index == 1
+                            ? Assets.malfunctionRequest
+                            : Assets.maintenancePeriodic,
+                  ),
                 ),
                 Container(
-                  constraints: BoxConstraints(maxWidth: context.screenWidth * .18),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Text(
                     cubit.maintenanceLabels[index],
                     style: TextStyle(
-                      fontSize: 10.sp,
-                      color: cubit.indexList == index ? AppColors.white : AppColors.textColorTextFormField,
+                      fontSize: 16.sp,
+                      color: Colors.black,
                       fontWeight: FontWeight.w700,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                )
+                ),
+                const Spacer(),
+                SvgPicture.asset(Assets.arrowIOS),
               ],
             ),
           ),

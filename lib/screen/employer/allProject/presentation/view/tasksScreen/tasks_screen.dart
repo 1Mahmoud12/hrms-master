@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -24,7 +25,7 @@ class TasksScreen extends StatelessWidget {
           style: Styles.styleHeader.copyWith(fontWeight: FontWeight.bold),
         ),
         actions: [
-          if (genderUser == RoleId.mechanics.name)
+          if (genderUser == RoleId.nine.name.tr)
             IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, AppRoute.addTasksScreen);

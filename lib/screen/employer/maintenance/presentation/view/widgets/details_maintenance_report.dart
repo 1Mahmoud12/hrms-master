@@ -73,7 +73,7 @@ class _DetailsMaintenanceState extends State<DetailsMaintenance> {
             ),
           ),
           GoogleMapWithoutScaffold(cubit: MainBlocMaintenanceCubit.of(context)),
-          const AttachmentsReportCustomer()
+          const AttachmentsReportCustomer(),
         ].paddingDirectional(
           start: 10.w,
           end: 10.w,

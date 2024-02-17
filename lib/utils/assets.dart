@@ -29,6 +29,8 @@ class Assets {
   static const sickLeave = 'assets/icons/svg/sickLeave.svg';
   static const unPaidLeave = 'assets/icons/svg/unPaidLeave.svg';
   static const emptyNotification = 'assets/icons/svg/emptyNotification.svg';
+  static const checkBoxTrue = 'assets/icons/svg/checkBoxTrue.svg';
+  static const backgroundMaintenance = 'assets/images/backgroundMaintenance.png';
 
   static const aboutUS = 'assets/icons/svg/aboutUS.svg';
   static const AdministrativaRequests = 'assets/icons/svg/AdministrativaRequests.svg';

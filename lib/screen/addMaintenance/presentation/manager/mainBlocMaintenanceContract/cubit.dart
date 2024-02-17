@@ -17,14 +17,26 @@ class MainBlocMaintenanceContractCubit extends Cubit<MainBlocMaintenanceContract
   int indexList = 0;
   TextEditingController addressController = TextEditingController();
   TextEditingController nameContract = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+  TextEditingController initialStatusElevator = TextEditingController();
+  TextEditingController installationDate = TextEditingController();
+  TextEditingController maximumLoad = TextEditingController();
+  TextEditingController numberStops = TextEditingController();
+  TextEditingController modelElevator = TextEditingController();
 
   List<String> maintenanceLabels = ['Emergency maintenance request', 'Malfunction maintenance', 'Request periodic maintenance'];
 
   void changeIndex({required int index}) {
     indexList = index;
     emit(ChangeIndexState());
+  }
+
+  bool checkBox = false;
+
+  void changeCheckBox() {
+    checkBox = !checkBox;
+    emit(ChangeCheckBoxState());
   }
 }

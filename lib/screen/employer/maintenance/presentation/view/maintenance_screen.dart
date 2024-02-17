@@ -1,15 +1,14 @@
-import 'package:cnattendance/core/routes/app_route.dart';
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/item_toggle.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/malfunction_request.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/periodic_maintenance.dart';
+import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MaintenanceScreen extends StatelessWidget {
@@ -17,117 +16,57 @@ class MaintenanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String nameMaintenanceReport = 'Name Contract';
+    /* const String nameMaintenanceReport = 'Name Contract';
     const String location = 'Cairo';
-    const int numberElevators = 15;
+    const int numberElevators = 15;*/
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Maintenance'.tr,
-          style: Styles.styleHeader,
+          style: TextStyle(color: AppColors.textColor, fontSize: 20.sp, fontWeight: FontWeight.w700),
         ),
       ),
       body: BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
         builder: (context, state) => SingleChildScrollView(
           padding: EdgeInsets.all(context.screenWidth * .04),
-          child: Column(
-            children: [
-              const Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ItemToggle(index: 0),
-                      ItemToggle(index: 1),
-                      ItemToggle(index: 2),
-                    ],
-                  ),
-                ],
-              ),
-              10.ESH(),
-              SizedBox(
-                height: context.screenHeight * .9,
-                child: BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
-                  builder: (context, state) => PageView(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    controller: MainBlocMaintenanceCubit.of(context).pageController,
-                    onPageChanged: (value) {
-                      MainBlocMaintenanceCubit.of(context).changeIndex(index: value);
-                    },
-                    children: [
-                      ListView.builder(
-                        itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            final arguments = {
-                              'nameMaintenanceReport': nameMaintenanceReport,
-                              'startDate': '24 Aug',
-                              'location': location,
-                              'numberElevators': numberElevators,
-                              'status': index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
-                            };
-                            if (genderUser == RoleId.customer.name) {
-                              Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
-                            } else if (genderUser == RoleId.mechanics.name) {
-                              Navigator.pushNamed(context, AppRoute.maintenanceReportMechanics, arguments: arguments);
-                            } else {
-                              Navigator.pushNamed(context, AppRoute.maintenanceReportTechnical, arguments: arguments);
-                            }
-                          },
-                          child: MalfunctionRequest(
-                            nameMaintenanceReport: nameMaintenanceReport,
-                            status: index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Image.asset(Assets.backgroundMaintenance),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 24.0, left: 16),
+                      child: Column(
+                        children: [
+                          Text(
+                            'RAK\nMaintenance',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40.sp,
+                              fontWeight: FontWeight.w700,
+                              //height: 1.0,
+                            ),
                           ),
-                        ),
-                        itemCount: 9,
-                        shrinkWrap: true,
+                        ],
                       ),
-                      ListView.builder(
-                        itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            final arguments = {
-                              'nameMaintenanceReport': nameMaintenanceReport,
-                              'startDate': '24 Aug',
-                              'location': location,
-                              'numberElevators': numberElevators,
-                              'status': index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
-                            };
-                            if (genderUser == RoleId.customer.name) {
-                              Navigator.pushNamed(context, AppRoute.emergencyMalfunctionScreen, arguments: arguments);
-                            } else if (genderUser == RoleId.mechanics.name) {
-                              Navigator.pushNamed(context, AppRoute.maintenanceReportMechanics, arguments: arguments);
-                            } else {
-                              Navigator.pushNamed(context, AppRoute.maintenanceReportTechnical, arguments: arguments);
-                            }
-                          },
-                          child: MalfunctionRequest(
-                            nameMaintenanceReport: nameMaintenanceReport,
-                            status: index > 4 ? Malfunction.In_Progress.name : Malfunction.Pending.name,
-                          ),
-                        ),
-                        itemCount: 9,
-                        shrinkWrap: true,
-                      ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            final arguments = {
-                              'nameMaintenanceReport': nameMaintenanceReport,
-                              'startDate': '24 Aug',
-                              'location': location,
-                              'numberElevators': numberElevators,
-                            };
-                            Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
-                          },
-                          child: PeriodicMaintenance(nameMaintenanceReport: nameMaintenanceReport, numberElevators: numberElevators.toString()),
-                        ),
-                        itemCount: 5,
-                      ),
-                    ],
+                    ),
+                  ],
+                ),
+                22.ESH(),
+                Text(
+                  'Maintenance Type',
+                  style: Styles.styleHeader.copyWith(
+                    color: const Color(0xFF0A256C),
                   ),
                 ),
-              ),
-            ],
+                const ItemToggle(index: 0),
+                const ItemToggle(index: 1),
+                const ItemToggle(index: 2),
+              ],
+            ),
           ),
         ),
       ),

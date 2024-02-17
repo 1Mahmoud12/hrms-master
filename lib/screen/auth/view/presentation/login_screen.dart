@@ -1,16 +1,11 @@
 import 'dart:ui';
 
-import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
-import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
 import 'package:cnattendance/screen/auth/view/manager/login/state.dart';
 import 'package:cnattendance/screen/auth/view/presentation/signup_screen.dart';
-import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -61,173 +56,169 @@ class LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
-          final cubit = LoginCubit.of(context);
           return Form(
             key: _form,
             child: SingleChildScrollView(
               padding: EdgeInsets.all(context.screenWidth * .05),
-              child: IgnorePointer(
-                ignoring: cubit.isLoading,
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          Assets.appLogo,
-                          fit: BoxFit.cover,
-                          height: context.screenHeight * .2,
-                        ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        Assets.appLogo,
+                        fit: BoxFit.cover,
+                        height: context.screenHeight * .2,
                       ),
+                    ),
 
-                      Text(
-                        'Login',
-                        style: Styles.style16700,
-                      ),
+                    Text(
+                      'Login',
+                      style: Styles.style16700,
+                    ),
 
-                      //textHeading('Username'),
-                      //gaps(10),
-                      CustomTextFormField(controller: _usernameController, hintText: 'Username'),
+                    //textHeading('Username'),
+                    //gaps(10),
+                    CustomTextFormField(controller: _usernameController, hintText: 'Username'),
 
-                      //  textHeading('Password'),
-                      CustomTextFormField(
-                        controller: _passwordController,
-                        hintText: 'Password',
-                        password: true,
-                      ),
-                      /*TextFormField(
-                      obscureText: _obscureText,
-                      style: const TextStyle(color: AppColors.textColor),
-                      validator: (value) {
-                        if (!validateField(value!)) {
-                          return "Empty Field";
-                        }
-
-                        return null;
-                      },
+                    //  textHeading('Password'),
+                    CustomTextFormField(
                       controller: _passwordController,
-                      cursorColor: AppColors.textColor,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock, color: AppColors.textColor),
-                        labelStyle: const TextStyle(color: AppColors.textColor),
-                        fillColor: AppColors.textColor,
-                        filled: true,
-                        enabledBorder: const OutlineInputBorder(
+                      hintText: 'Password',
+                      password: true,
+                    ),
+                    /*TextFormField(
+                    obscureText: _obscureText,
+                    style: const TextStyle(color: AppColors.textColor),
+                    validator: (value) {
+                      if (!validateField(value!)) {
+                        return "Empty Field";
+                      }
+
+                      return null;
+                    },
+                    controller: _passwordController,
+                    cursorColor: AppColors.textColor,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.lock, color: AppColors.textColor),
+                      labelStyle: const TextStyle(color: AppColors.textColor),
+                      fillColor: AppColors.textColor,
+                      filled: true,
+                      enabledBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                        borderSide: BorderSide(color: AppColors.textColor),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                        borderSide: BorderSide(color: AppColors.textColor),
+                      ),
+                      focusedErrorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
                               bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          borderSide: BorderSide(color: AppColors.textColor),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
+                              bottomRight: Radius.circular(10))),
+                      errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
                               bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          borderSide: BorderSide(color: AppColors.textColor),
-                        ),
-                        focusedErrorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10))),
-                        errorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10))),
-                        suffixIcon: InkWell(
-                          onTap: _toggle,
-                          child: Icon(
-                            _obscureText ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
-                            size: 15.0,
-                            color: AppColors.textColor,
-                          ),
+                              bottomRight: Radius.circular(10))),
+                      suffixIcon: InkWell(
+                        onTap: _toggle,
+                        child: Icon(
+                          _obscureText ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
+                          size: 15.0,
+                          color: AppColors.textColor,
                         ),
                       ),
+                    ),
+                  ),*/
+
+                    loginButton(),
+                    /*   CustomTextButton(
+                      child: Text(RoleId.eight.name.tr),
+                      onPress: () async {
+                        genderUser = RoleId.eight.name.tr;
+                        await Preferences.setSaved(value: RoleId.eight.name.tr, key: 'genderUser');
+                        MainBlocHomeCubit.of(context).changeToCustomer();
+
+                        Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+                      },
+                    ),
+                    CustomTextButton(
+                      child: Text(RoleId.twelve.name.tr),
+                      onPress: () async {
+                        genderUser = RoleId.twelve.name.tr;
+                        await Preferences.setSaved(value: RoleId.twelve.name.tr, key: 'genderUser');
+                        MainBlocHomeCubit.of(context).changeToClient();
+
+                        Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+                      },
+                    ),
+                    CustomTextButton(
+                      child: Text(RoleId.nine.name.tr),
+                      onPress: () async {
+                        genderUser = RoleId.nine.name.tr;
+                        await Preferences.setSaved(value: RoleId.nine.name.tr, key: 'genderUser');
+                        MainBlocHomeCubit.of(context).changeToEmployer();
+                        Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+                      },
+                    ),
+                    CustomTextButton(
+                      child: Text(RoleId.ten.name.tr),
+                      onPress: () async {
+                        genderUser = RoleId.ten.name.tr;
+                        await Preferences.setSaved(value: RoleId.ten.name.tr, key: 'genderUser');
+                        MainBlocHomeCubit.of(context).changeToEmployer();
+
+                        Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+                      },
                     ),*/
 
-                      button(),
-                      CustomTextButton(
-                        child: Text(RoleId.customer.name),
-                        onPress: () async {
-                          genderUser = RoleId.customer.name;
-                          await Preferences.setSaved(value: RoleId.customer.name, key: 'genderUser');
-                          MainBlocHomeCubit.of(context).changeToCustomer();
-
-                          Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
-                        },
-                      ),
-                      CustomTextButton(
-                        child: Text(RoleId.client.name),
-                        onPress: () async {
-                          genderUser = RoleId.client.name;
-                          await Preferences.setSaved(value: RoleId.client.name, key: 'genderUser');
-                          MainBlocHomeCubit.of(context).changeToClient();
-
-                          Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
-                        },
-                      ),
-                      CustomTextButton(
-                        child: Text(RoleId.mechanics.name),
-                        onPress: () async {
-                          genderUser = RoleId.mechanics.name;
-                          await Preferences.setSaved(value: RoleId.mechanics.name, key: 'genderUser');
-                          MainBlocHomeCubit.of(context).changeToEmployer();
-                          Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
-                        },
-                      ),
-                      CustomTextButton(
-                        child: Text(RoleId.technical.name),
-                        onPress: () async {
-                          genderUser = RoleId.technical.name;
-                          await Preferences.setSaved(value: RoleId.technical.name, key: 'genderUser');
-                          MainBlocHomeCubit.of(context).changeToEmployer();
-
-                          Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
-                        },
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Signup(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "Don't Have An Account ? Create Account",
-                              textAlign: TextAlign.center,
-                              style: Styles.style12400,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Signup(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Don't Have An Account ? Create Account",
+                            textAlign: TextAlign.center,
+                            style: Styles.style12400,
                           ),
-                        ],
-                      ),
-                      // Center(
-                      //   child: GestureDetector(
-                      //     onTap: () {
-                      //       openBrowserTab();
-                      //     },
-                      //     child: Text(
-                      //         textAlign: TextAlign.left,
-                      //         style: TextStyle(color:  AppColors.textColor),
-                      //         'Forget Password'),
-                      //   ),
-                      // ),
-                    ].paddingDirectional(top: context.screenHeight * .02),
-                  ),
+                        ),
+                      ],
+                    ),
+                    // Center(
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       openBrowserTab();
+                    //     },
+                    //     child: Text(
+                    //         textAlign: TextAlign.left,
+                    //         style: TextStyle(color:  AppColors.textColor),
+                    //         'Forget Password'),
+                    //   ),
+                    // ),
+                  ].paddingDirectional(top: context.screenHeight * .02),
                 ),
               ),
             ),
@@ -277,24 +268,30 @@ class LoginScreenState extends State<LoginScreen> {
     return Text(textAlign: TextAlign.left, style: Styles.style14400, value);
   }
 
-  Widget button() {
-    return SizedBox(
-      width: context.screenWidth,
-      child: TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.r))),
-        ),
-        onPressed: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-          validateValue();
-        },
-        child: const Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text(
-            'Login',
-            style: TextStyle(color: AppColors.white),
+  Widget loginButton() {
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) => SizedBox(
+        width: context.screenWidth,
+        child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: AppColors.primaryColor,
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.r))),
+          ),
+          onPressed: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+            validateValue();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: state is LoginLoadingState
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : const Text(
+                    'Login',
+                    style: TextStyle(color: AppColors.white),
+                  ),
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:cnattendance/data/source/datastore/preferences.dart';
-import 'package:cnattendance/data/source/network/model/login/Login.dart';
-import 'package:cnattendance/data/source/network/model/login/User.dart';
 import 'package:flutter/material.dart';
+
+import '../screen/auth/data/model/login_model.dart';
 
 class CustomerProvider with ChangeNotifier {
   String _userName = '';
@@ -9,7 +9,7 @@ class CustomerProvider with ChangeNotifier {
   String _email = '';
   String _phone = '';
   String _avatar = '';
-  String _roleId = '';
+  int _roleId = 0;
   bool _auth = false;
 
   String get userName {
@@ -32,7 +32,7 @@ class CustomerProvider with ChangeNotifier {
     return _avatar;
   }
 
-  String get roleId {
+  int get roleId {
     return _roleId;
   }
 
@@ -48,7 +48,7 @@ class CustomerProvider with ChangeNotifier {
     _phone = await preferences.getEmail();
     _email = await preferences.getEmail();
     _avatar = await preferences.getAvatar();
-    _roleId = user.roleId;
+    _roleId = user.roleId!;
     notifyListeners();
   }
 
@@ -57,7 +57,7 @@ class CustomerProvider with ChangeNotifier {
     return preferences.getUserAuth();
   }
 
-  void saveUser(Login data) async {
+  void saveUser(LoginModel data) async {
     final Preferences preferences = Preferences();
     preferences.saveUser(data);
     notifyListeners();

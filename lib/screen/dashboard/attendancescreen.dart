@@ -1,10 +1,10 @@
 import 'package:cnattendance/provider/attendancereportprovider.dart';
-import 'package:cnattendance/widget/headerprofile.dart';
-import 'package:cnattendance/widget/radialDecoration.dart';
-import 'package:flutter/material.dart';
 import 'package:cnattendance/widget/attendancescreen/attendancestatus.dart';
 import 'package:cnattendance/widget/attendancescreen/attendancetoggle.dart';
 import 'package:cnattendance/widget/attendancescreen/reportlistview.dart';
+import 'package:cnattendance/widget/headerprofile.dart';
+import 'package:cnattendance/widget/radialDecoration.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AttendanceScreen extends StatefulWidget {
@@ -28,8 +28,7 @@ class AttendanceScreenState extends State<AttendanceScreen> {
 
   Future<String> loadAttendanceReport() async {
     try {
-      await Provider.of<AttendanceReportProvider>(context, listen: false)
-          .getAttendanceReport();
+      await Provider.of<AttendanceReportProvider>(context, listen: false).getAttendanceReport();
       return 'loaded';
     } catch (e) {
       return 'loaded';
@@ -41,27 +40,27 @@ class AttendanceScreenState extends State<AttendanceScreen> {
     return Container(
       decoration: RadialDecoration(),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         body: SafeArea(
-            child: RefreshIndicator(
-          onRefresh: () {
-            return loadAttendanceReport();
-          },
-          child: const SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
-                children: [
-                  HeaderProfile(),
-                  AttendanceStatus(),
-                  AttendanceToggle(),
-                  ReportListView(),
-                ],
+          child: RefreshIndicator(
+            onRefresh: () {
+              return loadAttendanceReport();
+            },
+            child: const SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    HeaderProfile(),
+                    AttendanceStatus(),
+                    AttendanceToggle(),
+                    ReportListView(),
+                  ],
+                ),
               ),
             ),
           ),
-        ),),
+        ),
       ),
     );
   }

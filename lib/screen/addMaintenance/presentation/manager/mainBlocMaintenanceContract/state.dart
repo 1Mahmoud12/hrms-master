@@ -5,3 +5,5 @@ class MainBlocMaintenanceContractInitial extends MainBlocMaintenanceContractStat
 class SelectLocationState extends MainBlocMaintenanceContractState {}
 
 class ChangeIndexState extends MainBlocMaintenanceContractState {}
+
+class ChangeCheckBoxState extends MainBlocMaintenanceContractState {}

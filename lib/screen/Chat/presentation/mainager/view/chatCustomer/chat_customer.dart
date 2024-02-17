@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class ChatCustomer extends StatelessWidget {
   const ChatCustomer({super.key});
@@ -42,8 +43,9 @@ class ChatCustomer extends StatelessWidget {
           ),
           5.ESH(),
           SizedBox(
-              width: context.screenWidth,
-              child: CustomDropDownMenu(selectedItem: 'Department', items: [RoleId.mechanics.name, RoleId.technical.name])),
+            width: context.screenWidth,
+            child: CustomDropDownMenu(selectedItem: 'Department', items: [RoleId.nine.name.tr, RoleId.ten.name.tr]),
+          ), //
           CustomTextFormField(
             controller: TextEditingController(),
             hintText: 'Title',

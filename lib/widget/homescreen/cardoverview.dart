@@ -65,7 +65,6 @@ class CardoverviewSvgs extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -78,11 +77,13 @@ class CardoverviewSvgs extends StatelessWidget {
                 ],
               ),
               8.ESH(),
-              Center(
-                child: Text(
-                  value,
-                  style: const TextStyle(color: Colors.black, fontSize: 20),
-                ),
+              Row(
+                children: [
+                  Text(
+                    value,
+                    style: TextStyle(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w700),
+                  ),
+                ],
               ),
             ],
           ),
@@ -127,9 +128,13 @@ class CardoverviewSvgsandcolor extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                value,
-                style: const TextStyle(color: Colors.black, fontSize: 20),
+              Row(
+                children: [
+                  Text(
+                    value,
+                    style: TextStyle(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w700),
+                  ),
+                ],
               ),
             ],
           ),

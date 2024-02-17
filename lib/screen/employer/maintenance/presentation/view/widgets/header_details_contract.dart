@@ -72,11 +72,10 @@ class HeaderDetailsContract extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: context.screenHeight * .58,
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) => InkWell(
+        Column(
+          children: List.generate(
+            10,
+            (index) => InkWell(
               onTap: () {
                 final arguments = {
                   'maintenanceEngineer': 'Name Technical',

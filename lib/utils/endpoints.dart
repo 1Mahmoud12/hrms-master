@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class EndPoints {
-  static const production = 'https://hr.dar-bayat.com/';
+  static const production = 'https://rak.bytes-sa.com/';
 
   // http://127.0.0.1:8000/api/login
 

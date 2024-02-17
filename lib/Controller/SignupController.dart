@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:cnattendance/data/source/datastore/preferences.dart';
-import 'package:cnattendance/data/source/network/model/login/Loginresponse.dart';
+import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
-import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
+import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -41,17 +41,17 @@ class SignupController extends GetxController {
       debugPrint('response data ==>>>>$responsedata');
       if (responsedata['status'] == true) {
         final Preferences preferences = Preferences();
-        final responseJson = LoginResponse.fromJson(responsedata);
-        await preferences.saveUser(responseJson.data);
+        final responseJson = LoginModel.fromJson(responsedata);
+        await preferences.saveUser(responseJson);
 
         usernameController.clear();
         emailcontroller.clear();
         phonecontroller.clear();
         passwordController.clear();
 
-        debugPrint('asaassasjjdsd${responseJson.data.user.roleId}');
-        if (responseJson.data.user.roleId == '4') {
-          Get.offAll(HomeDashboardScreen());
+        debugPrint('Sign up=======> ${responseJson.data!.user!.roleId}');
+        if (responseJson.data!.user!.roleId == 8) {
+          Get.offAll(const HomeDashboardScreen());
 
           // Navigator.of(context).pushNamedAndRemoveUntil(
           //     HomeDashboardScreen.routeName, (route) => false);

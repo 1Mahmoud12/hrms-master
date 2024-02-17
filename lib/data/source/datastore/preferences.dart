@@ -1,5 +1,4 @@
-import 'package:cnattendance/data/source/network/model/login/Login.dart';
-import 'package:cnattendance/data/source/network/model/login/User.dart';
+import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,17 +18,17 @@ class Preferences with ChangeNotifier {
     prefs = await SharedPreferences.getInstance();
   }
 
-  Future<bool> saveUser(Login data) async {
+  Future<bool> saveUser(LoginModel data) async {
     // Obtain shared preferences.
-    final User user = data.user;
+    final User user = data.data!.user!;
 
-    await prefs!.setString(userToken, data.tokens);
-    await prefs!.setInt(userId, user.id);
-    await prefs!.setString(roleId, user.roleId);
-    await prefs!.setString(userAvatar, user.avatar);
-    await prefs!.setString(userEmail, user.email);
-    await prefs!.setString(userName, user.username);
-    await prefs!.setString(userFullName, user.name);
+    await prefs!.setString(userToken, data.data!.tokens!);
+    await prefs!.setInt(userId, user.id!);
+    await prefs!.setInt(roleId, user.roleId!);
+    await prefs!.setString(userAvatar, user.avatar!);
+    await prefs!.setString(userEmail, user.email!);
+    await prefs!.setString(userName, user.username!);
+    await prefs!.setString(userFullName, user.name!);
 
     notifyListeners();
 
@@ -37,13 +36,13 @@ class Preferences with ChangeNotifier {
   }
 
   void saveBasicUser(User user) async {
-    await prefs!.setInt(userId, user.id);
-    await prefs!.setString(userAvatar, user.avatar);
-    await prefs!.setString(userEmail, user.email);
-    await prefs!.setString(roleId, user.roleId);
-    await prefs!.setString(userName, user.username);
-    await prefs!.setString(userFullName, user.name);
-    await prefs!.setString(userFullName, user.name);
+    await prefs!.setInt(userId, user.id!);
+    await prefs!.setString(userAvatar, user.avatar!);
+    await prefs!.setString(userEmail, user.email!);
+    await prefs!.setInt(roleId, user.roleId!);
+    await prefs!.setString(userName, user.username!);
+    await prefs!.setString(userFullName, user.name!);
+    await prefs!.setString(userFullName, user.name!);
 
     notifyListeners();
   }
@@ -102,7 +101,7 @@ class Preferences with ChangeNotifier {
     return User(
       id: prefs.getInt(userId) ?? 0,
       name: prefs.getString(userFullName) ?? '',
-      roleId: prefs.getString(roleId) ?? '',
+      roleId: prefs.getInt(roleId) ?? 0,
       email: prefs.getString(userEmail) ?? '',
       username: prefs.getString(userName) ?? '',
       avatar: prefs.getString(userAvatar) ?? '',

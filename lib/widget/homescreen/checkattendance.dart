@@ -6,7 +6,6 @@ import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/widget/attendance_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CheckAttendance extends StatefulWidget {
@@ -22,12 +21,9 @@ class CheckAttendanceState extends State<CheckAttendance> {
     final attendanceList = Provider.of<DashboardProvider>(context).attendanceList;
     final pref = Provider.of<CustomerProvider>(context);
 
-    final DateTime now = DateTime.now();
-    final String formattedDate = DateFormat('EEEE , MMMM d , yyyy').format(now);
-
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -90,25 +86,30 @@ class CheckAttendanceState extends State<CheckAttendance> {
                         final bool isAuthenticated = await AuthService.authenticateUser();
                         if (isAuthenticated) {
                           showModalBottomSheet(
-                              context: context,
-                              useRootNavigator: true,
-                              builder: (context) {
-                                return const AttedanceBottomSheet();
-                              },);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              content: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('Either no biometric is enrolled or biometric did not match'),
-                          ),),);
-                        }
-                      } else {
-                        showModalBottomSheet(
                             context: context,
                             useRootNavigator: true,
                             builder: (context) {
                               return const AttedanceBottomSheet();
-                            },);
+                            },
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text('Either no biometric is enrolled or biometric did not match'),
+                              ),
+                            ),
+                          );
+                        }
+                      } else {
+                        showModalBottomSheet(
+                          context: context,
+                          useRootNavigator: true,
+                          builder: (context) {
+                            return const AttedanceBottomSheet();
+                          },
+                        );
                       }
                     },
                     icon: const Icon(
@@ -124,10 +125,11 @@ class CheckAttendanceState extends State<CheckAttendance> {
             height: 15,
           ),
           Center(
-              child: Text(
-            'checkin_out'.tr,
-            style: TextStyle(color: AppColors.textColor, fontSize: context.screenWidth * .05),
-          ),),
+            child: Text(
+              'checkin_out'.tr,
+              style: TextStyle(color: AppColors.textColor, fontSize: context.screenWidth * .05),
+            ),
+          ),
           /*SizedBox(
             height: 15,
           ),
@@ -148,19 +150,26 @@ class CheckAttendanceState extends State<CheckAttendance> {
               progressColor: attendanceList['check-in'] != "-" && attendanceList['check-out'] == "-" ? HexColor("#EDE7B0") : HexColor("#EDE7B0"),
             ),
           ),*/
-          Container(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(
-                attendanceList['check-in']!,
-                style: const TextStyle(color: AppColors.textColor),
+          if (attendanceList['check-in'] != '-' && attendanceList['check-out'] != '-')
+            Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
               ),
-              Text(
-                attendanceList['check-out']!,
-                style: const TextStyle(color: AppColors.textColor),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    attendanceList['check-in']!,
+                    style: const TextStyle(color: AppColors.textColor),
+                  ),
+                  Text(
+                    attendanceList['check-out']!,
+                    style: const TextStyle(color: AppColors.textColor),
+                  ),
+                ],
               ),
-            ],),
-          ),
+            ),
         ],
       ),
     );

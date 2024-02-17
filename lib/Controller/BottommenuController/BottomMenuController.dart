@@ -24,8 +24,8 @@ class BottomMenuController extends GetxController {
   Widget currentscreen = const HomeScreen();
   int currenttab = 0;
 
-  updatewidget(Widget Widget, int tab) {
-    currentscreen = Widget;
+  void updatewidget(Widget widget, int tab) {
+    currentscreen = widget;
     currenttab = tab;
     update();
   }

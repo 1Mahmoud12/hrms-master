@@ -1,5 +1,6 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/provider/profileprovider.dart';
 import 'package:cnattendance/screen/profile/NotificationScreen.dart';
 import 'package:cnattendance/utils/assets.dart';
@@ -68,7 +69,8 @@ class ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: InkWell(
                 onTap: () {
-                  pushNewScreen(context, screen: const NotificationScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
+                  pushNewScreen(context,
+                      screen: const NotificationScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
                 child: SvgPicture.asset(Assets.notification),
               ),
@@ -98,7 +100,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   endIndent: 20.w,
                   indent: 20.w,
                 ),
-                if (userProfile.post != '')
+                if (userCache != null)
                   Container(
                     padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 10),
                     width: double.infinity,
@@ -109,7 +111,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   )
                 else
                   const SizedBox(),
-                if (userProfile.post != '') const BasicDetail() else const SizedBox(),
+                if (userCache != null) const BasicDetail() else const SizedBox(),
                 if (userProfile.bankName != '')
                   Container(
                     padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 10),

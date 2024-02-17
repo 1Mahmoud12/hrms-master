@@ -14,7 +14,7 @@ class UserChatController extends GetxController {
   late int userid;
   bool isLoading = false;
   final ScrollController scrollController = ScrollController();
-  final Notification = Get.put(NotificationController());
+  final notification = Get.put(NotificationController());
 
   @override
   void onInit() {
@@ -32,14 +32,14 @@ class UserChatController extends GetxController {
   void getcurrentuserid() async {
     final Preferences preferences = Preferences();
     final user = await preferences.getUser();
-    userid = user.id;
+    userid = user.id!;
     update();
   }
 
   void sendmessagetouser(id) async {
     final Preferences preferences = Preferences();
     final user = await preferences.getUser();
-    final int myuserid = user.id;
+    final int myuserid = user.id!;
     final DateTime now = DateTime.now();
     final String formattedDate = '${now.year}-${now.month}-${now.day}';
     final String formattedTime = '${now.hour}:${now.minute}:${now.second}';
@@ -67,7 +67,7 @@ class UserChatController extends GetxController {
         (value) {
           debugPrint('done');
           message.clear();
-          Notification.SendChatNotification(usermessage, id);
+          notification.SendChatNotification(usermessage, id);
         },
         // ignore: invalid_return_type_for_catch_error
       ).catchError((e) => debugPrint(e));
@@ -92,7 +92,7 @@ class UserChatController extends GetxController {
 
     final Preferences preferences = Preferences();
     final user = await preferences.getUser();
-    final String chatgroup = user.id > id ? '${user.id}to$id' : '${id}to${user.id}';
+    final String chatgroup = user.id! > id ? '${user.id}to$id' : '${id}to${user.id}';
 
     final uniquenumber = UserChatController.getuniquenumber();
 
@@ -117,7 +117,7 @@ class UserChatController extends GetxController {
 
     final Preferences preferences = Preferences();
     final user = await preferences.getUser();
-    final String chatgroup = user.id > id ? '${user.id}to$id' : '${id}to${user.id}';
+    final String chatgroup = user.id! > id ? '${user.id}to$id' : '${id}to${user.id}';
 
     //getting image file extension
     final ext = file.path.split('.').last;
@@ -143,7 +143,7 @@ class UserChatController extends GetxController {
   void InsertDataInChatSystem(id, fileurl, attactmenttype, [filname = '']) async {
     final Preferences preferences = Preferences();
     final user = await preferences.getUser();
-    final String chatgroup = user.id > id ? '${user.id}to$id' : '${id}to${user.id}';
+    final String chatgroup = user.id! > id ? '${user.id}to$id' : '${id}to${user.id}';
 
     final DateTime now = DateTime.now();
     final String formattedDate = '${now.year}-${now.month}-${now.day}';
@@ -167,7 +167,7 @@ class UserChatController extends GetxController {
         'file_name': filname,
       }).then(
         (value) {
-          Notification.SendChatNotification('You Have recieved An Attachment', id);
+          notification.SendChatNotification('You Have recieved An Attachment', id);
           debugPrint('done');
         },
         // ignore: invalid_return_type_for_catch_error
@@ -187,7 +187,7 @@ class UserChatController extends GetxController {
         'file_link': null,
       }).then(
         (value) {
-          Notification.SendChatNotification('You Have recieved An Attachment', id);
+          notification.SendChatNotification('You Have recieved An Attachment', id);
           debugPrint('done');
         },
         // ignore: invalid_return_type_for_catch_error

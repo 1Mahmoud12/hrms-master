@@ -1,8 +1,6 @@
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/state.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
-import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/custom_floating_action_button_maintenance.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -27,64 +25,64 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
     return BlocBuilder<MainBlocHomeCubit, MainBlocHomeState>(
       builder: (context, state) => Scaffold(
         body: MainBlocHomeCubit.of(context).screenList[MainBlocHomeCubit.of(context).indexList],
-        extendBody: true,
-        bottomNavigationBar: SizedBox(
-          height: context.screenHeight * .16,
-          child: Column(
-            children: [
-              if (MainBlocHomeCubit.of(context).indexList == 1 && genderUser == RoleId.customer.name) const CustomFloatingActionButtonMaintenance(),
-              const Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                    color: AppColors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r))),
-                child: BottomNavigationBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  items: [
-                    BottomNavigationBarItem(
-                      icon: MainBlocHomeCubit.of(context).indexList == 0
-                          ? SvgPicture.asset(Assets.selectedHome)
-                          : SvgPicture.asset(Assets.unSelectedHome),
-                      label: '',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: MainBlocHomeCubit.of(context).indexList == 1
-                          ? SvgPicture.asset(Assets.selectedMaintenance)
-                          : SvgPicture.asset(Assets.maintenance),
-                      label: '',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: MainBlocHomeCubit.of(context).indexList == 2
-                          ? SvgPicture.asset(
-                              Assets.selectedMessage,
-                              width: context.screenWidth * .065,
-                            )
-                          : SvgPicture.asset(Assets.unSelectMessage),
-                      label: '',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: MainBlocHomeCubit.of(context).indexList == 3
-                          ? SvgPicture.asset(Assets.selectedProjects)
-                          : SvgPicture.asset(Assets.projects),
-                      label: '',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: MainBlocHomeCubit.of(context).indexList == 4
-                          ? SvgPicture.asset(Assets.selectedMenu)
-                          : SvgPicture.asset(Assets.unSelectedMenu),
-                      label: '',
-                    ),
-                  ],
-                  type: BottomNavigationBarType.fixed,
-                  landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-                  onTap: (int index) {
-                    MainBlocHomeCubit.of(context).changeIndex(index: index);
-                  },
-                ),
+        //extendBody: true,
+        floatingActionButton: InkWell(
+          onTap: () {
+            MainBlocHomeCubit.of(context).changeIndex(index: 2);
+          },
+          child: Container(
+            padding: const EdgeInsets.all(9),
+            decoration: const BoxDecoration(color: AppColors.primaryColor, shape: BoxShape.circle),
+            child: SvgPicture.asset(
+              Assets.unSelectMessage,
+              width: context.screenWidth * .08,
+              colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+
+        bottomNavigationBar: Container(
+          decoration:
+              BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r))),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            unselectedFontSize: 0,
+            selectedFontSize: 0,
+            items: [
+              BottomNavigationBarItem(
+                icon: MainBlocHomeCubit.of(context).indexList == 0 ? SvgPicture.asset(Assets.selectedHome) : SvgPicture.asset(Assets.unSelectedHome),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: MainBlocHomeCubit.of(context).indexList == 1
+                    ? SvgPicture.asset(Assets.selectedMaintenance)
+                    : SvgPicture.asset(Assets.maintenance),
+                label: '',
+              ),
+              /* BottomNavigationBarItem(
+                icon: MainBlocHomeCubit.of(context).indexList == 2
+                    ? SvgPicture.asset(Assets.selectedMessage, width: context.screenWidth * .065)
+                    : SvgPicture.asset(Assets.unSelectMessage),
+                label: '',
+              ),*/
+              BottomNavigationBarItem(
+                icon: MainBlocHomeCubit.of(context).indexList == 3 ? SvgPicture.asset(Assets.selectedProjects) : SvgPicture.asset(Assets.projects),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: MainBlocHomeCubit.of(context).indexList == 4 ? SvgPicture.asset(Assets.selectedMenu) : SvgPicture.asset(Assets.unSelectedMenu),
+                label: '',
               ),
             ],
+            type: BottomNavigationBarType.fixed,
+            landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+            onTap: (int index) {
+              MainBlocHomeCubit.of(context).changeIndex(index: index >= 2 ? index + 1 : index);
+            },
           ),
         ),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/commentlist/commentlistresponse.dart';
 import 'package:cnattendance/data/source/network/model/commentsaveresponse/commentsaveresponse.dart';
-import 'package:cnattendance/data/source/network/model/login/User.dart';
 import 'package:cnattendance/model/comment.dart';
 import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/mention.dart';
@@ -17,13 +16,15 @@ import 'package:flutter_mentions/flutter_mentions.dart' as fm;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../auth/data/model/login_model.dart';
+
 class CommentScreenController extends GetxController {
   TextEditingController commentEdit = TextEditingController();
   final scrollController = ScrollController();
   Preferences preferences = Preferences();
   FocusNode focusNode = FocusNode();
 
-  Rx<User> user = User(id: 0, name: '', roleId: '', email: '', username: '', avatar: '').obs;
+  Rx<User> user = User(id: 0, name: '', roleId: 0, email: '', username: '', avatar: '').obs;
 
   SendComment sendComment = SendComment();
 

@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
-import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
-import 'package:cnattendance/screen/employer/ProjectsScreen/home_dashboard_screen.dart';
+import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +30,7 @@ class SplashState extends State<SplashScreen> with TickerProviderStateMixin {
         if (genderUser == '') {
           Navigator.pushReplacementNamed(context, LoginScreen.routeName);
         } else {
-          if (genderUser == RoleId.customer.name) {
+          if (genderUser == RoleId.eight.name.tr) {
             MainBlocHomeCubit.of(context).changeToCustomer();
           } else {
             MainBlocHomeCubit.of(context).changeToEmployer();

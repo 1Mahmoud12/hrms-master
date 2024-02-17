@@ -28,7 +28,7 @@ class MalfunctionRequest extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: context.screenHeight * .009, horizontal: context.screenWidth * .02),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
+                borderRadius: BorderRadius.circular(10.r),
                 color: AppColors.cBackGroundIconMaintenance,
               ),
               child: Padding(

@@ -11,3 +11,32 @@ class Styles {
   static TextStyle style12400 = TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500);
 //static TextStyle style18700 = TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600);
 }
+
+// scaleFactor
+// responsive font size
+// (min , max) fontSize
+double getResponsiveFontSize(BuildContext context, {required double fontSize}) {
+  final double scaleFactor = getScaleFactor(context);
+  final double responsiveFontSize = fontSize * scaleFactor;
+
+  final double lowerLimit = fontSize * .8;
+  final double upperLimit = fontSize * 1.2;
+
+  return responsiveFontSize.clamp(lowerLimit, upperLimit);
+}
+
+double getScaleFactor(BuildContext context) {
+  // var dispatcher = PlatformDispatcher.instance;
+  // var physicalWidth = dispatcher.views.first.physicalSize.width;
+  // var devicePixelRatio = dispatcher.views.first.devicePixelRatio;
+  // double width = physicalWidth / devicePixelRatio;
+
+  final double width = MediaQuery.sizeOf(context).width;
+  if (width < 600) {
+    return width / 550;
+  } else if (width < 900) {
+    return width / 1000;
+  } else {
+    return width / 1920;
+  }
+}

@@ -4,6 +4,11 @@ class Language extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'eight': '8',
+          'nine': '9',
+          'ten': '10',
+          'eleven': '11',
+          'twelve': '12',
           'Hi': 'Hi, ',
           'check_in': 'Check In',
           'check_out': 'Check Out',

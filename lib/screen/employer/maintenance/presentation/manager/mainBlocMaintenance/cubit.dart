@@ -17,7 +17,7 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   // toggle switch
   int indexList = 0;
 
-  List<String> maintenanceLabels = ['Emergency', 'Malfunction ', 'Periodic Maintenance'];
+  List<String> maintenanceLabels = ['Emergency Request', 'Malfunction Request', 'Periodic Maintenance'];
 
   void changeIndex({required int index}) {
     indexList = index;
@@ -25,6 +25,7 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   }
 
   PageController pageController = PageController();
+
   void changeView(int page) {
     pageController.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.bounceOut);
   }

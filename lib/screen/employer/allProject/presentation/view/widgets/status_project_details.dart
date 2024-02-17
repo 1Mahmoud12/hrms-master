@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 
@@ -101,7 +102,7 @@ class StatusDetailsProject extends StatelessWidget {
               ),
             ),
           ),
-          if (genderUser == RoleId.technical.name || genderUser == RoleId.mechanics.name)
+          if (genderUser == RoleId.ten.name.tr || genderUser == RoleId.nine.name.tr)
             OneStatusRow(
               button: true,
               onPress: () {
@@ -113,7 +114,7 @@ class StatusDetailsProject extends StatelessWidget {
               assetsName: Assets.tasksSVG,
               nameRow: 'Tasks',
             ),
-          if (genderUser == RoleId.customer.name)
+          if (genderUser == RoleId.eight.name.tr)
             OneStatusRow(
               button: true,
               onPress: () {
@@ -190,8 +191,8 @@ class StatusDetailsProject extends StatelessWidget {
                         color: AppColors.primaryColor,
                       ),
                     ),
-                    if (genderUser == RoleId.mechanics.name) 10.ESW(),
-                    if (genderUser == RoleId.mechanics.name)
+                    if (genderUser == RoleId.nine.name.tr) 10.ESW(),
+                    if (genderUser == RoleId.nine.name.tr)
                       InkWell(
                         onTap: () {
                           showDialog(
@@ -282,8 +283,8 @@ class StatusDetailsProject extends StatelessWidget {
                     DateFormat('MMM dd,yyyy').format(OverViewProjectCubit.of(context).dueDate),
                     style: Styles.style14400,
                   ),
-                  if (genderUser == RoleId.mechanics.name) 10.ESW(),
-                  if (genderUser == RoleId.mechanics.name)
+                  if (genderUser == RoleId.nine.name.tr) 10.ESW(),
+                  if (genderUser == RoleId.nine.name.tr)
                     InkWell(
                       onTap: () {
                         showDatePicker(
@@ -310,7 +311,7 @@ class StatusDetailsProject extends StatelessWidget {
               ),
             ),
           ),
-          if (genderUser == RoleId.mechanics.name)
+          if (genderUser == RoleId.nine.name.tr)
             BlocBuilder<OverViewProjectCubit, OverViewState>(
               builder: (context, state) => OneStatusRow(
                 button: false,
