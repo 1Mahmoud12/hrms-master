@@ -114,6 +114,18 @@ class StatusDetailsProject extends StatelessWidget {
               assetsName: Assets.tasksSVG,
               nameRow: 'Tasks',
             ),
+          if (genderUser == RoleId.eleven.name.tr || genderUser == RoleId.nine.name.tr)
+            OneStatusRow(
+              button: true,
+              onPress: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoute.proposalScreen,
+                );
+              },
+              assetsName: Assets.tasksSVG,
+              nameRow: 'Proposal',
+            ),
           if (genderUser == RoleId.eight.name.tr)
             OneStatusRow(
               button: true,

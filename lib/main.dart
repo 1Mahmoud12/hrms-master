@@ -50,7 +50,8 @@ void main() async {
   await Preferences.init();
   genderUser = Preferences.getSaved(key: 'genderUser') ?? '';
   userCache = await preferencesConstants.getUser();
-  print('User Cache ====>> ${userCache?.toJson()}');
+  tokenCache = Preferences.getSaved(key: tokenCacheKey);
+  print('User Cache ====>> $genderUser ${userCache?.toJson()}');
   await NotificationUtility.initializeAwesomeNotification();
 
   AwesomeNotifications().isNotificationAllowed().then((isAllowed) {

@@ -9,6 +9,7 @@ import 'package:get/get_utils/get_utils.dart';
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
+  final bool? enabled;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final Widget? labelText;
@@ -19,6 +20,7 @@ class CustomTextFormField extends StatefulWidget {
   final Color? focusedBorderColor;
   final double? fontSizeHintText;
   final bool? validationOnNumber;
+  final void Function(String)? onFieldSubmitted;
 
   const CustomTextFormField({
     super.key,
@@ -34,6 +36,8 @@ class CustomTextFormField extends StatefulWidget {
     this.focusedBorderColor,
     this.validationOnNumber,
     this.labelText,
+    this.enabled,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -83,12 +87,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ],
       maxLines: widget.maxLines ?? 1,
       cursorColor: AppColors.textColorTextFormField,
+      onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         hintText: widget.hintText.tr,
         hintStyle: TextStyle(color: AppColors.textColorTextFormField, fontSize: (widget.fontSizeHintText ?? 14).sp, fontWeight: FontWeight.bold),
         prefixIcon: widget.prefixIcon,
         label: widget.labelText,
         labelStyle: const TextStyle(color: Colors.black),
+        enabled: widget.enabled ?? true,
         fillColor: AppColors.white,
         filled: true,
         enabledBorder: const OutlineInputBorder(

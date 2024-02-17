@@ -27,6 +27,7 @@ class SplashState extends State<SplashScreen> with TickerProviderStateMixin {
     Timer(
       const Duration(seconds: 3),
       () async {
+        print('genderingg $genderUser');
         if (genderUser == '') {
           Navigator.pushReplacementNamed(context, LoginScreen.routeName);
         } else {

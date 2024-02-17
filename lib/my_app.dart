@@ -28,6 +28,7 @@ import 'package:cnattendance/screen/employer/allProject/presentation/manager/pay
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/all_project_details.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/view/proposal/all_proposal.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/tasksScreen/add_tasks_screen.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/tasksScreen/edit_tasks.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/tasksScreen/tasks_screen.dart';
@@ -59,6 +60,7 @@ import 'package:in_app_notification/in_app_notification.dart';
 import 'package:provider/provider.dart';
 
 import 'screen/addElevator/presentation/view/add_elevator.dart';
+import 'screen/employer/allProject/presentation/view/proposal/details_porposal_screen.dart';
 import 'screen/employer/allProject/presentation/view/widgets/add_progress_screen.dart';
 import 'screen/employer/allProject/presentation/view/widgets/details_contract_project.dart';
 import 'screen/employer/allProject/presentation/view/widgets/team_project_screen.dart';
@@ -239,6 +241,8 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.addProgressScreen: (_) => const AddProgressScreen(),
                     AppRoute.editProgressScreen: (_) => const EditProgressScreen(),
                     AppRoute.tasksScreen: (_) => const TasksScreen(),
+                    AppRoute.proposalScreen: (_) => const ProposalScreen(),
+                    AppRoute.detailsProposalScreen: (_) => const DetailsProposalScreen(),
                     AppRoute.addTasksScreen: (_) => const AddTasksScreen(),
                     AppRoute.editTasksScreen: (_) => const EditTasksScreen(),
                     AppRoute.editReportScreen: (_) => const EditReportScreen(),

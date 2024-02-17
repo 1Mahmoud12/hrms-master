@@ -21,7 +21,7 @@ class DetailsElevatorRow extends StatelessWidget {
         Text(
           executeDetails,
           style: TextStyle(color: AppColors.primaryColor, fontSize: 13.sp, fontWeight: FontWeight.bold),
-        )
+        ),
       ],
     );
   }

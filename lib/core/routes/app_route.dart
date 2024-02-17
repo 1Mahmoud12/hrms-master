@@ -27,4 +27,6 @@ class AppRoute {
   static const String editTasksScreen = '/EditTasksScreen';
   static const String periodicMaintenanceScreenItems = '/PeriodicMaintenanceScreenItems';
   static const String emergencyScreenItems = '/EmergencyScreenItems';
+  static const String proposalScreen = '/ProposalScreen';
+  static const String detailsProposalScreen = '/DetailsProposalScreen';
 }

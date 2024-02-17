@@ -22,7 +22,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoadingState());
 
     //  Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
-    Preferences.setSaved(value: RoleId.eight.name.tr, key: 'genderUser');
     //if (context.mounted) return;
 
     await LoginDataSource.login(userName, password).then((value) async {
@@ -32,6 +31,8 @@ class LoginCubit extends Cubit<LoginState> {
         debugPrint('Errrrrrrorrrrrrr');
         emit(LoginErrorState(l.errMessage));
       }, (r) async {
+        tokenCache = r.data!.tokens!;
+        Preferences.setSaved(value: r.data!.tokens, key: tokenCacheKey);
         if (r.data!.user!.roleId.toString() == RoleId.twelve.name.tr) {
           genderUser = RoleId.twelve.name.tr;
           await Preferences.setSaved(value: RoleId.twelve.name.tr, key: 'genderUser');

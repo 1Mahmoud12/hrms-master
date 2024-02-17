@@ -2,7 +2,6 @@ import 'package:cnattendance/core/component/slider/circular_Slider.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/comments.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/status_project_details.dart';
-import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,9 +12,9 @@ class AllProjectDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //  final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
-    const String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
+    //const String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
     const String titleProject = 'titleProject'; // arguments['titleProject'] ?? '';
-    const String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
+    // const String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
 
     const int newComments = 8;
     return Scaffold(
@@ -28,8 +27,8 @@ class AllProjectDetails extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .02),
         child: Column(
-            children: [
-          /*Container(
+          children: [
+            /*Container(
             padding: EdgeInsets.all(15.w),
             decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
             child: Column(
@@ -54,18 +53,19 @@ class AllProjectDetails extends StatelessWidget {
               ],
             ),
           ),*/
-          PieChartSample2(),
-          //const DoubleCustomSlider(value1: 50, value2: 20, color1: AppColors.primaryColor, color2: AppColors.selectedCharData),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const StatusDetailsProject(),
-              const Comments(
-                newComments: newComments,
-              ),
-            ].paddingDirectional(top: 10.h),
-          ),
-        ].paddingDirectional(bottom: context.screenHeight * .01)),
+            const PieChartSample2(),
+            //const DoubleCustomSlider(value1: 50, value2: 20, color1: AppColors.primaryColor, color2: AppColors.selectedCharData),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const StatusDetailsProject(),
+                const Comments(
+                  newComments: newComments,
+                ),
+              ].paddingDirectional(top: 10.h),
+            ),
+          ].paddingDirectional(bottom: context.screenHeight * .01),
+        ),
       ),
     );
   }

@@ -13,6 +13,9 @@ class EndPoints {
   static const PRIVACY_POLICY_URL = '${MAIN_URL}privacy';
 
   static const loginUrl = '$API_URL/login';
+  static const allProposals = '$API_URL/proposals';
+  static const proposalSalesStore = '$API_URL/proposals/technical/store';
+  static const proposalEngineerStore = '$API_URL/proposals/engineer/store';
   static const DEACTIVATE_URL = '$API_URL/users/deactive';
   static const SIGNUP_URL = '$API_URL/users/creating';
   static const LOGOUT_URL = '$API_URL/logout';
