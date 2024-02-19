@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/my_app.dart';
+import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/utils/bloc_observe.dart';
 import 'package:cnattendance/utils/navigationservice.dart';
 import 'package:cnattendance/utils/notification_utility.dart';
@@ -47,11 +49,7 @@ void main() async {
     debugPrint('User declined or has not accepted permission');
   }
   fcmToken = await FirebaseMessaging.instance.getToken() ?? '';
-  await Preferences.init();
-  genderUser = Preferences.getSaved(key: 'genderUser') ?? '';
-  userCache = await preferencesConstants.getUser();
-  tokenCache = Preferences.getSaved(key: tokenCacheKey);
-  print('User Cache ====>> $genderUser ${userCache?.toJson()}');
+
   await NotificationUtility.initializeAwesomeNotification();
 
   AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
@@ -102,6 +100,15 @@ void main() async {
   final ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
   Bloc.observer = MyBlocObserver();
+
+  // Caching
+  await Preferences.init();
+  genderUser = await Preferences.getSaved(key: 'genderUser') ?? '';
+  userCache = User.fromJson(jsonDecode(await Preferences.getSaved(key: userCacheKey) ?? '{}'));
+  tokenCache = await Preferences.getSaved(key: tokenCacheKey) ?? '';
+  debugPrint('genderUser ====>> $genderUser}');
+  debugPrint('User Cache ====>> ${userCache?.toJson()}');
+  debugPrint('tokenCache ====>> $tokenCache ');
 
   runApp(
     DevicePreview(

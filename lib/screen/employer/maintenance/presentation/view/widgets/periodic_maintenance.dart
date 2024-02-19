@@ -1,5 +1,6 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
@@ -8,10 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PeriodicMaintenance extends StatelessWidget {
-  final String nameMaintenanceReport;
-  final String numberElevators;
+  final Periodic periodic;
 
-  const PeriodicMaintenance({super.key, required this.nameMaintenanceReport, required this.numberElevators});
+  const PeriodicMaintenance({super.key, required this.periodic});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class PeriodicMaintenance extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                nameMaintenanceReport,
+                periodic.name ?? '',
                 style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColor, fontWeight: FontWeight.w700),
               ),
               Row(
@@ -52,7 +52,7 @@ class PeriodicMaintenance extends StatelessWidget {
                     style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    numberElevators,
+                    periodic.numelevaters ?? '0',
                     style: Styles.style14400.copyWith(color: AppColors.textColor),
                   ),
                 ],
@@ -65,7 +65,7 @@ class PeriodicMaintenance extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '14/Aug/2023',
+                        (periodic.updatedAt ?? DateTime.now().toString()).substring(0, 10),
                         style: Styles.style14500.copyWith(color: AppColors.subTextColor.withOpacity(.8), fontWeight: FontWeight.w700),
                       ),
                       10.ESW(),
@@ -104,7 +104,7 @@ class PeriodicMaintenance extends StatelessWidget {
                   ),
                   5.ESW(),
                   Text(
-                    'Cairo,Egypt',
+                    periodic.city ?? '',
                     style: Styles.style14500.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w500),
                   ),
                   SvgPicture.asset(Assets.location),

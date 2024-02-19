@@ -3,6 +3,7 @@ import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/allProject/data/models/proposal_one_model.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/addReportEngineerBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/addReportEngineerBloc/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/details_elevator.dart';
@@ -12,15 +13,52 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class DetailsProposalScreen extends StatelessWidget {
+class DetailsProposalScreen extends StatefulWidget {
   const DetailsProposalScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final argument = context.getArguments;
-    final int index = argument['index'];
-    final int formRequestId = argument['formRequestId'];
+  State<DetailsProposalScreen> createState() => _DetailsProposalScreenState();
+}
 
+class _DetailsProposalScreenState extends State<DetailsProposalScreen> {
+  TextEditingController reportEngineer = TextEditingController();
+  TextEditingController reportSales = TextEditingController();
+  TextEditingController costReportEngineer = TextEditingController();
+
+  Map<String, dynamic> argument = {};
+  int? index;
+  int? formRequestId;
+  ProposalOneModel? proposalOneModel;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    argument = context.getArguments;
+    index = argument['index'];
+    formRequestId = argument['formRequestId'];
+    proposalOneModel = argument['oneProposal'];
+    reportEngineer.text = proposalOneModel!.data!.report?.reportEngineer ?? '';
+    reportSales.text = proposalOneModel!.data!.report?.reportTechnical ?? '';
+    costReportEngineer.text = proposalOneModel!.data!.report?.costs ?? '';
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    reportEngineer.dispose();
+    reportSales.dispose();
+    costReportEngineer.dispose();
+    debugPrint('============= Closing =====================');
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -53,32 +91,84 @@ class DetailsProposalScreen extends StatelessWidget {
                         style: Styles.style14500.copyWith(color: Colors.black),
                       ),
                       DetailsElevatorRow(
-                        nameDetails: allProposalsModelCache!.data!.requests![index].formData!.userNameLabel ?? '',
-                        executeDetails: allProposalsModelCache!.data!.requests![index].formData!.userNameValue ?? 'N/A',
+                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userNameLabel ?? '',
+                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userNameValue ?? 'N/A',
                       ),
                       DetailsElevatorRow(
-                        nameDetails: allProposalsModelCache!.data!.requests![index].formData!.userEmailLabel ?? '',
-                        executeDetails: allProposalsModelCache!.data!.requests![index].formData!.userEmailValue ?? 'N/A',
+                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userEmailLabel ?? '',
+                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userEmailValue ?? 'N/A',
                       ),
                       DetailsElevatorRow(
-                        nameDetails: allProposalsModelCache!.data!.requests![index].formData!.phoneNumberLabel ?? '',
-                        executeDetails: allProposalsModelCache!.data!.requests![index].formData!.phoneNumberValue ?? 'N/A',
+                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.phoneNumberLabel ?? '',
+                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.phoneNumberValue ?? 'N/A',
                       ),
                       DetailsElevatorRow(
-                        nameDetails: allProposalsModelCache!.data!.requests![index].formData!.userAgeLabel ?? '',
-                        executeDetails: allProposalsModelCache!.data!.requests![index].formData!.userAgeValue ?? 'N/A',
+                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userAgeLabel ?? '',
+                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userAgeValue ?? 'N/A',
                       ),
                       DetailsElevatorRow(
-                        nameDetails: allProposalsModelCache!.data!.requests![index].formData!.userGenderLabel ?? '',
-                        executeDetails: allProposalsModelCache!.data!.requests![index].formData!.userGenderValue ?? 'N/A',
+                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userGenderLabel ?? '',
+                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userGenderValue ?? 'N/A',
                       ),
                       DetailsElevatorRow(
-                        nameDetails: allProposalsModelCache!.data!.requests![index].formData!.userAddressLabel ?? '',
-                        executeDetails: allProposalsModelCache!.data!.requests![index].formData!.userAddressValue ?? 'N/A',
+                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userAddressLabel ?? '',
+                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userAddressValue ?? 'N/A',
                       ),
                     ].paddingDirectional(bottom: context.screenHeight * .01),
                   ),
                 ),
+                /*  Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: [
+                      Text(
+                        'Products',
+                        style: Styles.styleHeader,
+                      ),
+                    ],
+                  ),
+                ),
+                ...List.generate(
+                  proposalOneModel!.data!.products!.length,
+                  (index) => Container(
+                    padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: AppColors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  proposalOneModel!.data!.products![index].name ?? '',
+                                  style: Styles.style16700,
+                                ),
+                                // const Spacer(),
+                                Text(
+                                  proposalOneModel!.data!.products![index].quantity.toString(),
+                                  style: Styles.style16700,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  proposalOneModel!.data!.products![index].salePrice.toString(),
+                                  style: Styles.style16700,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),*/
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -88,10 +178,10 @@ class DetailsProposalScreen extends StatelessWidget {
                 ),
                 BlocBuilder<AddReportEngineerCubit, AddReportEngineerState>(
                   builder: (context, state) => CustomTextFormField(
-                    controller: AddReportEngineerCubit.of(context).reportSales,
+                    controller: reportSales,
                     hintText: 'Description',
                     maxLines: 10,
-                    enabled: genderUser == RoleId.eleven.name.tr,
+                    enabled: genderUser == RoleId.twelve.name.tr,
                   ),
                 ),
                 Align(
@@ -103,7 +193,7 @@ class DetailsProposalScreen extends StatelessWidget {
                 ),
                 BlocBuilder<AddReportEngineerCubit, AddReportEngineerState>(
                   builder: (context, state) => CustomTextFormField(
-                    controller: AddReportEngineerCubit.of(context).reportEngineer,
+                    controller: reportEngineer,
                     hintText: 'Description',
                     maxLines: 10,
                     enabled: genderUser == RoleId.nine.name.tr,
@@ -123,24 +213,36 @@ class DetailsProposalScreen extends StatelessWidget {
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
-                          decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15)),
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: genderUser == RoleId.nine.name.tr ? Colors.transparent : AppColors.grey.withOpacity(.3)),
+                          ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Expanded(
                                 child: TextField(
-                                  controller: AddReportEngineerCubit.of(context).costReportEngineer,
+                                  controller: costReportEngineer,
                                   style: Styles.style16700,
                                   decoration: InputDecoration(
-                                    hintText: '00.00',
+                                    hintText: '0.0',
                                     hintStyle: Styles.style16700,
                                     contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                                     fillColor: AppColors.transparent,
                                     filled: true,
                                     focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15), borderSide: const BorderSide(color: Colors.transparent)),
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: const BorderSide(color: Colors.transparent),
+                                    ),
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15), borderSide: const BorderSide(color: Colors.transparent)),
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: const BorderSide(color: Colors.transparent),
+                                    ),
+                                    disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: const BorderSide(color: Colors.transparent),
+                                    ),
                                   ),
                                   keyboardType: TextInputType.number,
                                   enabled: genderUser == RoleId.nine.name.tr,
@@ -170,16 +272,19 @@ class DetailsProposalScreen extends StatelessWidget {
                     onPress: () {
                       if (genderUser == RoleId.nine.name.tr) {
                         AddReportEngineerCubit.of(context).postReportEngineer(
-                          formRequestId: formRequestId,
-                          cost: AddReportEngineerCubit.of(context).costReportEngineer.text,
-                          reportTechnical: AddReportEngineerCubit.of(context).reportEngineer.text,
+                          formRequestId: formRequestId!,
+                          cost: costReportEngineer.text,
+                          reportEngineer: reportEngineer.text,
+                          reportSales: reportSales.text,
                           context: context,
+                          reportId: proposalOneModel!.data!.report!.reportTechnical != null ? proposalOneModel!.data!.report!.id!.toString() : null,
                         );
                       } else {
                         AddReportEngineerCubit.of(context).postReportSales(
-                          formRequestId: formRequestId,
-                          reportTechnical: AddReportEngineerCubit.of(context).reportSales.text,
+                          formRequestId: formRequestId!,
+                          reportSales: reportSales.text,
                           context: context,
+                          reportId: proposalOneModel!.data!.report?.reportTechnical != null ? proposalOneModel!.data!.report!.id!.toString() : null,
                         );
                       }
                     },

@@ -98,37 +98,31 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         fillColor: AppColors.white,
         filled: true,
         enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
           borderSide: BorderSide(color: Colors.white),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          borderSide: BorderSide(color: Colors.grey.withOpacity(.3)),
+        ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
           ),
           borderSide: BorderSide(color: widget.focusedBorderColor ?? Colors.black),
         ),
         focusedErrorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
         ),
         errorBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
         ),
         suffixIcon: widget.password != null && widget.password!

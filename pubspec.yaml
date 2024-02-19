@@ -89,6 +89,8 @@ dependencies:
 
   syncfusion_flutter_gauges: ^24.2.6
 
+  upgrader: ^9.0.0
+
 
   #flutter_inappwebview: ^6.0.0
   device_preview: ^1.1.0

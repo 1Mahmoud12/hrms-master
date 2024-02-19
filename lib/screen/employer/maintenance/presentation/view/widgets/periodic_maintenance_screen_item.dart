@@ -1,10 +1,14 @@
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
+import 'package:cnattendance/core/component/empty_widget.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/periodicBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/periodicBloc/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/custom_floating_action_button_maintenance.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/periodic_maintenance.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 class PeriodicMaintenanceScreenItems extends StatelessWidget {
@@ -12,10 +16,6 @@ class PeriodicMaintenanceScreenItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String nameMaintenanceReport = 'Name Contract';
-    const String location = 'Cairo';
-    const int numberElevators = 15;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,20 +23,33 @@ class PeriodicMaintenanceScreenItems extends StatelessWidget {
           style: Styles.styleHeader,
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) => InkWell(
-          onTap: () {
-            final arguments = {
-              'nameMaintenanceReport': nameMaintenanceReport,
-              'startDate': '24 Aug',
-              'location': location,
-              'numberElevators': numberElevators,
-            };
-            Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
-          },
-          child: PeriodicMaintenance(nameMaintenanceReport: nameMaintenanceReport, numberElevators: numberElevators.toString()),
+      body: BlocProvider(
+        create: (context) => PeriodicCubit()..getAllProposals(context: context),
+        child: BlocBuilder<PeriodicCubit, PeriodicState>(
+          builder: (context, state) => state is PeriodicLoadingState
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : state is PeriodicErrorState
+                  ? ErrorWidget(state.error)
+                  : state is PeriodicSuccessState &&
+                          allPeridicsCache != null &&
+                          allPeridicsCache!.data != null &&
+                          allPeridicsCache!.data!.periodic != null
+                      ? ListView.builder(
+                          itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              final arguments = {
+                                'onePeriodic': allPeridicsCache!.data!.periodic![index],
+                              };
+                              Navigator.pushNamed(context, AppRoute.detailsMaintenanceWidget, arguments: arguments);
+                            },
+                            child: PeriodicMaintenance(periodic: allPeridicsCache!.data!.periodic![index]),
+                          ),
+                          itemCount: allPeridicsCache!.data!.periodic!.length,
+                        )
+                      : const EmptyWidget(),
         ),
-        itemCount: 5,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: MainBlocHomeCubit.of(context).indexList == 1 && genderUser == RoleId.eight.name.tr

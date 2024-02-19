@@ -1,6 +1,7 @@
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/all_proposals_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 LatLng cairoLatLng = const LatLng(30.033333, 31.233334);
@@ -11,12 +12,18 @@ String tokenCache =
 String tokenCacheKey = 'tokenCacheKey';
 Preferences preferencesConstants = Preferences();
 User? userCache;
+String userCacheKey = 'userCacheKey';
+
 AllProposalsModel? allProposalsModelCache;
 String allProposalsKey = 'allProposalsModel';
 
-//// customer =eight , engineer =nine, technical = ten, sales= eleven,client =12,
+PeriodicModel? allPeridicsCache;
+String allPeridicsKey = 'allPeridicsKey';
+
+//// customer =eight , engineer =nine, technical = ten,////  sales= twelve,client =eleven,
 enum RoleId { eight, nine, ten, eleven, twelve }
 
 enum Malfunction { In_Progress, Pending, Finished }
 
 String? genderUser;
+String genderUserKey = 'genderUser';

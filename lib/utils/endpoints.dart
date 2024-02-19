@@ -13,9 +13,16 @@ class EndPoints {
   static const PRIVACY_POLICY_URL = '${MAIN_URL}privacy';
 
   static const loginUrl = '$API_URL/login';
+
   static const allProposals = '$API_URL/proposals';
-  static const proposalSalesStore = '$API_URL/proposals/technical/store';
+  static const proposalSalesStore = '$API_URL/proposals/sales/store';
+  static const proposalSalesUpdate = '$API_URL/proposals/sales/update';
   static const proposalEngineerStore = '$API_URL/proposals/engineer/store';
+  static const proposalEngineerUpdate = '$API_URL/proposals/engineer/update';
+
+  static const getPeridics = '$API_URL/peridics';
+  static const addPeridics = '$API_URL/peridics/add';
+
   static const DEACTIVATE_URL = '$API_URL/users/deactive';
   static const SIGNUP_URL = '$API_URL/users/creating';
   static const LOGOUT_URL = '$API_URL/logout';

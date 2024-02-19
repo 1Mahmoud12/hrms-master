@@ -50,6 +50,9 @@ class User {
   int? id;
   String? name;
   String? email;
+  String? address;
+  String? phone;
+  String? gender;
   int? roleId;
   String? username;
   String? avatar;
@@ -67,6 +70,9 @@ class User {
     id = json['id'];
     name = json['name'];
     email = json['email'];
+    address = json['address'];
+    gender = json['gender'];
+    phone = '${json['phone']}';
     roleId = json['role_id'];
     username = json['username'];
     avatar = json['avatar'];
@@ -77,6 +83,9 @@ class User {
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
+    data['address'] = address;
+    data['gender'] = gender;
+    data['phone'] = phone;
     data['role_id'] = roleId;
     data['username'] = username;
     data['avatar'] = avatar;

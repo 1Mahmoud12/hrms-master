@@ -1,7 +1,7 @@
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/component/custom_check_box.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
-import 'package:cnattendance/core/routes/app_route.dart';
+import 'package:cnattendance/core/component/loading_widget.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/utils.dart';
@@ -26,14 +26,18 @@ class AddMaintenanceContract extends StatelessWidget {
       ),
       persistentFooterAlignment: AlignmentDirectional.bottomCenter,
       persistentFooterButtons: [
-        BlocBuilder<MainBlocMaintenanceContractCubit, MainBlocMaintenanceContractState>(
+        BlocConsumer<MainBlocMaintenanceContractCubit, MainBlocMaintenanceContractState>(
+          listener: (context, state) {
+            if (state is AddPeriodicLoadingState) loadingDialog(context);
+            if (state is AddPeriodicErrorState) Navigator.pop(context);
+          },
           builder: (context, state) => CustomTextButton(
             backgroundColor: AppColors.primaryColor,
             child: Text(
               'Submit',
               style: Styles.style16700.copyWith(color: AppColors.white),
             ),
-            onPress: () {
+            onPress: () async {
               if (MainBlocMaintenanceContractCubit.of(context).nameContract.text.isNotEmpty &&
                   MainBlocMaintenanceContractCubit.of(context).cityController.text.isNotEmpty &&
                   MainBlocMaintenanceContractCubit.of(context).numberController.text.isNotEmpty &&
@@ -42,28 +46,19 @@ class AddMaintenanceContract extends StatelessWidget {
                   MainBlocMaintenanceContractCubit.of(context).maximumLoad.text.isNotEmpty &&
                   MainBlocMaintenanceContractCubit.of(context).installationDate.text.isNotEmpty &&
                   MainBlocMaintenanceContractCubit.of(context).initialStatusElevator.text.isNotEmpty) {
-                Utils.showToast(title: 'The request has been sent successfully', state: UtilState.success);
-                Navigator.pushReplacementNamed(context, AppRoute.periodicMaintenanceScreenItems);
-                MainBlocMaintenanceContractCubit.of(context).nameContract.clear();
-                MainBlocMaintenanceContractCubit.of(context).cityController.clear();
-                MainBlocMaintenanceContractCubit.of(context).numberController.clear();
-                MainBlocMaintenanceContractCubit.of(context).modelElevator.clear();
-                MainBlocMaintenanceContractCubit.of(context).numberStops.clear();
-                MainBlocMaintenanceContractCubit.of(context).maximumLoad.clear();
-                MainBlocMaintenanceContractCubit.of(context).installationDate.clear();
-                MainBlocMaintenanceContractCubit.of(context).initialStatusElevator.clear();
+                await MainBlocMaintenanceContractCubit.of(context).addPeriodic(context: context);
               } else {
                 Utils.showToast(title: 'You must input all fields', state: UtilState.warning);
               }
               /*final arguments = {
-                'numberElevators': MainBlocMaintenanceContractCubit.of(context).numberController.text,
-              };
-              if (MainBlocMaintenanceContractCubit.of(context).numberController.text != '') {
-                showToast(MainBlocMaintenanceContractCubit.of(context).numberController.text);
-                Navigator.pushNamed(context, AppRoute.addElevator, arguments: arguments);
-              } else {
-                showToast('You must add number elevators');
-              }*/
+                  'numberElevators': MainBlocMaintenanceContractCubit.of(context).numberController.text,
+                };
+                if (MainBlocMaintenanceContractCubit.of(context).numberController.text != '') {
+                  showToast(MainBlocMaintenanceContractCubit.of(context).numberController.text);
+                  Navigator.pushNamed(context, AppRoute.addElevator, arguments: arguments);
+                } else {
+                  showToast('You must add number elevators');
+                }*/
             },
           ),
         ),
@@ -82,11 +77,11 @@ class AddMaintenanceContract extends StatelessWidget {
             fillColor: AppColors.cFillColorDropDownButton,
           ),
           /*  CustomTextFormField(
-            controller: MainBlocMaintenanceContractCubit.of(context).phoneController,
-            hintText: 'Phone',
-            fillColor: AppColors.cFillColorDropDownButton,
-            textInputType: TextInputType.number,
-          ),*/
+              controller: MainBlocMaintenanceContractCubit.of(context).phoneController,
+              hintText: 'Phone',
+              fillColor: AppColors.cFillColorDropDownButton,
+              textInputType: TextInputType.number,
+            ),*/
           CustomTextFormField(
             controller: MainBlocMaintenanceContractCubit.of(context).numberController,
             hintText: 'Number of Elevators',

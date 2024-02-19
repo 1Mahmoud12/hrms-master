@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class AllProposalsModel {
+class ProposalOneModel {
   bool? success;
   Data? data;
 
-  AllProposalsModel({this.success, this.data});
+  ProposalOneModel({this.success, this.data});
 
-  AllProposalsModel.fromJson(Map<String, dynamic> json) {
+  ProposalOneModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
@@ -24,29 +24,42 @@ class AllProposalsModel {
 }
 
 class Data {
-  List<Requests>? requests;
+  FormRequest? formRequest;
+  List<Products>? products;
+  List<int>? allprdids;
+  Report? report;
 
-  Data({this.requests});
+  Data({this.formRequest, this.products, this.allprdids, this.report});
 
   Data.fromJson(Map<String, dynamic> json) {
-    if (json['requests'] != null) {
-      requests = <Requests>[];
-      json['requests'].forEach((v) {
-        requests!.add(Requests.fromJson(v));
+    formRequest = json['formrequest'] != null ? FormRequest.fromJson(json['formrequest']) : null;
+    if (json['products'] != null) {
+      products = <Products>[];
+      json['products'].forEach((v) {
+        products!.add(Products.fromJson(v));
       });
     }
+    allprdids = json['allprdids'].cast<int>();
+    report = json['report'] != null ? Report.fromJson(json['report']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (requests != null) {
-      data['requests'] = requests!.map((v) => v.toJson()).toList();
+    if (formRequest != null) {
+      data['formrequest'] = formRequest!.toJson();
+    }
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
+    }
+    data['allprdids'] = allprdids;
+    if (report != null) {
+      data['report'] = report!.toJson();
     }
     return data;
   }
 }
 
-class Requests {
+class FormRequest {
   int? id;
   int? propasalId;
   int? userId;
@@ -55,12 +68,10 @@ class Requests {
   String? totalCost;
   String? createdAt;
   String? updatedAt;
-  Pivot? pivot;
   Proposal? propasal;
+  User? user;
 
-  // UserProposal? user;
-
-  Requests({
+  FormRequest({
     this.id,
     this.propasalId,
     this.userId,
@@ -69,12 +80,11 @@ class Requests {
     this.totalCost,
     this.createdAt,
     this.updatedAt,
-    this.pivot,
     this.propasal,
-    //this.user,
+    this.user,
   });
 
-  Requests.fromJson(Map<String, dynamic> json) {
+  FormRequest.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     propasalId = json['propasal_id'];
     userId = json['user_id'];
@@ -83,9 +93,8 @@ class Requests {
     totalCost = json['total_cost'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    pivot = json['pivot'] != null ? Pivot.fromJson(json['pivot']) : null;
     propasal = json['propasal'] != null ? Proposal.fromJson(json['propasal']) : null;
-    //user = json['user'] != null ? UserProposal.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -98,15 +107,12 @@ class Requests {
     data['total_cost'] = totalCost;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    if (pivot != null) {
-      data['pivot'] = pivot!.toJson();
-    }
     if (propasal != null) {
       data['propasal'] = propasal!.toJson();
     }
-    /* if (user != null) {
+    if (user != null) {
       data['user'] = user!.toJson();
-    }*/
+    }
     return data;
   }
 }
@@ -129,8 +135,6 @@ class FormData {
 
   String? userGenderValue;
   String? userGenderLabel;
-  String? productsValue;
-  String? productsLabel;
 
   FormData({
     this.userNameValue,
@@ -145,47 +149,32 @@ class FormData {
     this.userEmailLabel,
     this.userGenderValue,
     this.userGenderLabel,
-    this.productsLabel,
-    this.productsValue,
   });
 
   FormData.fromJson(Map<String, dynamic> json) {
-    userNameValue = json['user_name'] != null ? json['user_name']['value'] : null;
-    userNameLabel = json['user_name'] != null ? json['user_name']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
+    userNameValue = json['user_name']['value'];
+    userNameLabel = json['user_name']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
     debugPrint('userName $userNameValue $userNameLabel');
 
-    userAgeValue = json['user_age'] != null ? json['user_age']['value'] : null;
-    userAgeLabel = json['user_age'] != null ? json['user_age']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
+    userAgeValue = json['user_age']['value'];
+    userAgeLabel = json['user_age']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
     debugPrint('userAge $userAgeValue $userAgeLabel');
 
-    phoneNumberValue = json['phone_number'] != null ? json['phone_number']['value'] : null;
-    phoneNumberLabel =
-        json['phone_number'] != null ? json['phone_number']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
+    phoneNumberValue = json['phone_number']['value'];
+    phoneNumberLabel = json['phone_number']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
     debugPrint('phoneNumber $phoneNumberValue $phoneNumberLabel');
 
-    userAddressValue = json['user_address'] != null ? json['user_address']['value'] : null;
-    userAddressLabel =
-        json['user_address'] != null ? json['user_address']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
+    userAddressValue = json['user_address']['value'];
+    userAddressLabel = json['user_address']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
     debugPrint('userAddress $userAddressValue $userAddressLabel');
 
-    userEmailValue = json['user_email'] != null ? json['user_email']['value'] : null;
-    userEmailLabel =
-        json['user_email'] != null ? json['user_email']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
+    userEmailValue = json['user_email']['value'];
+    userEmailLabel = json['user_email']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
     debugPrint('userEmail $userEmailValue $userEmailLabel');
 
-    userGenderValue = json['user_gender'] != null ? json['user_gender']['value'] : null;
-    userGenderLabel =
-        json['user_gender'] != null ? json['user_gender']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
+    userGenderValue = json['user_gender']['value'];
+    userGenderLabel = json['user_gender']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
     debugPrint('userGender $userGenderValue $userGenderLabel');
-
-    productsValue = json['all_products'] != null
-        ? json['value'] != null
-            ? json['all_products']['value'].toString()
-            : null
-        : null;
-    productsLabel =
-        json['all_products'] != null ? json['all_products']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '') : null;
-    debugPrint('all_products $productsValue $productsLabel');
   }
 
   Map<String, dynamic> toJson() {
@@ -214,30 +203,7 @@ class FormData {
         'value': userGenderValue,
         'label': userGenderLabel,
       },
-      'all_products': {
-        'value': {'id': productsValue},
-        'label': productsLabel,
-      },
     };
-  }
-}
-
-class Pivot {
-  int? userId;
-  int? formRequestId;
-
-  Pivot({this.userId, this.formRequestId});
-
-  Pivot.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
-    formRequestId = json['form_request_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['user_id'] = userId;
-    data['form_request_id'] = formRequestId;
-    return data;
   }
 }
 
@@ -279,7 +245,7 @@ class Proposal {
   }
 }
 
-/*class UserProposal {
+class User {
   int? id;
   String? name;
   String? email;
@@ -328,7 +294,7 @@ class Proposal {
   String? workingdate;
   String? userProfileImg;
 
-  UserProposal({
+  User({
     this.id,
     this.name,
     this.email,
@@ -378,7 +344,7 @@ class Proposal {
     this.userProfileImg,
   });
 
-  UserProposal.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -479,4 +445,124 @@ class Proposal {
     data['user_profile_img'] = userProfileImg;
     return data;
   }
-}*/
+}
+
+class Products {
+  int? id;
+  String? name;
+  String? sku;
+  int? salePrice;
+  int? purchasePrice;
+  int? quantity;
+  String? taxId;
+  int? categoryId;
+  int? unitId;
+  String? type;
+  String? description;
+  String? proImage;
+  int? createdBy;
+  String? createdAt;
+  String? updatedAt;
+
+  Products({
+    this.id,
+    this.name,
+    this.sku,
+    this.salePrice,
+    this.purchasePrice,
+    this.quantity,
+    this.taxId,
+    this.categoryId,
+    this.unitId,
+    this.type,
+    this.description,
+    this.proImage,
+    this.createdBy,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  Products.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    sku = json['sku'];
+    salePrice = json['sale_price'];
+    purchasePrice = json['purchase_price'];
+    quantity = json['quantity'];
+    taxId = json['tax_id'];
+    categoryId = json['category_id'];
+    unitId = json['unit_id'];
+    type = json['type'];
+    description = json['description'];
+    proImage = json['pro_image'];
+    createdBy = json['created_by'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['sku'] = sku;
+    data['sale_price'] = salePrice;
+    data['purchase_price'] = purchasePrice;
+    data['quantity'] = quantity;
+    data['tax_id'] = taxId;
+    data['category_id'] = categoryId;
+    data['unit_id'] = unitId;
+    data['type'] = type;
+    data['description'] = description;
+    data['pro_image'] = proImage;
+    data['created_by'] = createdBy;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class Report {
+  int? id;
+  int? formRequestId;
+  String? reportTechnical;
+  String? reportEngineer;
+  String? costs;
+  String? submit;
+  String? createdAt;
+  String? updatedAt;
+
+  Report({
+    this.id,
+    this.formRequestId,
+    this.reportTechnical,
+    this.reportEngineer,
+    this.costs,
+    this.submit,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  Report.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    formRequestId = json['form_request_id'];
+    reportTechnical = json['report_technical'];
+    reportEngineer = json['report_engineer'];
+    costs = json['costs'];
+    submit = json['submit'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['form_request_id'] = formRequestId;
+    data['report_technical'] = reportTechnical;
+    data['report_engineer'] = reportEngineer;
+    data['costs'] = costs;
+    data['submit'] = submit;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}

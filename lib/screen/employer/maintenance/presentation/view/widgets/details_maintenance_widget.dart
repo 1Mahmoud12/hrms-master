@@ -1,6 +1,7 @@
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
@@ -13,27 +14,24 @@ class DetailsMaintenanceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
-    final String nameMaintenanceReport = arguments['nameMaintenanceReport'];
-    final String location = arguments['location'];
-    final String date = arguments['startDate'];
-    String nameElevator = 'Elevator 1';
+    final Periodic onePeriodic = arguments['onePeriodic'];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          nameMaintenanceReport,
+          onePeriodic.name ?? 'N/A',
           style: Styles.styleHeader,
         ),
       ),
       body: ListView.separated(
         padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 30.h),
-        itemCount: 5,
+        itemCount: int.parse(onePeriodic.numelevaters ?? '0'),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
-            nameElevator = 'Elevator ${index + 1}';
             final arguments = {
-              'location': location,
-              'startDate': date,
-              'nameElevator': nameElevator,
+              'location': onePeriodic.createdAt ?? '',
+              'startDate': (onePeriodic.updatedAt ?? DateTime.now().toString()).substring(0, 10),
+              'nameElevator': 'Elevator ${index + 1}',
             };
             Navigator.pushNamed(context, AppRoute.allDetailsElevator, arguments: arguments);
           },

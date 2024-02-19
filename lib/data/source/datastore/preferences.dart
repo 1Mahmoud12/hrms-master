@@ -65,16 +65,16 @@ class Preferences with ChangeNotifier {
 
   static Future<bool> setSaved({required dynamic value, required String key}) async {
     if (value is String) {
-      return await prefs!.setString(key, value);
+      return prefs!.setString(key, value);
     }
     if (value is bool) {
-      return await prefs!.setBool(key, value);
+      return prefs!.setBool(key, value);
     }
     if (value is int) {
-      return await prefs!.setInt(key, value);
+      return prefs!.setInt(key, value);
     }
 
-    return await prefs!.setDouble(key, value);
+    return prefs!.setDouble(key, value);
   }
 
   static dynamic getSaved({required String key}) {
@@ -82,7 +82,7 @@ class Preferences with ChangeNotifier {
   }
 
   static Future<dynamic> deleteSaved({required String key}) async {
-    return await prefs!.remove(key);
+    return prefs!.remove(key);
   }
 
   void saveUserAuth({required bool value}) async {

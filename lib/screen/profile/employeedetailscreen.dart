@@ -19,9 +19,9 @@ class EmployeeDetailScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Text(model.profile.value.name == ''
-                ? 'Profile'
-                : model.profile.value.name,),
+            title: Text(
+              model.profile.value.name == '' ? 'Profile' : model.profile.value.name,
+            ),
           ),
           resizeToAvoidBottomInset: true,
           body: RefreshIndicator(
@@ -39,66 +39,93 @@ class EmployeeDetailScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             ClipRRect(
-                                borderRadius: BorderRadius.circular(90),
-                                child: Container(
-                                  width: 180,
-                                  height: 180,
-                                  decoration: const BoxDecoration(
-                                      // image: DecorationImage(
-                                      //   fit: BoxFit.cover,
-                                      //   image: NetworkImage(
-                                      //     model.profile.value.avatar,
-                                      //   ),
-                                      //   onError: (exception, stackTrace) {},
-                                      // ),
-                                      ),
-                                  alignment: Alignment.bottomCenter,
-                                ),),
+                              borderRadius: BorderRadius.circular(90),
+                              child: Container(
+                                width: 180,
+                                height: 180,
+                                decoration: const BoxDecoration(
+                                    // image: DecorationImage(
+                                    //   fit: BoxFit.cover,
+                                    //   image: NetworkImage(
+                                    //     model.profile.value.avatar,
+                                    //   ),
+                                    //   onError: (exception, stackTrace) {},
+                                    // ),
+                                    ),
+                                alignment: Alignment.bottomCenter,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    if (model.profile.value.post != '') Container(
-                            padding: const EdgeInsets.only(
-                                left: 30, right: 30, top: 20, bottom: 10,),
-                            width: double.infinity,
-                            child: const Text(
-                              'Personal Details',
-                              style: TextStyle(
-                                  color: Colors.white38, fontSize: 15,),
+                    if (model.profile.value.post != '')
+                      Container(
+                        padding: const EdgeInsets.only(
+                          left: 30,
+                          right: 30,
+                          top: 20,
+                          bottom: 10,
+                        ),
+                        width: double.infinity,
+                        child: const Text(
+                          'Personal Details',
+                          style: TextStyle(
+                            color: Colors.white38,
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
+                    else
+                      const SizedBox(),
+                    if (model.profile.value.post != '')
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        width: double.infinity,
+                        child: Card(
+                          shape: ButtonBorder(),
+                          color: Colors.white10,
+                          elevation: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 10,
                             ),
-                          ) else const SizedBox(),
-                    if (model.profile.value.post != '') Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            width: double.infinity,
-                            child: Card(
-                              shape: ButtonBorder(),
-                              color: Colors.white10,
-                              elevation: 0,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10,),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CardTitle(
-                                        'Fullname', model.profile.value.name,),
-                                    CardTitle('Username',
-                                        model.profile.value.username,),
-                                    CardTitle(
-                                        'Phone', model.profile.value.phone,),
-                                    CardTitle('Post', model.profile.value.post),
-                                    CardTitle('Date of birth',
-                                        model.profile.value.dob,),
-                                    CardTitle(
-                                        'Gender', model.profile.value.gender,),
-                                    CardTitle(
-                                        'Address', model.profile.value.address,),
-                                  ],
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CardTitle(
+                                  'Fullname',
+                                  model.profile.value.name,
                                 ),
-                              ),
+                                CardTitle(
+                                  'Username',
+                                  model.profile.value.username,
+                                ),
+                                CardTitle(
+                                  'Phone',
+                                  model.profile.value.phone,
+                                ),
+                                CardTitle('Post', model.profile.value.post),
+                                CardTitle(
+                                  'Date of birth',
+                                  model.profile.value.dob,
+                                ),
+                                CardTitle(
+                                  'Gender',
+                                  model.profile.value.gender,
+                                ),
+                                CardTitle(
+                                  'Address',
+                                  model.profile.value.address,
+                                ),
+                              ],
                             ),
-                          ) else const SizedBox(),
+                          ),
+                        ),
+                      )
+                    else
+                      const SizedBox(),
                   ],
                 ),
               ),

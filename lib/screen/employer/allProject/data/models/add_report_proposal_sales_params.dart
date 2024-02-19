@@ -1,11 +1,11 @@
 class AddReportSalesParams {
   final int formRequestId;
-  final String reportTechnical;
+  final String reportSales;
 
-  AddReportSalesParams({required this.formRequestId, required this.reportTechnical});
+  AddReportSalesParams({required this.formRequestId, required this.reportSales});
 
   Map<String, dynamic> toJson() => {
         'form_request_id': formRequestId.toString(),
-        'report_technical': reportTechnical,
+        'report_technical': reportSales,
       };
 }

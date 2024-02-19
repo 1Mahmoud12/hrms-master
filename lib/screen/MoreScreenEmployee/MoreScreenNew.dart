@@ -101,7 +101,7 @@ class MoreScreenNew extends StatelessWidget {
               type: 'Profile'.tr,
               svgvalue: Assets.profile,
               onPressed: () {
-                if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr) {
+                if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr) {
                   pushNewScreen(context, screen: const ProfileScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 } else {
                   pushNewScreen(
@@ -127,7 +127,7 @@ class MoreScreenNew extends StatelessWidget {
               pushNewScreen(context, screen: TaskListScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
             },
           ),*/
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Meeting'.tr,
                 svgvalue: Assets.meeting,
@@ -135,7 +135,7 @@ class MoreScreenNew extends StatelessWidget {
                   pushNewScreen(context, screen: const MeetingScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Holiday'.tr,
                 svgvalue: Assets.weekend,
@@ -143,7 +143,7 @@ class MoreScreenNew extends StatelessWidget {
                   pushNewScreen(context, screen: const HolidayScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Team_Sheet'.tr,
                 svgvalue: Assets.team,
@@ -156,7 +156,7 @@ class MoreScreenNew extends StatelessWidget {
                   );
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Leave_Calendar'.tr,
                 svgvalue: Assets.calender,
@@ -169,7 +169,7 @@ class MoreScreenNew extends StatelessWidget {
                   );
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Notices'.tr,
                 svgvalue: Assets.notiesMore,
@@ -184,7 +184,7 @@ class MoreScreenNew extends StatelessWidget {
                 pushNewScreen(context, screen: const SupportScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
               },
             ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Tada'.tr,
                 svgvalue: Assets.tada,
@@ -235,7 +235,7 @@ class MoreScreenNew extends StatelessWidget {
                 );
               },
             ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Securitiy'.tr,
                 svgvalue: Assets.Security,
@@ -260,7 +260,7 @@ class MoreScreenNew extends StatelessWidget {
                 );
               },
             ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Financial requests'.tr,
                 svgvalue: Assets.financialRequest,
@@ -273,7 +273,7 @@ class MoreScreenNew extends StatelessWidget {
                   );
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.twelve.name.tr)
+            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Administrativa requests'.tr,
                 svgvalue: Assets.AdministrativaRequests,

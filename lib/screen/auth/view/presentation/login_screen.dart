@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
+import 'package:cnattendance/core/component/loading_widget.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
@@ -200,8 +201,8 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               );
                             },
-                            child: Text(
-                              "Don't Have An Account ? Create Account",
+                            child: Text.rich(
+                              TextSpan(text: "Don't Have An Account ?", children: [TextSpan(text: ' Create Account', style: Styles.style14500)]),
                               textAlign: TextAlign.center,
                               style: Styles.style12400,
                             ),
@@ -271,7 +272,11 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   Widget loginButton() {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is LoginLoadingState) loadingDialog(context);
+        if (state is LoginErrorState) Navigator.pop(context);
+      },
       builder: (context, state) => SizedBox(
         width: context.screenWidth,
         child: TextButton(
@@ -285,15 +290,11 @@ class LoginScreenState extends State<LoginScreen> {
             validateValue();
           },
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: state is LoginLoadingState
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : const Text(
-                    'Login',
-                    style: TextStyle(color: AppColors.white),
-                  ),
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              'Login',
+              style: Styles.style16700.copyWith(color: AppColors.white),
+            ),
           ),
         ),
       ),

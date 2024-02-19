@@ -8,15 +8,24 @@ class AddReportEngineerCubit extends Cubit<AddReportEngineerState> {
   AddReportEngineerCubit() : super(AddReportEngineerInitial());
 
   static AddReportEngineerCubit of(BuildContext context) => BlocProvider.of<AddReportEngineerCubit>(context);
-  TextEditingController reportEngineer = TextEditingController();
-  TextEditingController reportSales = TextEditingController();
-  TextEditingController costReportEngineer = TextEditingController();
 
-  void postReportEngineer({required int formRequestId, required String cost, required String reportTechnical, required BuildContext context}) async {
+  void postReportEngineer({
+    required int formRequestId,
+    required String cost,
+    String? reportId,
+    required String reportEngineer,
+    required BuildContext context,
+    String? reportSales,
+  }) async {
     emit(AddReportEngineerLoadingState());
 
-    await ProposalDataSource.postReportEngineerProposal(cost: cost, formRequestId: formRequestId, reportTechnical: reportTechnical)
-        .then((value) async {
+    await ProposalDataSource.postReportEngineerProposal(
+      cost: cost,
+      formRequestId: formRequestId,
+      reportEngineer: reportEngineer,
+      reportId: reportId,
+      reportSales: reportSales,
+    ).then((value) async {
       value.fold((l) {
         debugPrint(l.errMessage);
         showToast(l.errMessage);
@@ -28,10 +37,14 @@ class AddReportEngineerCubit extends Cubit<AddReportEngineerState> {
     });
   }
 
-  void postReportSales({required int formRequestId, required String reportTechnical, required BuildContext context}) async {
+  void postReportSales({required int formRequestId, required String reportSales, String? reportId, required BuildContext context}) async {
     emit(AddReportEngineerLoadingState());
 
-    await ProposalDataSource.postReportSalesProposal(formRequestId: formRequestId, reportTechnical: reportTechnical).then((value) async {
+    await ProposalDataSource.postReportSalesProposal(
+      formRequestId: formRequestId,
+      reportSales: reportSales,
+      reportId: reportId,
+    ).then((value) async {
       value.fold((l) {
         debugPrint(l.errMessage);
         showToast(l.errMessage);
@@ -41,14 +54,5 @@ class AddReportEngineerCubit extends Cubit<AddReportEngineerState> {
         emit(AddReportEngineerSuccessState());
       });
     });
-  }
-
-  @override
-  Future<void> close() {
-    reportEngineer.dispose();
-    reportSales.dispose();
-    costReportEngineer.dispose();
-    debugPrint('============= Closing =====================');
-    return super.close();
   }
 }

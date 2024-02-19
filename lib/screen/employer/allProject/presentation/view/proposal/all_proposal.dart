@@ -1,3 +1,4 @@
+import 'package:cnattendance/core/component/empty_widget.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
@@ -35,7 +36,7 @@ class ProposalScreen extends StatelessWidget {
                     height: context.screenHeight - Scaffold.of(context).appBarMaxHeight!, child: const Center(child: CircularProgressIndicator()))
               else if (state is ProposalErrorState)
                 Center(child: Text(state.error))
-              else
+              else if (allProposalsModelCache != null && allProposalsModelCache!.data != null)
                 Expanded(
                   child: ListView(
                     padding: EdgeInsets.all(context.screenWidth * .02),
@@ -43,62 +44,80 @@ class ProposalScreen extends StatelessWidget {
                       ...List.generate(
                         allProposalsModelCache!.data!.requests!.length,
                         (index) => InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            await ProposalCubit.of(context)
+                                .getOneProposals(context: context, idProposal: allProposalsModelCache!.data!.requests![index].propasalId!);
                             final arguments = {
                               'index': index,
                               'formRequestId': allProposalsModelCache!.data!.requests![index].propasalId,
+                              'oneProposal': ProposalCubit.of(context).proposalOneModel,
+                              // 'idProducts': allProposalsModelCache!.data!.requests![index].formData!.productsValue,
                             };
-                            Navigator.pushNamed(context, AppRoute.detailsProposalScreen, arguments: arguments);
+                            if (ProposalCubit.of(context).proposalOneModel != null && ProposalCubit.of(context).proposalOneModel!.data != null) {
+                              Navigator.pushNamed(context, AppRoute.detailsProposalScreen, arguments: arguments);
+                            }
                           },
                           child: Container(
                             margin: EdgeInsets.all(context.screenWidth * .02),
                             padding: EdgeInsets.all(context.screenWidth * .02),
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r), color: AppColors.white),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  constraints: BoxConstraints(maxWidth: context.screenWidth * .4),
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(color: AppColors.cBackGroundIconButton, borderRadius: BorderRadius.circular(10.r)),
-                                  child: SvgPicture.asset(Assets.stepOne),
-                                ),
-                                10.ESW(),
-                                Expanded(
-                                  child: Row(
+                            child: state is ProposalLoadingState
+                                ? Row(
                                     children: [
-                                      Column(
+                                      Container(
+                                        padding: const EdgeInsets.all(10),
+                                        color: Colors.grey[300],
+                                      ),
+                                    ],
+                                  )
+                                : state is ProposalErrorState
+                                    ? Center(child: Text(state.error))
+                                    : Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            allProposalsModelCache!.data!.requests![index].formData!.userNameValue ?? '',
-                                            style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColorTextFormField),
+                                          Container(
+                                            constraints: BoxConstraints(maxWidth: context.screenWidth * .4),
+                                            padding: const EdgeInsets.all(10),
+                                            decoration:
+                                                BoxDecoration(color: AppColors.cBackGroundIconButton, borderRadius: BorderRadius.circular(10.r)),
+                                            child: SvgPicture.asset(Assets.stepOne),
                                           ),
-                                          5.ESH(),
-                                          Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.my_location_sharp,
-                                                color: AppColors.primaryColor,
-                                              ),
-                                              const SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                allProposalsModelCache!.data!.requests![index].formData!.userAddressValue ?? '',
-                                                style: Styles.style18700.copyWith(color: AppColors.grey, fontSize: 12.sp),
-                                              ),
-                                            ],
-                                          ),
-                                          5.ESH(),
-                                          /*    SizedBox(
+                                          10.ESW(),
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      allProposalsModelCache!.data!.requests![index].formData!.userNameValue ?? '',
+                                                      style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColorTextFormField),
+                                                    ),
+                                                    5.ESH(),
+                                                    Row(
+                                                      children: [
+                                                        const Icon(
+                                                          Icons.my_location_sharp,
+                                                          color: AppColors.primaryColor,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          allProposalsModelCache!.data!.requests![index].formData!.userAddressValue ?? '',
+                                                          style: Styles.style18700.copyWith(color: AppColors.grey, fontSize: 12.sp),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    5.ESH(),
+                                                    /*    SizedBox(
                                       width: context.screenWidth * .5,
                                       child: Text(ProposalCubit.of(context).steps[index]['description']),
                                     ),
                                     5.ESH(),*/
-                                          /*
+                                                    /*
                                       */
-                                          /*SizedBox(
+                                                    /*SizedBox(
                                       height: context.screenHeight * .002,
                                       width: context.screenWidth * .5,
                                       child: SliderTheme(
@@ -114,7 +133,7 @@ class ProposalScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),*/
-                                          /*
+                                                    /*
                                     ],
                                   ),
                                 ],
@@ -125,19 +144,21 @@ class ProposalScreen extends StatelessWidget {
                       ),
                     ),
                   ),*/
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
+                )
+              else
+                SizedBox(height: context.screenHeight - Scaffold.of(context).appBarMaxHeight!, child: const Center(child: EmptyWidget()))
             ],
           ),
         ),

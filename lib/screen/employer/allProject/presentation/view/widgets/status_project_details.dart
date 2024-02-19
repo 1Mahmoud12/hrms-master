@@ -114,7 +114,7 @@ class StatusDetailsProject extends StatelessWidget {
               assetsName: Assets.tasksSVG,
               nameRow: 'Tasks',
             ),
-          if (genderUser == RoleId.eleven.name.tr || genderUser == RoleId.nine.name.tr)
+          if (genderUser == RoleId.twelve.name.tr || genderUser == RoleId.nine.name.tr || genderUser == RoleId.eight.name.tr)
             OneStatusRow(
               button: true,
               onPress: () {

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/utils/deviceuuid.dart';
 import 'package:cnattendance/utils/endpoints.dart';
@@ -22,7 +23,6 @@ class LoginDataSource {
       // debugPrint('working');
       // var fcm = await FirebaseMessaging.instance.getToken();
 
-      debugPrint('fcm $username $password ${await DeviceUUid().getUniqueDeviceId()} $fcmToken');
       final response = await http.post(
         uri,
         headers: headers,
@@ -39,7 +39,8 @@ class LoginDataSource {
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
       final responseJson = LoginModel.fromJson(responseData);
-      await preferencesConstants.saveUser(responseJson);
+      print(responseJson.data?.user!.toJson());
+      await Preferences.setSaved(value: jsonEncode(responseJson.data?.user!.toJson()), key: userCacheKey);
       userCache = responseJson.data!.user;
 
       return Right(responseJson);

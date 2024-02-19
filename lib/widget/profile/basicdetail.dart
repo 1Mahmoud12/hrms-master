@@ -21,11 +21,10 @@ class BasicDetail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardTitle('Phone'.tr, userCache!.email!),
-              CardTitle('Post'.tr, userCache!.email!),
-              CardTitle('Dateofbirth'.tr, userCache!.email!),
-              CardTitle('Gender'.tr, userCache!.email!),
-              CardTitle('Address'.tr, userCache!.email!),
+              CardTitle('Phone'.tr, userCache!.phone!),
+              CardTitle('Email'.tr, userCache!.email!),
+              CardTitle('Gender'.tr, userCache!.gender!),
+              CardTitle('Address'.tr, userCache!.address!),
             ],
           ),
         ),
