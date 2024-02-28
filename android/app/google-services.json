@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "10784846687",
-    "project_id": "rakelvator",
-    "storage_bucket": "rakelvator.appspot.com"
+    "project_number": "112139824312",
+    "project_id": "rak-elevator",
+    "storage_bucket": "rak-elevator.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:10784846687:android:0399a73ffa4a398d9e3cea",
+        "mobilesdk_app_id": "1:112139824312:android:3a6712600d5fc5f6a7584d",
         "android_client_info": {
-          "package_name": "com.rakelevators.codgoo"
+          "package_name": "com.codgoo.rakelevators"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCvg-9ixi6qW3GVEa5e4T6owkIlQ0bPKIo"
+          "current_key": "AIzaSyBWtbsRLRj-H15qot9KndJ4yMYRupdYHSk"
         }
       ],
       "services": {

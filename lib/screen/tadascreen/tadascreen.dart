@@ -18,16 +18,17 @@ class TadaScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Platform.isAndroid
-                ? const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  )
-                : const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),),
+          onPressed: () => Navigator.pop(context),
+          icon: Platform.isAndroid
+              ? const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                )
+              : const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                ),
+        ),
         title: Text(
           'Tada'.tr,
           style: Styles.styleHeader,
@@ -37,10 +38,15 @@ class TadaScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primaryColor,
+        shape: OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
           model.onTadaCreateClicked();
         },
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: AppColors.scaffoldBackGround,
+        ),
       ),
       // body: Obx(
       //   () => SafeArea(
@@ -138,11 +144,14 @@ class TadaScreen extends StatelessWidget {
                 model.selected.value = model.tadaListLabels[index];
                 model.filterList();
               },
+              animationDuration: 500,
+              curve: Curves.linear,
+              animate: true,
               customTextStyles: [
-                Styles.style14500.copyWith(color: model.indexSelected == 0 ? AppColors.white : AppColors.primaryColor),
-                Styles.style14500.copyWith(color: model.indexSelected == 1 ? AppColors.white : AppColors.primaryColor),
-                Styles.style14500.copyWith(color: model.indexSelected == 2 ? AppColors.white : AppColors.primaryColor),
-                Styles.style14500.copyWith(color: model.indexSelected == 3 ? AppColors.white : AppColors.primaryColor),
+                Styles.style14500.copyWith(color: model.indexSelected.round() == 0 ? AppColors.white : AppColors.primaryColor),
+                Styles.style14500.copyWith(color: model.indexSelected.round() == 1 ? AppColors.white : AppColors.primaryColor),
+                Styles.style14500.copyWith(color: model.indexSelected.round() == 2 ? AppColors.white : AppColors.primaryColor),
+                Styles.style14500.copyWith(color: model.indexSelected.round() == 3 ? AppColors.white : AppColors.primaryColor),
               ],
               labels: model.tadaListLabels,
             ),
@@ -278,11 +287,12 @@ class TadaScreen extends StatelessWidget {
                                     Text(
                                       support.status,
                                       style: Styles.style12400.copyWith(
-                                          color: support.status == model.tadaListLabels[2]
-                                              ? AppColors.green
-                                              : support.status == model.tadaListLabels[3]
-                                                  ? AppColors.red
-                                                  : AppColors.hintOrange,),
+                                        color: support.status == model.tadaListLabels[2]
+                                            ? AppColors.green
+                                            : support.status == model.tadaListLabels[3]
+                                                ? AppColors.red
+                                                : AppColors.hintOrange,
+                                      ),
                                     ),
                                     5.ESW(),
                                     Text(

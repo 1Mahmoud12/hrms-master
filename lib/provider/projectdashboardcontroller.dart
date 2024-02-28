@@ -6,9 +6,9 @@ import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/model/task.dart';
 import 'package:cnattendance/utils/endpoints.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class ProjectDashboardController extends GetxController {
   RxMap<String, int> overview = {
@@ -24,7 +24,7 @@ class ProjectDashboardController extends GetxController {
     final uri = Uri.parse('${EndPoints.PROJECT_DASHBOARD_URL}?tasks=10&projects=3');
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -74,7 +74,7 @@ class ProjectDashboardController extends GetxController {
               project.id,
               project.project_name,
               '',
-              project.start_date,
+              project.startDate,
               project.priority,
               project.status,
               project.project_progress_percent,
@@ -82,6 +82,7 @@ class ProjectDashboardController extends GetxController {
               members,
               [],
               [],
+              project.end_date,
             ),
           );
         }

@@ -151,7 +151,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(20),
           child: TextButton(
-            style: TextButton.styleFrom(backgroundColor: Color(0xff635F54), shape: ButtonBorder(), fixedSize: const Size(double.maxFinite, 55)),
+            style: TextButton.styleFrom(backgroundColor: const Color(0xff635F54), shape: ButtonBorder(), fixedSize: const Size(double.maxFinite, 55)),
             onPressed: () {
               validateValue();
             },

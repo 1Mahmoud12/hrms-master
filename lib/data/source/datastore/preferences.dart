@@ -1,3 +1,4 @@
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -108,10 +109,8 @@ class Preferences with ChangeNotifier {
     );
   }
 
-  Future<String> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    return prefs.getString(userToken) ?? '';
+  String getToken() {
+    return tokenCache;
   }
 
   // Future<String> getUserid() async {

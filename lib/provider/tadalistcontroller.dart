@@ -3,15 +3,16 @@ import 'package:cnattendance/repositories/tadarepository.dart';
 import 'package:cnattendance/screen/tadascreen/createtadascreen.dart';
 import 'package:cnattendance/screen/tadascreen/edittadascreen.dart';
 import 'package:cnattendance/screen/tadascreen/tadadetailscreen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class TadaListController extends GetxController {
   final filteredList = <Tadaother>[].obs;
   final tadaList = <Tadaother>[].obs;
-  final tadaList_pending = <Tadaother>[].obs;
-  final tadaList_rejected = <Tadaother>[].obs;
-  final tadaList_accepted = <Tadaother>[].obs;
+  final tadaListPending = <Tadaother>[].obs;
+  final tadaListRejected = <Tadaother>[].obs;
+  final tadaListAccepted = <Tadaother>[].obs;
   final selected = 'All'.obs;
   final indexSelected = 0.obs;
   final tadaListLabels = ['All'.tr, 'Pending'.tr, 'Accepted'.tr, 'Rejected'.tr];
@@ -30,78 +31,86 @@ class TadaListController extends GetxController {
 
       for (final tada in response.data) {
         if (tada.status == 'Pending') {
-          listPending.add(Tadaother.list(
-            tada.id,
-            tada.title,
-            tada.total_expense,
-            tada.status,
-            tada.remark,
-            tada.submitted_date,
-          ),);
+          listPending.add(
+            Tadaother.list(
+              tada.id,
+              tada.title,
+              tada.total_expense,
+              tada.status,
+              tada.remark,
+              tada.submitted_date,
+            ),
+          );
 
-          tadaList_pending.value = listPending;
+          tadaListPending.value = listPending;
         } else if (tada.status == 'Rejected') {
-          listRejected.add(Tadaother.list(
-            tada.id,
-            tada.title,
-            tada.total_expense,
-            tada.status,
-            tada.remark,
-            tada.submitted_date,
-          ),);
+          listRejected.add(
+            Tadaother.list(
+              tada.id,
+              tada.title,
+              tada.total_expense,
+              tada.status,
+              tada.remark,
+              tada.submitted_date,
+            ),
+          );
 
-          tadaList_rejected.value = listRejected;
+          tadaListRejected.value = listRejected;
         } else if (tada.status == 'Accepted') {
-          listAccepted.add(Tadaother.list(
+          listAccepted.add(
+            Tadaother.list(
+              tada.id,
+              tada.title,
+              tada.total_expense,
+              tada.status,
+              tada.remark,
+              tada.submitted_date,
+            ),
+          );
+
+          tadaListAccepted.value = listAccepted;
+        }
+        list.add(
+          Tadaother.list(
             tada.id,
             tada.title,
             tada.total_expense,
             tada.status,
             tada.remark,
             tada.submitted_date,
-          ),);
-
-          tadaList_accepted.value = listAccepted;
-        }
-        list.add(Tadaother.list(
-          tada.id,
-          tada.title,
-          tada.total_expense,
-          tada.status,
-          tada.remark,
-          tada.submitted_date,
-        ),);
+          ),
+        );
       }
       tadaList.value = list;
       filteredList.addAll(tadaList);
-      print('-------------------tadaList_accepted');
-      print(tadaList_accepted);
-      print('--------------------tadaList_pending');
-      print(tadaList_pending);
-      print('--------------------tadaList_rejected');
-      print(tadaList_rejected);
+      debugPrint('-------------------tadaList_accepted');
+      debugPrint('$tadaListAccepted');
+      debugPrint('--------------------tadaList_pending');
+      debugPrint('$tadaListPending');
+      debugPrint('--------------------tadaList_rejected');
+      debugPrint('$tadaListRejected');
 
       return 'Loaded';
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       rethrow;
     }
   }
 
-  filterList() {
+  void filterList() {
     filteredList.clear();
     if (selected.value == 'Rejected') {
-      filteredList.addAll(tadaList_rejected);
+      filteredList.addAll(tadaListRejected);
     } else if (selected.value == 'Accepted') {
-      filteredList.addAll(tadaList_accepted);
+      filteredList.addAll(tadaListAccepted);
     } else if (selected.value == 'Pending') {
-      filteredList.addAll(tadaList_pending);
+      filteredList.addAll(tadaListPending);
     } else {
       filteredList.addAll(tadaList);
     }
     update();
-    print(filteredList);
-    print(selected.value);
+    debugPrint('$filteredList');
+    debugPrint(selected.value);
   }
 
   void onTadaClicked(String id) {

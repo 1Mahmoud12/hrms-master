@@ -63,7 +63,7 @@ class CommentScreenController extends GetxController {
     final uri = Uri.parse('${EndPoints.GET_COMMENT_URL}?per_page=$PER_PAGE&page=$page&task_id=${Get.arguments['taskId']}');
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',

@@ -26,7 +26,7 @@ class Profile {
 
   factory Profile.fromJson(dynamic json) {
     return Profile(
-      id: json['id'],
+      id: int.parse('${json['id']}'),
       name: json['name'] ?? '',
       email: json['email'] ?? '',
       username: json['username'] ?? '',

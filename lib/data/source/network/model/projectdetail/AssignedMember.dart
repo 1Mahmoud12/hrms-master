@@ -4,18 +4,19 @@ class AssignedMember {
   String name;
   String post;
 
-  AssignedMember(
-      {required this.avatar,
-      required this.id,
-      required this.name,
-      required this.post,});
+  AssignedMember({
+    required this.avatar,
+    required this.id,
+    required this.name,
+    required this.post,
+  });
 
   factory AssignedMember.fromJson(Map<String, dynamic> json) {
     return AssignedMember(
       avatar: json['avatar'],
       id: json['id'],
       name: json['name'],
-      post: json['post'],
+      post: json['post'] ?? '',
     );
   }
 

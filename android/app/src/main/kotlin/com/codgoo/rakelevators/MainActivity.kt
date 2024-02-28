@@ -1,4 +1,4 @@
-package com.rakelevators.codgoo
+package com.codgoo.rakelevators
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

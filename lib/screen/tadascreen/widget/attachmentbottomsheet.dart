@@ -1,3 +1,4 @@
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/model/attachment.dart';
 import 'package:cnattendance/screen/tadascreen/widget/fileslistbottom.dart';
 import 'package:cnattendance/screen/tadascreen/widget/imagelistbottom.dart';
@@ -12,10 +13,10 @@ class AttachmentBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .9,
+      height: MediaQuery.of(context).size.height * .6,
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      color: AppColors.white,
       // decoration: RadialDecoration(),
-      decoration: const BoxDecoration(color: Color(0xffcfcdcb)),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -28,18 +29,20 @@ class AttachmentBottomSheet extends StatelessWidget {
                   Text(
                     'Attachments'.tr,
                     style: const TextStyle(
-                        color: Color(0xff635F54),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,),
+                      color: Color(0xff635F54),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   GestureDetector(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: const Icon(
-                        Icons.close,
-                        color: Color(0xff635F54),
-                      ),),
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: const Icon(
+                      Icons.close,
+                      color: Color(0xff635F54),
+                    ),
+                  ),
                 ],
               ),
             ),

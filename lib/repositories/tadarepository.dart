@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/connect.dart';
 import 'package:cnattendance/data/source/network/model/leaveissue/IssueLeaveResponse.dart';
 import 'package:cnattendance/data/source/network/model/tadadetail/tadadetailresponse.dart';
@@ -11,14 +10,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/utils/constants.dart';
+
 class TadaRepository {
   Future<TadaListResponse> getTadaList() async {
-    final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
-
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer $tokenCache',
     };
 
     try {
@@ -33,24 +31,21 @@ class TadaRepository {
         return tadaResponse;
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         throw errorMessage;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       rethrow;
     }
   }
 
   Future<TadaDetailResponse> getTadaDetail(String tadaId) async {
-    final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
-
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer $tokenCache',
     };
-    print(token);
+    debugPrint(tokenCache);
 
     try {
       final int tadaIds = int.parse(tadaId);
@@ -58,19 +53,19 @@ class TadaRepository {
       debugPrint(response.body);
 
       final responseData = json.decode(response.body);
-      print('responseData -------------------');
-      print(responseData);
+      debugPrint('responseData -------------------');
+      debugPrint('$responseData');
       if (response.statusCode == 200) {
         final tadaResponse = TadaDetailResponse.fromJson(responseData);
 
         return tadaResponse;
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         throw errorMessage;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       rethrow;
     }
   }
@@ -82,14 +77,11 @@ class TadaRepository {
     List<PlatformFile> fileList,
   ) async {
     final uri = Uri.parse(EndPoints.TADA_STORE_URL);
-
-    final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
-
+    debugPrint(EndPoints.TADA_STORE_URL);
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
       'Content-type': 'multipart/form-data',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer $tokenCache',
     };
 
     final requests = http.MultipartRequest('POST', uri);
@@ -125,7 +117,7 @@ class TadaRepository {
       return tadaResponse;
     } else {
       final errorMessage = responseData['message'];
-      print(errorMessage);
+      debugPrint(errorMessage);
       throw errorMessage;
     }
   }

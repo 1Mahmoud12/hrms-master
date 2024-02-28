@@ -19,14 +19,14 @@ class SupportController extends GetxController {
   Rx<Department> selected = Department('0', '').obs;
 
   RxList<Department> departments = <Department>[].obs;
-  RxList Getalldepartment = [].obs;
+  RxList getAllDepartment = [].obs;
 
   final form = GlobalKey<FormState>();
 
   void onSubmitClicked(department) {
     if (form.currentState!.validate()) {
-      if (selected.value.id != 0) {
-        print(titleController.text);
+      if (selected.value.id != '0') {
+        debugPrint(titleController.text);
         sendSupportMessage(
           titleController.text,
           descriptionController.text,
@@ -111,7 +111,7 @@ class SupportController extends GetxController {
       'Authorization': 'Bearer $token',
     };
 
-    Getalldepartment.clear();
+    getAllDepartment.clear();
     try {
       final response = await http.get(uri, headers: headers);
       // debugPrint(response.body.toString());
@@ -129,7 +129,7 @@ class SupportController extends GetxController {
 
         for (final department in responseData['data']) {
           // print("1 $department");
-          Getalldepartment.add(department);
+          getAllDepartment.add(department);
           // departments.add(Department(department.id, department.dept_name));
         }
         // print('A gaya');

@@ -29,13 +29,12 @@ class MeetingState extends State<MeetingScreenNew> {
   }
 
   Future<String> getMeetingList() async {
-    setState(() async {
-      isLoading = true;
-      EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
-      await Provider.of<MeetingProvider>(context, listen: false).getMeetingList();
-      isLoading = false;
-      EasyLoading.dismiss();
-    });
+    isLoading = true;
+    EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
+    await Provider.of<MeetingProvider>(context, listen: false).getMeetingList();
+    isLoading = false;
+    EasyLoading.dismiss();
+    setState(() {});
 
     return 'Loaded';
   }
@@ -49,24 +48,26 @@ class MeetingState extends State<MeetingScreenNew> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-            leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Platform.isAndroid
-                    ? const Icon(
-                        Icons.arrow_back,
-                        color: Colors.black,
-                      )
-                    : const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                      ),),
-            title: Text(
-              'Meeting'.tr,
-              style: Styles.styleHeader,
-            ),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.transparent,),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Platform.isAndroid
+                ? const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  )
+                : const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+          ),
+          title: Text(
+            'Meeting'.tr,
+            style: Styles.styleHeader,
+          ),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
         backgroundColor: Colors.transparent,
         body: RefreshIndicator(
           onRefresh: () {

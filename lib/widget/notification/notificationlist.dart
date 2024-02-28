@@ -2,7 +2,6 @@ import 'package:cnattendance/provider/notificationprovider.dart';
 import 'package:cnattendance/widget/notification/notificationcard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 
 class NotificationList extends StatefulWidget {
@@ -43,16 +42,11 @@ class NotificationListState extends State<NotificationList> {
     final items = Provider.of<NotificationProvider>(context).notificationList;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: SizedBox(
-        height: context.screenHeight * .76,
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            primary: false,
-            controller: _controller,
-            itemCount: items.length,
-            itemBuilder: (ctx, index) {
-              return NotificationCard(id: items[index].id, name: items[index].title, date: items[index].date, desc: items[index].description);
-            },),
+      child: Column(
+        children: [
+          ...List.generate(items.length,
+              (index) => NotificationCard(id: items[index].id, name: items[index].title, date: items[index].date, desc: items[index].description)),
+        ],
       ),
     );
   }

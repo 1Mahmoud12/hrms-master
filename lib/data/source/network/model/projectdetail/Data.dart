@@ -17,10 +17,11 @@ class Data {
   String priority;
   int progress_percent;
   List<ProjectLeader> project_leader;
-  String start_date;
+  String startDate;
   String status;
 
-  Data({required this.assigned_member,
+  Data({
+    required this.assigned_member,
     required this.assigned_task_count,
     required this.assigned_task_detail,
     required this.attachments,
@@ -33,21 +34,16 @@ class Data {
     required this.priority,
     required this.progress_percent,
     required this.project_leader,
-    required this.start_date,
-    required this.status,});
+    required this.startDate,
+    required this.status,
+  });
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      assigned_member: (json['assigned_member'] as List)
-          .map((i) => AssignedMember.fromJson(i))
-          .toList(),
+      assigned_member: (json['assigned_member'] as List).map((i) => AssignedMember.fromJson(i)).toList(),
       assigned_task_count: json['assigned_task_count'],
-      assigned_task_detail: (json['assigned_task_detail'] as List)
-          .map((i) => AssignedTaskDetail.fromJson(i))
-          .toList(),
-      attachments: (json['attachments'] as List)
-          .map((i) => Attachment.fromJson(i))
-          .toList(),
+      assigned_task_detail: (json['assigned_task_detail'] as List).map((i) => AssignedTaskDetail.fromJson(i)).toList(),
+      attachments: (json['attachments'] as List).map((i) => Attachment.fromJson(i)).toList(),
       client_name: json['client_name'],
       cover_pic: json['cover_pic'],
       deadline: json['deadline'],
@@ -56,10 +52,8 @@ class Data {
       name: json['name'],
       priority: json['priority'],
       progress_percent: json['progress_percent'],
-      project_leader: (json['project_leader'] as List)
-          .map((i) => ProjectLeader.fromJson(i))
-          .toList(),
-      start_date: json['start_date'],
+      project_leader: (json['project_leader'] as List).map((i) => ProjectLeader.fromJson(i)).toList(),
+      startDate: json['start_date'],
       status: json['status'],
     );
   }
@@ -75,15 +69,12 @@ class Data {
     data['name'] = name;
     data['priority'] = priority;
     data['progress_percent'] = progress_percent;
-    data['start_date'] = start_date;
+    data['start_date'] = startDate;
     data['status'] = status;
-    data['assigned_member'] =
-        assigned_member.map((v) => v.toJson()).toList();
-      data['assigned_task_detail'] =
-        assigned_task_detail.map((v) => v.toJson()).toList();
-      data['attachments'] = attachments.map((v) => v.toJson()).toList();
-      data['project_leader'] =
-        project_leader.map((v) => v.toJson()).toList();
-      return data;
+    data['assigned_member'] = assigned_member.map((v) => v.toJson()).toList();
+    data['assigned_task_detail'] = assigned_task_detail.map((v) => v.toJson()).toList();
+    data['attachments'] = attachments.map((v) => v.toJson()).toList();
+    data['project_leader'] = project_leader.map((v) => v.toJson()).toList();
+    return data;
   }
 }

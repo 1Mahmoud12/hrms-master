@@ -135,9 +135,9 @@ class _SupportScreenNewState extends State<SupportScreenNew> {
                                       style: Styles.style14500.copyWith(color: AppColors.textColorTextFormField),
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    items: model.Getalldepartment.map((e) {
+                                    items: model.getAllDepartment.map((e) {
                                       check1++;
-                                      print(e);
+
                                       return DropdownMenuItem(
                                         value: e['id'],
                                         child: Padding(

@@ -70,7 +70,7 @@ class DashboardProvider with ChangeNotifier {
     final uri = Uri.parse(EndPoints.DASHBOARD_URL);
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final fcm = await FirebaseMessaging.instance.getToken();
 

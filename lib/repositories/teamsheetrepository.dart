@@ -10,7 +10,7 @@ class TeamSheetRepository {
   Future<Teamsheetresponse> getTeam() async {
     final Preferences preferences = Preferences();
 
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Content-Type': 'application/json',

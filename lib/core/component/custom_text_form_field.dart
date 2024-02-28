@@ -21,6 +21,7 @@ class CustomTextFormField extends StatefulWidget {
   final double? fontSizeHintText;
   final bool? validationOnNumber;
   final void Function(String)? onFieldSubmitted;
+  final void Function(String)? onChanged;
 
   const CustomTextFormField({
     super.key,
@@ -38,6 +39,7 @@ class CustomTextFormField extends StatefulWidget {
     this.labelText,
     this.enabled,
     this.onFieldSubmitted,
+    this.onChanged,
   });
 
   @override
@@ -85,6 +87,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       inputFormatters: [
         if (widget.validationOnNumber != null && widget.validationOnNumber!) FilteringTextInputFormatter.allow(RegExp(r'^\d{0,2}$')),
       ],
+      onChanged: (value) {
+        widget.onChanged?.call(value);
+
+        setState(() {});
+      },
       maxLines: widget.maxLines ?? 1,
       cursorColor: AppColors.textColorTextFormField,
       onFieldSubmitted: widget.onFieldSubmitted,

@@ -90,13 +90,14 @@ extension StringExtension on String {
 }
 
 void showToast(
-  String message,
-) {
+  String message, {
+  Color? backgroundColor,
+}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.BOTTOM,
-    backgroundColor: Colors.white,
+    backgroundColor: backgroundColor ?? Colors.white,
     textColor: Colors.black,
     fontSize: 12,
   );

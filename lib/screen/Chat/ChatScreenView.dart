@@ -1,8 +1,7 @@
 import 'package:cnattendance/Controller/ChatScreenViewController.dart';
+import 'package:cnattendance/core/component/cache_image.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/Chat/userchat/chatui.dart';
-import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,36 +40,24 @@ class ChatScreenView extends StatelessWidget {
               onRefresh: () {
                 return chatScreenController.GetAllChatUsers();
               },
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: Get.height * .9,
-                      width: Get.width * 1,
-                      child: ListView.builder(
-                        itemCount: chatScreenController.userdata.length,
-                        itemBuilder: (context, index) {
-                          username = chatScreenController.userdata[index]['name'];
-                          depart = chatScreenController.userdata[index]['name'];
-                          id = chatScreenController.userdata[index]['id'];
-                          role = chatScreenController.userdata[index]['role']['name'];
-
-                          userImage = chatScreenController.userdata[index]['user_profile_img'];
-                          if (userImage == 'uploads/user/avatar/') {
-                            userImage = 'color';
-                          } else {
-                            userImage = '${EndPoints.production}$userImage';
-                          }
-
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 14, right: 14, bottom: 5),
-                            child: userChatList(chatScreenController, username, depart, id, role, userImage),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+              child: ListView.builder(
+                itemCount: chatScreenController.userdata.length,
+                itemBuilder: (context, index) {
+                  username = chatScreenController.userdata[index]['name'];
+                  depart = chatScreenController.userdata[index]['name'];
+                  id = chatScreenController.userdata[index]['id'];
+                  role = chatScreenController.userdata[index]['role']['name'];
+                  userImage = chatScreenController.userdata[index]['user_profile_img'];
+                  if (userImage == 'uploads/user/avatar/') {
+                    userImage = 'color';
+                  } else {
+                    userImage = userImage;
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 14, right: 14, bottom: 5),
+                    child: userChatList(chatScreenController, username, depart, id, role, userImage),
+                  );
+                },
               ),
             ),
           );
@@ -92,15 +79,13 @@ Widget userChatList(ChatViewScreenController chatViewScreenController, String us
       borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
     ),
     tileColor: Colors.white,
-    leading: userimage == 'color'
-        ? const CircleAvatar(
-            backgroundColor: Colors.white,
-          )
-        : CircleAvatar(
-            backgroundImage: NetworkImage(
-              userimage,
-            ),
-          ),
+    leading: CacheImage(
+      imageUrl: userimage,
+      width: 40,
+      height: 40,
+      circle: true,
+    ),
+
     subtitle: Text(
       username,
       style: const TextStyle(color: Colors.black),

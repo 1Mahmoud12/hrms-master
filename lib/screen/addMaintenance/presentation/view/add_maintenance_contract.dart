@@ -98,7 +98,10 @@ class AddMaintenanceContract extends StatelessWidget {
                 child: CustomTextFormField(
                   controller: MainBlocMaintenanceContractCubit.of(context).modelElevator,
                   hintText: 'Model',
-                  textInputType: TextInputType.number,
+                  onChanged: (p0) {
+                    MainBlocMaintenanceContractCubit.of(context).modelElevator.text =
+                        MainBlocMaintenanceContractCubit.of(context).modelElevator.text.toUpperCase();
+                  },
                   fillColor: AppColors.cFillColorDropDownButton,
                 ),
               ),
@@ -121,7 +124,10 @@ class AddMaintenanceContract extends StatelessWidget {
                 child: CustomTextFormField(
                   controller: MainBlocMaintenanceContractCubit.of(context).maximumLoad,
                   hintText: 'Maximum Load',
-                  textInputType: TextInputType.number,
+                  onChanged: (p0) {
+                    MainBlocMaintenanceContractCubit.of(context).maximumLoad.text =
+                        MainBlocMaintenanceContractCubit.of(context).maximumLoad.text.toUpperCase();
+                  },
                   fillColor: AppColors.cFillColorDropDownButton,
                 ),
               ),

@@ -16,6 +16,5 @@ class Utils {
 
   static Future<void> openFile({required String nameFile}) async {
     await OpenFile.open(nameFile);
-    ;
   }
 }

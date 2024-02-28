@@ -1,15 +1,20 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/provider/projectdashboardcontroller.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/widgets/card_project.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ProjectDashboardController()).getProjectOverview();
+    final model = Get.put(ProjectDashboardController());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -19,13 +24,16 @@ class ProjectsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const CardProject(valueSlider: 80),
-              const CardProject(valueSlider: 20),
-              const CardProject(valueSlider: 20),
-              30.ESH(),
-            ].paddingDirectional(bottom: 10.h),
+          child: Obx(
+            () => Column(
+              children: [
+                ...List.generate(
+                  model.projectList.length.obs.value,
+                  (index) => CardProject(project: model.projectList[index]),
+                ),
+                30.ESH(),
+              ].paddingDirectional(bottom: 10.h),
+            ),
           ),
         ),
       ),

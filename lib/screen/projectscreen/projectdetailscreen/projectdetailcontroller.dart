@@ -26,6 +26,7 @@ class ProjectDetailController extends GetxController {
     [],
     [],
     [],
+    '',
   ).obs;
 
   RxList memberImages = [].obs;
@@ -37,7 +38,7 @@ class ProjectDetailController extends GetxController {
     );
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -62,14 +63,14 @@ class ProjectDetailController extends GetxController {
         final List<Member> members = [];
         memberImages.clear();
         for (final member in projectResponse.data.assigned_member) {
-          members.add(Member(member.id, member.name, member.avatar, post: member.post));
+          members.add(Member(member.id, member.name, member.avatar, post: member.post ?? ''));
           memberImages.add(member.avatar);
         }
 
         final List<Member> leaders = [];
         leaderImages.clear();
         for (final member in projectResponse.data.project_leader) {
-          leaders.add(Member(member.id, member.name, member.avatar, post: member.post));
+          leaders.add(Member(member.id, member.name, member.avatar, post: member.post ?? ''));
           leaderImages.add(member.avatar);
         }
 
@@ -86,7 +87,7 @@ class ProjectDetailController extends GetxController {
           projectResponse.data.id,
           projectResponse.data.name,
           projectResponse.data.description,
-          projectResponse.data.start_date,
+          projectResponse.data.startDate,
           projectResponse.data.priority,
           projectResponse.data.status,
           projectResponse.data.progress_percent,
@@ -94,6 +95,7 @@ class ProjectDetailController extends GetxController {
           members,
           leaders,
           attachments,
+          projectResponse.data.deadline,
         );
 
         final List<Task> taskList = [];

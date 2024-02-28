@@ -120,7 +120,7 @@ class ChatUi extends StatelessWidget {
           title: Text(userName),
           elevation: 0,
         ),
-        body: GetBuilder(
+        body: GetBuilder<UserChatController>(
           init: chatController,
           builder: (context) {
             chatgroup = chatController.userid > userid ? '${chatController.userid}to$userid' : '${userid}to${chatController.userid}';
@@ -223,10 +223,10 @@ class ChatUi extends StatelessWidget {
 }
 
 Widget _chatInput(
-  ChatControl,
+  UserChatController chatControl,
   userid,
-  _scrollController,
-  Function _showDialog,
+  scrollController,
+  Function showDialog,
 ) {
   return Row(
     children: [
@@ -242,7 +242,7 @@ Widget _chatInput(
                 //emoji button
                 IconButton(
                   onPressed: () async {
-                    _showDialog();
+                    showDialog();
                     // ----------- Pick Image
 
                     // final ImagePicker picker = ImagePicker();
@@ -261,7 +261,7 @@ Widget _chatInput(
 
                 Expanded(
                   child: TextField(
-                    controller: ChatControl.selectedMessage,
+                    controller: chatControl.message,
                     // controller: _textController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
@@ -280,9 +280,9 @@ Widget _chatInput(
                   angle: -45 * (3.14159265359 / 180),
                   child: IconButton(
                     onPressed: () async {
-                      ChatControl.sendmessagetouser(userid);
+                      chatControl.sendmessagetouser(userid);
 
-                      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                      scrollController.jumpTo(scrollController.position.maxScrollExtent);
                     },
                     icon: const Icon(
                       Icons.send,

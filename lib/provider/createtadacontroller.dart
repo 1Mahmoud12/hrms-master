@@ -35,11 +35,11 @@ class CreateTadaController extends GetxController {
   }
 
   Future<String> createTada() async {
-    EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
+    //  EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
     final response = await repository.createTada(titleController.text, descriptionController.text, expensesController.text, fileList);
     debugPrint(response.toString());
-    EasyLoading.dismiss();
+    //EasyLoading.dismiss();
 
     if (response.statusCode == 200) {
       showToast('Tada has been submitted');
@@ -47,7 +47,7 @@ class CreateTadaController extends GetxController {
       return 'Loaded';
     } else {
       final errorMessage = response.message;
-      print(errorMessage);
+      debugPrint(errorMessage);
       throw errorMessage;
     }
   }

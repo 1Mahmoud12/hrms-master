@@ -1,16 +1,20 @@
+import 'package:cnattendance/core/component/cache_image.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/utils/assets.dart';
+import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class TeamProjectScreen extends StatelessWidget {
   const TeamProjectScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final model = Get.find<ProjectDetailController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Team Project', style: Styles.styleHeader),
@@ -19,7 +23,7 @@ class TeamProjectScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .05, vertical: context.screenHeight * .02),
         children: [
           ...List.generate(
-            5,
+            model.project.value.members.length > 5 ? 5 : model.project.value.members.length,
             (index) => Container(
               height: context.screenHeight * .08,
               padding: EdgeInsets.all(10.w),
@@ -29,9 +33,10 @@ class TeamProjectScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: const AssetImage(Assets.temporaryPerson),
-                    radius: 20.r,
+                  CacheImage(
+                    imageUrl: model.project.value.members[index].image,
+                    circle: true,
+                    //  radius: 20.r,
                   ),
                   15.ESW(),
                   Column(
@@ -39,13 +44,13 @@ class TeamProjectScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'name Team',
+                          model.project.value.members[index].name,
                           style: Styles.style14400.copyWith(),
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          'Mechanics',
+                          model.project.value.members[index].post,
                           style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
                         ),
                       ),

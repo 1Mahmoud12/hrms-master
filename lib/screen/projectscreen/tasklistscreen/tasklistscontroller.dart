@@ -31,7 +31,7 @@ class TaskListController extends GetxController {
     final uri = Uri.parse(EndPoints.TASK_LIST_URL);
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',

@@ -15,6 +15,7 @@ import 'package:cnattendance/screen/profile/profilescreen.dart';
 import 'package:cnattendance/screen/securitycheck/Securitycheck.dart';
 import 'package:cnattendance/screen/tadascreen/tadascreen.dart';
 import 'package:cnattendance/utils/assets.dart';
+import 'package:cnattendance/utils/profile_image_widget.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:cnattendance/widget/log_out_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -65,21 +66,10 @@ class MoreScreenNew extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(60),
-                child: SizedBox(
+                child: const SizedBox(
                   width: 100,
                   height: 100,
-                  child: Image.network(
-                    userCache!.avatar ?? '',
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        'assets/images/dummy_avatar.png',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      );
-                    },
-                  ),
+                  child: ProfileImageWidget(),
                 ),
               ),
             ),
@@ -127,7 +117,7 @@ class MoreScreenNew extends StatelessWidget {
               pushNewScreen(context, screen: TaskListScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
             },
           ),*/
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Meeting'.tr,
                 svgvalue: Assets.meeting,
@@ -135,7 +125,7 @@ class MoreScreenNew extends StatelessWidget {
                   pushNewScreen(context, screen: const MeetingScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Holiday'.tr,
                 svgvalue: Assets.weekend,
@@ -143,7 +133,7 @@ class MoreScreenNew extends StatelessWidget {
                   pushNewScreen(context, screen: const HolidayScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Team_Sheet'.tr,
                 svgvalue: Assets.team,
@@ -156,7 +146,7 @@ class MoreScreenNew extends StatelessWidget {
                   );
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Leave_Calendar'.tr,
                 svgvalue: Assets.calender,
@@ -169,7 +159,7 @@ class MoreScreenNew extends StatelessWidget {
                   );
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Notices'.tr,
                 svgvalue: Assets.notiesMore,
@@ -184,7 +174,7 @@ class MoreScreenNew extends StatelessWidget {
                 pushNewScreen(context, screen: const SupportScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
               },
             ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Tada'.tr,
                 svgvalue: Assets.tada,
@@ -235,7 +225,7 @@ class MoreScreenNew extends StatelessWidget {
                 );
               },
             ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Securitiy'.tr,
                 svgvalue: Assets.Security,
@@ -260,7 +250,7 @@ class MoreScreenNew extends StatelessWidget {
                 );
               },
             ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Financial requests'.tr,
                 svgvalue: Assets.financialRequest,
@@ -273,7 +263,7 @@ class MoreScreenNew extends StatelessWidget {
                   );
                 },
               ),
-            if (genderUser != RoleId.eight.name.tr || genderUser != RoleId.eleven.name.tr)
+            if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Administrativa requests'.tr,
                 svgvalue: Assets.AdministrativaRequests,
@@ -300,7 +290,7 @@ class MoreScreenNew extends StatelessWidget {
                 //  pushNewScreen(context, screen: SecurityCheckScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
               },
             ),
-            50.ESH(),
+            //10.ESH(),
             /*Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
             child: Container(

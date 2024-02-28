@@ -1,7 +1,7 @@
+import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/createtadacontroller.dart';
-import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
@@ -77,25 +77,34 @@ class CreateTadaScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(Assets.pdfSVG),
-                      10.ESW(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'PDF',
-                            style: Styles.style14400.copyWith(color: AppColors.subTextColor),
+                /* ...List.generate(
+                  model.fileList.length,
+                  (index) => ,
+                ),*/
+                Obx(
+                  () => ListView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: model.fileList.length,
+                    itemBuilder: (context, index) {
+                      final file = model.fileList[index];
+                      return ListTile(
+                        leading: SvgPicture.asset(Assets.pdfSVG),
+                        title: Text(
+                          file.name,
+                          style: const TextStyle(color: AppColors.black),
+                        ),
+                        trailing: GestureDetector(
+                          onTap: () {
+                            model.removeItem(index);
+                          },
+                          child: const Icon(
+                            Icons.close,
+                            color: AppColors.black,
                           ),
-                          Text(
-                            '${'Uploaded on'.tr} ${DateTime.now().toString().substring(0, 10)}',
-                            style: Styles.style14500.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ],
+                        ),
+                      );
+                    },
                   ),
                 ),
                 10.ESH(),
@@ -115,31 +124,6 @@ class CreateTadaScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Obx(
-                  () => ListView.builder(
-                    primary: false,
-                    shrinkWrap: true,
-                    itemCount: model.fileList.length,
-                    itemBuilder: (context, index) {
-                      final file = model.fileList[index];
-                      return ListTile(
-                        title: Text(
-                          file.name,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        trailing: GestureDetector(
-                          onTap: () {
-                            model.removeItem(index);
-                          },
-                          child: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
               ],
             ),
           ),
@@ -148,3 +132,23 @@ class CreateTadaScreen extends StatelessWidget {
     );
   }
 }
+/*
+Row(
+children: [
+SvgPicture.asset(Assets.pdfSVG),
+10.ESW(),
+Column(
+crossAxisAlignment: CrossAxisAlignment.start,
+children: [
+Text(
+model.fileList[index].name,
+style: Styles.style14400.copyWith(color: AppColors.subTextColor),
+),
+Text(
+'${'Uploaded on'.tr} ${DateTime.now().toString().substring(0, 10)}',
+style: Styles.style14500.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w400),
+),
+],
+),
+],
+)*/

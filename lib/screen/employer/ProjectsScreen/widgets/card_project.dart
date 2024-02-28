@@ -1,28 +1,28 @@
+import 'package:cnattendance/core/component/cache_image.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardProject extends StatelessWidget {
-  final double valueSlider;
+  final Project project;
 
-  const CardProject({super.key, required this.valueSlider});
+  const CardProject({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
-    double valueSliderWidget = valueSlider;
-    const String titleProject = 'King Hotel Maintenance';
-    const String subTitleProject = 'Maintenance of 12 elevators at the King Hotel';
+    double valueSliderWidget = project.progress.toDouble();
     return InkWell(
       onTap: () {
         final arguments = {
           'mainImage': Assets.temporaryProjects,
-          'titleProject': titleProject,
-          'subTitleProject': subTitleProject,
+          'titleProject': project.name,
           'progress': valueSliderWidget,
+          'id': project.id,
         };
         Navigator.pushNamed(context, AppRoute.cardDetailsProject, arguments: arguments);
       },
@@ -42,14 +42,14 @@ class CardProject extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    titleProject,
+                    project.name,
                     style: Styles.style18700,
                   ),
                   //  10.ESH(),
-                  Text(
-                    subTitleProject,
+                  /* Text(
+                    project.description,
                     style: Styles.style14500.copyWith(color: AppColors.textColorTextFormField),
-                  ),
+                  ),*/
                   //20.ESH(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,19 +57,24 @@ class CardProject extends StatelessWidget {
                       Stack(
                         children: [
                           ...List.generate(
-                            5,
+                            project.members.length > 5 ? 5 : project.members.length,
                             (index) => Padding(
-                              padding: EdgeInsets.only(left: index * 18.0),
-                              child: Image.asset(Assets.temporaryPerson),
+                              padding: EdgeInsets.only(left: index * 12.0),
+                              child: CacheImage(
+                                imageUrl: project.members[index].image,
+                                width: 20,
+                                height: 20,
+                                circle: true,
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5 * 18.0),
+                            padding: const EdgeInsets.only(left: 5 * 12.0),
                             child: Container(
-                              padding: EdgeInsets.all(context.screenWidth * .015),
+                              //padding: const EdgeInsets.all(1),
                               decoration: const BoxDecoration(color: AppColors.cLightPlusNumber, shape: BoxShape.circle),
                               child: Text(
-                                '+5',
+                                '+${project.members.length - 5}',
                                 style: Styles.style12400.copyWith(color: AppColors.cPlusNumber),
                               ),
                             ),
@@ -77,7 +82,7 @@ class CardProject extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '8 Days Left',
+                        project.date,
                         style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
                       ),
                     ],

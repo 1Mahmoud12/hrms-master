@@ -2,7 +2,6 @@ import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/teamsheetprovider.dart';
 import 'package:cnattendance/screen/TeamsheetScreen/team_sheet_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -39,13 +38,12 @@ class TeamSheetState extends State<TeamSheet> {
   }
 
   Future<String> getTeam() async {
-    setState(() async {
-      isLoading = true;
-      EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
-      await Provider.of<TeamSheetProvider>(context, listen: false).getTeam();
-      isLoading = false;
-      EasyLoading.dismiss();
-    });
+    isLoading = true;
+    // EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
+    await Provider.of<TeamSheetProvider>(context, listen: false).getTeam();
+    isLoading = false;
+    // EasyLoading.dismiss();
+    setState(() {});
 
     return 'Loaded';
   }
@@ -55,7 +53,7 @@ class TeamSheetState extends State<TeamSheet> {
     final provider = Provider.of<TeamSheetProvider>(context);
     return WillPopScope(
       onWillPop: () async {
-        return !isLoading;
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(

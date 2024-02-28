@@ -31,8 +31,9 @@ class NotificationCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: AppColors.cBorderSVG)),
-                    child: SvgPicture.asset(Assets.creditNotification),),
+                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: AppColors.cBorderSVG)),
+                  child: SvgPicture.asset(Assets.creditNotification),
+                ),
                 10.ESW(),
                 Expanded(
                   child: Padding(

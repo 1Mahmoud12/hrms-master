@@ -2,13 +2,14 @@ import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/detailsContractBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/detailsContractBloc/state.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/view/details_elevators.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/details_elevator.dart';
+import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
 import 'package:cnattendance/utils/extensions.dart';
-import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
 
 class DetailsContractProject extends StatelessWidget {
@@ -18,6 +19,8 @@ class DetailsContractProject extends StatelessWidget {
   Widget build(BuildContext context) {
     //Create an instance of ScreenshotController
     final ScreenshotController screenshotController = ScreenshotController();
+    final model = Get.find<ProjectDetailController>();
+
     return BlocProvider(
       create: (context) => DetailsContractCubit(),
       child: Scaffold(
@@ -29,13 +32,14 @@ class DetailsContractProject extends StatelessWidget {
           actions: [
             BlocBuilder<DetailsContractCubit, DetailsContractState>(
               builder: (context, state) => IconButton(
-                  onPressed: () async {
-                    await screenshotController.capture().then((value) async {
-                      await DetailsContractCubit.of(context).savePdf(screen: value);
-                    });
-                  },
-                  icon: const Icon(Icons.save_alt)),
-            )
+                onPressed: () async {
+                  await screenshotController.capture().then((value) async {
+                    await DetailsContractCubit.of(context).savePdf(screen: value);
+                  });
+                },
+                icon: const Icon(Icons.save_alt),
+              ),
+            ),
           ],
         ),
         body: Screenshot(
@@ -57,11 +61,11 @@ class DetailsContractProject extends StatelessWidget {
                       'Details',
                       style: Styles.style14500.copyWith(color: Colors.black),
                     ),
-                    const DetailsElevatorRow(nameDetails: 'Start Date', executeDetails: '10 DEC 2023'),
-                    const DetailsElevatorRow(nameDetails: 'Installation', executeDetails: 'Installation'),
-                    const DetailsElevatorRow(nameDetails: 'Supplying duration', executeDetails: '5 Years'),
-                    const DetailsElevatorRow(nameDetails: 'Number of elevators', executeDetails: '15'),
-                    const DetailsElevatorRow(nameDetails: 'the cost', executeDetails: '10,000 EGY'),
+                    DetailsElevatorRow(nameDetails: 'Start Date', executeDetails: model.project.value.date),
+                    DetailsElevatorRow(nameDetails: 'Installation', executeDetails: model.project.value.status),
+                    DetailsElevatorRow(nameDetails: 'Supplying duration', executeDetails: model.project.value.deadline),
+                    DetailsElevatorRow(nameDetails: 'Priority', executeDetails: model.project.value.priority),
+                    // DetailsElevatorRow(nameDetails: 'the cost', executeDetails: '${model.project.value.noOfTask} EGY'),
                   ].paddingDirectional(bottom: context.screenHeight * .01),
                 ),
               ),
@@ -80,14 +84,17 @@ class DetailsContractProject extends StatelessWidget {
                         'Description:- \n',
                         style: Styles.style12400.copyWith(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14.sp),
                       ),
-                      ExpandableText(
-                        detailsReport,
+                      Html(
+                        data: model.project.value.description,
+                      ),
+                      /* ExpandableText(
+                        model.project.value.description,
                         expandText: 'see more',
                         linkStyle: Styles.style12400.copyWith(fontWeight: FontWeight.bold, fontSize: 15.sp, color: Colors.black),
                         style: Styles.style12400.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600, color: AppColors.subTextColor),
                         maxLines: 22,
                         collapseText: 'see less',
-                      ),
+                      ),*/
                     ],
                   ),
                 ),

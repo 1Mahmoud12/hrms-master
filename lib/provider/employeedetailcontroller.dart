@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/employeedetailresponse/Data.dart';
 import 'package:cnattendance/data/source/network/model/employeedetailresponse/employeedetailresponse.dart';
+import 'package:cnattendance/model/profile.dart' as up;
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:cnattendance/model/profile.dart' as up;
 import 'package:http/http.dart' as http;
 
 class EmployeeDetailController extends GetxController {

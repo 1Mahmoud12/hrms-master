@@ -4,6 +4,7 @@ import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/state.dart';
+import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
@@ -18,6 +19,8 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = Get.find<ProjectDetailController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,9 +42,9 @@ class TasksScreen extends StatelessWidget {
           padding: EdgeInsets.all(context.screenWidth * .02),
           children: [
             ...List.generate(
-              TasksCubit.of(context).steps.length,
+              model.project.value.tasks.length,
               (index) => Dismissible(
-                key: Key(TasksCubit.of(context).steps[index]['nameStep']),
+                key: Key(model.project.value.tasks[index].id!.toString()),
                 background: Container(
                   color: Colors.red,
                   alignment: Alignment.centerLeft,

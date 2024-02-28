@@ -1,21 +1,23 @@
-import 'package:cnattendance/core/component/slider/circular_Slider.dart';
+import 'package:cnattendance/core/component/slider/circular_slider.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/comments.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/status_project_details.dart';
+import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class AllProjectDetails extends StatelessWidget {
   const AllProjectDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //  final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
+    final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
     //const String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
-    const String titleProject = 'titleProject'; // arguments['titleProject'] ?? '';
+    final String titleProject = arguments['titleProject']; // arguments['titleProject'] ?? '';
     // const String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
-
+    final model = Get.put(ProjectDetailController()).getProjectOverview();
     const int newComments = 8;
     return Scaffold(
       appBar: AppBar(

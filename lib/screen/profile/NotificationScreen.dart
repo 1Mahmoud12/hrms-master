@@ -1,4 +1,3 @@
-import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/notificationprovider.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
@@ -6,7 +5,6 @@ import 'package:cnattendance/widget/notification/notificationlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -49,49 +47,54 @@ class NotificationState extends State<Notification> {
   Widget build(BuildContext context) {
     final provider = Provider.of<NotificationProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'notification'.tr,
-            style: Styles.styleHeader,
-          ),
-
-          // backgroundColor: Color(0xffcfcdcb),
+      appBar: AppBar(
+        title: Text(
+          'notification'.tr,
+          style: Styles.styleHeader,
         ),
+
         // backgroundColor: Color(0xffcfcdcb),
-        body: RefreshIndicator(
-            onRefresh: () {
-              Provider.of<NotificationProvider>(context, listen: false).page = 1;
-              return getNotification();
-            },
-            child: Column(
-              children: [
-                Card(
-                  elevation: 0,
-                  child: ToggleSwitch(
-                    cornerRadius: 20,
-                    activeBgColor: const [AppColors.primaryColor],
-                    activeFgColor: Colors.white,
-                    inactiveFgColor: AppColors.primaryColor,
-                    inactiveBgColor: AppColors.greyWhite,
-                    minWidth: Get.width * 0.4,
-                    minHeight: 34,
-                    initialLabelIndex: provider.indexList,
-                    totalSwitches: 3,
-                    onToggle: (index) {
-                      provider.indexList = index!;
-                      provider.toggle(index);
-                    },
-                    customTextStyles: [
-                      Styles.style14500.copyWith(color: provider.indexList == 0 ? AppColors.white : AppColors.primaryColor),
-                      Styles.style14500.copyWith(color: provider.indexList == 1 ? AppColors.white : AppColors.primaryColor),
-                      Styles.style14500.copyWith(color: provider.indexList == 2 ? AppColors.white : AppColors.primaryColor),
-                    ],
-                    labels: provider.selectLabel,
-                  ),
-                ),
-                10.ESH(),
-                const NotificationList(),
-              ],
-            ),),);
+      ),
+      // backgroundColor: Color(0xffcfcdcb),
+      body: RefreshIndicator(
+        onRefresh: () {
+          Provider.of<NotificationProvider>(context, listen: false).page = 1;
+          return getNotification();
+        },
+        child: ListView(
+          children: const [
+            /*Center(
+              child: ToggleSwitch(
+                cornerRadius: 20,
+                activeBgColor: const [AppColors.primaryColor],
+                activeFgColor: Colors.white,
+                inactiveFgColor: AppColors.primaryColor,
+                inactiveBgColor: AppColors.greyWhite,
+                minWidth: Get.width * 0.4,
+                minHeight: 34,
+                initialLabelIndex: provider.indexList,
+                totalSwitches: 3,
+                animate: true,
+                animationDuration: 500,
+                onToggle: (index) {
+                  provider.indexList = index!;
+                  provider.toggle(index);
+                },
+                customTextStyles: [
+                  Styles.style14500.copyWith(color: provider.indexList == 0 ? AppColors.white : AppColors.primaryColor),
+                  Styles.style14500.copyWith(color: provider.indexList == 1 ? AppColors.white : AppColors.primaryColor),
+                  Styles.style14500.copyWith(color: provider.indexList == 2 ? AppColors.white : AppColors.primaryColor),
+                ],
+                labels: provider.selectLabel,
+              ),
+            ),*/
+            SizedBox(
+              height: 10,
+            ),
+            NotificationList(),
+          ],
+        ),
+      ),
+    );
   }
 }

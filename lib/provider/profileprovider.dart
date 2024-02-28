@@ -32,14 +32,14 @@ class ProfileProvider with ChangeNotifier {
     return _profile;
   }
 
-  Future<Profileresponse> getProfile() async {
+  Future<ProfileResponse> getProfile() async {
     final uri = Uri.parse(EndPoints.PROFILE_URL);
 
     final Preferences preferences = Preferences();
 
     checkValueInPref(preferences);
 
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ class ProfileProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         debugPrint(responseData.toString());
 
-        final responseJson = Profileresponse.fromJson(responseData);
+        final responseJson = ProfileResponse.fromJson(responseData);
         parseUser(responseJson.data);
 
         return responseJson;
@@ -94,7 +94,7 @@ class ProfileProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Profileresponse> updateProfile(
+  Future<ProfileResponse> updateProfile(
     String name,
     String email,
     String address,
@@ -106,7 +106,7 @@ class ProfileProvider with ChangeNotifier {
     final uri = Uri.parse(EndPoints.EDIT_PROFILE_URL);
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     dynamic response;
     try {
@@ -137,13 +137,13 @@ class ProfileProvider with ChangeNotifier {
         response = await requests.send();
 
         await response.stream.transform(utf8.decoder).listen((value) {
-          final responseJson = Profileresponse.fromJson(json.decode(value));
-          if (responseJson.statusCode == 200) {
+          if (json.decode(value)['status_code'] == 200) {
+            final responseJson = ProfileResponse.fromJson(json.decode(value));
             parseUser(responseJson.data);
             return responseJson;
           } else {
-            final errorMessage = responseJson.message;
-            throw errorMessage;
+            final errorMessage = json.decode(value)['message'];
+            showToast(errorMessage);
           }
         });
 
@@ -170,7 +170,7 @@ class ProfileProvider with ChangeNotifier {
         final responseData = json.decode(response.body);
         if (response.statusCode == 200) {
           debugPrint(responseData.toString());
-          final responseJson = Profileresponse.fromJson(responseData);
+          final responseJson = ProfileResponse.fromJson(responseData);
 
           parseUser(responseJson.data);
           return responseJson;

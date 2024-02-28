@@ -44,13 +44,12 @@ class HolidayState extends State<Holiday> {
   }
 
   Future<String> loadHolidays() async {
-    setState(() async {
-      isLoading = true;
-      EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
-      await Provider.of<HolidayProvider>(context, listen: false).getHolidays();
-      isLoading = false;
-      EasyLoading.dismiss();
-    });
+    isLoading = true;
+    EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
+    await Provider.of<HolidayProvider>(context, listen: false).getHolidays();
+    isLoading = false;
+    EasyLoading.dismiss();
+    setState(() {});
 
     return 'loaded';
   }
@@ -64,16 +63,17 @@ class HolidayState extends State<Holiday> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Platform.isAndroid
-                  ? const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    )
-                  : const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    ),),
+            onPressed: () => Navigator.pop(context),
+            icon: Platform.isAndroid
+                ? const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  )
+                : const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+          ),
           title: Text(
             'Holiday'.tr,
             style: Styles.styleHeader,

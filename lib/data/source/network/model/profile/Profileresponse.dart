@@ -1,19 +1,19 @@
 import 'Profile.dart';
 
-class Profileresponse {
-  Profileresponse({
+class ProfileResponse {
+  ProfileResponse({
     required this.status,
     required this.message,
     required this.statusCode,
     required this.data,
   });
 
-  factory Profileresponse.fromJson(dynamic json) {
-    return Profileresponse(
-        status: json['status'],
-        message: json['message'],
-        statusCode: json['status_code'],
-        data: Profile.fromJson(json['data'] ?? []),
+  factory ProfileResponse.fromJson(dynamic json) {
+    return ProfileResponse(
+      status: json['status'],
+      message: json['message'],
+      statusCode: json['status_code'],
+      data: Profile.fromJson(json['data'] ?? []),
     );
   }
 

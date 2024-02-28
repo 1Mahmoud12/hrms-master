@@ -4,18 +4,19 @@ class ProjectLeader {
   String name;
   String post;
 
-  ProjectLeader(
-      {required this.avatar,
-      required this.id,
-      required this.name,
-      required this.post,});
+  ProjectLeader({
+    required this.avatar,
+    required this.id,
+    required this.name,
+    required this.post,
+  });
 
   factory ProjectLeader.fromJson(Map<String, dynamic> json) {
     return ProjectLeader(
       avatar: json['avatar'],
       id: json['id'],
       name: json['name'],
-      post: json['post'],
+      post: json['post'] ?? '',
     );
   }
 

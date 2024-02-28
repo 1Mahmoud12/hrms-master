@@ -12,30 +12,29 @@ class Data {
   String name;
   String priority;
   List<ProjectLeader> project_leader;
-  String start_date;
+  String startDate;
   String status;
   int progress_percent;
 
-  Data(
-      {required this.assigned_member,
-      required this.assigned_task_count,
-      required this.client_name,
-      required this.cover_pic,
-      required this.deadline,
-      required this.description,
-      required this.id,
-      required this.name,
-      required this.priority,
-      required this.project_leader,
-      required this.start_date,
-      required this.status,
-      required this.progress_percent,});
+  Data({
+    required this.assigned_member,
+    required this.assigned_task_count,
+    required this.client_name,
+    required this.cover_pic,
+    required this.deadline,
+    required this.description,
+    required this.id,
+    required this.name,
+    required this.priority,
+    required this.project_leader,
+    required this.startDate,
+    required this.status,
+    required this.progress_percent,
+  });
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      assigned_member:(json['assigned_member'] as List)
-              .map((i) => AssignedMember.fromJson(i))
-              .toList(),
+      assigned_member: (json['assigned_member'] as List).map((i) => AssignedMember.fromJson(i)).toList(),
       assigned_task_count: json['assigned_task_count'],
       client_name: json['client_name'],
       cover_pic: json['cover_pic'],
@@ -44,10 +43,8 @@ class Data {
       id: json['id'],
       name: json['name'],
       priority: json['priority'],
-      project_leader: (json['project_leader'] as List)
-              .map((i) => ProjectLeader.fromJson(i))
-              .toList(),
-      start_date: json['start_date'],
+      project_leader: (json['project_leader'] as List).map((i) => ProjectLeader.fromJson(i)).toList(),
+      startDate: json['start_date'],
       status: json['status'],
       progress_percent: json['progress_percent'],
     );
@@ -63,13 +60,11 @@ class Data {
     data['id'] = id;
     data['name'] = name;
     data['priority'] = priority;
-    data['start_date'] = start_date;
+    data['start_date'] = startDate;
     data['status'] = status;
     data['progress_percent'] = progress_percent;
-    data['assigned_member'] =
-        assigned_member.map((v) => v.toJson()).toList();
-      data['project_leader'] =
-        project_leader.map((v) => v.toJson()).toList();
-      return data;
+    data['assigned_member'] = assigned_member.map((v) => v.toJson()).toList();
+    data['project_leader'] = project_leader.map((v) => v.toJson()).toList();
+    return data;
   }
 }

@@ -49,11 +49,13 @@ import 'package:cnattendance/screen/profile/profilescreen.dart';
 import 'package:cnattendance/screen/splashscreen.dart';
 import 'package:cnattendance/utils/navigationservice.dart';
 import 'package:cnattendance/utils/notification_utility.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:in_app_notification/in_app_notification.dart';
@@ -87,9 +89,67 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   void initState() {
+    notificationMethod();
     // TODO: implement initState
     AwesomeNotifications().setListeners(onActionReceivedMethod: NotificationUtility.onActionReceivedMethod);
     super.initState();
+  }
+
+  Future<void> notificationMethod() async {
+    final NotificationSettings settings = await FirebaseMessaging.instance.requestPermission();
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      debugPrint('User granted permission');
+    } else {
+      debugPrint('User declined or has not accepted permission');
+    }
+
+    await NotificationUtility.initializeAwesomeNotification();
+
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        // This is just a basic example. For real apps, you must show some
+        // friendly dialog box before call the request method.
+        // This is very important to not harm the user experience
+        // AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+
+    FirebaseMessaging.onMessage.listen((event) {
+      FlutterRingtonePlayer.play(
+        fromAsset: 'assets/sound/beep.mp3',
+      );
+      try {
+        InAppNotification.show(
+          child: Card(
+            margin: const EdgeInsets.all(15),
+            child: ListTile(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              leading: const SizedBox(height: double.infinity, child: Icon(Icons.notifications)),
+              iconColor: const Color(0xff011754),
+              textColor: const Color(0xff011754),
+              minVerticalPadding: 10,
+              minLeadingWidth: 0,
+              tileColor: Colors.white,
+              title: Text(
+                event.notification!.title!,
+              ),
+              subtitle: Text(
+                event.notification!.body!,
+                style: const TextStyle(color: Colors.grey),
+              ),
+            ),
+          ),
+          context: NavigationService.navigatorKey.currentState!.context,
+        );
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      debugPrint('Message clicked!');
+    });
   }
 
   @override

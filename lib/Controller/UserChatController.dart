@@ -70,7 +70,7 @@ class UserChatController extends GetxController {
           notification.SendChatNotification(usermessage, id);
         },
         // ignore: invalid_return_type_for_catch_error
-      ).catchError((e) => debugPrint(e));
+      ).catchError((e) => debugPrint('$e'));
     }
   }
 
@@ -171,7 +171,7 @@ class UserChatController extends GetxController {
           debugPrint('done');
         },
         // ignore: invalid_return_type_for_catch_error
-      ).catchError((e) => debugPrint(e));
+      ).catchError((e) => debugPrint('$e'));
     } else if (attactmenttype == 'image') {
       usersdata.add({
         'sendfrom': user.id,
@@ -191,7 +191,7 @@ class UserChatController extends GetxController {
           debugPrint('done');
         },
         // ignore: invalid_return_type_for_catch_error
-      ).catchError((e) => debugPrint(e));
+      ).catchError((e) => debugPrint('$e'));
     }
   }
 

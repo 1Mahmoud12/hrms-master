@@ -20,7 +20,7 @@ class ProjectListScreenController extends GetxController {
     final uri = Uri.parse(EndPoints.PROJECT_LIST_URL);
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -58,7 +58,7 @@ class ProjectListScreenController extends GetxController {
               project.id,
               project.name,
               project.description,
-              project.start_date,
+              project.startDate,
               project.priority,
               project.status,
               project.progress_percent,
@@ -66,6 +66,7 @@ class ProjectListScreenController extends GetxController {
               members,
               leaders,
               [],
+              project.deadline,
             ),
           );
         }
@@ -75,11 +76,11 @@ class ProjectListScreenController extends GetxController {
         return 'loaded';
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         throw errorMessage;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       rethrow;
     }
   }

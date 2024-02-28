@@ -22,21 +22,21 @@ class TaskDetailController extends GetxController {
   RxList leaderImages = [].obs;
 
   Future<TaskDetailResponse> getTaskOverview() async {
-    print("id ha ${Get.arguments["id"]}");
+    debugPrint("id ha ${Get.arguments["id"]}");
 
     final uri = Uri.parse(
       "${EndPoints.TASK_DETAIL_URL}/${Get.arguments["id"]}",
     );
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     };
-    // print(token);
-    // print("wapis id ha ha ${Get.arguments["id"]}");
+    // debugPrint(token);
+    // debugPrint("wapis id ha ha ${Get.arguments["id"]}");
 
     try {
       EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
@@ -50,10 +50,10 @@ class TaskDetailController extends GetxController {
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        print('1st chala');
+        debugPrint('1st chala');
         final taskResponse = TaskDetailResponse.fromJson(responseData);
 
-        print('2nd chala');
+        debugPrint('2nd chala');
 
         final List<Member> members = [];
         memberImages.clear();
@@ -106,11 +106,11 @@ class TaskDetailController extends GetxController {
         return taskResponse;
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         throw errorMessage;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       rethrow;
     }
   }
@@ -119,7 +119,7 @@ class TaskDetailController extends GetxController {
     final uri = Uri.parse('${EndPoints.UPDATE_CHECKLIST_TOGGLE_URL}/$checkListId');
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -144,11 +144,11 @@ class TaskDetailController extends GetxController {
         return true;
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         return false;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       return false;
     }
   }
@@ -157,7 +157,7 @@ class TaskDetailController extends GetxController {
     final uri = Uri.parse('${EndPoints.UPDATE_TASK_TOGGLE_URL}/$taskId');
 
     final Preferences preferences = Preferences();
-    final String token = await preferences.getToken();
+    final String token = preferences.getToken();
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -182,21 +182,21 @@ class TaskDetailController extends GetxController {
         return true;
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         return false;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       return false;
     }
   }
 
-  Future<void> launchUrls(String _url) async {
+  Future<void> launchUrls(String url) async {
     if (!await launchUrl(
-      Uri.parse(_url),
+      Uri.parse(url),
       mode: LaunchMode.externalApplication,
     )) {
-      throw Exception('Could not launch $_url');
+      throw Exception('Could not launch $url');
     }
   }
 

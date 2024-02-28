@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/provider/profileprovider.dart';
+import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,7 +23,7 @@ class HeadingState extends State<Heading> {
 
     final provider = Provider.of<ProfileProvider>(context, listen: false);
     final profile = Provider.of<ProfileProvider>(context).profile;
-    debugPrint(profile.avatar);
+    debugPrint('Now Please ==>${profile.avatar == ''}');
     return WillPopScope(
       onWillPop: () async {
         return !isLoading;
@@ -32,18 +34,19 @@ class HeadingState extends State<Heading> {
           children: [
             GestureDetector(
               onTap: () async {
-                final ImagePicker _picker = ImagePicker();
-                final XFile? image = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50, maxWidth: 500);
+                final ImagePicker picker = ImagePicker();
+                final XFile? image = await picker.pickImage(source: ImageSource.gallery, imageQuality: 50, maxWidth: 500);
                 if (image != null) {
-                  setState(() async {
-                    EasyLoading.show(status: 'Changing....', maskType: EasyLoadingMaskType.black);
-                    try {
-                      isLoading = true;
-                      await provider.updateProfile('', '', '', '', '', '', File(image.path));
-                    } catch (e) {}
-                    isLoading = false;
-                    EasyLoading.dismiss();
-                  });
+                  EasyLoading.show(status: 'Changing....', maskType: EasyLoadingMaskType.black);
+                  try {
+                    isLoading = true;
+                    await provider.updateProfile('', '', '', '', '', '', File(image.path));
+                  } catch (e) {
+                    showToast(e.toString());
+                  }
+                  isLoading = false;
+                  EasyLoading.dismiss();
+                  setState(() {});
                 }
               },
               child: ClipRRect(
@@ -54,15 +57,13 @@ class HeadingState extends State<Heading> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: profile.avatar == ''
-                          ? const AssetImage('assets/images/dummy_avatar.png') as ImageProvider<Object>
-                          : NetworkImage(profile.avatar),
+                      image: profile.avatar == '' ? NetworkImage(userCache!.avatar!) : NetworkImage(profile.avatar),
                     ),
                   ),
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     width: double.infinity,
-                    color: Colors.black12,
+                    color: Colors.black38,
                     padding: const EdgeInsets.all(20),
                     child: const Text(
                       'Change',
