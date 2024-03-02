@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cnattendance/data/source/datastore/preferences.dart';
+import 'package:cnattendance/firebase_obtion.dart';
 import 'package:cnattendance/my_app.dart';
 import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/utils/bloc_observe.dart';
@@ -25,15 +26,7 @@ void main() async {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark),
   );*/
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: 'AIzaSyBWtbsRLRj-H15qot9KndJ4yMYRupdYHSk',
-      appId: '1:112139824312:android:3a6712600d5fc5f6a7584d',
-      messagingSenderId: '112139824312',
-      projectId: 'rak-elevator',
-      storageBucket: 'rak-elevator.appspot.com',
-    ),
-  );
+  await initializeFirebaseApp();
 
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
 
