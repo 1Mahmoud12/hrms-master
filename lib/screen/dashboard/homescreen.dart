@@ -1,4 +1,5 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/provider/dashboardprovider.dart';
 import 'package:cnattendance/provider/prefprovider.dart';
 import 'package:cnattendance/utils/endpoints.dart';
@@ -28,6 +29,12 @@ class HomeScreenState extends State<HomeScreen> {
     super.didChangeDependencies();
   }
 
+  @override
+  void initState() {
+    loadDashboard();
+    super.initState();
+  }
+
   void locationStatus() async {
     try {
       final position = await LocationStatus().determinePosition();
@@ -49,16 +56,16 @@ class HomeScreenState extends State<HomeScreen> {
     final fcm = await FirebaseMessaging.instance.getToken();
     debugPrint(fcm.toString());
     try {
-      final dashboardResponse = await Provider.of<DashboardProvider>(context, listen: false).getDashboard();
+      await Provider.of<DashboardProvider>(context, listen: false).getDashboard();
 
-      final user = dashboardResponse.data.user;
+      final user = userCache!;
 
-      Provider.of<CustomerProvider>(context, listen: false).saveBasicUser(
-          User(id: user.id, name: user.name, roleId: int.parse(user.roleId), email: user.email, username: user.username, avatar: user.avatar));
+      Provider.of<CustomerProvider>(context, listen: false)
+          .saveBasicUser(User(id: user.id, name: user.name, roleId: user.roleId, email: user.email, username: user.username, avatar: user.avatar));
 
       return 'loaded';
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('Load Error $e');
       return 'loaded';
     }
   }

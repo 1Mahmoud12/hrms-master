@@ -1,24 +1,29 @@
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_elevator_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/details_elevator.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
+import 'package:cnattendance/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 class HeaderDetailsContract extends StatelessWidget {
   final String startDate;
   final String endDate;
   final String location;
+  final List<Reports>? reports;
 
   const HeaderDetailsContract({
     super.key,
     required this.startDate,
     required this.endDate,
     required this.location,
+    this.reports,
   });
 
   @override
@@ -74,74 +79,79 @@ class HeaderDetailsContract extends StatelessWidget {
         ),
         Column(
           children: List.generate(
-            10,
-            (index) => InkWell(
-              onTap: () {
-                final arguments = {
-                  'maintenanceEngineer': 'Name Technical',
-                  'customerName': 'Customer Name',
-                  'address': 'Egypt, Assut',
-                  'phone': '120932437435',
-                  'reportDate': '24th Sep 2023',
-                  'description': 'Description',
-                  'elevatorName': 'Elevator 1',
-                };
-                Navigator.pushNamed(context, AppRoute.allDetailsReport, arguments: arguments);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(3.0),
-                margin: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.cBorderDecoration),
-                        shape: BoxShape.circle,
-                      ),
-                      padding: EdgeInsets.all(10.w),
-                      child: SvgPicture.asset(Assets.FileSVG),
-                    ),
-                    15.ESW(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Report 1',
-                              style: Styles.style18700,
-                            ),
-                            5.ESW(),
-                            Text(
-                              'By Name Technical',
-                              style: Styles.style12400.copyWith(color: AppColors.subTextColor),
-                            ),
-                          ],
+            reports != null ? reports!.length : 0,
+            (index) {
+              final DateTime parsedDate = Utils.convertDateFromBackEnd(dateBackEnd: reports![index].updatedAt!);
+              final String formattedDate = DateFormat('MMM yyyy').format(parsedDate);
+
+              return InkWell(
+                onTap: () {
+                  final arguments = {
+                    'maintenanceEngineer': 'Name Technical',
+                    'customerName': 'Customer Name',
+                    'address': 'Egypt, Assut',
+                    'phone': '120932437435',
+                    'reportDate': '24th Sep 2023',
+                    'description': 'Description',
+                    'elevatorName': 'Elevator 1',
+                  };
+                  Navigator.pushNamed(context, AppRoute.allDetailsReport, arguments: arguments);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    color: Colors.white,
+                  ),
+                  padding: const EdgeInsets.all(3.0),
+                  margin: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.cBorderDecoration),
+                          shape: BoxShape.circle,
                         ),
-                        SizedBox(
-                          width: context.screenWidth * .65,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: EdgeInsets.all(10.w),
+                        child: SvgPicture.asset(Assets.FileSVG),
+                      ),
+                      15.ESW(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
                               Text(
-                                'March 2023 ',
+                                'Report $index',
+                                style: Styles.style18700,
+                              ),
+                              5.ESW(),
+                              Text(
+                                reports![index].technicalId.toString(),
                                 style: Styles.style12400.copyWith(color: AppColors.subTextColor),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    SvgPicture.asset(Assets.arrowIOS),
-                  ],
+                          SizedBox(
+                            width: context.screenWidth * .65,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  formattedDate,
+                                  style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset(Assets.arrowIOS),
+                    ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ),
       ].paddingDirectional(bottom: context.screenHeight * .01),

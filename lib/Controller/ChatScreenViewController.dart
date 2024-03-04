@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cnattendance/data/source/datastore/preferences.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,9 +19,7 @@ class ChatViewScreenController extends GetxController {
     isLoading = true;
     //EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
-    final Preferences preferences = Preferences();
-    final user = await preferences.getUser();
-    final userid = user.id;
+    final userid = userCache!.id;
     userdata = [];
     final baseUrl = 'https://hr.dar-bayat.com/api/users/chat/$userid';
     final url = Uri.parse(baseUrl);

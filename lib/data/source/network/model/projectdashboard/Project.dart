@@ -10,6 +10,8 @@ class Project {
   int project_progress_percent;
   String startDate;
   String status;
+  String description;
+  String coverPicture;
 
   Project({
     required this.assigned_member,
@@ -21,6 +23,8 @@ class Project {
     required this.project_progress_percent,
     required this.startDate,
     required this.status,
+    required this.description,
+    required this.coverPicture,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
@@ -34,6 +38,9 @@ class Project {
       project_progress_percent: json['project_progress_percent'],
       startDate: json['start_date'],
       status: json['status'],
+      coverPicture:
+          json['coverpicture'].contains('https') ? json['coverpicture'] : 'https://rak.bytes-sa.com/uploads/projects/cover/${json['coverpicture']}',
+      description: json['description'],
     );
   }
 
@@ -47,6 +54,8 @@ class Project {
     data['project_progress_percent'] = project_progress_percent;
     data['start_date'] = startDate;
     data['status'] = status;
+    data['description'] = description;
+    data['coverpicture'] = coverPicture;
     data['assigned_member'] = assigned_member.map((v) => v.toJson()).toList();
     return data;
   }

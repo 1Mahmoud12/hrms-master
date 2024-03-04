@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/profile/Profile.dart';
 import 'package:cnattendance/data/source/network/model/profile/Profileresponse.dart';
@@ -86,7 +87,7 @@ class ProfileProvider with ChangeNotifier {
   }
 
   void checkValueInPref(Preferences preferences) async {
-    final user = await preferences.getUser();
+    final user = userCache!;
     _profile.name = user.name!;
     _profile.username = user.username!;
     _profile.email = user.email!;

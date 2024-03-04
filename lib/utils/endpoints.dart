@@ -22,11 +22,17 @@ class EndPoints {
 
   static const getPeridics = '$API_URL/peridics';
   static const addPeridics = '$API_URL/peridics/add';
+  static const getAllElevators = '$API_URL/peridics/elevators/';
+  static const getOneElevator = '$API_URL/peridics/elevator/';
+  static const getOneReport = '$API_URL/peridics/report/';
+  static const getAllReports = '$API_URL/peridics/reports/';
+  static const addReport = '$API_URL/peridics/report/add';
+  static const updateReport = '$API_URL/peridics/report/update/';
 
   static const DEACTIVATE_URL = '$API_URL/users/deactive';
   static const SIGNUP_URL = '$API_URL/users/creating';
   static const LOGOUT_URL = '$API_URL/logout';
-  static const DASHBOARD_URL = '$API_URL/dashboard';
+  static const DASHBOARD_URL = '$API_URL/dashboard/';
   static const CHECK_IN_URL = '$API_URL/employees/check-in';
   static const CHECK_OUT_URL = '$API_URL/employees/check-out';
   static const ATTENDANCE_REPORT_URL = '$API_URL/employees/attendance-detail';
@@ -49,6 +55,10 @@ class EndPoints {
   static const MEETING_URL = '$API_URL/team-meetings';
 
   static const PROJECT_DASHBOARD_URL = '$API_URL/project-management-dashboard';
+  static const updateProjectDeadlineUrl = '$API_URL/update-projects-deadline';
+  static const updateProjectStatus = '$API_URL/update-projects-status';
+  static const addProjectsAttachmentUrl = '$API_URL/add-projects-attacments';
+  static const deleteProjectsAttachments = '$API_URL/delete-projects-attacments';
   static const PROJECT_LIST_URL = '$API_URL/assigned-projects-list';
   static const PROJECT_DETAIL_URL = '$API_URL/assigned-projects-detail';
   static const TASK_LIST_URL = '$API_URL/assigned-task-list';

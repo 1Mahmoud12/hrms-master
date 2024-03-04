@@ -67,6 +67,7 @@ class DashboardProvider with ChangeNotifier {
   }
 
   Future<Dashboardresponse> getDashboard() async {
+    debugPrint('=== Dashboard ====');
     final uri = Uri.parse(EndPoints.DASHBOARD_URL);
 
     final Preferences preferences = Preferences();
@@ -84,7 +85,7 @@ class DashboardProvider with ChangeNotifier {
     try {
       final response = await http.get(uri, headers: headers);
 
-      debugPrint(response.body);
+      debugPrint('Dashboard Response ====> ${response.body}');
 
       final responseData = json.decode(response.body);
 
@@ -95,7 +96,7 @@ class DashboardProvider with ChangeNotifier {
         updateAttendanceStatus(dashboardResponse.data.employeeTodayAttendance);
         updateOverView(dashboardResponse.data.overview);
 
-        makeWeeklyReport(dashboardResponse.data.employeeWeeklyReport);
+        //  makeWeeklyReport(dashboardResponse.data.employeeWeeklyReport);
 
         final DateTime startTime = DateFormat('hh:mm a').parse(dashboardResponse.data.officeTime.startTime);
         final DateTime endTime = DateFormat('hh:mm a').parse(dashboardResponse.data.officeTime.endTime);
@@ -117,6 +118,7 @@ class DashboardProvider with ChangeNotifier {
         throw errorMessage;
       }
     } catch (e) {
+      debugPrint('Dashboard Error ===> $e');
       rethrow;
     }
   }

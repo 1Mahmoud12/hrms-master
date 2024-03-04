@@ -105,4 +105,5 @@ class Assets {
   static const recieipt = 'assets/icons/recieipt.png';
   static const temporaryProjects = 'assets/images/temporaryProjects.png';
   static const temporaryPerson = 'assets/images/temporaryPerson.png';
+  static const temElevator = 'assets/images/temElevator.jpg';
 }

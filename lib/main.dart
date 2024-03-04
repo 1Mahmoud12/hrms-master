@@ -7,7 +7,6 @@ import 'package:cnattendance/my_app.dart';
 import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/utils/bloc_observe.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

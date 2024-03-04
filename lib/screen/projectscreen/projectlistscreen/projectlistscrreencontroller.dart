@@ -67,6 +67,7 @@ class ProjectListScreenController extends GetxController {
               leaders,
               [],
               project.deadline,
+              project.cover_pic,
             ),
           );
         }

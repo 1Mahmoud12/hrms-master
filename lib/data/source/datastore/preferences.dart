@@ -99,10 +99,11 @@ class Preferences with ChangeNotifier {
   Future<User> getUser() async {
     final prefs = await SharedPreferences.getInstance();
 
+    print('Goo Goo please ${'${prefs.getString(roleId) ?? 0}'}');
     return User(
       id: prefs.getInt(userId) ?? 0,
       name: prefs.getString(userFullName) ?? '',
-      roleId: prefs.getInt(roleId) ?? 0,
+      roleId: int.parse('${prefs.getInt(roleId) ?? 0}'),
       email: prefs.getString(userEmail) ?? '',
       username: prefs.getString(userName) ?? '',
       avatar: prefs.getString(userAvatar) ?? '',

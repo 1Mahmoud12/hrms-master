@@ -16,27 +16,20 @@ class PeriodicCubit extends Cubit<PeriodicState> {
   void getAllProposals({required BuildContext context}) async {
     emit(PeriodicLoadingState());
 
-    //  Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
-    // Preferences.setSaved(value: RoleId.eight.name.tr, key: 'genderUser');
-    //if (context.mounted) return;
-
     await PeriodicDataSource.getAllPeriodic().then((value) async {
       value.fold((l) {
         debugPrint(l.errMessage);
         showToast(l.errMessage);
-        debugPrint('Errrrrrrorrrrrrr');
+        debugPrint('=== Error ====');
         emit(PeriodicErrorState(l.errMessage));
       }, (r) async {
+        debugPrint('=== Success ====');
+
         await Preferences.setSaved(value: jsonEncode(r.toJson()), key: allPeridicsKey);
         allPeridicsCache = r;
 
         emit(PeriodicSuccessState());
       });
     });
-
-    /* setState(() {
-      _isLoading = false;
-      EasyLoading.dismiss();
-    });*/
   }
 }

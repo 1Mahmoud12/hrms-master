@@ -24,6 +24,7 @@ import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
 import 'package:cnattendance/screen/auth/view/presentation/login_screen.dart';
 import 'package:cnattendance/screen/dashboard/bottommenu/bottommenu.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/commentBLoc/cubit.dart';
+import 'package:cnattendance/screen/employer/allProject/presentation/manager/overViewProjectBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/paymentBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/cubit.dart';
@@ -206,6 +207,9 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => LoginCubit(),
+            ),
+            BlocProvider(
+              create: (context) => OverViewProjectCubit(),
             ),
             BlocProvider(
               create: (context) => MainBlocMaintenanceContractCubit(),

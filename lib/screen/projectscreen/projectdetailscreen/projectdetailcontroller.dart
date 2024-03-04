@@ -27,6 +27,7 @@ class ProjectDetailController extends GetxController {
     [],
     [],
     '',
+    '',
   ).obs;
 
   RxList memberImages = [].obs;
@@ -63,23 +64,23 @@ class ProjectDetailController extends GetxController {
         final List<Member> members = [];
         memberImages.clear();
         for (final member in projectResponse.data.assigned_member) {
-          members.add(Member(member.id, member.name, member.avatar, post: member.post ?? ''));
+          members.add(Member(member.id, member.name, member.avatar, post: member.post));
           memberImages.add(member.avatar);
         }
 
         final List<Member> leaders = [];
         leaderImages.clear();
         for (final member in projectResponse.data.project_leader) {
-          leaders.add(Member(member.id, member.name, member.avatar, post: member.post ?? ''));
+          leaders.add(Member(member.id, member.name, member.avatar, post: member.post));
           leaderImages.add(member.avatar);
         }
 
         final List<Attachment> attachments = [];
         for (final attachment in projectResponse.data.attachments) {
           if (attachment.type == 'image') {
-            attachments.add(Attachment(0, attachment.attachment_url, 'image'));
+            attachments.add(Attachment(attachment.id, attachment.attachment_url, 'image'));
           } else {
-            attachments.add(Attachment(0, attachment.attachment_url, 'file'));
+            attachments.add(Attachment(attachment.id, attachment.attachment_url, 'file'));
           }
         }
 
@@ -96,10 +97,10 @@ class ProjectDetailController extends GetxController {
           leaders,
           attachments,
           projectResponse.data.deadline,
+          projectResponse.data.cover_pic,
         );
 
         final List<Task> taskList = [];
-        print(projectResponse.data.assigned_task_detail.length);
         for (final task in projectResponse.data.assigned_task_detail) {
           taskList.add(
             Task(
@@ -118,11 +119,11 @@ class ProjectDetailController extends GetxController {
         return 'Loaded';
       } else {
         final errorMessage = responseData['message'];
-        print(errorMessage);
+        debugPrint(errorMessage);
         throw errorMessage;
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
       rethrow;
     }
   }

@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cnattendance/Controller/NotificationController.dart';
-import 'package:cnattendance/data/source/datastore/preferences.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -30,16 +30,12 @@ class UserChatController extends GetxController {
   static FirebaseStorage storage = FirebaseStorage.instance;
 
   void getcurrentuserid() async {
-    final Preferences preferences = Preferences();
-    final user = await preferences.getUser();
-    userid = user.id!;
+    userid = userCache!.id!;
     update();
   }
 
   void sendmessagetouser(id) async {
-    final Preferences preferences = Preferences();
-    final user = await preferences.getUser();
-    final int myuserid = user.id!;
+    final int myuserid = userCache!.id!;
     final DateTime now = DateTime.now();
     final String formattedDate = '${now.year}-${now.month}-${now.day}';
     final String formattedTime = '${now.hour}:${now.minute}:${now.second}';
@@ -90,9 +86,7 @@ class UserChatController extends GetxController {
     String? downloadUrl;
     EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
-    final Preferences preferences = Preferences();
-    final user = await preferences.getUser();
-    final String chatgroup = user.id! > id ? '${user.id}to$id' : '${id}to${user.id}';
+    final String chatgroup = userCache!.id! > id ? '${userCache!.id}to$id' : '${id}to${userCache!.id}';
 
     final uniquenumber = UserChatController.getuniquenumber();
 
@@ -115,9 +109,7 @@ class UserChatController extends GetxController {
     isLoading = true;
     EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
-    final Preferences preferences = Preferences();
-    final user = await preferences.getUser();
-    final String chatgroup = user.id! > id ? '${user.id}to$id' : '${id}to${user.id}';
+    final String chatgroup = userCache!.id! > id ? '${userCache!.id}to$id' : '${id}to${userCache!.id}';
 
     //getting image file extension
     final ext = file.path.split('.').last;
@@ -141,9 +133,7 @@ class UserChatController extends GetxController {
   }
 
   void InsertDataInChatSystem(id, fileurl, attactmenttype, [filname = '']) async {
-    final Preferences preferences = Preferences();
-    final user = await preferences.getUser();
-    final String chatgroup = user.id! > id ? '${user.id}to$id' : '${id}to${user.id}';
+    final String chatgroup = userCache!.id! > id ? '${userCache!.id}to$id' : '${id}to${userCache!.id}';
 
     final DateTime now = DateTime.now();
     final String formattedDate = '${now.year}-${now.month}-${now.day}';
@@ -153,7 +143,7 @@ class UserChatController extends GetxController {
 
     if (attactmenttype == 'file') {
       usersdata.add({
-        'sendfrom': user.id,
+        'sendfrom': userCache!.id,
         'sento': id,
         'chat_group': chatgroup,
         'timestamp': now,
@@ -174,7 +164,7 @@ class UserChatController extends GetxController {
       ).catchError((e) => debugPrint('$e'));
     } else if (attactmenttype == 'image') {
       usersdata.add({
-        'sendfrom': user.id,
+        'sendfrom': userCache!.id,
         'sento': id,
         'chat_group': chatgroup,
         'timestamp': now,

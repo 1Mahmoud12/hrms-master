@@ -113,17 +113,15 @@ class CardoverviewSvgsandcolor extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              Container(
-                child: Row(
-                  children: [
-                    SvgPicture.asset(svgValue),
-                    15.ESW(),
-                    Text(
-                      type,
-                      style: TextStyle(color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
+              Row(
+                children: [
+                  SvgPicture.asset(svgValue),
+                  15.ESW(),
+                  Text(
+                    type,
+                    style: TextStyle(color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.w600),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,

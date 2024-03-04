@@ -73,7 +73,7 @@ class ProjectDashboardController extends GetxController {
             Project(
               project.id,
               project.project_name,
-              '',
+              project.description,
               project.startDate,
               project.priority,
               project.status,
@@ -83,6 +83,7 @@ class ProjectDashboardController extends GetxController {
               [],
               [],
               project.end_date,
+              project.coverPicture,
             ),
           );
         }

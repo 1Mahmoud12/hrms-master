@@ -16,6 +16,7 @@ class Project {
   List<Task> tasks = [];
   List<Attachment> attachment = [];
   String deadline;
+  String image;
 
   Project(
     this.id,
@@ -30,5 +31,6 @@ class Project {
     this.leaders,
     this.attachment,
     this.deadline,
+    this.image,
   );
 }

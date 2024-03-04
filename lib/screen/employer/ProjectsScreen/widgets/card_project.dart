@@ -6,6 +6,7 @@ import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardProject extends StatelessWidget {
@@ -34,10 +35,14 @@ class CardProject extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //10.ESH(),
-              Image.asset(
-                Assets.temporaryProjects,
+              CacheImage(
+                imageUrl: project.image,
+                height: 150,
+                width: double.infinity,
+                boxFit: BoxFit.fill,
+                profileImage: false,
               ),
-              //20.ESH(),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -46,10 +51,9 @@ class CardProject extends StatelessWidget {
                     style: Styles.style18700,
                   ),
                   //  10.ESH(),
-                  /* Text(
-                    project.description,
-                    style: Styles.style14500.copyWith(color: AppColors.textColorTextFormField),
-                  ),*/
+                  Html(
+                    data: project.description,
+                  ),
                   //20.ESH(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

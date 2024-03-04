@@ -99,19 +99,18 @@ class TasksScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  TasksCubit.of(context).steps[index]['nameStep'],
+                                  model.project.value.tasks[index].name ?? '',
                                   style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColorTextFormField),
                                 ),
                                 5.ESH(),
-                                /* Text(
-                                  TasksCubit.of(context).steps[index]['nameEngineer'],
-                                  style: Styles.style18700.copyWith(color: AppColors.grey, fontSize: 12.sp),
+                                Text(
+                                  model.project.value.tasks[index].status ?? '',
                                 ),
-                                5.ESH(),*/
-                                SizedBox(
+                                5.ESH(),
+                                /* SizedBox(
                                   width: context.screenWidth * .5,
                                   child: Text(TasksCubit.of(context).steps[index]['description']),
-                                ),
+                                ),*/
                                 5.ESH(),
                                 /*SizedBox(
                                   height: context.screenHeight * .002,
@@ -129,6 +128,20 @@ class TasksScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),*/
+                              ],
+                            ),
+                            const Spacer(),
+                            Column(
+                              children: [
+                                Text(
+                                  '${model.project.value.tasks[index].progress ?? 0}%',
+                                  style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColorTextFormField),
+                                ),
+                                5.ESH(),
+                                Text(
+                                  model.project.value.tasks[index].endDate ?? '',
+                                ),
+                                5.ESH(),
                               ],
                             ),
                           ],

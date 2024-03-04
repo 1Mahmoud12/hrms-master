@@ -58,14 +58,17 @@ class CheckAttendanceState extends State<CheckAttendance> {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(90)),
                 child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
+                  decoration: BoxDecoration(
+                    color: attendanceList['check-in'] != '-' && attendanceList['check-out'] == '-'
+                        ? Colors.black.withOpacity(.5)
+                        : Colors.red.withOpacity(.5),
+                    gradient: const LinearGradient(
                       begin: FractionalOffset.topLeft,
                       end: FractionalOffset.bottomRight,
                       stops: [0.1475, 0.6484, 0.8575],
                       colors: [Colors.white, Color.fromRGBO(255, 255, 255, 0.80), Color.fromRGBO(214, 212, 222, 0.67)],
                     ),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromRGBO(20, 9, 69, 0.15),
                         offset: Offset(0, 50),
@@ -75,10 +78,6 @@ class CheckAttendanceState extends State<CheckAttendance> {
                     backgroundBlendMode: BlendMode.luminosity,
                   ),
                   padding: const EdgeInsets.all(20),
-                  // color: attendanceList['check-in'] != "-" &&
-                  //         attendanceList['check-out'] == "-"
-                  //     ? HexColor("#e82e5f").withOpacity(.5)
-                  //     : HexColor("#3b98cc").withOpacity(.5),
                   child: IconButton(
                     iconSize: 70,
                     onPressed: () async {

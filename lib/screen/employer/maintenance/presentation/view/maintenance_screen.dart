@@ -38,7 +38,7 @@ class MaintenanceScreen extends StatelessWidget {
                   children: [
                     Image.asset(Assets.backgroundMaintenance),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 24.0, left: 16),
+                      padding: const EdgeInsets.only(bottom: 24.0, left: 16),
                       child: Column(
                         children: [
                           Text(

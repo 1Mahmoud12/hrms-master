@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/data/source/network/model/commentlist/commentlistresponse.dart';
 import 'package:cnattendance/data/source/network/model/commentsaveresponse/commentsaveresponse.dart';
@@ -55,7 +56,7 @@ class CommentScreenController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     taskId = Get.arguments['taskId'];
-    user.value = await preferences.getUser();
+    user.value = userCache!;
     getComments();
   }
 

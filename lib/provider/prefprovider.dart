@@ -1,3 +1,4 @@
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,7 @@ class CustomerProvider with ChangeNotifier {
 
   void getUser() async {
     final Preferences preferences = Preferences();
-    final User user = await preferences.getUser();
+    final User user = userCache!;
     _userName = await preferences.getUsername();
     _fullName = await preferences.getFullName();
     _phone = await preferences.getEmail();
