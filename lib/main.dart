@@ -15,17 +15,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
-import 'core/theme/color_constraint.dart';
 import 'core/utils/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
+  /*SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
         statusBarColor: AppColors.scaffoldBackGround, // Change this to your desired color
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark),
-  );
+  );*/
   await initializeFirebaseApp();
 
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
@@ -34,14 +33,17 @@ void main() async {
 
   fcmToken = await FirebaseMessaging.instance.getToken() ?? '';
 
-  final ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+  final ByteData data =
+      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
   Bloc.observer = MyBlocObserver();
 
   // Caching
   await Preferences.init();
   genderUser = await Preferences.getSaved(key: 'genderUser') ?? '';
-  userCache = User.fromJson(jsonDecode(await Preferences.getSaved(key: userCacheKey) ?? '{}'));
+  userCache = User.fromJson(
+      jsonDecode(await Preferences.getSaved(key: userCacheKey) ?? '{}'));
   tokenCache = await Preferences.getSaved(key: tokenCacheKey) ?? '';
   debugPrint('genderUser ====>> $genderUser');
   debugPrint('User Cache ====>> ${userCache?.toJson()}');

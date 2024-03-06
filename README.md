@@ -48,3 +48,19 @@ start build\app\outputs\flutter-apk
 flutter build apk
 flutter clean
 ```
+
+//To clean the pub cache
+
+```shell
+flutter pub get
+flutter pub cache clean
+flutter clean
+```
+
+//To repair the pub cache
+
+```shell
+flutter pub get
+flutter pub cache repair
+flutter clean
+```

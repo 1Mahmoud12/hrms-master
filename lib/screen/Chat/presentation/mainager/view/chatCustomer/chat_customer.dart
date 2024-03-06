@@ -39,12 +39,17 @@ class ChatCustomer extends StatelessWidget {
           ),
           Text(
             'Contact us if any problem or complains need to be addressed.',
-            style: Styles.style14400.copyWith(color: AppColors.subTextColor, fontWeight: FontWeight.w600, fontSize: 14.sp),
+            style: Styles.style14400.copyWith(
+                color: AppColors.subTextColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 14.sp),
           ),
           5.ESH(),
           SizedBox(
             width: context.screenWidth,
-            child: CustomDropDownMenu(selectedItem: 'Department', items: [RoleId.nine.name.tr, RoleId.ten.name.tr]),
+            child: CustomDropDownMenu(
+                selectedItem: 'Department',
+                items: [RoleId.nine.name.tr, RoleId.ten.name.tr]),
           ), //
           CustomTextFormField(
             controller: TextEditingController(),
@@ -89,31 +94,44 @@ class ChatCustomer extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => InkWell(
                 onTap: () async {
-                  await Utils.openFile(nameFile: SupportCustomerBloc.of(context).filesPicker[index].path);
+                  await Utils.openFile(
+                      nameFile: SupportCustomerBloc.of(context)
+                          .filesPicker[index]
+                          .path);
                 },
                 child: Container(
                   padding: EdgeInsets.all(context.screenWidth * .02),
-                  decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r)),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(15.r)),
                   child: Row(
                     children: [
                       Container(
                         padding: EdgeInsets.all(context.screenWidth * .015),
-                        decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: AppColors.greyWhite)),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.greyWhite)),
                         child: SvgPicture.asset(Assets.FileSVG),
                       ),
                       10.ESW(),
                       Text(
-                        Utils.createNameFile(nameFile: SupportCustomerBloc.of(context).filesPicker[index].path),
-                        style: Styles.style14500.copyWith(color: AppColors.subTextColor),
+                        Utils.createNameFile(
+                            nameFile: SupportCustomerBloc.of(context)
+                                .filesPicker[index]
+                                .path),
+                        style: Styles.style14500
+                            .copyWith(color: AppColors.subTextColor),
                       ),
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          SupportCustomerBloc.of(context).deleteIndexAttachment(index: index);
+                          SupportCustomerBloc.of(context)
+                              .deleteIndexAttachment(index: index);
                         },
                         child: SvgPicture.asset(
                           Assets.trash,
-                          colorFilter: ColorFilter.mode(AppColors.red, BlendMode.srcIn),
+                          colorFilter:
+                              ColorFilter.mode(AppColors.red, BlendMode.srcIn),
                           width: context.screenWidth * .045,
                         ),
                       ),
@@ -125,49 +143,53 @@ class ChatCustomer extends StatelessWidget {
               separatorBuilder: (context, index) => 5.ESH(),
             ),
           ),
+
+          //   40.ESH(),
+        ].paddingDirectional(bottom: context.screenHeight * .01),
+      ),
+      bottomNavigationBar:
           BlocBuilder<SupportCustomerBloc, SupportCustomerState>(
-            builder: (context, state) => SupportCustomerBloc.of(context).filesPicker.length >= 4
-                ? CustomTextButton(
-                    backgroundColor: AppColors.primaryColor,
-                    onPress: () {
-                      Navigator.pushNamed(context, AppRoute.messagesCustomerScreen);
-                    },
-                    child: Text(
-                      'Chating',
-                      style: Styles.style16700.copyWith(color: AppColors.white),
+        builder: (context, state) =>
+            SupportCustomerBloc.of(context).filesPicker.length < 4
+                ? SizedBox(
+                    //  height: context.screenHeight * .13,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomTextButton(
+                          backgroundColor: AppColors.primaryColor,
+                          onPress: () {
+                            Navigator.pushNamed(
+                                context, AppRoute.messagesCustomerScreen);
+                          },
+                          child: Text(
+                            'Chating',
+                            style: Styles.style16700
+                                .copyWith(color: AppColors.white),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
                   )
                 : Container(
-                    height: context.screenHeight * .05,
+                    height: context.screenHeight * 0,
                   ),
+      ),
+      /* persistentFooterButtons: [
+        CustomTextButton(
+          backgroundColor: AppColors.primaryColor,
+          onPress: () {
+            Navigator.pushNamed(context, AppRoute.messagesCustomerScreen);
+          },
+          child: Text(
+            'Chating',
+            style: Styles.style16700.copyWith(color: AppColors.white),
           ),
-          40.ESH(),
-        ].paddingDirectional(bottom: context.screenHeight * .01),
-      ),
-      bottomNavigationBar: BlocBuilder<SupportCustomerBloc, SupportCustomerState>(
-        builder: (context, state) => SupportCustomerBloc.of(context).filesPicker.length < 4
-            ? SizedBox(
-                height: context.screenHeight * .13,
-                child: Column(
-                  children: [
-                    CustomTextButton(
-                      backgroundColor: AppColors.primaryColor,
-                      onPress: () {
-                        Navigator.pushNamed(context, AppRoute.messagesCustomerScreen);
-                      },
-                      child: Text(
-                        'Chating',
-                        style: Styles.style16700.copyWith(color: AppColors.white),
-                      ),
-                    ),
-                    50.ESH(),
-                  ],
-                ),
-              )
-            : Container(
-                height: context.screenHeight * 0,
-              ),
-      ),
+        )
+      ], */
     );
   }
 }

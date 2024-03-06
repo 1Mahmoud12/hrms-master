@@ -29,7 +29,9 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
     return UpgradeAlert(
       canDismissDialog: true,
       showReleaseNotes: false,
-      dialogStyle: Platform.isIOS ? UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material,
+      dialogStyle: Platform.isIOS
+          ? UpgradeDialogStyle.cupertino
+          : UpgradeDialogStyle.material,
       shouldPopScope: () => true,
       cupertinoButtonTextStyle: Styles.style18700,
       upgrader: Upgrader(
@@ -39,27 +41,36 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
       ),
       child: BlocBuilder<MainBlocHomeCubit, MainBlocHomeState>(
         builder: (context, state) => Scaffold(
-          body: MainBlocHomeCubit.of(context).screenList[MainBlocHomeCubit.of(context).indexList],
+          body: MainBlocHomeCubit.of(context)
+              .screenList[MainBlocHomeCubit.of(context).indexList],
           //extendBody: true,
           floatingActionButton: InkWell(
             onTap: () {
               MainBlocHomeCubit.of(context).changeIndex(index: 2);
             },
-            child: Container(
-              padding: const EdgeInsets.all(9),
-              decoration: const BoxDecoration(color: AppColors.primaryColor, shape: BoxShape.circle),
-              child: SvgPicture.asset(
-                Assets.unSelectMessage,
-                width: context.screenWidth * .08,
-                colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-              ),
-            ),
+            child: MainBlocHomeCubit.of(context).indexList != 2
+                ? Container(
+                    padding: const EdgeInsets.all(9),
+                    decoration: const BoxDecoration(
+                        color: AppColors.primaryColor, shape: BoxShape.circle),
+                    child: SvgPicture.asset(
+                      Assets.unSelectMessage,
+                      width: context.screenWidth * .08,
+                      colorFilter: const ColorFilter.mode(
+                          AppColors.white, BlendMode.srcIn),
+                    ),
+                  )
+                : const SizedBox(),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniCenterDocked,
 
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-                color: AppColors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r))),
+                color: AppColors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.r),
+                    topRight: Radius.circular(20.r))),
             child: BottomNavigationBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -69,8 +80,9 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               selectedFontSize: 0,
               items: [
                 BottomNavigationBarItem(
-                  icon:
-                      MainBlocHomeCubit.of(context).indexList == 0 ? SvgPicture.asset(Assets.selectedHome) : SvgPicture.asset(Assets.unSelectedHome),
+                  icon: MainBlocHomeCubit.of(context).indexList == 0
+                      ? SvgPicture.asset(Assets.selectedHome)
+                      : SvgPicture.asset(Assets.unSelectedHome),
                   label: '',
                 ),
                 BottomNavigationBarItem(
@@ -86,19 +98,23 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   label: '',
                 ),*/
                 BottomNavigationBarItem(
-                  icon: MainBlocHomeCubit.of(context).indexList == 3 ? SvgPicture.asset(Assets.selectedProjects) : SvgPicture.asset(Assets.projects),
+                  icon: MainBlocHomeCubit.of(context).indexList == 3
+                      ? SvgPicture.asset(Assets.selectedProjects)
+                      : SvgPicture.asset(Assets.projects),
                   label: '',
                 ),
                 BottomNavigationBarItem(
-                  icon:
-                      MainBlocHomeCubit.of(context).indexList == 4 ? SvgPicture.asset(Assets.selectedMenu) : SvgPicture.asset(Assets.unSelectedMenu),
+                  icon: MainBlocHomeCubit.of(context).indexList == 4
+                      ? SvgPicture.asset(Assets.selectedMenu)
+                      : SvgPicture.asset(Assets.unSelectedMenu),
                   label: '',
                 ),
               ],
               type: BottomNavigationBarType.fixed,
               landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
               onTap: (int index) {
-                MainBlocHomeCubit.of(context).changeIndex(index: index >= 2 ? index + 1 : index);
+                MainBlocHomeCubit.of(context)
+                    .changeIndex(index: index >= 2 ? index + 1 : index);
               },
             ),
           ),
