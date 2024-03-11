@@ -12,7 +12,7 @@ class ProjectsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ProjectDashboardController()).getProjectOverview();
+    //Get.put(ProjectDashboardController()).getProjectOverview();
     final model = Get.put(ProjectDashboardController());
 
     return Scaffold(

@@ -6,6 +6,7 @@ import 'package:cnattendance/model/attachment.dart';
 import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/model/project.dart';
 import 'package:cnattendance/model/task.dart';
+import 'package:cnattendance/provider/projectdashboardcontroller.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -33,9 +34,9 @@ class ProjectDetailController extends GetxController {
   RxList memberImages = [].obs;
   RxList leaderImages = [].obs;
 
-  Future<String> getProjectOverview() async {
+  Future<String> getProjectOverview({required String idProject}) async {
     final uri = Uri.parse(
-      "${EndPoints.PROJECT_DETAIL_URL}/${Get.arguments["id"]}",
+      '${EndPoints.PROJECT_DETAIL_URL}/$idProject',
     );
 
     final Preferences preferences = Preferences();
@@ -101,16 +102,18 @@ class ProjectDetailController extends GetxController {
         );
 
         final List<Task> taskList = [];
-        for (final task in projectResponse.data.assigned_task_detail) {
+        final model = Get.find<ProjectDashboardController>();
+
+        for (final task in model.taskList) {
           taskList.add(
             Task(
-              task.task_id,
-              task.task_name,
-              projectResponse.data.name,
-              task.start_date,
-              task.deadline,
+              task.id,
+              task.name,
+              task.projectName,
+              task.date,
+              task.endDate,
               task.status,
-              //    members: task.assigned_member.map((e) => Member(e.id, e.name, e.avatar)).toList(),
+              members: task.members,
             ),
           );
         }
@@ -127,12 +130,6 @@ class ProjectDetailController extends GetxController {
       debugPrint('$e');
       rethrow;
     }
-  }
-
-  @override
-  void onInit() {
-    getProjectOverview();
-    super.onInit();
   }
 
   Future<void> launchUrls(String _url) async {

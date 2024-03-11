@@ -34,3 +34,5 @@ enum Malfunction { In_Progress, Pending, Finished }
 
 String? genderUser;
 String genderUserKey = 'genderUser';
+
+String projectIdShare = '';

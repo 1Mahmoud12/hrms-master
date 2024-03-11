@@ -1,5 +1,6 @@
 import 'package:cnattendance/core/component/slider/circular_slider.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/comments.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/status_project_details.dart';
 import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
@@ -16,8 +17,10 @@ class AllProjectDetails extends StatelessWidget {
     final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
     //const String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
     final String titleProject = arguments['titleProject']; // arguments['titleProject'] ?? '';
+    final String idProject = '${arguments['id']}'; // arguments['titleProject'] ?? '';
+    projectIdShare = '${arguments['id']}'; // arguments['titleProject'] ?? '';
     // const String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
-    final model = Get.put(ProjectDetailController()).getProjectOverview();
+    Get.put(ProjectDetailController()).getProjectOverview(idProject: idProject);
     const int newComments = 8;
     return Scaffold(
       appBar: AppBar(
