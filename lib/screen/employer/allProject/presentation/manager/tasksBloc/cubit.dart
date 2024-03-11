@@ -1,18 +1,20 @@
 import 'package:cnattendance/model/member.dart';
+import 'package:cnattendance/model/task.dart';
 import 'package:cnattendance/screen/employer/allProject/data/dataSource/tasks_data_source.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/add_task_params.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/state.dart';
+import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
 
   static TasksCubit of(BuildContext context) => BlocProvider.of<TasksCubit>(context);
-
+  final model = Get.find<ProjectDetailController>();
   Member selectedList = Member(-1, 'Name Engineer', '');
   final List<Map<String, dynamic>> steps = [
     {
@@ -54,7 +56,21 @@ class TasksCubit extends Cubit<TasksState> {
 
         emit(AddTasksErrorState());
       }, (r) async {
+        model.project.value.tasks.add(
+          Task(
+            model.project.value.tasks.length,
+            nameTasks.text,
+            model.project.value.name,
+            startDateController.text,
+            endDateController.text,
+            'Not Started',
+          ),
+        );
         showToast('Adding successfully');
+        nameTasks.clear();
+        startDateController.clear();
+        endDateController.clear();
+        descriptionTasks.clear();
         emit(AddTasksSuccessState());
       });
     });
@@ -96,9 +112,22 @@ class TasksCubit extends Cubit<TasksState> {
     emit(EditTasksSuccessState());
   }
 
-  void deleteTasks({required int index}) {
-    steps.removeAt(index);
-    showToast('Success Deleted');
-    emit(DeleteTasksSuccessState());
+  void deleteTasks({required String idTask, required int index}) async {
+    emit(DeleteTasksLoadingState());
+    await TasksDataSource.postDeleteTask(
+      idTask: idTask,
+    ).then((value) {
+      value.fold((l) {
+        debugPrint('==== Error ====');
+        debugPrint(l.errMessage);
+        showToast(l.errMessage);
+
+        emit(DeleteTasksErrorState());
+      }, (r) async {
+        model.project.value.tasks.removeAt(index);
+        showToast('Success Deleted');
+        emit(DeleteTasksSuccessState());
+      });
+    });
   }
 }

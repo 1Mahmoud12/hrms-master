@@ -69,7 +69,7 @@ class TasksScreen extends StatelessWidget {
                     };
                     Navigator.pushNamed(context, AppRoute.editTasksScreen, arguments: argument);
                   } else {
-                    TasksCubit.of(context).deleteTasks(index: index);
+                    TasksCubit.of(context).deleteTasks(idTask: model.project.value.tasks[index].id.toString(), index: index);
                   }
                   return false;
                 },

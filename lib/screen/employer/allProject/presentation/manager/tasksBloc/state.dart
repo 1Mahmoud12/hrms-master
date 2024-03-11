@@ -19,3 +19,7 @@ class EditTasksSuccessState extends TasksState {}
 class EditTasksErrorState extends TasksState {}
 
 class DeleteTasksSuccessState extends TasksState {}
+
+class DeleteTasksLoadingState extends TasksState {}
+
+class DeleteTasksErrorState extends TasksState {}

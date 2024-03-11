@@ -36,11 +36,8 @@ class AddTasksScreen extends StatelessWidget {
             onPress: () {
               if (TasksCubit.of(context).nameTasks.text != '' && TasksCubit.of(context).descriptionTasks.text != '') {
                 TasksCubit.of(context).addTasks(projectId: model.project.value.id.toString());
+
                 Navigator.pop(context);
-                TasksCubit.of(context).nameTasks.clear();
-                TasksCubit.of(context).startDateController.clear();
-                TasksCubit.of(context).endDateController.clear();
-                TasksCubit.of(context).descriptionTasks.clear();
               } else {
                 showToast('You must Input all fields');
               }

@@ -78,4 +78,36 @@ class TasksDataSource {
       return left(ServerFailure(error.toString()));
     }
   }
+
+  static Future<Either<Failure, String>> postDeleteTask({
+    required String idTask,
+  }) async {
+    final uri = Uri.parse('${EndPoints.deleteTasks}/$idTask');
+    debugPrint('Url ======> $uri ');
+
+    final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $tokenCache'};
+
+    try {
+      // debugPrint('working');
+      // var fcm = await FirebaseMessaging.instance.getToken();
+
+      final response = await http.post(
+        uri,
+        headers: headers,
+      );
+      final responseData = json.decode(response.body);
+
+      debugPrint(responseData.toString());
+      if (responseData['status'] == false) throw responseData['message'];
+      final String responseJson = responseData['message'];
+
+      return Right(responseJson);
+    } catch (error) {
+      debugPrint('==== Error =$error');
+      if (error is DioException) {
+        return left(ServerFailure.fromDioException(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
 }
