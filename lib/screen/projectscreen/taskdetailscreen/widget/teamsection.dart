@@ -12,11 +12,13 @@ class TeamSection extends StatelessWidget {
     final TaskDetailController controller = Get.find();
     return GestureDetector(
       onTap: () {
-        Get.bottomSheet(TeamBottomSheet(controller.taskDetail.value.members),
-            isDismissible: true,
-            enableDrag: true,
-            isScrollControlled: false,
-            ignoreSafeArea: true,);
+        Get.bottomSheet(
+          TeamBottomSheet(controller.taskDetail.value.members!),
+          isDismissible: true,
+          enableDrag: true,
+          isScrollControlled: false,
+          ignoreSafeArea: true,
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,17 +30,19 @@ class TeamSection extends StatelessWidget {
               Text(
                 'Teams'.tr,
                 style: const TextStyle(
-                    color: Color(0xff635F54),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,),
+                  color: Color(0xff635F54),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 'view_all'.tr,
                 style: const TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Color(0xff635F54),
-                    fontSize: 12,
-                    fontWeight: FontWeight.normal,),
+                  decoration: TextDecoration.underline,
+                  color: Color(0xff635F54),
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ],
           ),

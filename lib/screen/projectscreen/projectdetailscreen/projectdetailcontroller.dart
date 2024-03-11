@@ -110,6 +110,7 @@ class ProjectDetailController extends GetxController {
               task.start_date,
               task.deadline,
               task.status,
+              //    members: task.assigned_member.map((e) => Member(e.id, e.name, e.avatar)).toList(),
             ),
           );
         }

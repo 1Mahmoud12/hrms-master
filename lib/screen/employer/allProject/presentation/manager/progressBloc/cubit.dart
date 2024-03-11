@@ -19,6 +19,13 @@ class ProgressCubit extends Cubit<ProgressState> {
       'description': 'description',
       'chooseStatus': 'Finished',
     },
+    {
+      'assets': Assets.stepOne,
+      'value': '20',
+      'nameStep': 'Step one',
+      'description': 'description',
+      'chooseStatus': 'Finished',
+    },
   ];
 
   void addSelected({required String newSelected}) {

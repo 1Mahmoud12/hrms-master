@@ -1,16 +1,19 @@
+import 'package:cnattendance/model/member.dart';
+import 'package:cnattendance/screen/employer/allProject/data/dataSource/tasks_data_source.dart';
+import 'package:cnattendance/screen/employer/allProject/data/models/add_task_params.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/state.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
 
   static TasksCubit of(BuildContext context) => BlocProvider.of<TasksCubit>(context);
 
-  List<String> statusList = ['Mohamed', 'Ahmed', 'Ismail'];
-  String selectedList = 'Name Engineer';
+  Member selectedList = Member(-1, 'Name Engineer', '');
   final List<Map<String, dynamic>> steps = [
     {
       'assets': Assets.stepOne,
@@ -22,56 +25,73 @@ class TasksCubit extends Cubit<TasksState> {
     },
   ];
 
-  void addSelected({required String newSelected}) {
+  void addSelected({required Member newSelected}) {
     selectedList = newSelected;
     emit(AddStatusState());
   }
 
   TextEditingController nameTasks = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
   TextEditingController descriptionTasks = TextEditingController();
 
-  void addTasks() async {
+  void addTasks({required String projectId}) async {
     emit(AddTasksLoadingState());
-    String assets = '';
-    if ((steps.length % 5) == 0) {
-      assets = Assets.stepOne;
-    } else if ((steps.length % 5) == 1) {
-      assets = Assets.stepTwo;
-    } else if ((steps.length % 5) == 2) {
-      assets = Assets.stepThree;
-    } else if ((steps.length % 5) == 3) {
-      assets = Assets.stepFour;
-    } else if ((steps.length % 5) == 4) {
-      assets = Assets.stepFive;
-    }
+    await TasksDataSource.postAddTasks(
+      addTaskParams: AddTaskParams(
+        nameTask: nameTasks.text,
+        descriptionTask: descriptionTasks.text,
+        startDateTask: startDateController.text,
+        endDateTask: endDateController.text,
+        assignedMemberTask: selectedList.id.toString(),
+        projectId: projectId,
+      ),
+    ).then((value) {
+      value.fold((l) {
+        debugPrint('==== Error ====');
+        debugPrint(l.errMessage);
+        showToast(l.errMessage);
 
-    steps.add({
-      'assets': assets,
-      'nameStep': nameTasks.text,
-      'description': descriptionTasks.text,
-      'nameEngineer': selectedList,
+        emit(AddTasksErrorState());
+      }, (r) async {
+        showToast('Adding successfully');
+        emit(AddTasksSuccessState());
+      });
     });
-    showToast('Adding successfully');
-    emit(AddTasksSuccessState());
   }
 
-  void editTasks({required int index}) async {
-    emit(EditTasksLoadingState());
-    steps.removeAt(index);
-    String assets = '';
-    if ((steps.length % 5) == 0) {
-      assets = Assets.stepOne;
-    } else if ((steps.length % 5) == 1) {
-      assets = Assets.stepTwo;
-    } else if ((steps.length % 5) == 2) {
-      assets = Assets.stepThree;
-    } else if ((steps.length % 5) == 3) {
-      assets = Assets.stepFour;
-    } else if ((steps.length % 5) == 4) {
-      assets = Assets.stepFive;
-    }
+  List<String> imageTask = [
+    Assets.stepOne,
+    Assets.stepTwo,
+    Assets.stepThree,
+    Assets.stepFour,
+    Assets.stepFive,
+  ];
 
-    steps.insert(index, {'assets': assets, 'nameStep': nameTasks.text, 'description': descriptionTasks.text, 'nameEngineer': selectedList});
+  Future<void> editTasks({required String idTask, required String projectId}) async {
+    emit(EditTasksLoadingState());
+    await TasksDataSource.postEditTasks(
+      addTaskParams: AddTaskParams(
+        nameTask: nameTasks.text,
+        descriptionTask: descriptionTasks.text,
+        startDateTask: startDateController.text,
+        endDateTask: endDateController.text,
+        assignedMemberTask: selectedList.id.toString(),
+        projectId: projectId,
+      ),
+      idTask: idTask,
+    ).then((value) {
+      value.fold((l) {
+        debugPrint('==== Error ====');
+        debugPrint(l.errMessage);
+        showToast(l.errMessage);
+
+        emit(AddTasksErrorState());
+      }, (r) async {
+        showToast('Adding successfully');
+        emit(AddTasksSuccessState());
+      });
+    });
     showToast('Editing successfully');
     emit(EditTasksSuccessState());
   }

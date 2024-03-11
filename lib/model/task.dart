@@ -14,26 +14,34 @@ class Task {
   int? progress;
   int? noOfComments;
   bool? has_checklist;
-  List<Member> members = [];
+  List<Member>? members = [];
   List<Checklist> checkList = [];
   List<Attachment> attachments = [];
 
-  Task(this.id, this.name, this.projectName, this.date, this.endDate,
-      this.status,);
+  Task(
+    this.id,
+    this.name,
+    this.projectName,
+    this.date,
+    this.endDate,
+    this.status, {
+    this.members,
+  });
 
   Task.all(
-      this.id,
-      this.name,
-      this.projectName,
-      this.description,
-      this.date,
-      this.endDate,
-      this.priority,
-      this.status,
-      this.progress,
-      this.noOfComments,
-      this.has_checklist,
-      this.members,
-      this.checkList,
-      this.attachments,);
+    this.id,
+    this.name,
+    this.projectName,
+    this.description,
+    this.date,
+    this.endDate,
+    this.priority,
+    this.status,
+    this.progress,
+    this.noOfComments,
+    this.has_checklist,
+    this.members,
+    this.checkList,
+    this.attachments,
+  );
 }

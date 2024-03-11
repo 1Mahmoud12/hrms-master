@@ -65,10 +65,6 @@ class TasksScreen extends StatelessWidget {
                 confirmDismiss: (direction) async {
                   if (direction.index == 2) {
                     final argument = {
-                      'nameStep': TasksCubit.of(context).steps[index]['nameStep'],
-                      'description': TasksCubit.of(context).steps[index]['description'],
-                      'value': TasksCubit.of(context).steps[index]['value'],
-                      'nameEngineer': TasksCubit.of(context).steps[index]['nameEngineer'],
                       'index': index,
                     };
                     Navigator.pushNamed(context, AppRoute.editTasksScreen, arguments: argument);
@@ -89,7 +85,7 @@ class TasksScreen extends StatelessWidget {
                         constraints: BoxConstraints(maxWidth: context.screenWidth * .4),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(color: AppColors.cBackGroundIconButton, borderRadius: BorderRadius.circular(10.r)),
-                        child: SvgPicture.asset(TasksCubit.of(context).steps[index]['assets']),
+                        child: SvgPicture.asset(TasksCubit.of(context).imageTask[index % 5]),
                       ),
                       10.ESW(),
                       Expanded(

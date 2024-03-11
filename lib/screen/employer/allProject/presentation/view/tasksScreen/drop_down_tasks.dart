@@ -1,12 +1,13 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/model/member.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/tasksBloc/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropDownMenuTasks extends StatefulWidget {
-  final String? selectedItem;
-  final List<String> items;
+  final Member? selectedItem;
+  final List<Member> items;
   final double? width;
 
   const CustomDropDownMenuTasks({
@@ -21,7 +22,7 @@ class CustomDropDownMenuTasks extends StatefulWidget {
 }
 
 class _CustomDropDownMenuTasksState extends State<CustomDropDownMenuTasks> {
-  String newSelected = '';
+  Member newSelected = Member(-1, 'Name Engineer', 'image');
 
   @override
   void initState() {
@@ -36,7 +37,7 @@ class _CustomDropDownMenuTasksState extends State<CustomDropDownMenuTasks> {
       width: widget.width ?? MediaQuery.of(context).size.width / 1.5,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r), color: AppColors.white, border: Border.all(color: Color(0xffF5F6FA))),
       padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: DropdownButton<String>(
+      child: DropdownButton<Member>(
         underline: Container(),
         icon: const RotatedBox(
           quarterTurns: 1,
@@ -47,9 +48,9 @@ class _CustomDropDownMenuTasksState extends State<CustomDropDownMenuTasks> {
         ),
         hint: Padding(
           padding: const EdgeInsets.only(left: 10).w,
-          child: Text(newSelected),
+          child: Text(newSelected.name),
         ),
-        onChanged: (String? newValue) {
+        onChanged: (Member? newValue) {
           newSelected = newValue!;
           TasksCubit.of(context).addSelected(newSelected: newValue);
           setState(() {});
@@ -59,8 +60,8 @@ class _CustomDropDownMenuTasksState extends State<CustomDropDownMenuTasks> {
         autofocus: true,
         focusColor: AppColors.primaryColor,
         dropdownColor: AppColors.greyWhite,
-        items: widget.items.map((String item) {
-          return DropdownMenuItem<String>(
+        items: widget.items.map((Member item) {
+          return DropdownMenuItem<Member>(
             value: item,
             child: Container(
               // constraints: BoxConstraints(maxWidth: 120.w),
@@ -68,7 +69,7 @@ class _CustomDropDownMenuTasksState extends State<CustomDropDownMenuTasks> {
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0).w,
-                child: Text(item, style: Styles.style12400, overflow: TextOverflow.ellipsis),
+                child: Text(item.name, style: Styles.style12400, overflow: TextOverflow.ellipsis),
               ),
             ),
             onTap: () {

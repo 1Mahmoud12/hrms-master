@@ -1,10 +1,7 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
-import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/cubit.dart';
-import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/state.dart';
 import 'package:cnattendance/screen/projectscreen/projectdetailscreen/projectdetailcontroller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +18,6 @@ class PieChart2State extends State {
   @override
   Widget build(BuildContext context) {
     final modelProject = Get.find<ProjectDetailController>();
-
     return AspectRatio(
       aspectRatio: 1.7,
       child: Row(
@@ -32,27 +28,25 @@ class PieChart2State extends State {
           Expanded(
             child: AspectRatio(
               aspectRatio: 1,
-              child: BlocBuilder<ProgressCubit, ProgressState>(
-                builder: (context, state) => PieChart(
-                  PieChartData(
-                    pieTouchData: PieTouchData(
-                      touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                        setState(() {
-                          if (!event.isInterestedForInteractions || pieTouchResponse == null || pieTouchResponse.touchedSection == null) {
-                            touchedIndex = -1;
-                            return;
-                          }
-                          touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
-                        });
-                      },
-                    ),
-                    borderData: FlBorderData(
-                      show: false,
-                    ),
-                    sectionsSpace: 0,
-                    centerSpaceRadius: 40,
-                    sections: showingSections(modelProject),
+              child: PieChart(
+                PieChartData(
+                  pieTouchData: PieTouchData(
+                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions || pieTouchResponse == null || pieTouchResponse.touchedSection == null) {
+                          touchedIndex = -1;
+                          return;
+                        }
+                        touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+                      });
+                    },
                   ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 40,
+                  sections: showingSections(modelProject),
                 ),
               ),
             ),
@@ -72,12 +66,12 @@ class PieChart2State extends State {
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
       const shadows = [Shadow(blurRadius: 2)];
-      remaining += (i != modelProject.project.value.tasks.length) ? double.parse(ProgressCubit.of(context).steps[i]['value']) : 0;
+      remaining += (i != modelProject.project.value.tasks.length) ? double.parse('${modelProject.project.value.tasks[i].progress ?? '0'}') : 0;
       return (i != modelProject.project.value.tasks.length)
           ? PieChartSectionData(
               color: modelProject.project.value.tasks[i].status == 'Cancelled' ? AppColors.primaryColor : AppColors.cBackGroundIconButton,
               value: double.parse('${modelProject.project.value.tasks[i].progress ?? '0'}'),
-              title: '${ProgressCubit.of(context).steps[i]['value']}%',
+              title: '${modelProject.project.value.tasks[i].progress ?? '0'}%',
               radius: radius,
               borderSide: const BorderSide(color: AppColors.white),
               badgeWidget: Container(

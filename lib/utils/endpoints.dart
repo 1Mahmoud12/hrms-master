@@ -63,6 +63,9 @@ class EndPoints {
   static const PROJECT_DETAIL_URL = '$API_URL/assigned-projects-detail';
   static const TASK_LIST_URL = '$API_URL/assigned-task-list';
   static const TASK_DETAIL_URL = '$API_URL/assigned-task-detail';
+  static const createTasks = '$API_URL/task-create';
+  static const editTasks = '$API_URL/task-update';
+  static const deleteTasks = '$API_URL/task-delete';
   static const UPDATE_CHECKLIST_TOGGLE_URL = '$API_URL/assigned-task-checklist/toggle-status';
   static const UPDATE_TASK_TOGGLE_URL = '$API_URL/assigned-task-detail/change-status';
   static const EMPLOYEE_DETAIL_URL = '$API_URL/users/profile-detail';

@@ -27,7 +27,7 @@ class ProposalCubit extends Cubit<ProposalState> {
       value.fold((l) {
         debugPrint(l.errMessage);
         showToast(l.errMessage);
-        debugPrint('Errrrrrrorrrrrrr');
+        debugPrint('==== Error ====');
         emit(ProposalErrorState(l.errMessage));
       }, (r) async {
         await Preferences.setSaved(value: jsonEncode(r.toJson()), key: allProposalsKey);
@@ -54,7 +54,7 @@ class ProposalCubit extends Cubit<ProposalState> {
       value.fold((l) {
         debugPrint(l.errMessage);
         showToast(l.errMessage);
-        debugPrint('Errrrrrrorrrrrrr');
+        debugPrint('==== Error ====');
         emit(ProposalErrorState(l.errMessage));
       }, (r) async {
         proposalOneModel = r;
