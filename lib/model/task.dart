@@ -25,6 +25,7 @@ class Task {
     this.date,
     this.endDate,
     this.status, {
+    this.description,
     this.members,
   });
 

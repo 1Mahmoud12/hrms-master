@@ -31,7 +31,6 @@ class EditTasksScreen extends StatelessWidget {
     final argument = context.getArguments;
 
     final int index = argument['index'];
-
     TasksCubit.of(context).nameTasks.text = model.project.value.tasks[index].name!;
     TasksCubit.of(context).descriptionTasks.text = model.project.value.tasks[index].description ?? '';
     TasksCubit.of(context).startDateController.text = convertStringDateTime(model.project.value.tasks[index].date!);
@@ -51,14 +50,8 @@ class EditTasksScreen extends StatelessWidget {
             backgroundColor: AppColors.primaryColor,
             onPress: () async {
               if (TasksCubit.of(context).nameTasks.text != '' && TasksCubit.of(context).descriptionTasks.text != '') {
-                await TasksCubit.of(context)
-                    .editTasks(idTask: model.project.value.tasks[index].id.toString(), projectId: model.project.value.id.toString());
+                await TasksCubit.of(context).editTasks(indexTask: index, projectId: model.project.value.id.toString());
                 Navigator.pop(context);
-                TasksCubit.of(context).nameTasks.clear();
-                TasksCubit.of(context).descriptionTasks.clear();
-                TasksCubit.of(context).startDateController.clear();
-                TasksCubit.of(context).endDateController.clear();
-                TasksCubit.of(context).selectedList = Member(-1, 'Name Engineer', 'image');
               } else {
                 showToast('You must Input all fields');
               }

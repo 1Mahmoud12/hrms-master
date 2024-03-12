@@ -9,6 +9,7 @@ import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
@@ -84,7 +85,7 @@ class TasksCubit extends Cubit<TasksState> {
     Assets.stepFive,
   ];
 
-  Future<void> editTasks({required String idTask, required String projectId}) async {
+  Future<void> editTasks({required int indexTask, required String projectId}) async {
     emit(EditTasksLoadingState());
     await TasksDataSource.postEditTasks(
       addTaskParams: AddTaskParams(
@@ -95,21 +96,33 @@ class TasksCubit extends Cubit<TasksState> {
         assignedMemberTask: selectedList.id.toString(),
         projectId: projectId,
       ),
-      idTask: idTask,
+      idTask: model.project.value.tasks[indexTask].id.toString(),
     ).then((value) {
       value.fold((l) {
         debugPrint('==== Error ====');
         debugPrint(l.errMessage);
         showToast(l.errMessage);
 
-        emit(AddTasksErrorState());
+        emit(EditTasksErrorState());
       }, (r) async {
-        showToast('Adding successfully');
-        emit(AddTasksSuccessState());
+        model.project.value.tasks[indexTask] = Task(
+          model.project.value.tasks[indexTask].id,
+          nameTasks.text,
+          model.project.value.name,
+          DateFormat('MMM dd yyy').format(DateTime.parse(startDateController.text)).toString().substring(0, 10),
+          DateFormat('MMM dd yyy').format(DateTime.parse(endDateController.text)).toString().substring(0, 10),
+          model.project.value.tasks[indexTask].status,
+          members: [selectedList],
+        );
+        nameTasks.clear();
+        descriptionTasks.clear();
+        startDateController.clear();
+        endDateController.clear();
+        selectedList = Member(-1, 'Name Engineer', 'image');
+        showToast('Editing successfully');
+        emit(EditTasksSuccessState());
       });
     });
-    showToast('Editing successfully');
-    emit(EditTasksSuccessState());
   }
 
   void deleteTasks({required String idTask, required int index}) async {
