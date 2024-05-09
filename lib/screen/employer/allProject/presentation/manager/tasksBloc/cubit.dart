@@ -109,8 +109,8 @@ class TasksCubit extends Cubit<TasksState> {
           model.project.value.tasks[indexTask].id,
           nameTasks.text,
           model.project.value.name,
-          DateFormat('MMM dd yyy').format(DateTime.parse(startDateController.text)).toString().substring(0, 10),
-          DateFormat('MMM dd yyy').format(DateTime.parse(endDateController.text)).toString().substring(0, 10),
+          DateFormat('MMM dd yyy').format(DateTime.parse(startDateController.text)).substring(0, 10),
+          DateFormat('MMM dd yyy').format(DateTime.parse(endDateController.text)).substring(0, 10),
           model.project.value.tasks[indexTask].status,
           members: [selectedList],
         );

@@ -158,7 +158,7 @@ class ProposalScreen extends StatelessWidget {
                   ),
                 )
               else
-                SizedBox(height: context.screenHeight - Scaffold.of(context).appBarMaxHeight!, child: const Center(child: EmptyWidget()))
+                SizedBox(height: context.screenHeight - Scaffold.of(context).appBarMaxHeight!, child: const Center(child: EmptyWidget())),
             ],
           ),
         ),
