@@ -29,7 +29,9 @@ class Project {
 
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
-      assigned_member: (json['assigned_member'] as List).map((i) => AssignedMemberX.fromJson(i)).toList(),
+      assigned_member: (json['assigned_member'] as List)
+          .map((i) => AssignedMemberX.fromJson(i))
+          .toList(),
       assigned_task_count: json['assigned_task_count'],
       end_date: json['end_date'],
       id: json['id'],
@@ -38,8 +40,9 @@ class Project {
       project_progress_percent: json['project_progress_percent'],
       startDate: json['start_date'],
       status: json['status'],
-      coverPicture:
-          json['coverpicture'].contains('https') ? json['coverpicture'] : 'https://rak.bytes-sa.com/uploads/projects/cover/${json['coverpicture']}',
+      coverPicture: json['coverpicture'].contains('https')
+          ? json['coverpicture']
+          : 'https://rak.bytes-sa.com/uploads/projects/cover/${json['coverpicture']}',
       description: json['description'],
     );
   }

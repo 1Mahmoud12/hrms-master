@@ -14,12 +14,16 @@ class AllProjectDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
     //const String mainImage = Assets.temporaryProjects; //arguments['mainImage'] ?? '';
-    final String titleProject = arguments['titleProject']; // arguments['titleProject'] ?? '';
-    final String idProject = '${arguments['id']}'; // arguments['titleProject'] ?? '';
+    final String titleProject =
+        arguments['titleProject']; // arguments['titleProject'] ?? '';
+    final String idProject =
+        '${arguments['id']}'; // arguments['titleProject'] ?? '';
     projectIdShare = '${arguments['id']}'; // arguments['titleProject'] ?? '';
     // const String subTitleProject = 'subTitleProject'; //arguments['subTitleProject'] ?? '';
+    final int index = arguments['index'];
     Get.put(ProjectDetailController()).getProjectOverview(idProject: idProject);
     const int newComments = 8;
     return Scaffold(
@@ -58,7 +62,7 @@ class AllProjectDetails extends StatelessWidget {
               ],
             ),
           ),*/
-            const PieChartSample2(),
+             PieChartSample2(index:index),
             //const DoubleCustomSlider(value1: 50, value2: 20, color1: AppColors.primaryColor, color2: AppColors.selectedCharData),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
