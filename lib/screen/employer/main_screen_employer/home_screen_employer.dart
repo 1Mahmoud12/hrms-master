@@ -2,7 +2,6 @@ import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/screen/employer/ProjectsScreen/widgets/card_project.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/presentation/view/widgets/slide_widget.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
