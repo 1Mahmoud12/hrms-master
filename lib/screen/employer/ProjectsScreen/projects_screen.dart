@@ -29,7 +29,7 @@ class ProjectsScreen extends StatelessWidget {
               children: [
                 ...List.generate(
                   model.projectList.length.obs.value,
-                  (index) => CardProject(project: model.projectList[index]),
+                  (index) => CardProject(project: model.projectList[index],index: index,),
                 ),
                 30.ESH(),
               ].paddingDirectional(bottom: 10.h),

@@ -36,6 +36,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> afterLogin(LoginModel r, BuildContext context) async {
     debugPrint('======== Success ========');
     tokenCache = r.data!.tokens!;
+    debugPrint('$tokenCache');
+
     Preferences.setSaved(value: r.data!.tokens, key: tokenCacheKey);
     if (r.data!.user!.roleId.toString() == RoleId.eleven.name.tr) {
       genderUser = RoleId.eleven.name.tr;

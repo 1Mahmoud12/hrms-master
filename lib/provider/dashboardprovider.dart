@@ -67,8 +67,8 @@ class DashboardProvider with ChangeNotifier {
   }
 
   Future<Dashboardresponse> getDashboard() async {
-    debugPrint('=== Dashboard ====');
     final uri = Uri.parse(EndPoints.DASHBOARD_URL);
+    debugPrint('=== Dashboard ==== $uri');
 
     final Preferences preferences = Preferences();
     final String token = preferences.getToken();
