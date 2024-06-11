@@ -25,6 +25,8 @@ class PieChart2State extends State<PieChartSample2> {
     final model = Get.put(ProjectDashboardController());
     final Project project = model.projectList[index];
     final double valueSliderWidget = project.progress.toDouble();
+  //final double valueSliderWidget = project.tasks[index].progress! as double;
+
 
     return AspectRatio(
       aspectRatio: 1.7,

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
@@ -5,6 +6,8 @@ import 'package:cnattendance/core/services/googleMap/google_map_no_scaffold.dart
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/attachment.dart';
@@ -28,56 +31,78 @@ class _DetailsMaintenanceState extends State<DetailsMaintenance> {
     final TextEditingController nameController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     final String nameStatus = argument['nameStatus'];
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          nameStatus,
-          style: Styles.style18700,
-        ),
-      ),
-      persistentFooterButtons: [
-        SizedBox(
-          width: context.screenWidth * .95,
-          child: CustomTextButton(
-            onPress: () {
-              showToast('Your request has been sent successfully');
-              Navigator.pushNamed(context, AppRoute.paymentMaintenanceValue);
-              /* Navigator.pop(context);
-              Navigator.pop(context);*/
-            },
-            backgroundColor: AppColors.primaryColor,
-            child: Text(
-              'submit',
-              style: Styles.style16700.copyWith(color: AppColors.white),
-            ),
+    return BlocListener<EmergencieCubit, EmergencieState>(
+      listener: (context, state) {
+        if (state is EmergencieErrorState) {
+          ErrorWidget(state.error);
+        } else if (state is EmergencieAddedState) {
+          debugPrint('Success====> ');
+          showToast('Your request has been sent successfully');
+          Navigator.pushNamed(
+            context,
+            AppRoute.paymentMaintenanceValue,
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            nameStatus,
+            style: Styles.style18700,
           ),
         ),
-      ],
-      body: ListView(
-        children: [
-          CustomTextFormField(
-            controller: nameController,
-            hintText: 'name',
-            fillColor: AppColors.white,
-          ),
-          CustomTextFormField(
-            controller: descriptionController,
-            hintText: 'Description',
-            maxLines: 5,
-            fillColor: AppColors.white,
-          ),
-          BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
-            builder: (context, state) => Text(
-              'location: $locationCache',
-              style: Styles.style16700,
+        persistentFooterButtons: [
+          SizedBox(
+            width: context.screenWidth * .95,
+            child: CustomTextButton(
+              onPress: () async {
+                final File image =
+                    BlocProvider.of<MainBlocMaintenanceCubit>(context)
+                        .imagesAttachment[0];
+
+                BlocProvider.of<EmergencieCubit>(context).addEmergency(
+                  name: nameController.text,
+                  description: descriptionController.text,
+                  location: locationCache,
+                  imageFile: image,
+                );
+              },
+              backgroundColor: AppColors.primaryColor,
+              child: Text(
+                'submit',
+                style: Styles.style16700.copyWith(color: AppColors.white),
+              ),
             ),
           ),
-          GoogleMapWithoutScaffold(cubit: MainBlocMaintenanceCubit.of(context)),
-          const AttachmentsReportCustomer(),
-        ].paddingDirectional(
-          start: 10.w,
-          end: 10.w,
-          bottom: 10.h,
+        ],
+        body: ListView(
+          children: [
+            CustomTextFormField(
+              controller: nameController,
+              hintText: 'name',
+              fillColor: AppColors.white,
+            ),
+            CustomTextFormField(
+              controller: descriptionController,
+              hintText: 'Description',
+              maxLines: 5,
+              fillColor: AppColors.white,
+            ),
+            BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
+              builder: (context, state) => Text(
+                'location: $locationCache',
+                style: Styles.style16700,
+              ),
+            ),
+            GoogleMapWithoutScaffold(
+              cubit: MainBlocMaintenanceCubit.of(context),
+            ),
+            const AttachmentsReportCustomer(),
+          ].paddingDirectional(
+            start: 10.w,
+            end: 10.w,
+            bottom: 10.h,
+          ),
         ),
       ),
     );

@@ -1,9 +1,10 @@
 import 'dart:io';
-
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
+// Ensure to include relevant imports for Failure and EmergenciesModel
 
 class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   MainBlocMaintenanceCubit() : super(MainBlocMaintenanceInitial());
@@ -35,13 +36,11 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
 
   void imageFileClear() async {
     image = File('');
-
     emit(ClearImageState());
   }
 
   void imagesAttachmentClear({required int index}) async {
     imagesAttachment.removeAt(index);
-
     emit(ClearImageState());
   }
 
@@ -49,14 +48,13 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
     emit(SelectImageLoadingState());
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 100, // To set quality of images
-      maxHeight: 1000, // To set maxHeight of images that you want in your app
+      imageQuality: 100,
+      maxHeight: 1000,
       maxWidth: 1000,
-    ); // To set maxHeight of images that you want in your app
+    );
     final XFile? xFilePick = pickedFile;
     if (xFilePick != null) {
       image = File(xFilePick.path);
-
       emit(SelectImageSuccessState());
     } else {
       emit(SelectImageErrorState());
@@ -68,10 +66,10 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   void selectMoreImages() async {
     emit(SelectImageLoadingState());
     final pickedFile = await picker.pickMultiImage(
-      imageQuality: 100, // To set quality of images
-      maxHeight: 1000, // To set maxHeight of images that you want in your app
+      imageQuality: 100,
+      maxHeight: 1000,
       maxWidth: 1000,
-    ); // To set maxHeight of images that you want in your app
+    );
     final List<XFile> xFilePick = pickedFile;
 
     for (final element in xFilePick) {
@@ -80,4 +78,5 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
 
     emit(SelectImageSuccessState());
   }
-}
+
+  }

@@ -28,6 +28,8 @@ class EndPoints {
   static const getAllReports = '$API_URL/peridics/reports/';
   static const addReport = '$API_URL/peridics/report/add';
   static const updateReport = '$API_URL/peridics/report/update/';
+   static const getEmergencie = '$API_URL/emergencies';
+   static const addEmergencie = '$API_URL/emergencies/add';
 
   static const DEACTIVATE_URL = '$API_URL/users/deactive';
   static const SIGNUP_URL = '$API_URL/users/creating';
