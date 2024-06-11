@@ -2,20 +2,24 @@ import 'dart:convert';
 
 import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/screen/employer/maintenance/data/model/all_elevators_model.dart';
-import 'package:cnattendance/screen/employer/maintenance/data/model/one_elevator_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_report_model.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ElevatorDataSource {
-  static Future<Either<Failure, AllElevatorsModel>> getAllElevators({required String idPeriodic}) async {
-    final uri = Uri.parse('${EndPoints.getAllElevators}$idPeriodic');
-    debugPrint('${EndPoints.getAllElevators}$idPeriodic');
+class ReportDataSource {
+  static Future<Either<Failure, OneReportModel>> getOneReport({
+    required String idReport,
+  }) async {
+    final uri = Uri.parse('${EndPoints.getOneReport}$idReport');
+    debugPrint('${EndPoints.getOneReport}$idReport');
 
-    final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $tokenCache'};
+    final Map<String, String> headers = {
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $tokenCache',
+    };
     debugPrint(headers.toString());
     try {
       // debugPrint('working');
@@ -30,7 +34,7 @@ class ElevatorDataSource {
 
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
-      final responseJson = AllElevatorsModel.fromJson(responseData);
+      final responseJson = OneReportModel.fromJson(responseData);
 
       return Right(responseJson);
     } catch (error) {
@@ -41,26 +45,39 @@ class ElevatorDataSource {
     }
   }
 
-  static Future<Either<Failure, OneElevatorModel>> getOneElevator({required String idElevator}) async {
-    final uri = Uri.parse('${EndPoints.getOneElevator}$idElevator');
-    debugPrint('${EndPoints.getOneElevator}$idElevator');
+  static Future<Either<Failure, OneReportModel>> addReport({
+    required String emergencyId,
+    required String description,
+    required String price,
+    required String status,
+    required String product,
+  }) async {
+    final uri = Uri.parse(EndPoints.addReport);
 
-    final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8', 'Authorization': 'Bearer $tokenCache'};
+    final Map<String, String> headers = {
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $tokenCache',
+    };
+
+    final Map<String, String> body = {
+      'emergency_id': emergencyId,
+      'description': description,
+      'price': price,
+      'status': status,
+      'product': product,
+    };
+
     debugPrint(headers.toString());
+    debugPrint(body.toString());
     try {
-      // debugPrint('working');
-      // var fcm = await FirebaseMessaging.instance.getToken();
+      final response = await http.post(uri, headers: headers, body: body);
 
-      final response = await http.get(
-        uri,
-        headers: headers,
-      );
       debugPrint(response.body);
       final responseData = json.decode(response.body);
 
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
-      final responseJson = OneElevatorModel.fromJson(responseData);
+      final responseJson = OneReportModel.fromJson(responseData);
 
       return Right(responseJson);
     } catch (error) {
@@ -70,7 +87,4 @@ class ElevatorDataSource {
       return left(ServerFailure(error.toString()));
     }
   }
-
-
-
 }

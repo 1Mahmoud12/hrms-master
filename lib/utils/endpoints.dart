@@ -25,11 +25,14 @@ class EndPoints {
   static const getAllElevators = '$API_URL/peridics/elevators/';
   static const getOneElevator = '$API_URL/peridics/elevator/';
   static const getOneReport = '$API_URL/peridics/report/';
+  static const getOneEmergencie = '$API_URL/emergencies/';
   static const getAllReports = '$API_URL/peridics/reports/';
   static const addReport = '$API_URL/peridics/report/add';
   static const updateReport = '$API_URL/peridics/report/update/';
    static const getEmergencie = '$API_URL/emergencies';
+   static const getPayment = '$API_URL/emergencies';
    static const addEmergencie = '$API_URL/emergencies/add';
+   static const addPayment = '$API_URL/emergencies/payment';
 
   static const DEACTIVATE_URL = '$API_URL/users/deactive';
   static const SIGNUP_URL = '$API_URL/users/creating';
