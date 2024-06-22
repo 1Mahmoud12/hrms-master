@@ -38,6 +38,7 @@ import 'package:cnattendance/screen/employer/allProject/presentation/view/widget
 import 'package:cnattendance/screen/employer/allProject/presentation/view/widgets/progress_screen.dart';
 import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/edit_report_screen.dart';
@@ -240,6 +241,9 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => TasksCubit(),
+            ),
+               BlocProvider(
+              create: (context) => EmergencieCubit(),
             ),
           ],
           child: Portal(

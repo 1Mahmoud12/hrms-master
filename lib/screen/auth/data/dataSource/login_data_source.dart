@@ -13,11 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class LoginDataSource {
-  static Future<Either<Failure, LoginModel>> login(String username, String password) async {
+  static Future<Either<Failure, LoginModel>> login(
+    String username,
+    String password,
+  ) async {
     final uri = Uri.parse(EndPoints.loginUrl);
     debugPrint(EndPoints.loginUrl);
 
-    final Map<String, String> headers = {'Accept': 'application/json; charset=UTF-8'};
+    final Map<String, String> headers = {
+      'Accept': 'application/json; charset=UTF-8',
+    };
 
     try {
       // debugPrint('working');
@@ -35,12 +40,14 @@ class LoginDataSource {
         },
       );
       final responseData = json.decode(response.body);
-
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
       final responseJson = LoginModel.fromJson(responseData);
       print(responseJson.data?.user!.toJson());
-      await Preferences.setSaved(value: jsonEncode(responseJson.data?.user!.toJson()), key: userCacheKey);
+      await Preferences.setSaved(
+        value: jsonEncode(responseJson.data?.user!.toJson()),
+        key: userCacheKey,
+      );
       userCache = responseJson.data!.user;
 
       return Right(responseJson);
