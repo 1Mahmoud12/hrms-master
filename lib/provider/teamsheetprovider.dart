@@ -46,7 +46,7 @@ class TeamSheetProvider with ChangeNotifier {
           name: value.name,
           post: value.post,
           avatar: value.avatar,
-          phone: value.phone,
+          phone: value.phone.toString(),
           email: value.email,
           active: value.onlineStatus,),);
     }

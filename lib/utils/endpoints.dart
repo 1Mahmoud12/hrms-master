@@ -20,6 +20,7 @@ class EndPoints {
   static const proposalEngineerStore = '$API_URL/proposals/engineer/store';
   static const proposalEngineerUpdate = '$API_URL/proposals/engineer/update';
 
+
   static const getPeridics = '$API_URL/peridics';
   static const addPeridics = '$API_URL/peridics/add';
   static const getAllElevators = '$API_URL/peridics/elevators/';
@@ -30,7 +31,7 @@ class EndPoints {
   static const addReport = '$API_URL/peridics/report/add';
   static const updateReport = '$API_URL/peridics/report/update/';
    static const getEmergencie = '$API_URL/emergencies';
-   static const getPayment = '$API_URL/emergencies';
+   static const getPayment = '$API_URL/payments-projects-detail';
    static const addEmergencie = '$API_URL/emergencies/add';
    static const addPayment = '$API_URL/emergencies/payment';
 

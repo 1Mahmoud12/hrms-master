@@ -82,6 +82,7 @@ class CardProject extends StatelessWidget {
                               ),
                             ),
                           ),
+                          if(project.members.length > 5)
                           Padding(
                             padding: const EdgeInsets.only(left: 5 * 12.0),
                             child: Container(

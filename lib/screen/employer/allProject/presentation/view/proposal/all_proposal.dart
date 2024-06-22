@@ -6,7 +6,9 @@ import 'package:cnattendance/screen/employer/allProject/presentation/manager/pro
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/proposalCubit/state.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,7 +45,8 @@ class ProposalScreen extends StatelessWidget {
                     children: [
                       ...List.generate(
                         allProposalsModelCache!.data!.requests!.length,
-                        (index) => InkWell(
+                        (index) {
+                          return InkWell(
                           onTap: () async {
                             await ProposalCubit.of(context)
                                 .getOneProposals(context: context, idProposal: allProposalsModelCache!.data!.requests![index].propasalId!);
@@ -86,65 +89,57 @@ class ProposalScreen extends StatelessWidget {
                                           Expanded(
                                             child: Row(
                                               children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      allProposalsModelCache!.data!.requests![index].formData!.userNameValue ?? '',
-                                                      style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColorTextFormField),
-                                                    ),
-                                                    5.ESH(),
-                                                    Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons.my_location_sharp,
-                                                          color: AppColors.primaryColor,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Text(
-                                                          allProposalsModelCache!.data!.requests![index].formData!.userAddressValue ?? '',
-                                                          style: Styles.style18700.copyWith(color: AppColors.grey, fontSize: 12.sp),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    5.ESH(),
-                                                    /*    SizedBox(
-                                      width: context.screenWidth * .5,
-                                      child: Text(ProposalCubit.of(context).steps[index]['description']),
-                                    ),
-                                    5.ESH(),*/
-                                                    /*
-                                      */
-                                                    /*SizedBox(
-                                      height: context.screenHeight * .002,
-                                      width: context.screenWidth * .5,
-                                      child: SliderTheme(
-                                        data: SliderThemeData(
-                                          trackShape: CustomTrackShape(),
-                                          //thumbColor: Colors.transparent,
-                                          thumbShape: SliderComponentShape.noThumb,
-                                          trackHeight: 2,
-                                        ),
-                                        child: Slider(
-                                          value: double.parse(ProposalCubit.of(context).steps[index]['value']) / 100,
-                                          onChanged: (value) {},
-                                        ),
-                                      ),
-                                    ),*/
-                                                    /*
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),*/
-                                                  ],
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                              allProposalsModelCache!.data!.requests![index].propasal!.name ?? '',
+                                                              style: Styles.style14500.copyWith(fontSize: 15.sp, color: AppColors.textColorTextFormField),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+
+                                                      /*    SizedBox(
+                                                                                        width: context.screenWidth * .5,
+                                                                                        child: Text(ProposalCubit.of(context).steps[index]['description']),
+                                                                                      ),
+                                                                                      5.ESH(),*/
+                                                      /*
+                                                                                        */
+                                                      /*SizedBox(
+                                                                                        height: context.screenHeight * .002,
+                                                                                        width: context.screenWidth * .5,
+                                                                                        child: SliderTheme(
+                                                                                          data: SliderThemeData(
+                                                                                            trackShape: CustomTrackShape(),
+                                                                                            //thumbColor: Colors.transparent,
+                                                                                            thumbShape: SliderComponentShape.noThumb,
+                                                                                            trackHeight: 2,
+                                                                                          ),
+                                                                                          child: Slider(
+                                                                                            value: double.parse(ProposalCubit.of(context).steps[index]['value']) / 100,
+                                                                                            onChanged: (value) {},
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),*/
+                                                      /*
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),*/
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -152,7 +147,8 @@ class ProposalScreen extends StatelessWidget {
                                         ],
                                       ),
                           ),
-                        ),
+                        );
+                        },
                       ),
                     ],
                   ),

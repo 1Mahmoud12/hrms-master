@@ -1,6 +1,7 @@
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/all_proposals_model.dart';
+import 'package:cnattendance/screen/employer/allProject/data/models/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
@@ -18,6 +19,9 @@ String userCacheKey = 'userCacheKey';
 
 AllProposalsModel? allProposalsModelCache;
 String allProposalsKey = 'allProposalsModel';
+
+PaymentsProjectModel? allPaymentsProjectModelCache;
+String allPaymentsProjectModelKey = 'PaymentsProjectModel';
 
 PeriodicModel? allPeridicsCache;
 String allPeridicsKey = 'allPeridicsKey';

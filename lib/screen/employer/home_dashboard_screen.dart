@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/state.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
-import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +24,8 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
-      canDismissDialog: true,
-      showReleaseNotes: false,
-      dialogStyle: Platform.isIOS
-          ? UpgradeDialogStyle.cupertino
-          : UpgradeDialogStyle.material,
-      shouldPopScope: () => true,
-      cupertinoButtonTextStyle: Styles.style18700,
       upgrader: Upgrader(
+        debugLogging: true,
         durationUntilAlertAgain: const Duration(days: 1),
         languageCode: 'en',
         countryCode: 'Us',

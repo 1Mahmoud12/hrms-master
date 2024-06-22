@@ -14,7 +14,7 @@ class PaymentDataSource {
   static Future<Either<Failure, PaymentModel>> getOnePayment({
     required String idPayment,
   }) async {
-    final uri = Uri.parse('${EndPoints.getPayment}$idPayment');
+    final uri = Uri.parse('${EndPoints.getPayment}/$idPayment');
     debugPrint('${EndPoints.getPayment}$idPayment');
 
     final Map<String, String> headers = {

@@ -16,7 +16,7 @@ class _SliderCustomState extends State<SliderCustom> {
   @override
   Widget build(BuildContext context) {
     final double valueSlider = widget.valueSlider;
-
+    print('valueSlider ${widget.valueSlider}');
     return Row(
       children: [
         Expanded(

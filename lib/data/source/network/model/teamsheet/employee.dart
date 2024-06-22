@@ -23,13 +23,13 @@ class Employee {
         department: json['department'] ?? '',
         post: json['post'] ?? '',
         avatar: json['avatar'] ?? '',
-        onlineStatus: json['online_status'] ?? '0',);
+        onlineStatus: json['online_status'].toString(),);
   }
 
   int id;
   String name;
   String email;
-  String phone;
+  int phone;
   String dob;
   String gender;
   String department;
