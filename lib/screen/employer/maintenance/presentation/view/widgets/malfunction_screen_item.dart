@@ -3,8 +3,8 @@ import 'package:cnattendance/core/component/empty_widget.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/custom_floating_action_button_maintenance.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/malfunction_request.dart';
 import 'package:cnattendance/utils/extensions.dart';
@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-class EmergencyScreenItems extends StatelessWidget {
-  const EmergencyScreenItems({super.key});
+class MalFunctionScreenItems extends StatelessWidget {
+  const MalFunctionScreenItems({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +31,18 @@ class EmergencyScreenItems extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) =>
-            EmergencieCubit()..getAllProposals(context: context),
-        child: BlocBuilder<EmergencieCubit, EmergencieState>(
-          builder: (context, state) => state is EmergencieLoadingState
+            MalfunctionCubit()..getAllProposals(context: context),
+        child: BlocBuilder<MalfunctionCubit, MalfunctionState>(
+          builder: (context, state) => state is MalfunctionLoadingState
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : state is EmergencieErrorState
+              : state is MalfunctionErrorState
                   ? ErrorWidget(state.error)
-                  : state is EmergencieSuccessState &&
-                          allEmergenciesCache != null &&
-                          allEmergenciesCache!.data != null &&
-                          allEmergenciesCache!.data!.emergencie != null
+                  : state is MalfunctionSuccessState &&
+                          allMalfunctionCache != null &&
+                          allMalfunctionCache!.data != null &&
+                          allMalfunctionCache!.data!.malfunction != null
                       ? ListView.builder(
                           itemBuilder: (context, index) => InkWell(
                             onTap: () {
@@ -54,14 +54,14 @@ class EmergencyScreenItems extends StatelessWidget {
                                 'status': index > 4
                                     ? Malfunction.In_Progress.name
                                     : Malfunction.Pending.name,
-                                'index':index,
-                                'emrgencie_id':allEmergenciesCache!
-                                  .data!.emergencie![index].id,
+                                'index': index,
+                                'malfuncion_id': allMalfunctionCache!
+                                    .data!.malfunction![index].id,
                               };
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.emergencyMalfunctionScreen,
+                                  AppRoute.maintenanceReportMechanics,
                                   arguments: arguments,
                                 );
                               } else if (genderUser == RoleId.nine.name.tr) {
@@ -79,17 +79,17 @@ class EmergencyScreenItems extends StatelessWidget {
                               }
                             },
                             child: MalfunctionRequest(
-                              nameMaintenanceReport: allEmergenciesCache!
-                                  .data!.emergencie![index].name!,
-                              date: allEmergenciesCache!
-                                  .data!.emergencie![index].createdAt!,
+                              nameMaintenanceReport: allMalfunctionCache!
+                                  .data!.malfunction![index].name!,
+                              date: allMalfunctionCache!
+                                  .data!.malfunction![index].createdAt!,
                               status: index > 4
                                   ? Malfunction.In_Progress.name
                                   : Malfunction.Pending.name,
                             ),
                           ),
                           itemCount:
-                              allEmergenciesCache!.data!.emergencie!.length,
+                              allMalfunctionCache!.data!.malfunction!.length,
                           shrinkWrap: true,
                         )
                       : const EmptyWidget(),
@@ -102,10 +102,11 @@ class EmergencyScreenItems extends StatelessWidget {
               onTap: () {
                 final arguments = {
                   'nameStatus': 'Malfunction maintenance',
+                  
                 };
                 Navigator.pushNamed(
                   context,
-                  AppRoute.detailsMaintenance,
+                  AppRoute.addMafunctionRequest,
                   arguments: arguments,
                 );
               },

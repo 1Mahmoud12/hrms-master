@@ -39,10 +39,13 @@ import 'package:cnattendance/screen/employer/allProject/presentation/view/widget
 import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/add_malfunction_request.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/edit_report_screen.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/emergency_screen_items.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/malfunction_screen_item.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/periodic_maintenance_screen_item.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
@@ -92,7 +95,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     notificationMethod();
-    // TODO: implement initState
     AwesomeNotifications().setListeners(onActionReceivedMethod: NotificationUtility.onActionReceivedMethod);
     super.initState();
   }
@@ -215,6 +217,9 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => MainBlocMaintenanceContractCubit(),
             ),
+              BlocProvider(
+              create: (context) => MalfunctionCubit(),
+            ),
             BlocProvider(
               create: (context) => MainBlocElevatorCubit(),
             ),
@@ -296,6 +301,7 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.progressScreen: (_) => const ProgressScreen(),
                     AppRoute.allDetailsElevator: (_) => const AllDetailsElevator(),
                     AppRoute.detailsMaintenance: (_) => const DetailsMaintenance(),
+                    AppRoute.addMafunctionRequest: (_) => const AddMalfunctionRequest(),
                     AppRoute.paymentMaintenanceValue: (_) => const PaymentMaintenanceValue(),
                     AppRoute.allDetailsReport: (_) => const AllDetailsReport(),
                     AppRoute.emergencyMalfunctionScreen: (_) => const EmergencyMalfunctionScreen(),
@@ -318,6 +324,7 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.messagesCustomerScreen: (_) => const MessagesCustomerScreen(),
                     AppRoute.periodicMaintenanceScreenItems: (_) => const PeriodicMaintenanceScreenItems(),
                     AppRoute.emergencyScreenItems: (_) => const EmergencyScreenItems(),
+                    AppRoute.malfunctionScreenItems: (_) => const MalFunctionScreenItems(),
                     ProfileScreen.routeName: (_) => const ProfileScreen(),
                     EditProfileScreen.routeName: (_) => const EditProfileScreen(),
                     MeetingDetailScreen.routeName: (_) => const MeetingDetailScreen(),

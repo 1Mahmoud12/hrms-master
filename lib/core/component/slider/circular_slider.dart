@@ -25,8 +25,16 @@ class PieChart2State extends State<PieChartSample2> {
     final model = Get.put(ProjectDashboardController());
     final Project project = model.projectList[index];
     final double valueSliderWidget = project.progress.toDouble();
-  //final double valueSliderWidget = project.tasks[index].progress! as double;
+    //final double valueSliderWidget = project.tasks[index].progress! as double;
+    bool isClicked = false;
+    double radius = 50;
 
+    void toggleRadius() {
+      setState(() {
+        isClicked = !isClicked;
+        radius = isClicked ? 60 : 5;
+      });
+    }
 
     return AspectRatio(
       aspectRatio: 1.7,
@@ -38,71 +46,74 @@ class PieChart2State extends State<PieChartSample2> {
           Expanded(
             child: AspectRatio(
               aspectRatio: 1,
-              child: PieChart(
-                PieChartData(
-                  pieTouchData: PieTouchData(
-                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                      setState(() {
-                        if (!event.isInterestedForInteractions ||
-                            pieTouchResponse == null ||
-                            pieTouchResponse.touchedSection == null) {
-                          touchedIndex = -1;
-                          return;
-                        }
-                        touchedIndex = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
-                      });
-                    },
-                  ),
-                  // badgePositionPercentageOffset: remaining == 0
-                  //     ? 1
-                  //     : remaining < 50 && remaining >= 20
-                  //         ? 1.7
-                  //         : remaining >= 50 && remaining <= 70
-                  //             ? 1.5
-                  //             : 1,
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
-                  sectionsSpace: 0,
-                  centerSpaceRadius: 40,
-                  sections: [
-                    PieChartSectionData(
-                      color: AppColors.primaryColor,
-                      value: valueSliderWidget,
-                      title: '$valueSliderWidget%',
-                      radius: 50,
-                      borderSide: const BorderSide(color: AppColors.white),
-                      badgeWidget: Container(
-                        padding: EdgeInsets.all(5.w),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Text(
-                          valueSliderWidget.toString(),
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.white,
+              child: GestureDetector(
+                onTap: () => toggleRadius,
+                child: PieChart(
+                  PieChartData(
+                    pieTouchData: PieTouchData(
+                      touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                        setState(() {
+                          if (!event.isInterestedForInteractions ||
+                              pieTouchResponse == null ||
+                              pieTouchResponse.touchedSection == null) {
+                            touchedIndex = -1;
+                            return;
+                          }
+                          touchedIndex = pieTouchResponse
+                              .touchedSection!.touchedSectionIndex;
+                        });
+                      },
+                    ),
+                    // badgePositionPercentageOffset: remaining == 0
+                    //     ? 1
+                    //     : remaining < 50 && remaining >= 20
+                    //         ? 1.7
+                    //         : remaining >= 50 && remaining <= 70
+                    //             ? 1.5
+                    //             : 1,
+                    borderData: FlBorderData(
+                      show: false,
+                    ),
+                    sectionsSpace: 0,
+                    centerSpaceRadius: 40,
+                    sections: [
+                      PieChartSectionData(
+                        color: AppColors.primaryColor,
+                        value: valueSliderWidget,
+                        title: '$valueSliderWidget%',
+                        radius: radius,
+                        borderSide: const BorderSide(color: AppColors.white),
+                        badgeWidget: Container(
+                          padding: EdgeInsets.all(5.w),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: Text(
+                            valueSliderWidget.toString(),
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.white,
+                            ),
                           ),
                         ),
+                        titleStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
+                          shadows: [Shadow(blurRadius: 2)],
+                        ),
                       ),
-                      titleStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                        shadows: [Shadow(blurRadius: 2)],
+                      PieChartSectionData(
+                        color: Colors.grey,
+                        value: 100 - valueSliderWidget,
+                        title: '',
+                        radius: 50,
+                        borderSide: const BorderSide(color: AppColors.white),
                       ),
-                    ),
-                    PieChartSectionData(
-                      color: Colors.grey,
-                      value: 100 - valueSliderWidget,
-                      title: '',
-                      radius: 50,
-                      borderSide: const BorderSide(color: AppColors.white),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

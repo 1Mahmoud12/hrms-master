@@ -68,9 +68,10 @@ class ReportDataSource {
     };
 
     debugPrint(headers.toString());
-    debugPrint(body.toString());
+    debugPrint(json.encode(body).toString());
     try {
-      final response = await http.post(uri, headers: headers, body: body);
+      final response =
+          await http.post(uri, headers: headers, body: json.encode(body));
 
       debugPrint(response.body);
       final responseData = json.decode(response.body);

@@ -6,7 +6,11 @@ class Company {
   });
 
   factory Company.fromJson(dynamic json) {
-    return Company(id: json['id'], name: json['name'] ?? '', weekend: json['weekend']);
+    return Company(
+      id: json['id'],
+      name: json['name'] ?? '',
+      weekend: json['weekend'] ?? [],
+    );
   }
 
   int id;

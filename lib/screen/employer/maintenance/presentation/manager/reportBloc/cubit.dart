@@ -10,6 +10,8 @@ class ReportBloc extends Cubit<ReportState> {
   static ReportBloc of(BuildContext context) =>
       BlocProvider.of<ReportBloc>(context);
 
+  String selectedStatus='';
+  String selectedProduct='';
   TextEditingController maintenanceEngineerController = TextEditingController();
   TextEditingController reportDateController = TextEditingController();
   TextEditingController customerNameController = TextEditingController();
@@ -59,13 +61,12 @@ class ReportBloc extends Cubit<ReportState> {
     );
   }
 
-
   void addReport({
     required String emergencyId,
     required String description,
     required String price,
-    required String status, 
-    required String product, 
+    required String status,
+    required String product,
   }) async {
     emit(ReportLoadingState());
 
@@ -95,6 +96,4 @@ class ReportBloc extends Cubit<ReportState> {
       emit(ReportErrorState(error.toString()));
     }
   }
-
-
 }

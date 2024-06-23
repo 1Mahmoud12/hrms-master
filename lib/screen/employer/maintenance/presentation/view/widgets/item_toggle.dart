@@ -26,7 +26,11 @@ class ItemToggle extends StatelessWidget {
             };
             Navigator.pushNamed(
               context,
-              index == 0 || index == 1 ? AppRoute.emergencyScreenItems : AppRoute.periodicMaintenanceScreenItems,
+              index == 0
+                  ? AppRoute.emergencyScreenItems
+                  : index == 1
+                      ? AppRoute.malfunctionScreenItems
+                      : AppRoute.periodicMaintenanceScreenItems,
               arguments: arguments,
             );
           },
