@@ -89,7 +89,7 @@ dependencies:
 
   syncfusion_flutter_gauges: ^24.2.6
 
-  upgrader: ^9.0.0
+  upgrader: any
 
 
 
@@ -100,7 +100,7 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
-  flutter_lints: ^3.0.1
+  flutter_lints: any
   change_app_package_name: ^1.1.0
 flutter_launcher_icons:
   android: "ic_launcher"

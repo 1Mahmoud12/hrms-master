@@ -1,6 +1,5 @@
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
-import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/progressBloc/cubit.dart';

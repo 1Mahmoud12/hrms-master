@@ -45,7 +45,7 @@ class StatusDetailsProject extends StatelessWidget {
             assetsName: Assets.detailsContract,
             nameRow: 'Contract Details',
           ),
-          InkWell(
+        /*  InkWell(
             onTap: () {
               final arguments = {
                 'progressRatio': 80,
@@ -76,11 +76,11 @@ class StatusDetailsProject extends StatelessWidget {
                         'Progress',
                         style: Styles.style14400.copyWith(color: AppColors.textColorTextFormField),
                       ),
-                      /*Text(
+                      *//*Text(
                           'Last Update: 5 mins ago',
                           style: Styles.style12400.copyWith(fontSize: 9.sp, color: AppColors.textColorTextFormField),
-                        ),*/
-                      /* SizedBox(
+                        ),*//*
+                      *//* SizedBox(
                           height: context.screenHeight * .002,
                           width: context.screenWidth * .4,
                           child: SliderTheme(
@@ -95,7 +95,7 @@ class StatusDetailsProject extends StatelessWidget {
                               onChanged: (value) {},
                             ),
                           ),
-                        ),*/
+                        ),*//*
                     ],
                   ),
                   // if (anotherWidgetBool) const Spacer(),
@@ -105,7 +105,7 @@ class StatusDetailsProject extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+          ),*/
           if (genderUser == RoleId.ten.name.tr || genderUser == RoleId.nine.name.tr)
             OneStatusRow(
               button: true,
@@ -171,6 +171,7 @@ class StatusDetailsProject extends StatelessWidget {
                         ),
                       ),
                     ),
+                    if( model.project.value.members.length > 5)
                     Padding(
                       padding: const EdgeInsets.only(left: 5 * 12.0),
                       child: Container(
