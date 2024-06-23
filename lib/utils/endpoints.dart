@@ -26,7 +26,9 @@ class EndPoints {
   static const getAllElevators = '$API_URL/peridics/elevators/';
   static const getOneElevator = '$API_URL/peridics/elevator/';
   static const getOneReport = '$API_URL/peridics/report/';
+  static const getOneReportMalF = '$API_URL/malfunctions/report/';
   static const getOneEmergencie = '$API_URL/emergencies/';
+  static const getOneMalfunctions = '$API_URL/malfunctions/';
   static const getAllReports = '$API_URL/peridics/reports/';
   static const addReport = '$API_URL/emergencies/report/add';
   static const updateReport = '$API_URL/peridics/report/update/';

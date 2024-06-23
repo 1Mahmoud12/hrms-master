@@ -40,7 +40,7 @@ import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/add_malfunction_request.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/edit_report_screen.dart';
@@ -95,12 +95,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     notificationMethod();
-    AwesomeNotifications().setListeners(onActionReceivedMethod: NotificationUtility.onActionReceivedMethod);
+    AwesomeNotifications().setListeners(
+        onActionReceivedMethod: NotificationUtility.onActionReceivedMethod);
     super.initState();
   }
 
   Future<void> notificationMethod() async {
-    final NotificationSettings settings = await FirebaseMessaging.instance.requestPermission();
+    final NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission();
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       debugPrint('User granted permission');
@@ -128,8 +130,10 @@ class _MyAppState extends State<MyApp> {
           child: Card(
             margin: const EdgeInsets.all(15),
             child: ListTile(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-              leading: const SizedBox(height: double.infinity, child: Icon(Icons.notifications)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              leading: const SizedBox(
+                  height: double.infinity, child: Icon(Icons.notifications)),
               iconColor: const Color(0xff011754),
               textColor: const Color(0xff011754),
               minVerticalPadding: 10,
@@ -217,7 +221,7 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => MainBlocMaintenanceContractCubit(),
             ),
-              BlocProvider(
+            BlocProvider(
               create: (context) => MalfunctionCubit(),
             ),
             BlocProvider(
@@ -233,7 +237,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => ProductsNeedBloc(),
             ),
             BlocProvider(
-              create: (context) => ReportBloc(),
+              create: (context) => ReportMalfunctionCubit(),
             ),
             BlocProvider(
               create: (context) => SupportCustomerBloc(),
@@ -247,7 +251,7 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => TasksCubit(),
             ),
-               BlocProvider(
+            BlocProvider(
               create: (context) => EmergencieCubit(),
             ),
           ],
@@ -291,44 +295,67 @@ class _MyAppState extends State<MyApp> {
                   initialRoute: '/',
                   routes: {
                     '/': (_) => const SplashScreen(),
-                    HomeDashboardScreen.routeName: (_) => const HomeDashboardScreen(),
+                    HomeDashboardScreen.routeName: (_) =>
+                        const HomeDashboardScreen(),
                     LoginScreen.routeName: (_) => const LoginScreen(),
                     // AppRoute.dashboardScreen: (_) => DashboardScreen(),
-                    AppRoute.cardDetailsProject: (_) => const AllProjectDetails(),
+                    AppRoute.cardDetailsProject: (_) =>
+                        const AllProjectDetails(),
                     AppRoute.knowUs: (_) => const KnowUs(),
-                    AppRoute.detailsMaintenanceWidget: (_) => const DetailsMaintenanceWidget(),
+                    AppRoute.detailsMaintenanceWidget: (_) =>
+                        const DetailsMaintenanceWidget(),
                     //  AppRoute.detailsElevators: (_) => const DetailsElevators(),
                     AppRoute.progressScreen: (_) => const ProgressScreen(),
-                    AppRoute.allDetailsElevator: (_) => const AllDetailsElevator(),
-                    AppRoute.detailsMaintenance: (_) => const DetailsMaintenance(),
-                    AppRoute.addMafunctionRequest: (_) => const AddMalfunctionRequest(),
-                    AppRoute.paymentMaintenanceValue: (_) => const PaymentMaintenanceValue(),
+                    AppRoute.allDetailsElevator: (_) =>
+                        const AllDetailsElevator(),
+                    AppRoute.detailsMaintenance: (_) =>
+                        const DetailsMaintenance(),
+                    AppRoute.addMafunctionRequest: (_) =>
+                        const AddMalfunctionRequest(),
+                    AppRoute.paymentMaintenanceValue: (_) =>
+                        const PaymentMaintenanceValue(),
                     AppRoute.allDetailsReport: (_) => const AllDetailsReport(),
-                    AppRoute.emergencyMalfunctionScreen: (_) => const EmergencyMalfunctionScreen(),
-                    AppRoute.maintenanceReportMechanics: (_) => const MaintenanceReportMechanics(),
-                    AppRoute.maintenanceReportTechnical: (_) => const MaintenanceReportTechnical(),
-                    AppRoute.detailsContractProject: (_) => const DetailsContractProject(),
+                    AppRoute.emergencyMalfunctionScreen: (_) =>
+                        const EmergencyMalfunctionScreen(),
+                    AppRoute.maintenanceReportMechanics: (_) =>
+                        const MaintenanceReportMechanics(),
+                    AppRoute.maintenanceReportTechnical: (_) =>
+                        const MaintenanceReportTechnical(),
+                    AppRoute.detailsContractProject: (_) =>
+                        const DetailsContractProject(),
                     AppRoute.addElevator: (_) => const AddElevator(),
                     AppRoute.payments: (_) => const PaymentScreen(),
-                    AppRoute.addMaintenanceContract: (_) => const AddMaintenanceContract(),
-                    AppRoute.teamProjectScreen: (_) => const TeamProjectScreen(),
-                    AppRoute.addProgressScreen: (_) => const AddProgressScreen(),
-                    AppRoute.editProgressScreen: (_) => const EditProgressScreen(),
+                    AppRoute.addMaintenanceContract: (_) =>
+                        const AddMaintenanceContract(),
+                    AppRoute.teamProjectScreen: (_) =>
+                        const TeamProjectScreen(),
+                    AppRoute.addProgressScreen: (_) =>
+                        const AddProgressScreen(),
+                    AppRoute.editProgressScreen: (_) =>
+                        const EditProgressScreen(),
                     AppRoute.tasksScreen: (_) => const TasksScreen(),
                     AppRoute.proposalScreen: (_) => const ProposalScreen(),
-                    AppRoute.detailsProposalScreen: (_) => const DetailsProposalScreen(),
+                    AppRoute.detailsProposalScreen: (_) =>
+                        const DetailsProposalScreen(),
                     AppRoute.addTasksScreen: (_) => const AddTasksScreen(),
                     AppRoute.editTasksScreen: (_) => const EditTasksScreen(),
                     AppRoute.editReportScreen: (_) => const EditReportScreen(),
                     AppRoute.chatCustomer: (_) => const ChatCustomer(),
-                    AppRoute.messagesCustomerScreen: (_) => const MessagesCustomerScreen(),
-                    AppRoute.periodicMaintenanceScreenItems: (_) => const PeriodicMaintenanceScreenItems(),
-                    AppRoute.emergencyScreenItems: (_) => const EmergencyScreenItems(),
-                    AppRoute.malfunctionScreenItems: (_) => const MalFunctionScreenItems(),
+                    AppRoute.messagesCustomerScreen: (_) =>
+                        const MessagesCustomerScreen(),
+                    AppRoute.periodicMaintenanceScreenItems: (_) =>
+                        const PeriodicMaintenanceScreenItems(),
+                    AppRoute.emergencyScreenItems: (_) =>
+                        const EmergencyScreenItems(),
+                    AppRoute.malfunctionScreenItems: (_) =>
+                        const MalFunctionScreenItems(),
                     ProfileScreen.routeName: (_) => const ProfileScreen(),
-                    EditProfileScreen.routeName: (_) => const EditProfileScreen(),
-                    MeetingDetailScreen.routeName: (_) => const MeetingDetailScreen(),
-                    PaySlipDetailScreen.routeName: (_) => const PaySlipDetailScreen(),
+                    EditProfileScreen.routeName: (_) =>
+                        const EditProfileScreen(),
+                    MeetingDetailScreen.routeName: (_) =>
+                        const MeetingDetailScreen(),
+                    PaySlipDetailScreen.routeName: (_) =>
+                        const PaySlipDetailScreen(),
                     MenuScreen.routeName: (_) => MenuScreen(),
                   },
                   // home: const AddElevator(),

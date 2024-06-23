@@ -32,7 +32,8 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.all(16.w),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -42,15 +43,19 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                 ),
                 Text(
                   status,
-                  style: Styles.style14500
-                      .copyWith(color: status == 'In Progress' ? AppColors.green : AppColors.subTextColor, fontWeight: FontWeight.w600),
+                  style: Styles.style14500.copyWith(
+                      color: status == 'In Progress'
+                          ? AppColors.green
+                          : AppColors.subTextColor,
+                      fontWeight: FontWeight.w600),
                 ),
               ],
             ),
           ),
           Container(
             padding: EdgeInsets.all(16.w),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,7 +69,8 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                 ),
                 Text(
                   'Mohamed',
-                  style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                  style:
+                      Styles.style14400.copyWith(color: AppColors.primaryColor),
                 ),
                 Text(
                   'Description',
@@ -73,7 +79,8 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                 Text(
                   '''
 Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex enim, euismod non consequat a, eg''',
-                  style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                  style:
+                      Styles.style14400.copyWith(color: AppColors.primaryColor),
                 ),
                 Text(
                   'location',
@@ -83,12 +90,14 @@ Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem 
                   children: [
                     Text(
                       location,
-                      style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                      style: Styles.style14400
+                          .copyWith(color: AppColors.primaryColor),
                     ),
                     5.ESW(),
                     SvgPicture.asset(
                       Assets.location,
-                      colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(
+                          AppColors.primaryColor, BlendMode.srcIn),
                     ),
                   ],
                 ),
@@ -96,7 +105,10 @@ Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem 
                   'Attachment',
                   style: Styles.style14400,
                 ),
-                Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)), child: Image.asset(Assets.attachment)),
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.r)),
+                    child: Image.asset(Assets.attachment)),
               ],
             ),
           ),

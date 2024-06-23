@@ -4,6 +4,7 @@ import 'package:cnattendance/screen/employer/allProject/data/models/all_proposal
 import 'package:cnattendance/screen/employer/allProject/data/models/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/malfunction_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_malfunction_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -35,6 +36,10 @@ String onePaymentKey = 'allPeridicsKey';
 
 MalfunctionModel? allMalfunctionCache;
 String allMalfunctionsKey = 'allMalfunctionKey';
+
+
+OneMalfunctionModel? oneMalfunctioCache;
+String oneMalfunctionKey = 'oneMalfunctionKey';
 
 //// customer =eight , engineer =nine, technical = ten,////  sales= twelve,client =eleven,
 enum RoleId {

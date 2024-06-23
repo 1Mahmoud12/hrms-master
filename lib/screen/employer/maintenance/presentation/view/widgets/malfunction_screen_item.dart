@@ -31,7 +31,7 @@ class MalFunctionScreenItems extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) =>
-            MalfunctionCubit()..getAllProposals(context: context),
+            MalfunctionCubit()..getAllMalfunction(context: context),
         child: BlocBuilder<MalfunctionCubit, MalfunctionState>(
           builder: (context, state) => state is MalfunctionLoadingState
               ? const Center(
@@ -46,6 +46,13 @@ class MalFunctionScreenItems extends StatelessWidget {
                       ? ListView.builder(
                           itemBuilder: (context, index) => InkWell(
                             onTap: () {
+                              MalfunctionCubit().getOneMalfunction(
+                                context: context,
+                                idMalfunction: allMalfunctionCache!
+                                    .data!.malfunction![index].id
+                                    .toString(),
+                              );
+
                               final arguments = {
                                 'nameMaintenanceReport': nameMaintenanceReport,
                                 'startDate': '24 Aug',
@@ -58,10 +65,22 @@ class MalFunctionScreenItems extends StatelessWidget {
                                 'malfuncion_id': allMalfunctionCache!
                                     .data!.malfunction![index].id,
                               };
+
+                              // final customerArguments = {
+                              //   'location': oneMalfunctioCache!
+                              //       .data!.malfunction!.location,
+                              //   'name': oneMalfunctioCache!
+                              //       .data!.report!.technical!.name,
+                              //   'description': oneMalfunctioCache!
+                              //       .data!.malfunction!.description,
+                              //   'image':
+                              //       oneMalfunctioCache!.data!.malfunction!.img,
+                              // };
+
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.maintenanceReportMechanics,
+                                  AppRoute.emergencyMalfunctionScreen,
                                   arguments: arguments,
                                 );
                               } else if (genderUser == RoleId.nine.name.tr) {
@@ -102,7 +121,6 @@ class MalFunctionScreenItems extends StatelessWidget {
               onTap: () {
                 final arguments = {
                   'nameStatus': 'Malfunction maintenance',
-                  
                 };
                 Navigator.pushNamed(
                   context,

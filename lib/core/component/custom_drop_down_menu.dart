@@ -1,6 +1,6 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +54,8 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         onChanged: (String? newValue) {
           newSelected = newValue!;
 
-          BlocProvider.of<ReportBloc>(context).selectedStatus = newValue;
+          BlocProvider.of<ReportMalfunctionCubit>(context).selectedStatus =
+              newValue;
           setState(() {});
         },
         isExpanded: true,

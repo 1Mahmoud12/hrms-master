@@ -1,17 +1,17 @@
-import 'package:cnattendance/screen/employer/maintenance/data/dataSource/report_data_source.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/dataSource/report_malfunction_data_source.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/state.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ReportBloc extends Cubit<ReportState> {
-  ReportBloc() : super(ReportInitialState());
+class ReportMalfunctionCubit extends Cubit<ReportState> {
+  ReportMalfunctionCubit() : super(ReportInitialState());
 
-  static ReportBloc of(BuildContext context) =>
-      BlocProvider.of<ReportBloc>(context);
+  static ReportMalfunctionCubit of(BuildContext context) =>
+      BlocProvider.of<ReportMalfunctionCubit>(context);
 
-  String selectedStatus='';
-  String selectedProduct='';
+  String selectedStatus = '';
+  String selectedProduct = '';
   TextEditingController maintenanceEngineerController = TextEditingController();
   TextEditingController reportDateController = TextEditingController();
   TextEditingController customerNameController = TextEditingController();
@@ -42,7 +42,7 @@ class ReportBloc extends Cubit<ReportState> {
   }) async {
     emit(ReportLoadingState());
 
-    await ReportDataSource.getOneReport(idReport: idReport).then(
+    await ReportMalfunctionDataSource.getOneReport(idReport: idReport).then(
       (value) async {
         value.fold((l) {
           debugPrint(l.errMessage);
@@ -62,7 +62,7 @@ class ReportBloc extends Cubit<ReportState> {
   }
 
   void addReport({
-    required String emergencyId,
+    required String malfunctionId,
     required String description,
     required String price,
     required String status,
@@ -71,8 +71,8 @@ class ReportBloc extends Cubit<ReportState> {
     emit(ReportLoadingState());
 
     try {
-      await ReportDataSource.addReport(
-        emergencyId: emergencyId,
+      await ReportMalfunctionDataSource.addReport(
+        malfunctionId: malfunctionId,
         description: description,
         price: price,
         status: status,

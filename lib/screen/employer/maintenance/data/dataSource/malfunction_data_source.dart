@@ -4,6 +4,7 @@ import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/malfunction_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_malfunction_model.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -32,6 +33,41 @@ class MalfunctionDataSource {
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
       final responseJson = MalfunctionModel.fromJson(responseData);
+
+      return Right(responseJson);
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioException(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  static Future<Either<Failure, OneMalfunctionModel>> getOneMalfunction({
+    required String idMalfunction,
+  }) async {
+    final uri = Uri.parse('${EndPoints.getOneMalfunctions}$idMalfunction');
+    debugPrint('${EndPoints.getOneMalfunctions}$idMalfunction');
+
+    final Map<String, String> headers = {
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $tokenCache',
+    };
+    debugPrint(headers.toString());
+    try {
+      // debugPrint('working');
+      // var fcm = await FirebaseMessaging.instance.getToken();
+
+      final response = await http.get(
+        uri,
+        headers: headers,
+      );
+      debugPrint(response.body);
+      final responseData = json.decode(response.body);
+
+      debugPrint(responseData.toString());
+      if (responseData['status'] == false) throw responseData['message'];
+      final responseJson = OneMalfunctionModel.fromJson(responseData);
 
       return Right(responseJson);
     } catch (error) {

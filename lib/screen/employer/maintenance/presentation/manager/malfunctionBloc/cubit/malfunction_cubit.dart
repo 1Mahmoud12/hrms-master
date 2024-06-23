@@ -16,7 +16,7 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
   static MalfunctionCubit of(BuildContext context) =>
       BlocProvider.of<MalfunctionCubit>(context);
 
-  void getAllProposals({required BuildContext context}) async {
+  void getAllMalfunction({required BuildContext context}) async {
     emit(MalfunctionLoadingState());
 
     await MalfunctionDataSource.getAllMalfunctions().then((value) async {
@@ -38,6 +38,41 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
       });
     });
   }
+
+void getOneMalfunction({
+  required BuildContext context,
+  required String idMalfunction,
+}) async {
+  emit(MalfunctionLoadingState());
+
+  await MalfunctionDataSource.getOneMalfunction(idMalfunction: idMalfunction).then((value) async {
+    value.fold((l) {
+      debugPrint(l.errMessage);
+      showToast(l.errMessage);
+      debugPrint('=== Error ====');
+      emit(MalfunctionErrorState(l.errMessage));
+    }, (r) async {
+      debugPrint('=== Success ====');
+
+      await Preferences.setSaved(
+        value: jsonEncode(r.toJson()),
+        key: oneMalfunctionKey,
+      );
+      oneMalfunctioCache = r;
+
+      emit(MalfunctionSuccessState());
+    });
+  });
+}
+
+
+
+
+
+
+
+
+
 
   void addMalfunction({
     required String name,

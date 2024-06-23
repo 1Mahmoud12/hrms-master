@@ -1,7 +1,7 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/productsNeedTechnicalBloc/cubit.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +60,8 @@ class _CustomDropDownMenuTechnicalState
         ),
         onChanged: (String? newValue) {
           newSelected = newValue!;
-          BlocProvider.of<ReportBloc>(context).selectedProduct = newValue;
+          BlocProvider.of<ReportMalfunctionCubit>(context).selectedProduct =
+              newValue;
 
           ProductsNeedTechnicalBloc.of(context).addProduct(product: newValue);
           debugPrint(newValue);

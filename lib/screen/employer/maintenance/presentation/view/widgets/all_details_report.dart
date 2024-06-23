@@ -2,8 +2,8 @@ import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/details_elevators.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/details_elevator.dart';
 import 'package:cnattendance/utils/assets.dart';
@@ -29,13 +29,19 @@ class AllDetailsReport extends StatelessWidget {
                   'reportDate:': '24th Sep 2023',
                   'description': 'Description',
                 };*/
-    ReportBloc.of(context).maintenanceEngineerController.text = arguments['maintenanceEngineer'];
-    ReportBloc.of(context).customerNameController.text = arguments['customerName'];
-    ReportBloc.of(context).addressController.text = arguments['address'];
-    ReportBloc.of(context).phoneController.text = arguments['phone'];
+    ReportMalfunctionCubit.of(context).maintenanceEngineerController.text =
+        arguments['maintenanceEngineer'];
+    ReportMalfunctionCubit.of(context).customerNameController.text =
+        arguments['customerName'];
+    ReportMalfunctionCubit.of(context).addressController.text =
+        arguments['address'];
+    ReportMalfunctionCubit.of(context).phoneController.text =
+        arguments['phone'];
     final String elevatorName = arguments['elevatorName'];
-    ReportBloc.of(context).detailsReportController.text = detailsReport;
-    ReportBloc.of(context).reportDateController.text = arguments['reportDate'] ?? '';
+    ReportMalfunctionCubit.of(context).detailsReportController.text =
+        detailsReport;
+    ReportMalfunctionCubit.of(context).reportDateController.text =
+        arguments['reportDate'] ?? '';
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -46,29 +52,40 @@ class AllDetailsReport extends StatelessWidget {
           if (genderUser == RoleId.nine.name.tr)
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: BlocBuilder<ReportBloc, ReportState>(
+              child: BlocBuilder<ReportMalfunctionCubit, ReportState>(
                 builder: (context, state) => InkWell(
                   onTap: () {
-                    ReportBloc.of(context).updateReportMechanics(
-                      maintenanceEngineer: ReportBloc.of(context).maintenanceEngineerController.text,
-                      reportDate: ReportBloc.of(context).reportDateController.text,
-                      customerName: ReportBloc.of(context).customerNameController.text,
-                      phone: ReportBloc.of(context).phoneController.text,
-                      address: ReportBloc.of(context).addressController.text,
+                    ReportMalfunctionCubit.of(context).updateReportMechanics(
+                      maintenanceEngineer: ReportMalfunctionCubit.of(context)
+                          .maintenanceEngineerController
+                          .text,
+                      reportDate: ReportMalfunctionCubit.of(context)
+                          .reportDateController
+                          .text,
+                      customerName: ReportMalfunctionCubit.of(context)
+                          .customerNameController
+                          .text,
+                      phone: ReportMalfunctionCubit.of(context)
+                          .phoneController
+                          .text,
+                      address: ReportMalfunctionCubit.of(context)
+                          .addressController
+                          .text,
                       detailsReport: detailsReport,
                     );
                     Navigator.pushNamed(context, AppRoute.editReportScreen);
                   },
                   child: SvgPicture.asset(
                     Assets.edit,
-                    colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.primaryColor, BlendMode.srcIn),
                   ),
                 ),
               ),
             )
         ],
       ),
-      body: BlocBuilder<ReportBloc, ReportState>(
+      body: BlocBuilder<ReportMalfunctionCubit, ReportState>(
         builder: (context, state) => ListView(
           children: [
             Container(
@@ -86,11 +103,31 @@ class AllDetailsReport extends StatelessWidget {
                     'Details',
                     style: Styles.style14500.copyWith(color: Colors.black),
                   ),
-                  DetailsElevatorRow(nameDetails: 'Maintenance Engineer ', executeDetails: ReportBloc.of(context).maintenanceEngineerController.text),
-                  DetailsElevatorRow(nameDetails: 'Report Date ', executeDetails: ReportBloc.of(context).reportDateController.text),
-                  DetailsElevatorRow(nameDetails: 'Customer Name', executeDetails: ReportBloc.of(context).customerNameController.text),
-                  DetailsElevatorRow(nameDetails: 'Phone', executeDetails: ReportBloc.of(context).phoneController.text),
-                  DetailsElevatorRow(nameDetails: 'address', executeDetails: ReportBloc.of(context).addressController.text),
+                  DetailsElevatorRow(
+                      nameDetails: 'Maintenance Engineer ',
+                      executeDetails: ReportMalfunctionCubit.of(context)
+                          .maintenanceEngineerController
+                          .text),
+                  DetailsElevatorRow(
+                      nameDetails: 'Report Date ',
+                      executeDetails: ReportMalfunctionCubit.of(context)
+                          .reportDateController
+                          .text),
+                  DetailsElevatorRow(
+                      nameDetails: 'Customer Name',
+                      executeDetails: ReportMalfunctionCubit.of(context)
+                          .customerNameController
+                          .text),
+                  DetailsElevatorRow(
+                      nameDetails: 'Phone',
+                      executeDetails: ReportMalfunctionCubit.of(context)
+                          .phoneController
+                          .text),
+                  DetailsElevatorRow(
+                      nameDetails: 'address',
+                      executeDetails: ReportMalfunctionCubit.of(context)
+                          .addressController
+                          .text),
                 ].paddingDirectional(bottom: context.screenHeight * .01),
               ),
             ),
@@ -107,13 +144,20 @@ class AllDetailsReport extends StatelessWidget {
                   children: [
                     Text(
                       'Description:- \n',
-                      style: Styles.style12400.copyWith(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14.sp),
+                      style: Styles.style12400.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14.sp),
                     ),
                     ExpandableText(
                       detailsReport,
                       expandText: 'see more',
-                      linkStyle: Styles.style12400.copyWith(fontWeight: FontWeight.w700, color: Colors.black),
-                      style: Styles.style12400.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600, color: AppColors.subTextColor),
+                      linkStyle: Styles.style12400.copyWith(
+                          fontWeight: FontWeight.w700, color: Colors.black),
+                      style: Styles.style12400.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.subTextColor),
                       maxLines: 22,
                       collapseText: 'see less',
                     ),
