@@ -66,7 +66,7 @@ class ProfileScreenState extends State<ProfileScreen> {
         appBar: AppBar(
           actions: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              padding: const EdgeInsets.all(10),
               child: InkWell(
                 onTap: () {
                   pushNewScreen(context,

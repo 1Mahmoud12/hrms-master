@@ -14,8 +14,8 @@ class Participator {
       id: json['id'],
       name: json['name'] ?? '',
       email: json['email'] ?? '',
-      phone: json['phone'] ?? '',
-      onlineStatus: json['online_status'] ?? '',
+      phone: '${json['phone'] ?? ''}',
+      onlineStatus: '${json['online_status'] ?? ''}',
       avatar: json['avatar'] ?? '',
       post: json['post'] ?? '',
     );

@@ -11,12 +11,12 @@ class LeaveType {
 
   factory LeaveType.fromJson(dynamic json) {
     return LeaveType(
-      leaveTypeId: json['leave_type_id'] ?? '',
+      leaveTypeId: '${json['leave_type_id'] ?? ''}',
       leaveTypeName: json['leave_type_name'] ?? '',
       leaveTypeSlug: json['leave_type_slug '] ?? '',
       leaveTypeStatus: json['leave_type_status'] ?? false,
       earlyExit: json['early_exit'] ?? false,
-      totalLeaveAllocated: json['total_leave_allocated'] ?? '',
+      totalLeaveAllocated: '${json['total_leave_allocated'] ?? ''}',
       leaveTaken: json['leave_taken'] ?? 0,
     );
   }

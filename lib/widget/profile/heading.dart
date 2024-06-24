@@ -6,6 +6,7 @@ import 'package:cnattendance/provider/profileprovider.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -65,9 +66,9 @@ class HeadingState extends State<Heading> {
                     width: double.infinity,
                     color: Colors.black38,
                     padding: const EdgeInsets.all(20),
-                    child: const Text(
-                      'Change',
-                      style: TextStyle(
+                    child: Text(
+                      'Change'.tr,
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       textAlign: TextAlign.center,

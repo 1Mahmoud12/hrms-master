@@ -7,7 +7,7 @@ class TranslationController extends GetxController {
   // Define a list of items for the radio buttons.
   List<String> radioItems = [
     'English',
-    'Arabic',
+    'عربي',
   ];
 
   void updateonchangevalue(value) {

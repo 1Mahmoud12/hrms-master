@@ -1,7 +1,6 @@
 import 'package:cnattendance/Controller/translationController.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/widget/buttonborder.dart';
-import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +10,7 @@ class TranslationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final Control = Get.put(TranslationController());
+    final control = Get.put(TranslationController());
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +38,7 @@ class TranslationScreen extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(29)),),
             ),
             onPressed: () {
-              Control.updatetranslation();
+              control.updatetranslation();
             },
             child: Padding(
               padding: const EdgeInsets.all(12.0),
@@ -55,8 +54,8 @@ class TranslationScreen extends StatelessWidget {
         ),
       ),
       body: GetBuilder(
-          init: Control,
-          builder: (context) {
+        init: control,
+        builder: (context) {
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,8 +65,8 @@ class TranslationScreen extends StatelessWidget {
                     shape: ButtonBorder(),
                     color: Colors.transparent,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Column(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
                         children: [
                           Row(
                             children: [
@@ -76,21 +75,20 @@ class TranslationScreen extends StatelessWidget {
                                 width: Get.width * 0.9,
                                 child: ListView.builder(
                                   shrinkWrap: true,
-                                  itemCount: Control.radioItems.length,
-                                  itemBuilder:
+                                itemCount: control.radioItems.length,
+                                itemBuilder:
                                       (BuildContext context, int index) {
                                     return SizedBox(
                                       height: Get.height * 0.06,
                                       child: ListTile(
-                                        title:
-                                            Text(Control.radioItems[index]),
-                                        trailing: Radio(
+                                        title: Text(control.radioItems[index]),
+                                      trailing: Radio(
                                           activeColor: AppColors.primaryColor,
-                                          value: Control.radioItems[index],
-                                          groupValue: Control.selectedValue,
-                                          onChanged: (value) {
-                                            Control.updateonchangevalue(
-                                                value.toString(),);
+                                        value: control.radioItems[index],
+                                        groupValue: control.selectedValue,
+                                        onChanged: (value) {
+                                          control.updateonchangevalue(
+                                            value.toString(),);
                                           },
                                         ),
                                       ),

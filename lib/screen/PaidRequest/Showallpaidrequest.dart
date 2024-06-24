@@ -1,6 +1,6 @@
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/provider/requestpaidprovider.dart';
 import 'package:cnattendance/screen/RequestScreen/Showallrequest.dart';
-import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -35,70 +35,57 @@ class _ShowAllpaidRequestState extends State<ShowAllpaidRequest> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<RequestPaidProvider>(context);
-    return Container(
-      decoration: RadialDecoration(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              child: Image.asset('assets/icons/backicon.png'),
-            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(
+          'Paid_request'.tr,
+          style: const TextStyle(
+            color: AppColors.primaryColor,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
           ),
-          title: Text(
-            'Paid_request'.tr,
-            style: const TextStyle(
-              color: Color(0xff635F54),
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
         ),
+        centerTitle: true,
+        elevation: 0,
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: Get.height * 1,
-                    width: Get.width * 1,
-                    child: ListView.builder(
-                      itemCount: model.PaidrequestList.length,
-                      itemBuilder: (context, index) {
-                        final Name = model.PaidrequestList[index]['request_type']
-                            ['name'];
-                        final date = model.PaidrequestList[index]
-                            ['leave_requested_date'];
-                        final status = model.PaidrequestList[index]['status'];
-                        final desc = model.PaidrequestList[index]['reasons'];
+      ),
+      backgroundColor: Colors.transparent,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: Get.height * 1,
+                  width: Get.width * 1,
+                  child: ListView.builder(
+                    itemCount: model.PaidrequestList.length,
+                    itemBuilder: (context, index) {
+                      final Name = model.PaidrequestList[index]['request_type']['name'];
+                      final date = model.PaidrequestList[index]['leave_requested_date'];
+                      final status = model.PaidrequestList[index]['status'];
+                      final desc = model.PaidrequestList[index]['reasons'];
 
-                        return Container(
-                          child: AllRequests(
-                              Name: Name,
-                              date: date,
-                              status: status,
-                              from: '',
-                              to: '',
-                              description: desc,),
-                        );
-                      },
-                    ),
+                      return Container(
+                        child: AllRequests(
+                          Name: Name,
+                          date: date,
+                          status: status,
+                          from: '',
+                          to: '',
+                          description: desc,
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ),),
+        ),
       ),
     );
   }

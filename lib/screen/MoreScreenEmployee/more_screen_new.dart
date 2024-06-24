@@ -2,6 +2,8 @@ import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/HolidayScreen/holidayscreennew.dart';
 import 'package:cnattendance/screen/MeetingScreen/MeetingScreenNew.dart';
+import 'package:cnattendance/screen/PaidRequest/paidrequestscreen.dart';
+import 'package:cnattendance/screen/RequestScreen/RequestScreen.dart';
 import 'package:cnattendance/screen/SupportScreen/SupportScreenNew.dart';
 import 'package:cnattendance/screen/TeamsheetScreen/TeamSheetScreenNew.dart';
 import 'package:cnattendance/screen/employer/staticloginhome/staticloginhome_screen.dart';
@@ -18,7 +20,6 @@ import 'package:cnattendance/screen/translation/translation.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/profile_image_widget.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
-import 'package:cnattendance/utils/svgsconstants.dart';
 import 'package:cnattendance/widget/log_out_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,12 +43,12 @@ class MoreScreenNew extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          'More',
+          'More'.tr,
           style: TextStyle(color: AppColors.textColor, fontSize: 24.sp, fontWeight: FontWeight.w700),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
+            padding: const EdgeInsets.all(10),
             child: InkWell(
               onTap: () {
                 pushNewScreen(context, screen: const NotificationScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
@@ -137,7 +138,7 @@ class MoreScreenNew extends StatelessWidget {
               ),
             if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
-                type: 'Team_Sheet'.tr,
+                type: 'Team Sheet'.tr,
                 svgvalue: Assets.team,
                 onPressed: () {
                   pushNewScreen(
@@ -170,7 +171,7 @@ class MoreScreenNew extends StatelessWidget {
                 },
               ),
             MoreCardoverviewSvgs(
-              type: 'Support'.tr,
+              type: 'Technical Support'.tr,
               svgvalue: Assets.Support,
               onPressed: () {
                 pushNewScreen(context, screen: const SupportScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
@@ -185,14 +186,14 @@ class MoreScreenNew extends StatelessWidget {
                 },
               ),
             MoreCardoverviewSvgs(
-              type: 'Companyrule'.tr,
+              type: 'Company Rules'.tr,
               svgvalue: Assets.rules,
               onPressed: () {
                 pushNewScreen(context, screen: const CompanyRulesScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
               },
             ),
             MoreCardoverviewSvgs(
-              type: 'About_us'.tr,
+              type: 'About Us'.tr,
               svgvalue: Assets.aboutUS,
               onPressed: () {
                 pushNewScreen(
@@ -204,7 +205,7 @@ class MoreScreenNew extends StatelessWidget {
               },
             ),
             MoreCardoverviewSvgs(
-              type: 'Termsandcondition'.tr,
+              type: 'Terms and condition'.tr,
               svgvalue: Assets.term,
               onPressed: () {
                 pushNewScreen(
@@ -216,7 +217,7 @@ class MoreScreenNew extends StatelessWidget {
               },
             ),
             MoreCardoverviewSvgs(
-              type: 'Privacy_Policy'.tr,
+              type: 'Privacy Policy'.tr,
               svgvalue: Assets.privacyPolicy,
               onPressed: () {
                 pushNewScreen(
@@ -229,7 +230,7 @@ class MoreScreenNew extends StatelessWidget {
             ),
             if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
-                type: 'Securitiy'.tr,
+                type: 'Security'.tr,
                 svgvalue: Assets.Security,
                 onPressed: () {
                   pushNewScreen(
@@ -263,22 +264,17 @@ class MoreScreenNew extends StatelessWidget {
                 type: 'Financial requests'.tr,
                 svgvalue: Assets.financialRequest,
                 onPressed: () {
-                  pushNewScreen(
-                    context,
-                    screen: const SecurityCheckScreen(),
-                    withNavBar: false,
-                    pageTransitionAnimation: PageTransitionAnimation.fade,
-                  );
+                  pushNewScreen(context, screen: const PaidRequestScreen(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);
                 },
               ),
             if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
-                type: 'Administrativa requests'.tr,
+                type: 'Paper requests'.tr,
                 svgvalue: Assets.AdministrativaRequests,
                 onPressed: () {
                   pushNewScreen(
                     context,
-                    screen: const SecurityCheckScreen(),
+                    screen: const RequestScreen(),
                     withNavBar: false,
                     pageTransitionAnimation: PageTransitionAnimation.fade,
                   );

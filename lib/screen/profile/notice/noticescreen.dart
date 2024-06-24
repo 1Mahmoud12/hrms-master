@@ -47,8 +47,8 @@ class NoticeState extends State<Notice> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Noticses'.tr,
-            style: Styles.styleHeader,
+          'Notices'.tr,
+          style: Styles.styleHeader,
           ),
 
           // backgroundColor: Color(0xffcfcdcb),

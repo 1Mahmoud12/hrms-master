@@ -58,7 +58,7 @@ class TeamSheetState extends State<TeamSheet> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Team_Sheet'.tr,
+            'Team Sheet'.tr,
             style: Styles.styleHeader,
           ),
         ),

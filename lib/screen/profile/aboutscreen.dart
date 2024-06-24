@@ -80,7 +80,7 @@ class AboutScreenState extends State<About> {
             child: Container(
               padding: const EdgeInsets.all(5),
               child: Visibility(
-                visible: isLoading ? false : true,
+                visible: isLoading,
                 // child: Html(
                 //   style: {
                 //     "body":

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/cubit.dart';
 import 'package:cnattendance/core/component/empty_widget.dart';
 import 'package:cnattendance/core/routes/app_route.dart';
@@ -55,7 +57,7 @@ class MalFunctionScreenItems extends StatelessWidget {
                                     .data!.malfunction![index].id
                                     .toString(),
                               );
-                              print(
+                              log(
                                 'iddddd====>${allMalfunctionCache!.data!.malfunction![index].id}',
                               );
 

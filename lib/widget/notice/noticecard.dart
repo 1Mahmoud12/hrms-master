@@ -28,7 +28,6 @@ class NoticeCard extends StatelessWidget {
                 color: Colors.blueAccent,
                 child: SizedBox(
                   width: 50,
-                  height: 50,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

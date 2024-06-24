@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/tadalistcontroller.dart';
@@ -17,18 +15,6 @@ class TadaScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Platform.isAndroid
-              ? const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                )
-              : const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ),
-        ),
         title: Text(
           'Tada'.tr,
           style: Styles.styleHeader,
@@ -257,7 +243,7 @@ class TadaScreen extends StatelessWidget {
               ),
             ),*/
             const SizedBox(
-              height: 5,
+              height: 15,
             ),
             Expanded(
               child: ListView.builder(
@@ -270,41 +256,47 @@ class TadaScreen extends StatelessWidget {
                       onTap: () {
                         model.onTadaClicked(support.id.toString());
                       },
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  support.title,
-                                  style: Styles.style16700,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      support.status,
-                                      style: Styles.style12400.copyWith(
-                                        color: support.status == model.tadaListLabels[2]
-                                            ? AppColors.green
-                                            : support.status == model.tadaListLabels[3]
-                                                ? AppColors.red
-                                                : AppColors.hintOrange,
+                      child: Card(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    support.title,
+                                    style: Styles.style16700,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        support.status,
+                                        style: Styles.style12400.copyWith(
+                                          color: support.status == model.tadaListLabels[2]
+                                              ? AppColors.green
+                                              : support.status == model.tadaListLabels[3]
+                                                  ? AppColors.red
+                                                  : AppColors.hintOrange,
+                                        ),
                                       ),
-                                    ),
-                                    5.ESW(),
-                                    Text(
-                                      support.submittedDate,
-                                      style: Styles.style12400.copyWith(color: AppColors.subTextColor),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Icon(Icons.arrow_forward_ios_sharp),
-                          ],
+                                      5.ESW(),
+                                      Text(
+                                        support.submittedDate,
+                                        style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios_sharp,
+                                size: 20,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
