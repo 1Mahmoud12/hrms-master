@@ -22,6 +22,7 @@ class EmergencyScreenItems extends StatelessWidget {
     const int numberElevators = 15;
     final arguments = context.getArguments;
     final String nameEmergency = arguments['nameEmergency'];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,8 +31,7 @@ class EmergencyScreenItems extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) =>
-            EmergencieCubit()..getAllProposals(context: context),
+        create: (context) => EmergencieCubit()..getAllEmergencies(context: context),
         child: BlocBuilder<EmergencieCubit, EmergencieState>(
           builder: (context, state) => state is EmergencieLoadingState
               ? const Center(
@@ -54,6 +54,7 @@ class EmergencyScreenItems extends StatelessWidget {
                                 'status': index > 4
                                     ? Malfunction.In_Progress.name
                                     : Malfunction.Pending.name,
+                                'id': allEmergenciesCache!.data!.emergencie![index].id.toString(),
                               };
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(

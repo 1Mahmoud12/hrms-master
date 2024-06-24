@@ -1,5 +1,5 @@
 import 'package:cnattendance/screen/AttendenceScreen/attendanceScreenNew.dart';
-import 'package:cnattendance/screen/MoreScreenEmployee/MoreScreenNew.dart';
+import 'package:cnattendance/screen/MoreScreenEmployee/more_screen_new.dart';
 import 'package:cnattendance/screen/dashboard/homescreen.dart';
 import 'package:cnattendance/screen/leavescreen/LeaveScreenNew.dart';
 import 'package:flutter/material.dart';

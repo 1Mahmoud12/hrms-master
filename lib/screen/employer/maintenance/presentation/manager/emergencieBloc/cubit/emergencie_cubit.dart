@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/dataSource/emergencie_data_source.dart';
@@ -14,10 +15,10 @@ class EmergencieCubit extends Cubit<EmergencieState> {
   static EmergencieCubit of(BuildContext context) =>
       BlocProvider.of<EmergencieCubit>(context);
 
-  void getAllProposals({required BuildContext context}) async {
+  void getAllEmergencies({required BuildContext context}) async {
     emit(EmergencieLoadingState());
 
-    await EmergencieDataSource.getAllEmergencies().then((value) async {
+    await EmergencyDataSource.getAllEmergencies().then((value) async {
       value.fold((l) {
         debugPrint(l.errMessage);
         showToast(l.errMessage);
@@ -46,7 +47,7 @@ class EmergencieCubit extends Cubit<EmergencieState> {
     emit(EmergencieLoadingState());
 
     try {
-      await EmergencieDataSource.addEmergency(
+      await EmergencyDataSource.addEmergency(
         name: name,
         description: description,
         location: location,

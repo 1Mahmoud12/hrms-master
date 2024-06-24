@@ -3,6 +3,7 @@ import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/all_proposals_model.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_emergency_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,7 +28,10 @@ PeriodicModel? allPeridicsCache;
 String allPeridicsKey = 'allPeridicsKey';
 
 EmergenciesModel? allEmergenciesCache;
-String allEmergenciesKey = 'allPeridicsKey';
+String allEmergenciesKey = 'allEmergenciesKey';
+
+OneEmergencyModel? oneEmergencyCache;
+String oneEmergencyKey = 'oneEmergencyKey';
 
 PaymentModel? onePaymentCache;
 String onePaymentKey = 'allPeridicsKey';

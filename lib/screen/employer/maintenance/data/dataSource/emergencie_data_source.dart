@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_emergency_model.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -10,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
-class EmergencieDataSource {
+class EmergencyDataSource {
   static Future<Either<Failure, EmergenciesModel>> getAllEmergencies() async {
     final uri = Uri.parse(EndPoints.getEmergencie);
     debugPrint(EndPoints.getEmergencie);
@@ -41,11 +43,11 @@ class EmergencieDataSource {
     }
   }
 
-  static Future<Either<Failure, EmergenciesModel>> getOneEmergencie({
-    required String idEmergencie,
+  static Future<Either<Failure, OneEmergencyModel>> getOneEmergencie({
+    required String idEmergency,
   }) async {
-    final uri = Uri.parse('${EndPoints.getOneEmergencie}$idEmergencie');
-    debugPrint('${EndPoints.getOneEmergencie}$idEmergencie');
+    final uri = Uri.parse('${EndPoints.getOneEmergencie}$idEmergency');
+    debugPrint('${EndPoints.getOneEmergencie}$idEmergency');
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -65,7 +67,7 @@ class EmergencieDataSource {
 
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
-      final responseJson = EmergenciesModel.fromJson(responseData);
+      final responseJson = OneEmergencyModel.fromJson(responseData);
 
       return Right(responseJson);
     } catch (error) {

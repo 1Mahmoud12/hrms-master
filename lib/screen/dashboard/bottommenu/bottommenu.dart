@@ -2,7 +2,7 @@ import 'package:cnattendance/Controller/BottommenuController/BottomMenuControlle
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/provider/prefprovider.dart';
 import 'package:cnattendance/screen/AttendenceScreen/attendanceScreenNew.dart';
-import 'package:cnattendance/screen/MoreScreenEmployee/MoreScreenNew.dart';
+import 'package:cnattendance/screen/MoreScreenEmployee/more_screen_new.dart';
 import 'package:cnattendance/screen/dashboard/homescreen.dart';
 import 'package:cnattendance/screen/leavescreen/LeaveScreenNew.dart';
 import 'package:cnattendance/utils/assets.dart';

@@ -2,6 +2,7 @@ import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_emergency_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/details_elevators.dart';
@@ -21,25 +22,16 @@ class AllDetailsReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = context.getArguments;
-    /*  final arguments = {
-                  'maintenanceEngineer': 'Name Technical',
-                  'customerName': 'Customer Name',
-                  'address': 'Egypt, Assut',
-                  'phone': '120932437435',
-                  'reportDate:': '24th Sep 2023',
-                  'description': 'Description',
-                };*/
-    ReportBloc.of(context).maintenanceEngineerController.text = arguments['maintenanceEngineer'];
-    ReportBloc.of(context).customerNameController.text = arguments['customerName'];
-    ReportBloc.of(context).addressController.text = arguments['address'];
-    ReportBloc.of(context).phoneController.text = arguments['phone'];
-    final String elevatorName = arguments['elevatorName'];
-    ReportBloc.of(context).detailsReportController.text = detailsReport;
-    ReportBloc.of(context).reportDateController.text = arguments['reportDate'] ?? '';
+    final Report report = arguments['Report'];
+    ReportBloc.of(context).maintenanceEngineerController.text = report.technical!.name ?? 'N/A';
+    ReportBloc.of(context).customerNameController.text = userCache!.name ?? 'N/A';
+    ReportBloc.of(context).phoneController.text = '${report.technical!.phone ?? 'N / A'}';
+    ReportBloc.of(context).detailsReportController.text = report!.description ?? 'N / A';
+    ReportBloc.of(context).reportDateController.text = report.updatedAt!.substring(0, 10);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          elevatorName,
+          'Report',
           style: Styles.styleHeader,
         ),
         actions: [
@@ -110,7 +102,7 @@ class AllDetailsReport extends StatelessWidget {
                       style: Styles.style12400.copyWith(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14.sp),
                     ),
                     ExpandableText(
-                      detailsReport,
+                      report.description ?? 'N/A',
                       expandText: 'see more',
                       linkStyle: Styles.style12400.copyWith(fontWeight: FontWeight.w700, color: Colors.black),
                       style: Styles.style12400.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600, color: AppColors.subTextColor),

@@ -54,6 +54,7 @@ class Assets {
   static const changePasswordImage = 'assets/icons/svg/changePassword_image.svg';
   static const look = 'assets/icons/svg/look.svg';
   static const showPassword = 'assets/icons/svg/showPassword.svg';
+  static const translate = 'assets/icons/svg/translate.svg';
   static const eyePasswordShow = 'assets/icons/svg/eye-password-show.svg';
 
   // employer

@@ -1,7 +1,7 @@
 import 'package:cnattendance/Controller/StaticControllers/mainBlocHome/state.dart';
 import 'package:cnattendance/screen/Chat/ChatScreenView.dart';
 import 'package:cnattendance/screen/Chat/presentation/mainager/view/chatCustomer/chat_customer.dart';
-import 'package:cnattendance/screen/MoreScreenEmployee/MoreScreenNew.dart';
+import 'package:cnattendance/screen/MoreScreenEmployee/more_screen_new.dart';
 import 'package:cnattendance/screen/dashboard/homescreen.dart';
 import 'package:cnattendance/screen/employer/ProjectsScreen/projects_screen.dart';
 import 'package:cnattendance/screen/employer/contactus/contactus_screen.dart';
