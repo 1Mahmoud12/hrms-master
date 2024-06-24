@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MaintenanceReport extends StatelessWidget {
-  final Report report;
+  final dynamic report;
 
   const MaintenanceReport({super.key, required this.report});
 

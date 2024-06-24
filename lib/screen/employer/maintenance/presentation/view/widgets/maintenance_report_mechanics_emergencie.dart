@@ -12,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'maintenance_report.dart';
 
-class MaintenanceReportMechanics extends StatelessWidget {
-  const MaintenanceReportMechanics({super.key});
+class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
+  const MaintenanceReportMechanicsEmergencie({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,8 @@ class MaintenanceReportMechanics extends StatelessWidget {
         )
       ],
       body: BlocProvider(
-        create: (context) => GetOneEmergencyCubit()..getOneEmergency(context: context, idEmergency: idEmergency),
+        create: (context) => GetOneEmergencyCubit()
+          ..getOneEmergency(context: context, idEmergency: idEmergency),
         child: BlocBuilder<GetOneEmergencyCubit, GetOneEmergencyState>(
           builder: (context, state) => state is GetOneEmergencyLoadingState
               ? const Center(
@@ -53,7 +54,9 @@ class MaintenanceReportMechanics extends StatelessWidget {
                       children: [
                         Container(
                           padding: EdgeInsets.all(16.w),
-                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.r)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -63,19 +66,25 @@ class MaintenanceReportMechanics extends StatelessWidget {
                               ),
                               Text(
                                 status,
-                                style: Styles.style14500
-                                    .copyWith(color: status == 'In Progress' ? AppColors.green : AppColors.subTextColor, fontWeight: FontWeight.w600),
+                                style: Styles.style14500.copyWith(
+                                    color: status == 'In Progress'
+                                        ? AppColors.green
+                                        : AppColors.subTextColor,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.all(16.w),
-                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.r)),
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Maintenance Description',
@@ -84,14 +93,19 @@ class MaintenanceReportMechanics extends StatelessWidget {
                                 ],
                               ),
                               Text(
-                                oneEmergencyCache!.data!.emergency!.description ?? 'N/A',
+                                oneEmergencyCache!
+                                        .data!.emergency!.description ??
+                                    'N/A',
                                 maxLines: 3,
-                                style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                                style: Styles.style14400
+                                    .copyWith(color: AppColors.primaryColor),
                               ),
                             ],
                           ),
                         ),
-                        if (oneEmergencyCache!.data!.report != null) MaintenanceReport(report: oneEmergencyCache!.data!.report!),
+                        if (oneEmergencyCache!.data!.report != null)
+                          MaintenanceReport(
+                              report: oneEmergencyCache!.data!.report!),
                         const ProductsNeed(),
                       ].paddingDirectional(bottom: 10.h),
                     ),

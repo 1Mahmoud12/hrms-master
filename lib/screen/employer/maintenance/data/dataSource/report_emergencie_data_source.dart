@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_report_emergence_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/one_report_malfunction_model.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:dartz/dartz.dart';
@@ -9,12 +10,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ReportMalfunctionDataSource {
-  static Future<Either<Failure, OneReportMalfunctionModel>> getOneReport({
+class ReportEmergencieDataSource {
+  static Future<Either<Failure, OneReportEmergenceModel>> getOneReport({
     required String idReport,
   }) async {
-    final uri = Uri.parse('${EndPoints.getOneReportMalF}$idReport');
-    debugPrint('${EndPoints.getOneReportMalF}$idReport');
+    final uri = Uri.parse('${EndPoints.getOneReportEmerg}$idReport');
+    debugPrint('${EndPoints.getOneReportEmerg}$idReport');
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -34,7 +35,7 @@ class ReportMalfunctionDataSource {
 
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
-      final responseJson = OneReportMalfunctionModel.fromJson(responseData);
+      final responseJson = OneReportEmergenceModel.fromJson(responseData);
 
       return Right(responseJson);
     } catch (error) {
@@ -45,14 +46,14 @@ class ReportMalfunctionDataSource {
     }
   }
 
-  static Future<Either<Failure, OneReportMalfunctionModel>> addReport({
-    required String malfunctionId,
+  static Future<Either<Failure, OneReportEmergenceModel>> addReport({
+    required String emrgencieId,
     required String description,
     required String price,
     required String status,
     required String product,
   }) async {
-    final uri = Uri.parse(EndPoints.addReportMalF);
+    final uri = Uri.parse(EndPoints.addReportEmerg);
 
     final Map<String, String> headers = {
       'Accept': 'application/json; charset=UTF-8',
@@ -60,7 +61,7 @@ class ReportMalfunctionDataSource {
     };
 
     final Map<String, String> body = {
-      'malfunction_id': malfunctionId,
+      'emergency_id': emrgencieId,
       'description': description,
       'price': price,
       'status': status,
@@ -78,7 +79,7 @@ class ReportMalfunctionDataSource {
 
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
-      final responseJson = OneReportMalfunctionModel.fromJson(responseData);
+      final responseJson = OneReportEmergenceModel.fromJson(responseData);
 
       return Right(responseJson);
     } catch (error) {

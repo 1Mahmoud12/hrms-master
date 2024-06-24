@@ -16,8 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class EmergencyMalfunctionScreen extends StatelessWidget {
-  const EmergencyMalfunctionScreen({super.key});
+class EmergencScreen extends StatelessWidget {
+  const EmergencScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,8 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) => GetOneEmergencyCubit()..getOneEmergency(context: context, idEmergency: idEmergency),
+        create: (context) => GetOneEmergencyCubit()
+          ..getOneEmergency(context: context, idEmergency: idEmergency),
         child: BlocBuilder<GetOneEmergencyCubit, GetOneEmergencyState>(
           builder: (context, state) => state is GetOneEmergencyLoadingState
               ? const Center(
@@ -40,7 +41,9 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
               : state is GetOneEmergencyErrorState
                   ? ErrorWidget(state.error)
                   : ListView(
-                      padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .05),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: context.screenWidth * .05,
+                      ),
                       children: [
                         /*Container(
                 padding: EdgeInsets.all(16.w),
@@ -62,7 +65,10 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
               ),*/
                         Container(
                           padding: EdgeInsets.all(16.w),
-                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -75,17 +81,22 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                                 style: Styles.style14400,
                               ),
                               Text(
-                                oneEmergencyCache!.data!.emergency!.name ?? 'N/A',
-                                style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                                oneEmergencyCache!.data!.emergency!.name ??
+                                    'N/A',
+                                style: Styles.style14400
+                                    .copyWith(color: AppColors.primaryColor),
                               ),
                               Text(
                                 'Description',
                                 style: Styles.style14400,
                               ),
                               Text(
-                                oneEmergencyCache!.data!.emergency!.description ?? 'N/A',
+                                oneEmergencyCache!
+                                        .data!.emergency!.description ??
+                                    'N/A',
                                 maxLines: 3,
-                                style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                                style: Styles.style14400
+                                    .copyWith(color: AppColors.primaryColor),
                               ),
                               Text(
                                 'location',
@@ -94,13 +105,20 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    oneEmergencyCache!.data!.emergency!.location ?? 'N/A',
-                                    style: Styles.style14400.copyWith(color: AppColors.primaryColor),
+                                    oneEmergencyCache!
+                                            .data!.emergency!.location ??
+                                        'N/A',
+                                    style: Styles.style14400.copyWith(
+                                      color: AppColors.primaryColor,
+                                    ),
                                   ),
                                   5.ESW(),
                                   SvgPicture.asset(
                                     Assets.location,
-                                    colorFilter: const ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
+                                    colorFilter: const ColorFilter.mode(
+                                      AppColors.primaryColor,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -109,23 +127,32 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                                 style: Styles.style14400,
                               ),
                               Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
-                                  child: CacheImage(
-                                    imageUrl: oneEmergencyCache!.data!.emergency!.img ?? '',
-                                    profileImage: false,
-                                    height: 60,
-                                    width: 90,
-                                  )),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                ),
+                                child: CacheImage(
+                                  imageUrl:
+                                      oneEmergencyCache!.data!.emergency!.img ??
+                                          '',
+                                  profileImage: false,
+                                  height: 60,
+                                  width: 90,
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        if (oneEmergencyCache!.data!.report != null) MaintenanceReport(report: oneEmergencyCache!.data!.report!),
+                        if (oneEmergencyCache!.data!.report != null)
+                          MaintenanceReport(
+                            report: oneEmergencyCache!.data!.report,
+                          ),
                         const ProductsUsed(),
                         CustomTextButton(
                           backgroundColor: AppColors.primaryColor,
                           child: Text(
                             'Confirm',
-                            style: Styles.style16700.copyWith(color: AppColors.white),
+                            style: Styles.style16700
+                                .copyWith(color: AppColors.white),
                           ),
                           onPress: () {
                             showToast('message');

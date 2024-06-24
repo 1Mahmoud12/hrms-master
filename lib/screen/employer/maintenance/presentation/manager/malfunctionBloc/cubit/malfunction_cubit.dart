@@ -43,7 +43,7 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
     required BuildContext context,
     required String idMalfunction,
   }) async {
-    emit(MalfunctionLoadingState());
+    emit(GetOneMalfunctionLoadingState());
 
     await MalfunctionDataSource.getOneMalfunction(idMalfunction: idMalfunction)
         .then((value) async {
@@ -63,7 +63,7 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
         oneMalfunctioCache = r;
         debugPrint('=== hhhhh ====   $oneMalfunctioCache');
 
-        emit(GetOneMalfunctionState());
+        emit(GetOneMalfunctionSuccessState());
       });
     });
   }

@@ -45,6 +45,9 @@ import 'package:cnattendance/screen/employer/maintenance/presentation/view/widge
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/edit_report_screen.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/emergency_screen_items.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/maintenance_Report_Mechanics_Mafunction.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/maintenance_report_technica_malfunction.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/malfunction_screen.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/malfunction_screen_item.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/periodic_maintenance_screen_item.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
@@ -74,12 +77,12 @@ import 'screen/employer/allProject/presentation/view/widgets/team_project_screen
 import 'screen/employer/main_screen_employer/presentation/view/widgets/know_us.dart';
 import 'screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'screen/employer/maintenance/presentation/manager/productsNeedBloc/cubit.dart';
-import 'screen/employer/maintenance/presentation/view/emergency_malfunction_screen.dart';
+import 'screen/employer/maintenance/presentation/view/emergency_screen.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/all_details_elevator.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_report.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/details_maintenance_widget.dart';
-import 'screen/employer/maintenance/presentation/view/widgets/maintenance_report_mechanics.dart';
-import 'screen/employer/maintenance/presentation/view/widgets/maintenance_report_technical.dart';
+import 'screen/employer/maintenance/presentation/view/widgets/maintenance_report_mechanics_emergencie.dart';
+import 'screen/employer/maintenance/presentation/view/widgets/maintenance_report_technica_emergencel.dart';
 import 'screen/employer/maintenance/presentation/view/widgets/payment_maintenance_value.dart';
 import 'utils/Language/language.dart';
 
@@ -96,7 +99,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     notificationMethod();
     AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationUtility.onActionReceivedMethod);
+      onActionReceivedMethod: NotificationUtility.onActionReceivedMethod,
+    );
     super.initState();
   }
 
@@ -131,9 +135,12 @@ class _MyAppState extends State<MyApp> {
             margin: const EdgeInsets.all(15),
             child: ListTile(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
+                borderRadius: BorderRadius.circular(25),
+              ),
               leading: const SizedBox(
-                  height: double.infinity, child: Icon(Icons.notifications)),
+                height: double.infinity,
+                child: Icon(Icons.notifications),
+              ),
               iconColor: const Color(0xff011754),
               textColor: const Color(0xff011754),
               minVerticalPadding: 10,
@@ -315,12 +322,15 @@ class _MyAppState extends State<MyApp> {
                     AppRoute.paymentMaintenanceValue: (_) =>
                         const PaymentMaintenanceValue(),
                     AppRoute.allDetailsReport: (_) => const AllDetailsReport(),
-                    AppRoute.emergencyMalfunctionScreen: (_) =>
-                        const EmergencyMalfunctionScreen(),
-                    AppRoute.maintenanceReportMechanics: (_) =>
-                        const MaintenanceReportMechanics(),
-                    AppRoute.maintenanceReportTechnical: (_) =>
-                        const MaintenanceReportTechnical(),
+                    AppRoute.emergencyScreen: (_) => const EmergencScreen(),
+                    AppRoute.MaintenanceReportMechanicsEmergencie: (_) =>
+                        const MaintenanceReportMechanicsEmergencie(),
+                    AppRoute.MaintenanceReportMechanicsMalfunction: (_) =>
+                        const MaintenanceReportMechanicsMalfunction(),
+                    AppRoute.maintenanceReportTechnicalEmergencie: (_) =>
+                        const MaintenanceReportTechnicalEmergincie(),
+                    AppRoute.maintenanceReportTechnicalMalfunction: (_) =>
+                        const MaintenanceReportTechnicalMalfunction(),
                     AppRoute.detailsContractProject: (_) =>
                         const DetailsContractProject(),
                     AppRoute.addElevator: (_) => const AddElevator(),
@@ -349,6 +359,8 @@ class _MyAppState extends State<MyApp> {
                         const EmergencyScreenItems(),
                     AppRoute.malfunctionScreenItems: (_) =>
                         const MalFunctionScreenItems(),
+                    AppRoute.malfunctionScreen: (_) =>
+                        const MalfunctionScreen(),
                     ProfileScreen.routeName: (_) => const ProfileScreen(),
                     EditProfileScreen.routeName: (_) =>
                         const EditProfileScreen(),

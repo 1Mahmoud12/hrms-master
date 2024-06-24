@@ -70,10 +70,13 @@ class MalFunctionScreenItems extends StatelessWidget {
                                     ? Malfunction.In_Progress.name
                                     : Malfunction.Pending.name,
                                 'index': index,
-                                'id': allMalfunctionCache!.data!.malfunction![index].id.toString(),
+                                'id': allMalfunctionCache!
+                                    .data!.malfunction![index].id
+                                    .toString(),
                               };
 
                               final customerArguments = {
+                                'nameMaintenanceReport': nameMaintenanceReport,
                                 'location': oneMalfunctioCache!
                                     .data!.malfunction!.location,
                                 'name': oneMalfunctioCache!.data!.report == null
@@ -84,24 +87,27 @@ class MalFunctionScreenItems extends StatelessWidget {
                                     .data!.malfunction!.description,
                                 'image':
                                     oneMalfunctioCache!.data!.malfunction!.img,
+                                'id': allMalfunctionCache!
+                                    .data!.malfunction![index].id
+                                    .toString(),
                               };
 
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.emergencyMalfunctionScreen,
+                                  AppRoute.malfunctionScreen,
                                   arguments: customerArguments,
                                 );
                               } else if (genderUser == RoleId.nine.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.maintenanceReportMechanics,
+                                  AppRoute.MaintenanceReportMechanicsMalfunction,
                                   arguments: arguments,
                                 );
                               } else {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.maintenanceReportTechnical,
+                                  AppRoute.maintenanceReportTechnicalMalfunction,
                                   arguments: arguments,
                                 );
                               }

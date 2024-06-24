@@ -13,9 +13,12 @@ class AppRoute {
   static const String detailsContractProject = '/DetailsContractProject';
   static const String addElevator = '/AddElevator';
   static const String addMaintenanceContract = '/AddMaintenanceContract';
-  static const String emergencyMalfunctionScreen = '/EmergencyMalfunctionScreen';
-  static const String maintenanceReportMechanics = '/MaintenanceReportMechanics';
-  static const String maintenanceReportTechnical = '/MaintenanceReportTechnical';
+  static const String emergencyScreen = '/EmergencScreen';
+  static const String malfunctionScreen = '/MalfunctionScreen';
+  static const String MaintenanceReportMechanicsEmergencie = '/MaintenanceReportMechanicsEmergencie'; 
+  static const String MaintenanceReportMechanicsMalfunction = '/MaintenanceReportMechanicsMalfunction'; 
+  static const String maintenanceReportTechnicalEmergencie = '/MaintenanceReportTechnicalEmergincie';
+  static const String maintenanceReportTechnicalMalfunction = '/MaintenanceReportTechnicalMalfunction';
   static const String payments = '/PaymentScreen';
   static const String teamProjectScreen = '/TeamProjectScreen';
   static const String addProgressScreen = '/AddProgressScreen';

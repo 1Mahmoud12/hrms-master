@@ -60,19 +60,19 @@ class EmergencyScreenItems extends StatelessWidget {
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.emergencyMalfunctionScreen,
+                                  AppRoute.emergencyScreen,
                                   arguments: arguments,
                                 );
                               } else if (genderUser == RoleId.nine.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.maintenanceReportMechanics,
+                                  AppRoute.MaintenanceReportMechanicsEmergencie,
                                   arguments: arguments,
                                 );
                               } else {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.maintenanceReportTechnical,
+                                  AppRoute.maintenanceReportTechnicalEmergencie,
                                   arguments: arguments,
                                 );
                               }

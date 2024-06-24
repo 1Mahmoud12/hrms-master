@@ -10,16 +10,16 @@ import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MaintenanceReportTechnical extends StatefulWidget {
-  const MaintenanceReportTechnical({super.key});
+class MaintenanceReportTechnicalEmergincie extends StatefulWidget {
+  const MaintenanceReportTechnicalEmergincie({super.key});
 
   @override
-  State<MaintenanceReportTechnical> createState() =>
-      _MaintenanceReportTechnicalState();
+  State<MaintenanceReportTechnicalEmergincie> createState() =>
+      _MaintenanceReportTechnicalEmergincieState();
 }
 
-class _MaintenanceReportTechnicalState
-    extends State<MaintenanceReportTechnical> {
+class _MaintenanceReportTechnicalEmergincieState
+    extends State<MaintenanceReportTechnicalEmergincie> {
   TextEditingController reportDescription = TextEditingController();
 
   @override
