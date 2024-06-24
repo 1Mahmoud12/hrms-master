@@ -7,6 +7,7 @@ import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class PeriodicMaintenance extends StatelessWidget {
   final Periodic periodic;
@@ -48,7 +49,7 @@ class PeriodicMaintenance extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Elevators :',
+                    'Elevators :'.tr,
                     style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
                   ),
                   Text(
@@ -85,12 +86,12 @@ class PeriodicMaintenance extends StatelessWidget {
                   // const Icon(Icons.location_on_outlined, color: AppColors.subTextColor),
 
                   Text(
-                    'Status: ',
+                    'Status: '.tr,
                     style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
                   ),
                   5.ESW(),
                   Text(
-                    'In progress',
+                    'In progress'.tr,
                     style: Styles.style14500.copyWith(color: AppColors.green, fontWeight: FontWeight.w700),
                   ),
                 ],
@@ -99,7 +100,7 @@ class PeriodicMaintenance extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'Location: ',
+                    'Location: '.tr,
                     style: Styles.style14500.copyWith(color: AppColors.textColor, fontWeight: FontWeight.w700),
                   ),
                   5.ESW(),
@@ -126,7 +127,7 @@ class PeriodicMaintenance extends StatelessWidget {
                     backgroundColor: const MaterialStatePropertyAll(AppColors.white),
                   ),
                   child: Text(
-                    'Show Reports',
+                    'Show Reports'.tr,
                     style: Styles.style16700.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.w600),
                   ),
                 ),

@@ -100,7 +100,7 @@ class EmergencyScreenItems extends StatelessWidget {
           ? CustomFloatingActionButtonMaintenance(
               onTap: () {
                 final arguments = {
-                  'nameStatus': 'Malfunction maintenance',
+                  'nameStatus': 'Malfunction maintenance'.tr,
                 };
                 Navigator.pushNamed(
                   context,

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class Comments extends StatelessWidget {
   final int newComments;
@@ -26,14 +27,15 @@ class Comments extends StatelessWidget {
             children: [
               BlocBuilder<CommentCubit, CommentState>(
                 builder: (context, state) => Text(
-                  'Comments (${CommentCubit.of(context).comments.length})',
+                  '${'Comments'.tr} (${CommentCubit.of(context).comments.length})',
                   style: Styles.style16700,
                 ),
               ),
               const Spacer(),
               Text(
-                'See All',
-                style: Styles.style16700.copyWith(color: AppColors.primaryColor),
+                'See All'.tr,
+                style:
+                    Styles.style16700.copyWith(color: AppColors.primaryColor),
               ),
             ],
           ),
@@ -45,7 +47,9 @@ class Comments extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => Container(
-                  decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(20.r)),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(20.r)),
                   padding: EdgeInsets.all(10.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,7 +62,7 @@ class Comments extends StatelessWidget {
                               SvgPicture.asset(Assets.personal),
                               10.ESW(),
                               Text(
-                                'Name person',
+                                'Name person'.tr,
                                 style: Styles.style14500,
                               ),
                             ],
@@ -66,18 +70,21 @@ class Comments extends StatelessWidget {
                           10.ESH(),
                           Text(
                             CommentCubit.of(context).comments[index],
-                            style: Styles.style12400.copyWith(color: AppColors.textColorTextFormField),
+                            style: Styles.style12400.copyWith(
+                                color: AppColors.textColorTextFormField),
                           ),
                         ],
                       ),
                       InkWell(
-                        onTap: () => CommentCubit.of(context).deleteComment(index: index),
+                        onTap: () => CommentCubit.of(context)
+                            .deleteComment(index: index),
                         child: SvgPicture.asset(
                           Assets.trash,
                           width: context.screenWidth * .045,
-                          colorFilter: ColorFilter.mode(AppColors.red, BlendMode.srcIn),
+                          colorFilter:
+                              ColorFilter.mode(AppColors.red, BlendMode.srcIn),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -91,7 +98,7 @@ class Comments extends StatelessWidget {
               height: context.screenHeight * .1,
               child: CustomTextFormField(
                 controller: CommentCubit.of(context).commentController,
-                hintText: 'Add comment',
+                hintText: 'Add comment'.tr,
                 fillColor: AppColors.white,
                 suffixIcon: IconButton(
                   onPressed: () {

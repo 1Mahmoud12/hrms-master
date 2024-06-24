@@ -34,7 +34,8 @@ class DetailsContractProject extends StatelessWidget {
               builder: (context, state) => IconButton(
                 onPressed: () async {
                   await screenshotController.capture().then((value) async {
-                    await DetailsContractCubit.of(context).savePdf(screen: value);
+                    await DetailsContractCubit.of(context)
+                        .savePdf(screen: value);
                   });
                 },
                 icon: const Icon(Icons.save_alt),
@@ -58,13 +59,21 @@ class DetailsContractProject extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Details',
+                      'Details'.tr,
                       style: Styles.style14500.copyWith(color: Colors.black),
                     ),
-                    DetailsElevatorRow(nameDetails: 'Start Date', executeDetails: model.project.value.date),
-                    DetailsElevatorRow(nameDetails: 'Installation', executeDetails: model.project.value.status),
-                    DetailsElevatorRow(nameDetails: 'Supplying duration', executeDetails: model.project.value.deadline),
-                    DetailsElevatorRow(nameDetails: 'Priority', executeDetails: model.project.value.priority),
+                    DetailsElevatorRow(
+                        nameDetails: 'Start Date'.tr,
+                        executeDetails: model.project.value.date),
+                    DetailsElevatorRow(
+                        nameDetails: 'Installation'.tr,
+                        executeDetails: model.project.value.status),
+                    DetailsElevatorRow(
+                        nameDetails: 'Supplying duration'.tr,
+                        executeDetails: model.project.value.deadline),
+                    DetailsElevatorRow(
+                        nameDetails: 'Priority'.tr,
+                        executeDetails: model.project.value.priority),
                     // DetailsElevatorRow(nameDetails: 'the cost', executeDetails: '${model.project.value.noOfTask} EGY'),
                   ].paddingDirectional(bottom: context.screenHeight * .01),
                 ),
@@ -81,8 +90,11 @@ class DetailsContractProject extends StatelessWidget {
                   child: Wrap(
                     children: [
                       Text(
-                        'Description:- \n',
-                        style: Styles.style12400.copyWith(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14.sp),
+                        'Description:-'.tr,
+                        style: Styles.style12400.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14.sp),
                       ),
                       Html(
                         data: model.project.value.description,

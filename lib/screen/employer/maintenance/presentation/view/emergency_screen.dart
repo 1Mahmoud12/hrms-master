@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class EmergencScreen extends StatelessWidget {
   const EmergencScreen({super.key});
@@ -73,11 +74,11 @@ class EmergencScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Details',
+                                'Details'.tr,
                                 style: Styles.style14400,
                               ),
                               Text(
-                                'Name',
+                                'Name'.tr,
                                 style: Styles.style14400,
                               ),
                               Text(
@@ -87,7 +88,7 @@ class EmergencScreen extends StatelessWidget {
                                     .copyWith(color: AppColors.primaryColor),
                               ),
                               Text(
-                                'Description',
+                                'Description'.tr,
                                 style: Styles.style14400,
                               ),
                               Text(
@@ -99,7 +100,7 @@ class EmergencScreen extends StatelessWidget {
                                     .copyWith(color: AppColors.primaryColor),
                               ),
                               Text(
-                                'location',
+                                'location'.tr,
                                 style: Styles.style14400,
                               ),
                               Row(
@@ -123,7 +124,7 @@ class EmergencScreen extends StatelessWidget {
                                 ],
                               ),
                               Text(
-                                'Attachment',
+                                'Attachment'.tr,
                                 style: Styles.style14400,
                               ),
                               Container(
@@ -150,7 +151,7 @@ class EmergencScreen extends StatelessWidget {
                         CustomTextButton(
                           backgroundColor: AppColors.primaryColor,
                           child: Text(
-                            'Confirm',
+                            'Confirm'.tr,
                             style: Styles.style16700
                                 .copyWith(color: AppColors.white),
                           ),

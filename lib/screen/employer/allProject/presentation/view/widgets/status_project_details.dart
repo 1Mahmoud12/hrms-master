@@ -31,7 +31,7 @@ class StatusDetailsProject extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Overview',
+            'Overview'.tr,
             style: Styles.style16700,
           ),
           OneStatusRow(
@@ -43,7 +43,7 @@ class StatusDetailsProject extends StatelessWidget {
               Navigator.pushNamed(context, AppRoute.detailsContractProject, arguments: arguments);
             },
             assetsName: Assets.detailsContract,
-            nameRow: 'Contract Details',
+            nameRow: 'Contract Details'.tr,
           ),
         /*  InkWell(
             onTap: () {
@@ -121,7 +121,7 @@ class StatusDetailsProject extends StatelessWidget {
                 );
               },
               assetsName: Assets.tasksSVG,
-              nameRow: 'Tasks',
+              nameRow: 'Tasks'.tr,
             ),
           if (genderUser == RoleId.twelve.name.tr || genderUser == RoleId.nine.name.tr || genderUser == RoleId.eight.name.tr)
             OneStatusRow(
@@ -133,7 +133,7 @@ class StatusDetailsProject extends StatelessWidget {
                 );
               },
               assetsName: Assets.tasksSVG,
-              nameRow: 'Proposal',
+              nameRow: 'Proposal'.tr,
             ),
           if (genderUser == RoleId.eight.name.tr)
             OneStatusRow(
@@ -145,7 +145,7 @@ class StatusDetailsProject extends StatelessWidget {
                 );
               },
               assetsName: Assets.payment,
-              nameRow: 'Payments',
+              nameRow: 'Payments'.tr,
             ),
           OneStatusRow(
             button: true,
@@ -153,7 +153,7 @@ class StatusDetailsProject extends StatelessWidget {
               Navigator.pushNamed(context, AppRoute.teamProjectScreen);
             },
             assetsName: Assets.users,
-            nameRow: 'Teams',
+            nameRow: 'Teams'.tr,
             anotherWidget: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -191,7 +191,7 @@ class StatusDetailsProject extends StatelessWidget {
           OneStatusRow(
             button: false,
             assetsName: Assets.oneUser,
-            nameRow: 'Engineer',
+            nameRow: 'Engineer'.tr,
             anotherWidget: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -226,7 +226,7 @@ class StatusDetailsProject extends StatelessWidget {
               return OneStatusRow(
                 button: false,
                 assetsName: Assets.status,
-                nameRow: 'Status',
+                nameRow: 'Status'.tr,
                 anotherWidget: Row(
                   children: [
                     Text(
@@ -256,7 +256,7 @@ class StatusDetailsProject extends StatelessWidget {
             builder: (context, state) => OneStatusRow(
               button: false,
               assetsName: Assets.calenderProject,
-              nameRow: 'Due Date',
+              nameRow: 'Due Date'.tr,
               anotherWidget: Row(
                 children: [
                   Text(

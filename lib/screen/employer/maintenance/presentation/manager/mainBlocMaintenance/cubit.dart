@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Ensure to include relevant imports for Failure and EmergenciesModel
@@ -9,7 +10,8 @@ import 'package:image_picker/image_picker.dart';
 class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   MainBlocMaintenanceCubit() : super(MainBlocMaintenanceInitial());
 
-  static MainBlocMaintenanceCubit of(BuildContext context) => BlocProvider.of<MainBlocMaintenanceCubit>(context);
+  static MainBlocMaintenanceCubit of(BuildContext context) =>
+      BlocProvider.of<MainBlocMaintenanceCubit>(context);
 
   void changeState() {
     emit(SelectLocationState());
@@ -18,7 +20,11 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   // toggle switch
   int indexList = 0;
 
-  List<String> maintenanceLabels = ['Emergency Request', 'Malfunction Request', 'Periodic Maintenance'];
+  List<String> maintenanceLabels = [
+    'Emergency Request'.tr,
+    'Malfunction Request'.tr,
+    'Periodic Maintenance'.tr,
+  ];
 
   void changeIndex({required int index}) {
     indexList = index;
@@ -28,7 +34,11 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
   PageController pageController = PageController();
 
   void changeView(int page) {
-    pageController.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.bounceOut);
+    pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.bounceOut,
+    );
   }
 
   final picker = ImagePicker();
@@ -78,5 +88,4 @@ class MainBlocMaintenanceCubit extends Cubit<MainBlocMaintenanceState> {
 
     emit(SelectImageSuccessState());
   }
-
-  }
+}

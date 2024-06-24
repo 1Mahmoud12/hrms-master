@@ -7,6 +7,7 @@ import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class ProductsNeedTechnical extends StatelessWidget {
   const ProductsNeedTechnical({super.key});
@@ -20,7 +21,7 @@ class ProductsNeedTechnical extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Products Needed',
+              'Products Needed'.tr,
               style: Styles.style16700,
             ),
             ...List.generate(
@@ -33,8 +34,8 @@ class ProductsNeedTechnical extends StatelessWidget {
             ),
             BlocBuilder<ProductsNeedTechnicalBloc, ProductsNeedTechnicalState>(
               builder: (context, state) => CustomDropDownMenuTechnical(
-                selectedItem: 'choose Product',
-                items: const ['Engine', 'Cabin'],
+                selectedItem: 'choose Product'.tr,
+                items:  ['Engine'.tr, 'Cabin'.tr],
                 width: context.screenWidth,
                 cubit: ProductsNeedTechnicalBloc(),
               ),

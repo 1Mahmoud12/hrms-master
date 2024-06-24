@@ -9,6 +9,7 @@ import 'package:cnattendance/screen/employer/maintenance/presentation/view/widge
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class MaintenanceReportTechnicalMalfunction extends StatefulWidget {
   const MaintenanceReportTechnicalMalfunction({super.key});
@@ -31,7 +32,7 @@ class _MaintenanceReportTechnicalEmergincieState
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Maintenance Report',
+            'Maintenance Report'.tr,
             style: Styles.styleHeader,
           ),
         ),
@@ -51,7 +52,7 @@ class _MaintenanceReportTechnicalEmergincieState
               },
               backgroundColor: AppColors.primaryColor,
               child: Text(
-                'submit',
+                'submit'.tr,
                 style: Styles.style14500.copyWith(color: AppColors.white),
               ),
             ),
@@ -60,13 +61,13 @@ class _MaintenanceReportTechnicalEmergincieState
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .02),
           children: [
-            const CustomDropDownMenu(
-              selectedItem: 'Choose Status',
-              items: ['In progress', 'Pending', 'Finished'],
+            CustomDropDownMenu(
+              selectedItem: 'Choose Status'.tr,
+              items: ['In progress'.tr, 'Pending'.tr, 'Finished'.tr],
             ),
             CustomTextFormField(
               controller: reportDescription,
-              hintText: 'Write your report',
+              hintText: 'Write your report'.tr,
               maxLines: 6,
               fillColor: AppColors.white,
             ),

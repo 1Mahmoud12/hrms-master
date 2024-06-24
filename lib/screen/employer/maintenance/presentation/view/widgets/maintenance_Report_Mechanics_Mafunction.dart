@@ -9,6 +9,7 @@ import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'maintenance_report.dart';
 
@@ -23,7 +24,7 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Maintenance Report',
+          'Maintenance Report'.tr,
           style: Styles.styleHeader,
         ),
       ),
@@ -33,7 +34,7 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
             onPress: () {},
             backgroundColor: AppColors.primaryColor,
             child: Text(
-              'submit',
+              'submit'.tr,
               style: Styles.style14400.copyWith(color: AppColors.white),
             ),
           ),
@@ -62,13 +63,13 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Maintenance Status',
+                                'Maintenance Status'.tr,
                                 style: Styles.style14400,
                               ),
                               Text(
                                 status,
                                 style: Styles.style14500.copyWith(
-                                  color: status == 'In Progress'
+                                  color: status == 'In Progress'.tr
                                       ? AppColors.green
                                       : AppColors.subTextColor,
                                   fontWeight: FontWeight.w600,
@@ -90,7 +91,7 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Maintenance Description',
+                                    'Maintenance Description'.tr,
                                     style: Styles.style14400,
                                   ),
                                 ],

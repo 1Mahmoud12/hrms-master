@@ -19,7 +19,7 @@ class PeriodicMaintenanceScreenItems extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Periodic Maintenance',
+          'Periodic Maintenance'.tr,
           style: Styles.styleHeader,
         ),
       ),
@@ -56,7 +56,7 @@ class PeriodicMaintenanceScreenItems extends StatelessWidget {
           ? CustomFloatingActionButtonMaintenance(
               onTap: () {
                 final arguments = {
-                  'nameStatus': 'Request periodic maintenance',
+                  'nameStatus': 'Request periodic maintenance'.tr,
                 };
                 Navigator.pushNamed(context, AppRoute.addMaintenanceContract, arguments: arguments);
               },
