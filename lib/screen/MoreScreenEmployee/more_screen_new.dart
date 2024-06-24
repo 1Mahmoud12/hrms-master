@@ -14,9 +14,11 @@ import 'package:cnattendance/screen/profile/notice/noticescreen.dart';
 import 'package:cnattendance/screen/profile/profilescreen.dart';
 import 'package:cnattendance/screen/securitycheck/Securitycheck.dart';
 import 'package:cnattendance/screen/tadascreen/tadascreen.dart';
+import 'package:cnattendance/screen/translation/translation.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/profile_image_widget.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
+import 'package:cnattendance/utils/svgsconstants.dart';
 import 'package:cnattendance/widget/log_out_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -249,7 +251,13 @@ class MoreScreenNew extends StatelessWidget {
                   pageTransitionAnimation: PageTransitionAnimation.fade,
                 );
               },
-            ),
+            ), MoreCardoverviewSvgs(type: 'translation'.tr, svgvalue: Assets.translate, onPressed: (){
+              pushNewScreen(context,
+                screen: const TranslationScreen(),
+                withNavBar: false,
+                pageTransitionAnimation:
+                PageTransitionAnimation.fade,);
+            },),
             if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
                 type: 'Financial requests'.tr,
@@ -495,6 +503,8 @@ class MoreCardoverviewSvgs extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       svgvalue,
+                      width: 20.sp,
+                      height: 25.sp,
                     ),
                     10.ESW(),
                     Text(
