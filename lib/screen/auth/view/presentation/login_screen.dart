@@ -11,8 +11,8 @@ import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -78,13 +78,13 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
 
                       Text(
-                        'Login',
+                        'Login'.tr,
                         style: Styles.style16700,
                       ),
 
                       //textHeading('Username'),
                       //gaps(10),
-                      CustomTextFormField(controller: _usernameController, hintText: 'Username'),
+                      CustomTextFormField(controller: _usernameController, hintText: 'Username or Email'),
 
                       //  textHeading('Password'),
                       CustomTextFormField(
@@ -202,9 +202,12 @@ class LoginScreenState extends State<LoginScreen> {
                               );
                             },
                             child: Text.rich(
-                              TextSpan(text: "Don't Have An Account ?", children: [TextSpan(text: ' Create Account', style: Styles.style14500)]),
+                              TextSpan(text: "Don't Have An Account ?".tr, children: [
+                                const TextSpan(text: '  '),
+                                TextSpan(text: ' Create Account'.tr, style: Styles.style16700.copyWith(fontWeight: FontWeight.w500))
+                              ]),
                               textAlign: TextAlign.center,
-                              style: Styles.style12400,
+                              style: Styles.style16700.copyWith(fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],
@@ -283,16 +286,16 @@ class LoginScreenState extends State<LoginScreen> {
           style: TextButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
             padding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.r))),
+            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(40))),
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
             validateValue();
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              'Login',
+              'Login'.tr,
               style: Styles.style16700.copyWith(color: AppColors.white),
             ),
           ),

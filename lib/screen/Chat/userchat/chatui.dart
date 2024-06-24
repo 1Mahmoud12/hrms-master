@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cnattendance/Controller/UserChatController.dart';
+import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/widget/radialDecoration.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -145,8 +146,8 @@ class ChatUi extends StatelessWidget {
                             );
                           }
                           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-                            return const Center(
-                              child: Text('No messages available.'),
+                            return Center(
+                              child: Text('No messages available.'.tr),
                             );
                           }
 
@@ -268,27 +269,24 @@ Widget _chatInput(
                     onTap: () {
                       // if (_showEmoji) setState(() => _showEmoji = !_showEmoji);
                     },
-                    decoration: const InputDecoration(
-                      hintText: 'Type Something...',
-                      hintStyle: TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                      hintText: 'Type Something...'.tr,
+                      hintStyle: const TextStyle(color: Colors.black),
                       border: InputBorder.none,
                     ),
                   ),
                 ),
 
-                Transform.rotate(
-                  angle: -45 * (3.14159265359 / 180),
-                  child: IconButton(
-                    onPressed: () async {
-                      chatControl.sendmessagetouser(userid);
+                IconButton(
+                  onPressed: () async {
+                    chatControl.sendmessagetouser(userid);
 
-                      scrollController.jumpTo(scrollController.position.maxScrollExtent);
-                    },
-                    icon: const Icon(
-                      Icons.send,
-                      color: Color(0xFF635F54),
-                      size: 26,
-                    ),
+                    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+                  },
+                  icon: const Icon(
+                    Icons.send,
+                    color: AppColors.primaryColor,
+                    size: 26,
                   ),
                 ),
 

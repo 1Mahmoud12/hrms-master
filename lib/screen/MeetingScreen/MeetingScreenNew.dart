@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/meetingprovider.dart';
 import 'package:cnattendance/widget/meeting/meetinglistview.dart';
@@ -48,20 +46,8 @@ class MeetingState extends State<MeetingScreenNew> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Platform.isAndroid
-                ? const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  )
-                : const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),
-          ),
           title: Text(
-            'Meeting'.tr,
+            'Meetings'.tr,
             style: Styles.styleHeader,
           ),
           centerTitle: true,

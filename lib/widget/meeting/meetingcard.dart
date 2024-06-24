@@ -1,4 +1,5 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/data/source/network/model/meeting/Participator.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
 import 'package:cnattendance/widget/meeting/meetingparticipator.dart';
@@ -64,50 +65,52 @@ class MeetingCard extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              date,
-                              style: const TextStyle(
-                                color: AppColors.primaryColor,
-                                fontSize: 15,
+                      Directionality(
+                        textDirection: defaultLanguage != 'en' ? TextDirection.ltr : TextDirection.rtl,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                date,
+                                style: const TextStyle(
+                                  color: AppColors.primaryColor,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.28,
-                          ),
-                          SizedBox(
-                            height: 25,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              primary: false,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: participator.length < 3 ? participator.length : 3,
-                              itemBuilder: (context, index) {
-                                return MeetingParticipator(
-                                  participator[index].avatar,
-                                );
-                              },
+                            SizedBox(
+                              width: Get.width * 0.28,
                             ),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Visibility(
-                            visible: participator.length < 3,
-                            child: Text(
-                              '+${participator.length - 3} more',
-                              style: const TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
+                            SizedBox(
+                              height: 25,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                primary: false,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: participator.length < 3 ? participator.length : 3,
+                                itemBuilder: (context, index) {
+                                  return MeetingParticipator(
+                                    participator[index].avatar,
+                                  );
+                                },
                               ),
                             ),
-                          ),
-                        ],
+                            if (participator.length <= 3)
+                              const SizedBox(
+                                width: 5,
+                              ),
+                            if (participator.length <= 3)
+                              Text(
+                                '+${participator.length - 3} more',
+                              style: const TextStyle(
+                                fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

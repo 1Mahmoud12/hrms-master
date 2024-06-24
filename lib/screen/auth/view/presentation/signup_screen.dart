@@ -20,15 +20,7 @@ class Signup extends StatelessWidget {
     final _form = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(
-                context,
-              );
-            },
-            icon: Icon(Icons.arrow_back)),
-      ),
+      appBar: AppBar(),
       body: GetBuilder(
         init: Signupcontrol,
         builder: (context) {
@@ -45,15 +37,17 @@ class Signup extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: Text(
-                        'Sign Up',
+                        'Sign Up'.tr,
                         style: Styles.styleHeader,
                       ),
                     ),
+                    10.ESH(),
                     CustomTextFormField(
                       hintText: 'Name',
                       controller: Signupcontrol.usernameController,
                       prefixIcon: const Icon(Icons.person),
                     ),
+                    10.ESH(),
                     CustomTextFormField(
                       hintText: 'Email',
                       controller: Signupcontrol.emailcontroller,
@@ -61,13 +55,15 @@ class Signup extends StatelessWidget {
                         Icons.email_outlined,
                       ),
                     ),
+                    10.ESH(),
                     CustomTextFormField(
-                      hintText: 'Phone Number',
+                      hintText: 'Phone',
                       controller: Signupcontrol.phonecontroller,
                       prefixIcon: const Icon(
                         Icons.phone,
                       ),
                     ),
+                    10.ESH(),
                     CustomTextFormField(
                       controller: Signupcontrol.passwordController,
                       hintText: 'Enter Password',
@@ -84,10 +80,10 @@ class Signup extends StatelessWidget {
                       width: Get.width * 0.9,
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: AppColors.white,
+                          backgroundColor: AppColors.primaryColor,
                           padding: EdgeInsets.zero,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
                         ),
                         onPressed: () {
@@ -98,10 +94,10 @@ class Signup extends StatelessWidget {
                           }
                         },
                         child: Padding(
-                          padding: EdgeInsets.all(20.0.w),
+                          padding: EdgeInsets.all(8.0.w),
                           child: Text(
-                            'Register',
-                            style: Styles.style16700.copyWith(fontWeight: FontWeight.w500),
+                            'Register'.tr,
+                            style: Styles.style16700.copyWith(color: AppColors.white, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
@@ -116,10 +112,10 @@ class Signup extends StatelessWidget {
                           onTap: () {
                             Get.off(const LoginScreen());
                           },
-                          child: const Text(
-                            'Already Have An Account ? Login',
+                          child: Text(
+                            'Already Have An Account ? Login'.tr,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white),
+                            style: Styles.style16700.copyWith(fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],

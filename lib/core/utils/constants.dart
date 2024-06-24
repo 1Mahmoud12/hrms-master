@@ -3,8 +3,8 @@ import 'package:cnattendance/screen/auth/data/model/login_model.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/all_proposals_model.dart';
 import 'package:cnattendance/screen/employer/allProject/data/models/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
-import 'package:cnattendance/screen/employer/maintenance/data/model/one_emergency_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/malfunction_model.dart';
+import 'package:cnattendance/screen/employer/maintenance/data/model/one_emergency_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/one_malfunction_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/payment_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/periodic_model.dart';
@@ -61,3 +61,4 @@ String? genderUser;
 String genderUserKey = 'genderUser';
 
 String projectIdShare = '';
+String defaultLanguage = 'en';

@@ -41,13 +41,16 @@ class MaintenanceScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 24.0, left: 16),
                       child: Column(
                         children: [
-                          Text(
-                            'RAK\nMaintenance',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 40.sp,
-                              fontWeight: FontWeight.w700,
-                              //height: 1.0,
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: Text(
+                              'RAK\nMaintenance',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.sp,
+                                fontWeight: FontWeight.w700,
+                                //height: 1.0,
+                              ),
                             ),
                           ),
                         ],
@@ -57,7 +60,7 @@ class MaintenanceScreen extends StatelessWidget {
                 ),
                 22.ESH(),
                 Text(
-                  'Maintenance Type',
+                  'Maintenance Type'.tr,
                   style: Styles.styleHeader.copyWith(
                     color: const Color(0xFF0A256C),
                   ),

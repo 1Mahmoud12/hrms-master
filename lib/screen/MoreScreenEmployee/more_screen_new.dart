@@ -122,7 +122,7 @@ class MoreScreenNew extends StatelessWidget {
           ),*/
             if (genderUser != RoleId.eight.name.tr && genderUser != RoleId.eleven.name.tr)
               MoreCardoverviewSvgs(
-                type: 'Meeting'.tr,
+                type: 'Meetings'.tr,
                 svgvalue: Assets.meeting,
                 onPressed: () {
                   pushNewScreen(context, screen: const MeetingScreenNew(), withNavBar: false, pageTransitionAnimation: PageTransitionAnimation.fade);

@@ -25,7 +25,7 @@ class ChatScreenView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Chat',
+          'Chats'.tr,
           style: Styles.styleHeader,
         ),
       ),

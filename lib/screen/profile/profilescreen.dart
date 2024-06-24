@@ -112,7 +112,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 else
                   const SizedBox(),
                 if (userCache != null) const BasicDetail() else const SizedBox(),
-                if (userProfile.bankName != '')
+                if (userProfile.bankName != '' && userProfile.bankNumber.length >= 15 && userProfile.joinedDate != '')
                   Container(
                     padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 10),
                     width: double.infinity,
@@ -123,7 +123,10 @@ class ProfileScreenState extends State<ProfileScreen> {
                   )
                 else
                   const SizedBox(),
-                if (userProfile.bankName != '') const BankDetail() else const SizedBox(),
+                if (userProfile.bankName != '' && userProfile.bankNumber.length >= 15 && userProfile.joinedDate != '')
+                  const BankDetail()
+                else
+                  const SizedBox(),
               ],
             ),
           ),
