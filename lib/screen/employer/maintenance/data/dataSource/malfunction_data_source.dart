@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
-import 'package:cnattendance/screen/employer/maintenance/data/model/emergencies_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/malfunction_model.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/one_malfunction_model.dart';
 import 'package:cnattendance/utils/endpoints.dart';

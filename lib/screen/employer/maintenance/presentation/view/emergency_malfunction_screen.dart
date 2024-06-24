@@ -12,11 +12,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class EmergencyMalfunctionScreen extends StatelessWidget {
+class EmergencyMalfunctionScreen extends StatefulWidget {
   const EmergencyMalfunctionScreen({super.key});
 
   @override
+  State<EmergencyMalfunctionScreen> createState() =>
+      _EmergencyMalfunctionScreenState();
+}
+
+class _EmergencyMalfunctionScreenState
+    extends State<EmergencyMalfunctionScreen> {
+  @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
+
     const String nameRequest = 'Malfunction Request';
     const String status = 'In Progress';
     const String location = 'Cairo';
@@ -33,7 +43,9 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -44,10 +56,11 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                 Text(
                   status,
                   style: Styles.style14500.copyWith(
-                      color: status == 'In Progress'
-                          ? AppColors.green
-                          : AppColors.subTextColor,
-                      fontWeight: FontWeight.w600),
+                    color: status == 'In Progress'
+                        ? AppColors.green
+                        : AppColors.subTextColor,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -55,7 +68,9 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10.r)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -68,7 +83,7 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                   style: Styles.style14400,
                 ),
                 Text(
-                  'Mohamed',
+                  args['name'] ?? 'N/A',
                   style:
                       Styles.style14400.copyWith(color: AppColors.primaryColor),
                 ),
@@ -77,8 +92,7 @@ class EmergencyMalfunctionScreen extends StatelessWidget {
                   style: Styles.style14400,
                 ),
                 Text(
-                  '''
-Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex enim, euismod non consequat a, eg''',
+                  args['description'] ?? 'N/A',
                   style:
                       Styles.style14400.copyWith(color: AppColors.primaryColor),
                 ),
@@ -89,7 +103,7 @@ Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem 
                 Row(
                   children: [
                     Text(
-                      location,
+                      args['location'] ?? 'N/A',
                       style: Styles.style14400
                           .copyWith(color: AppColors.primaryColor),
                     ),
@@ -97,7 +111,9 @@ Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem 
                     SvgPicture.asset(
                       Assets.location,
                       colorFilter: const ColorFilter.mode(
-                          AppColors.primaryColor, BlendMode.srcIn),
+                        AppColors.primaryColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ],
                 ),
@@ -106,9 +122,11 @@ Lorem mollit cupidatat irure aborum magna nulla duis ullamco cillum dolor Lorem 
                   style: Styles.style14400,
                 ),
                 Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.r)),
-                    child: Image.asset(Assets.attachment)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                  ),
+                  child: Image.asset(Assets.attachment),
+                ),
               ],
             ),
           ),

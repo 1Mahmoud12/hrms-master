@@ -5,6 +5,7 @@ class MalfunctionInitial extends MalfunctionState {}
 // Get
 
 class MalfunctionLoadingState extends MalfunctionState {}
+class GetOneMalfunctionState extends MalfunctionState {}
 
 class MalfunctionSuccessState extends MalfunctionState {}
 

@@ -39,40 +39,34 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
     });
   }
 
-void getOneMalfunction({
-  required BuildContext context,
-  required String idMalfunction,
-}) async {
-  emit(MalfunctionLoadingState());
+  void getOneMalfunction({
+    required BuildContext context,
+    required String idMalfunction,
+  }) async {
+    emit(MalfunctionLoadingState());
 
-  await MalfunctionDataSource.getOneMalfunction(idMalfunction: idMalfunction).then((value) async {
-    value.fold((l) {
-      debugPrint(l.errMessage);
-      showToast(l.errMessage);
-      debugPrint('=== Error ====');
-      emit(MalfunctionErrorState(l.errMessage));
-    }, (r) async {
-      debugPrint('=== Success ====');
+    await MalfunctionDataSource.getOneMalfunction(idMalfunction: idMalfunction)
+        .then((value) async {
+      value.fold((l) {
+        debugPrint(l.errMessage);
+        showToast(l.errMessage);
+        debugPrint('=== Error ====');
+        emit(MalfunctionErrorState(l.errMessage));
+      }, (r) async {
+        debugPrint('=== Success ====');
+        debugPrint(jsonEncode(r.toJson()));
 
-      await Preferences.setSaved(
-        value: jsonEncode(r.toJson()),
-        key: oneMalfunctionKey,
-      );
-      oneMalfunctioCache = r;
+        await Preferences.setSaved(
+          value: jsonEncode(r.toJson()),
+          key: oneMalfunctionKey,
+        );
+        oneMalfunctioCache = r;
+        debugPrint('=== hhhhh ====   $oneMalfunctioCache');
 
-      emit(MalfunctionSuccessState());
+        emit(GetOneMalfunctionState());
+      });
     });
-  });
-}
-
-
-
-
-
-
-
-
-
+  }
 
   void addMalfunction({
     required String name,
@@ -108,10 +102,8 @@ void getOneMalfunction({
     }
   }
 
-
- void uploadPayment({
+  void uploadPayment({
     required String malfunctionId,
-  
     required File imageFile,
   }) async {
     emit(MalfunctionLoadingState());
@@ -119,7 +111,6 @@ void getOneMalfunction({
     try {
       await MalfunctionDataSource.uploadPayment(
         malfunctionId: malfunctionId,
-       
         imageFile: imageFile,
       );
       emit(MalfunctionPaymentAddedState());
@@ -140,11 +131,4 @@ void getOneMalfunction({
       emit(MalfunctionErrorState(error.toString()));
     }
   }
-
-
-
-
-
-
-
 }

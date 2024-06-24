@@ -46,11 +46,17 @@ class MalFunctionScreenItems extends StatelessWidget {
                       ? ListView.builder(
                           itemBuilder: (context, index) => InkWell(
                             onTap: () {
+                              print(
+                                'nnnnn,====>${allMalfunctionCache!.data!.malfunction![6].id}',
+                              );
                               MalfunctionCubit().getOneMalfunction(
                                 context: context,
                                 idMalfunction: allMalfunctionCache!
                                     .data!.malfunction![index].id
                                     .toString(),
+                              );
+                              print(
+                                'iddddd====>${allMalfunctionCache!.data!.malfunction![index].id}',
                               );
 
                               final arguments = {
@@ -66,22 +72,24 @@ class MalFunctionScreenItems extends StatelessWidget {
                                     .data!.malfunction![index].id,
                               };
 
-                              // final customerArguments = {
-                              //   'location': oneMalfunctioCache!
-                              //       .data!.malfunction!.location,
-                              //   'name': oneMalfunctioCache!
-                              //       .data!.report!.technical!.name,
-                              //   'description': oneMalfunctioCache!
-                              //       .data!.malfunction!.description,
-                              //   'image':
-                              //       oneMalfunctioCache!.data!.malfunction!.img,
-                              // };
+                              final customerArguments = {
+                                'location': oneMalfunctioCache!
+                                    .data!.malfunction!.location,
+                                'name': oneMalfunctioCache!.data!.report == null
+                                    ? 'N/A'
+                                    : oneMalfunctioCache!
+                                        .data!.report!.technical!.name,
+                                'description': oneMalfunctioCache!
+                                    .data!.malfunction!.description,
+                                'image':
+                                    oneMalfunctioCache!.data!.malfunction!.img,
+                              };
 
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
                                   context,
                                   AppRoute.emergencyMalfunctionScreen,
-                                  arguments: arguments,
+                                  arguments: customerArguments,
                                 );
                               } else if (genderUser == RoleId.nine.name.tr) {
                                 Navigator.pushNamed(
