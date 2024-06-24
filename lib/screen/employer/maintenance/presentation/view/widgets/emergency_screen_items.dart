@@ -55,8 +55,7 @@ class EmergencyScreenItems extends StatelessWidget {
                                     ? Malfunction.In_Progress.name
                                     : Malfunction.Pending.name,
                                 'index':index,
-                                'emrgencie_id':allEmergenciesCache!
-                                  .data!.emergencie![index].id,
+                                'id': allEmergenciesCache!.data!.emergencie![index].id.toString(),
                               };
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(

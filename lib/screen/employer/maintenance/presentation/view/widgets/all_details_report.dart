@@ -3,8 +3,8 @@ import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/one_emergency_model.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/details_elevators.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/details_elevator.dart';
 import 'package:cnattendance/utils/assets.dart';
@@ -23,11 +23,11 @@ class AllDetailsReport extends StatelessWidget {
   Widget build(BuildContext context) {
     final arguments = context.getArguments;
     final Report report = arguments['Report'];
-    ReportBloc.of(context).maintenanceEngineerController.text = report.technical!.name ?? 'N/A';
-    ReportBloc.of(context).customerNameController.text = userCache!.name ?? 'N/A';
-    ReportBloc.of(context).phoneController.text = '${report.technical!.phone ?? 'N / A'}';
-    ReportBloc.of(context).detailsReportController.text = report!.description ?? 'N / A';
-    ReportBloc.of(context).reportDateController.text = report.updatedAt!.substring(0, 10);
+    ReportMalfunctionCubit.of(context).maintenanceEngineerController.text = report.technical!.name ?? 'N/A';
+    ReportMalfunctionCubit.of(context).customerNameController.text = userCache!.name ?? 'N/A';
+    ReportMalfunctionCubit.of(context).phoneController.text = '${report.technical!.phone ?? 'N / A'}';
+    ReportMalfunctionCubit.of(context).detailsReportController.text = report!.description ?? 'N / A';
+    ReportMalfunctionCubit.of(context).reportDateController.text = report.updatedAt!.substring(0, 10);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -38,15 +38,15 @@ class AllDetailsReport extends StatelessWidget {
           if (genderUser == RoleId.nine.name.tr)
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: BlocBuilder<ReportBloc, ReportState>(
+              child: BlocBuilder<ReportMalfunctionCubit, ReportState>(
                 builder: (context, state) => InkWell(
                   onTap: () {
-                    ReportBloc.of(context).updateReportMechanics(
-                      maintenanceEngineer: ReportBloc.of(context).maintenanceEngineerController.text,
-                      reportDate: ReportBloc.of(context).reportDateController.text,
-                      customerName: ReportBloc.of(context).customerNameController.text,
-                      phone: ReportBloc.of(context).phoneController.text,
-                      address: ReportBloc.of(context).addressController.text,
+                    ReportMalfunctionCubit.of(context).updateReportMechanics(
+                      maintenanceEngineer: ReportMalfunctionCubit.of(context).maintenanceEngineerController.text,
+                      reportDate: ReportMalfunctionCubit.of(context).reportDateController.text,
+                      customerName: ReportMalfunctionCubit.of(context).customerNameController.text,
+                      phone: ReportMalfunctionCubit.of(context).phoneController.text,
+                      address: ReportMalfunctionCubit.of(context).addressController.text,
                       detailsReport: detailsReport,
                     );
                     Navigator.pushNamed(context, AppRoute.editReportScreen);
@@ -60,7 +60,7 @@ class AllDetailsReport extends StatelessWidget {
             )
         ],
       ),
-      body: BlocBuilder<ReportBloc, ReportState>(
+      body: BlocBuilder<ReportMalfunctionCubit, ReportState>(
         builder: (context, state) => ListView(
           children: [
             Container(
@@ -78,11 +78,12 @@ class AllDetailsReport extends StatelessWidget {
                     'Details',
                     style: Styles.style14500.copyWith(color: Colors.black),
                   ),
-                  DetailsElevatorRow(nameDetails: 'Maintenance Engineer ', executeDetails: ReportBloc.of(context).maintenanceEngineerController.text),
-                  DetailsElevatorRow(nameDetails: 'Report Date ', executeDetails: ReportBloc.of(context).reportDateController.text),
-                  DetailsElevatorRow(nameDetails: 'Customer Name', executeDetails: ReportBloc.of(context).customerNameController.text),
-                  DetailsElevatorRow(nameDetails: 'Phone', executeDetails: ReportBloc.of(context).phoneController.text),
-                  DetailsElevatorRow(nameDetails: 'address', executeDetails: ReportBloc.of(context).addressController.text),
+                  DetailsElevatorRow(
+                      nameDetails: 'Maintenance Engineer ', executeDetails: ReportMalfunctionCubit.of(context).maintenanceEngineerController.text),
+                  DetailsElevatorRow(nameDetails: 'Report Date ', executeDetails: ReportMalfunctionCubit.of(context).reportDateController.text),
+                  DetailsElevatorRow(nameDetails: 'Customer Name', executeDetails: ReportMalfunctionCubit.of(context).customerNameController.text),
+                  DetailsElevatorRow(nameDetails: 'Phone', executeDetails: ReportMalfunctionCubit.of(context).phoneController.text),
+                  DetailsElevatorRow(nameDetails: 'address', executeDetails: ReportMalfunctionCubit.of(context).addressController.text),
                 ].paddingDirectional(bottom: context.screenHeight * .01),
               ),
             ),

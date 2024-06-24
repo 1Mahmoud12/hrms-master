@@ -68,8 +68,7 @@ class MalFunctionScreenItems extends StatelessWidget {
                                     ? Malfunction.In_Progress.name
                                     : Malfunction.Pending.name,
                                 'index': index,
-                                'malfuncion_id': allMalfunctionCache!
-                                    .data!.malfunction![index].id,
+                                'id': allMalfunctionCache!.data!.malfunction![index].id.toString(),
                               };
 
                               final customerArguments = {
