@@ -42,6 +42,7 @@ void main() async {
   // Caching
   await Preferences.init();
   genderUser = await Preferences.getSaved(key: 'genderUser') ?? '';
+  defaultLanguage = await Preferences.getSaved(key: 'language') ?? 'en';
   userCache = User.fromJson(
       jsonDecode(await Preferences.getSaved(key: userCacheKey) ?? '{}'));
   tokenCache = await Preferences.getSaved(key: tokenCacheKey) ?? '';

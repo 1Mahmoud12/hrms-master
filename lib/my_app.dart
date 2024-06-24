@@ -69,6 +69,7 @@ import 'package:get/get.dart';
 import 'package:in_app_notification/in_app_notification.dart';
 import 'package:provider/provider.dart';
 
+import 'core/utils/constants.dart';
 import 'screen/addElevator/presentation/view/add_elevator.dart';
 import 'screen/employer/allProject/presentation/view/proposal/details_porposal_screen.dart';
 import 'screen/employer/allProject/presentation/view/widgets/add_progress_screen.dart';
@@ -272,7 +273,7 @@ class _MyAppState extends State<MyApp> {
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
                 child: GetMaterialApp(
-                  locale: const Locale('en', 'US'),
+                  locale: Locale(defaultLanguage),
                   translations: Language(),
                   navigatorKey: NavigationService.navigatorKey,
                   useInheritedMediaQuery: true,
@@ -291,7 +292,6 @@ class _MyAppState extends State<MyApp> {
                       centerTitle: true,
                       iconTheme: IconThemeData(color: Colors.black),
                       elevation: 0,
-
                       systemOverlayStyle: SystemUiOverlayStyle(
                         statusBarColor: Colors.black,
                         statusBarIconBrightness: Brightness.light,

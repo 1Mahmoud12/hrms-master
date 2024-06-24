@@ -1,3 +1,4 @@
+import 'package:cnattendance/data/source/datastore/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,8 @@ class TranslationController extends GetxController {
 
     final String localvalue = selectedValue == 'English' ? 'en' : 'ar';
     final String localcountry = localvalue == 'en' ? 'US' : 'SA';
+    Preferences.setSaved(key: 'language', value: localvalue);
+
     final Locale newLocale = Locale(localvalue, localcountry);
     Get.updateLocale(newLocale);
 

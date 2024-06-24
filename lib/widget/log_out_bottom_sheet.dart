@@ -66,7 +66,7 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -132,7 +132,7 @@ class LogOutBottomSheetState extends State<LogOutBottomSheet> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            'Goback'.tr,
+                            'Cancel'.tr,
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),
