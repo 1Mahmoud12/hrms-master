@@ -1,13 +1,14 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropDownMenu extends StatefulWidget {
   final String? selectedItem;
   final List<String> items;
   final double? width;
-
   const CustomDropDownMenu({
     super.key,
     required this.selectedItem,
@@ -24,7 +25,6 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
 
   @override
   void initState() {
-    // TODO: implement initState
     newSelected = widget.selectedItem!;
     super.initState();
   }
@@ -33,7 +33,10 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width ?? MediaQuery.of(context).size.width / 1.5,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r), color: AppColors.white, border: Border.all(color: Color(0xffF5F6FA))),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.r),
+          color: AppColors.white,
+          border: Border.all(color: Color(0xffF5F6FA))),
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: DropdownButton<String>(
         underline: Container(),
@@ -50,6 +53,9 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         ),
         onChanged: (String? newValue) {
           newSelected = newValue!;
+
+          BlocProvider.of<ReportMalfunctionCubit>(context).selectedStatus =
+              newValue;
           setState(() {});
         },
         isExpanded: true,
@@ -63,10 +69,12 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
             child: Container(
               // constraints: BoxConstraints(maxWidth: 120.w),
               // width: 120.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0).w,
-                child: Text(item, style: Styles.style12400, overflow: TextOverflow.ellipsis),
+                child: Text(item,
+                    style: Styles.style12400, overflow: TextOverflow.ellipsis),
               ),
             ),
             onTap: () {

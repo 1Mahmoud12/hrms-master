@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_state.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
@@ -24,22 +29,43 @@ class PaymentMaintenanceValue extends StatelessWidget {
         elevation: 2,
       ),
       persistentFooterButtons: [
-        SizedBox(
-          width: context.screenWidth,
-          child: CustomTextButton(
-            backgroundColor: AppColors.primaryColor,
-            child: Text(
-              'Send payment',
-              style: Styles.style16700.copyWith(color: AppColors.white),
+        BlocListener<MalfunctionCubit, MalfunctionState>(
+          listener: (context, state) {
+            if (state is MalfunctionErrorState) {
+              ErrorWidget(state.error);
+            } else if (state is MalfunctionPaymentAddedState) {
+              debugPrint('Success====> ');
+              showToast('Your request has been sent successfully');
+              Navigator.pushReplacementNamed(
+                context,
+                HomeDashboardScreen.routeName,
+              );
+            }
+          },
+          child: SizedBox(
+            width: context.screenWidth,
+            child: CustomTextButton(
+              backgroundColor: AppColors.primaryColor,
+              child: Text(
+                'Send payment',
+                style: Styles.style16700.copyWith(color: AppColors.white),
+              ),
+              onPress: () {
+                if (MainBlocMaintenanceCubit.of(context).image != null) {
+                  final File image =
+                      BlocProvider.of<MainBlocMaintenanceCubit>(context).image!;
+
+                  BlocProvider.of<MalfunctionCubit>(context).uploadPayment(
+                    malfunctionId: userCache!.id!.toString(),
+                    imageFile: image,
+                  );
+
+                  showToast('Successfully');
+                } else {
+                  showToast('You must upload Image');
+                }
+              },
             ),
-            onPress: () {
-              if (MainBlocMaintenanceCubit.of(context).image != null) {
-                showToast('Successfully');
-                Navigator.pushReplacementNamed(context, HomeDashboardScreen.routeName);
-              } else {
-                showToast('You must upload Image');
-              }
-            },
           ),
         ),
       ],
@@ -57,7 +83,8 @@ class PaymentMaintenanceValue extends StatelessWidget {
                       5.ESW(),
                       Text(
                         'Upload payment receipt',
-                        style: Styles.style16700.copyWith(color: AppColors.primaryColor),
+                        style: Styles.style16700
+                            .copyWith(color: AppColors.primaryColor),
                       ),
                     ],
                   ),
@@ -74,7 +101,7 @@ class PaymentMaintenanceValue extends StatelessWidget {
                   height: context.screenHeight * .3,
                   fit: BoxFit.fill,
                 ),
-              )
+              ),
           ],
         ),
       ),

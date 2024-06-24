@@ -1,8 +1,8 @@
 import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/cubit.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportBloc/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/state.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +20,9 @@ class EditReportScreen extends StatelessWidget {
           style: Styles.styleHeader,
         ),
       ),
-      body: BlocBuilder<ReportBloc, ReportState>(
+      body: BlocBuilder<ReportMalfunctionCubit, ReportState>(
         builder: (context, state) {
-          final cubit = ReportBloc.of(context);
+          final cubit = ReportMalfunctionCubit.of(context);
           return ListView(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             children: [
@@ -37,7 +37,8 @@ class EditReportScreen extends StatelessWidget {
                   hintText: 'Maintenance Engineer',
                   fillColor: Colors.white,
                   filled: true,
-                  border: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.primaryColor)),
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor)),
                   hoverColor: AppColors.primaryColor,
                   enabledBorder: InputBorder.none,
                 ),
@@ -173,8 +174,9 @@ class EditReportScreen extends StatelessWidget {
               CustomTextButton(
                 backgroundColor: AppColors.primaryColor,
                 onPress: () {
-                  ReportBloc.of(context).updateReportMechanics(
-                    maintenanceEngineer: cubit.maintenanceEngineerController.text,
+                  ReportMalfunctionCubit.of(context).updateReportMechanics(
+                    maintenanceEngineer:
+                        cubit.maintenanceEngineerController.text,
                     reportDate: cubit.reportDateController.text,
                     customerName: cubit.customerNameController.text,
                     phone: cubit.phoneController.text,

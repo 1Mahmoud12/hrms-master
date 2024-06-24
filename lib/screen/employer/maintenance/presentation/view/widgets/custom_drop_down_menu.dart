@@ -1,7 +1,9 @@
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/productsNeedTechnicalBloc/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropDownMenuTechnical extends StatefulWidget {
@@ -19,10 +21,12 @@ class CustomDropDownMenuTechnical extends StatefulWidget {
   });
 
   @override
-  State<CustomDropDownMenuTechnical> createState() => _CustomDropDownMenuTechnicalState();
+  State<CustomDropDownMenuTechnical> createState() =>
+      _CustomDropDownMenuTechnicalState();
 }
 
-class _CustomDropDownMenuTechnicalState extends State<CustomDropDownMenuTechnical> {
+class _CustomDropDownMenuTechnicalState
+    extends State<CustomDropDownMenuTechnical> {
   String newSelected = '';
 
   @override
@@ -36,7 +40,10 @@ class _CustomDropDownMenuTechnicalState extends State<CustomDropDownMenuTechnica
   Widget build(BuildContext context) {
     return Container(
       width: widget.width ?? MediaQuery.of(context).size.width / 1.5,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r), color: AppColors.white, border: Border.all(color: Color(0xffF5F6FA))),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.r),
+          color: AppColors.white,
+          border: Border.all(color: const Color(0xffF5F6FA))),
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: DropdownButton<String>(
         underline: Container(),
@@ -53,6 +60,9 @@ class _CustomDropDownMenuTechnicalState extends State<CustomDropDownMenuTechnica
         ),
         onChanged: (String? newValue) {
           newSelected = newValue!;
+          BlocProvider.of<ReportMalfunctionCubit>(context).selectedProduct =
+              newValue;
+
           ProductsNeedTechnicalBloc.of(context).addProduct(product: newValue);
           debugPrint(newValue);
           setState(() {});
@@ -68,10 +78,12 @@ class _CustomDropDownMenuTechnicalState extends State<CustomDropDownMenuTechnica
             child: Container(
               // constraints: BoxConstraints(maxWidth: 120.w),
               // width: 120.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0).w,
-                child: Text(item, style: Styles.style12400, overflow: TextOverflow.ellipsis),
+                child: Text(item,
+                    style: Styles.style12400, overflow: TextOverflow.ellipsis),
               ),
             ),
             onTap: () {},

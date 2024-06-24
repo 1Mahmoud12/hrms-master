@@ -1,0 +1,111 @@
+import 'dart:io';
+import 'package:cnattendance/core/component/buttons/custom_text_button.dart';
+import 'package:cnattendance/core/component/custom_text_form_field.dart';
+import 'package:cnattendance/core/routes/app_route.dart';
+import 'package:cnattendance/core/services/googleMap/google_map_no_scaffold.dart';
+import 'package:cnattendance/core/theme/color_constraint.dart';
+import 'package:cnattendance/core/theme/styles.dart';
+import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/mainBlocMaintenance/state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_state.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/attachment.dart';
+import 'package:cnattendance/utils/endpoints.dart';
+import 'package:cnattendance/utils/extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class AddMalfunctionRequest extends StatefulWidget {
+  const AddMalfunctionRequest({super.key});
+
+  @override
+  State<AddMalfunctionRequest> createState() => _AddMalfunctionRequestState();
+}
+
+class _AddMalfunctionRequestState extends State<AddMalfunctionRequest> {
+  @override
+  Widget build(BuildContext context) {
+    final argument = context.getArguments;
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    final String nameStatus = argument['nameStatus'];
+    return BlocListener<MalfunctionCubit, MalfunctionState>(
+      listener: (context, state) {
+        if (state is MalfunctionErrorState) {
+          ErrorWidget(state.error);
+        } else if (state is MalfunctionAddedState) {
+          debugPrint('Success====> ');
+          showToast('Your request has been sent successfully');
+          Navigator.pushNamed(
+            context,
+            AppRoute.paymentMaintenanceValue,
+        
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            nameStatus,
+            style: Styles.style18700,
+          ),
+        ),
+        persistentFooterButtons: [
+          SizedBox(
+            width: context.screenWidth * .95,
+            child: CustomTextButton(
+              onPress: () async {
+                final File image =
+                    BlocProvider.of<MainBlocMaintenanceCubit>(context)
+                        .imagesAttachment[0];
+
+                BlocProvider.of<MalfunctionCubit>(context).addMalfunction(
+                  name: nameController.text,
+                  description: descriptionController.text,
+                  location: locationCache,
+                  imageFile: image,
+                );
+              },
+              backgroundColor: AppColors.primaryColor,
+              child: Text(
+                'submit',
+                style: Styles.style16700.copyWith(color: AppColors.white),
+              ),
+            ),
+          ),
+        ],
+        body: ListView(
+          children: [
+            CustomTextFormField(
+              controller: nameController,
+              hintText: 'name',
+              fillColor: AppColors.white,
+            ),
+            CustomTextFormField(
+              controller: descriptionController,
+              hintText: 'Description',
+              maxLines: 5,
+              fillColor: AppColors.white,
+            ),
+            BlocBuilder<MainBlocMaintenanceCubit, MainBlocMaintenanceState>(
+              builder: (context, state) => Text(
+                'location: $locationCache',
+                style: Styles.style16700,
+              ),
+            ),
+            GoogleMapWithoutScaffold(
+              cubit: MainBlocMaintenanceCubit.of(context),
+            ),
+            const AttachmentsReportCustomer(),
+          ].paddingDirectional(
+            start: 10.w,
+            end: 10.w,
+            bottom: 10.h,
+          ),
+        ),
+      ),
+    );
+  }
+}

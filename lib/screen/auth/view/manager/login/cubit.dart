@@ -13,9 +13,14 @@ import 'package:get/get.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
-  static LoginCubit of(BuildContext context) => BlocProvider.of<LoginCubit>(context);
+  static LoginCubit of(BuildContext context) =>
+      BlocProvider.of<LoginCubit>(context);
 
-  void loginUser({required String userName, required String password, required BuildContext context}) async {
+  void loginUser({
+    required String userName,
+    required String password,
+    required BuildContext context,
+  }) async {
     emit(LoginLoadingState());
 
     await LoginDataSource.login(userName, password).then((value) async {
@@ -36,26 +41,41 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> afterLogin(LoginModel r, BuildContext context) async {
     debugPrint('======== Success ========');
     tokenCache = r.data!.tokens!;
-    debugPrint('$tokenCache');
+    debugPrint(tokenCache);
 
     Preferences.setSaved(value: r.data!.tokens, key: tokenCacheKey);
     if (r.data!.user!.roleId.toString() == RoleId.eleven.name.tr) {
       genderUser = RoleId.eleven.name.tr;
-      await Preferences.setSaved(value: RoleId.eleven.name.tr, key: genderUserKey);
+      await Preferences.setSaved(
+        value: RoleId.eleven.name.tr,
+        key: genderUserKey,
+      );
       MainBlocHomeCubit.of(context).changeToClient();
     } else if (r.data!.user!.roleId.toString() == RoleId.eight.name.tr) {
       genderUser = RoleId.eight.name.tr;
-      await Preferences.setSaved(value: RoleId.eight.name.tr, key: genderUserKey);
+      await Preferences.setSaved(
+        value: RoleId.eight.name.tr,
+        key: genderUserKey,
+      );
       MainBlocHomeCubit.of(context).changeToCustomer();
     } else {
       genderUser = r.data!.user!.roleId.toString();
-      await Preferences.setSaved(value: r.data!.user!.roleId.toString(), key: genderUserKey);
+      await Preferences.setSaved(
+        value: r.data!.user!.roleId.toString(),
+        key: genderUserKey,
+      );
       MainBlocHomeCubit.of(context).changeToEmployer();
     }
 
-    Navigator.of(context).pushNamedAndRemoveUntil(HomeDashboardScreen.routeName, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      HomeDashboardScreen.routeName,
+      (route) => false,
+    );
 
-    debugPrint('Role Id Now ======> ${r.data!.user}${r.data!.user!.roleId == 4}');
+    debugPrint(
+      'Role Id Now ======> ${r.data!.user}${r.data!.user!.roleId == 4}',
+    );
     genderUser = r.data!.user!.roleId.toString();
+    debugPrint('genderUesr=======>$genderUser');
   }
 }

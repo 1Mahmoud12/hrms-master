@@ -71,4 +71,7 @@ class EmergencieCubit extends Cubit<EmergencieState> {
       emit(EmergencieErrorState(error.toString()));
     }
   }
+
+
+
 }
