@@ -5,9 +5,14 @@ import 'package:cnattendance/screen/Chat/userchat/chatui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChatScreenView extends StatelessWidget {
-  ChatScreenView({super.key});
+class ChatScreenView extends StatefulWidget {
+  const ChatScreenView({super.key});
 
+  @override
+  State<ChatScreenView> createState() => _ChatScreenViewState();
+}
+
+class _ChatScreenViewState extends State<ChatScreenView> {
   Future<String> getTeam() async {
     return 'Loaded';
   }

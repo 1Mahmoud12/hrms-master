@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cnattendance/core/utils/constants.dart';
+import 'package:cnattendance/screen/Chat/userchat/chatui.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,6 +29,13 @@ class ChatViewScreenController extends GetxController {
     if (jsonRes['status'] == 'ok') {
       for (final i in jsonRes['data']) {
         userdata.add(i);
+      }
+      if (genderUser == RoleId.eight.name.tr) {
+        final String username = userdata[0]['name'];
+
+        final int id = userdata[0]['id'];
+
+        Get.to(ChatUi(userid: id, userName: username));
       }
     }
     isLoading = false;

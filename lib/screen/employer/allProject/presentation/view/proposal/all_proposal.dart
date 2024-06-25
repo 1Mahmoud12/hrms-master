@@ -6,13 +6,12 @@ import 'package:cnattendance/screen/employer/allProject/presentation/manager/pro
 import 'package:cnattendance/screen/employer/allProject/presentation/manager/proposalCubit/state.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../core/theme/color_constraint.dart';
 
@@ -26,7 +25,7 @@ class ProposalScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Proposal',
+            'Proposal'.tr,
             style: Styles.styleHeader.copyWith(fontWeight: FontWeight.bold),
           ),
         ),

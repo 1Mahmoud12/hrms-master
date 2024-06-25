@@ -94,6 +94,7 @@ class HeaderDetailsContract extends StatelessWidget {
                     'reportDate': '24th Sep 2023',
                     'description': 'Description',
                     'elevatorName': 'Elevator 1',
+                    'Report': reports![index],
                   };
                   Navigator.pushNamed(context, AppRoute.allDetailsReport, arguments: arguments);
                 },
