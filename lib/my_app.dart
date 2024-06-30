@@ -40,6 +40,7 @@ import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportEmergencieBloc/cubit/report_emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/add_malfunction_request.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
@@ -216,6 +217,9 @@ class _MyAppState extends State<MyApp> {
           providers: [
             BlocProvider(
               create: (context) => MainBlocHomeCustomerCubit(),
+            ),
+            BlocProvider(
+              create: (context) => ReportEmergencieCubit(),
             ),
             BlocProvider(
               create: (context) => MainBlocMaintenanceCubit(),

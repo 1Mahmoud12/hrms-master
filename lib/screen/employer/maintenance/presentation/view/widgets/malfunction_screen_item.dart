@@ -48,9 +48,9 @@ class MalFunctionScreenItems extends StatelessWidget {
                       ? ListView.builder(
                           itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                              print(
-                                'nnnnn,====>${allMalfunctionCache!.data!.malfunction![6].id}',
-                              );
+                              // print(
+                              //   'nnnnn,====>${allMalfunctionCache!.data!.malfunction![6].id}',
+                              // );
                               MalfunctionCubit().getOneMalfunction(
                                 context: context,
                                 idMalfunction: allMalfunctionCache!
@@ -73,6 +73,7 @@ class MalFunctionScreenItems extends StatelessWidget {
                                 'id': allMalfunctionCache!
                                     .data!.malfunction![index].id
                                     .toString(),
+                          
                               };
 
                               final customerArguments = {

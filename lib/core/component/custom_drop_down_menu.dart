@@ -9,11 +9,13 @@ class CustomDropDownMenu extends StatefulWidget {
   final String? selectedItem;
   final List<String> items;
   final double? width;
+  final ValueChanged<String>? onItemSelected;
   const CustomDropDownMenu({
     super.key,
     required this.selectedItem,
     required this.items,
     this.width,
+     this.onItemSelected,
   });
 
   @override
@@ -34,9 +36,10 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
     return Container(
       width: widget.width ?? MediaQuery.of(context).size.width / 1.5,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.r),
-          color: AppColors.white,
-          border: Border.all(color: Color(0xffF5F6FA))),
+        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.white,
+        border: Border.all(color: const Color(0xffF5F6FA)),
+      ),
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: DropdownButton<String>(
         underline: Container(),
@@ -53,10 +56,9 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         ),
         onChanged: (String? newValue) {
           newSelected = newValue!;
+          widget.onItemSelected!(newValue);
 
-          BlocProvider.of<ReportMalfunctionCubit>(context).selectedStatus =
-              newValue;
-          setState(() {});
+        
         },
         isExpanded: true,
         borderRadius: BorderRadius.circular(15.r),
@@ -73,8 +75,11 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                   BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0).w,
-                child: Text(item,
-                    style: Styles.style12400, overflow: TextOverflow.ellipsis),
+                child: Text(
+                  item,
+                  style: Styles.style12400,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
             onTap: () {

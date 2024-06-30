@@ -67,7 +67,7 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
                                 style: Styles.style14400,
                               ),
                               Text(
-                                status,
+                                ' ${oneMalfunctioCache!.data!.report == null ? status : oneMalfunctioCache!.data!.report!.status}',
                                 style: Styles.style14500.copyWith(
                                   color: status == 'In Progress'.tr
                                       ? AppColors.green
@@ -85,6 +85,7 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.r),
                           ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 mainAxisAlignment:
@@ -111,7 +112,7 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
                           MaintenanceReport(
                             report: oneMalfunctioCache!.data!.report,
                           ),
-                        const ProductsNeed(),
+                        const ProductsNeedMalfunction(),
                       ].paddingDirectional(bottom: 10.h),
                     ),
         ),

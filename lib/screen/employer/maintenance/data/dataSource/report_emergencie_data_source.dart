@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cnattendance/core/services/api/remote/errors/failures.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/data/model/one_report_emergence_model.dart';
-import 'package:cnattendance/screen/employer/maintenance/data/model/one_report_malfunction_model.dart';
 import 'package:cnattendance/utils/endpoints.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -72,7 +71,7 @@ class ReportEmergencieDataSource {
     debugPrint(json.encode(body));
     try {
       final response =
-          await http.post(uri, headers: headers, body: json.encode(body));
+          await http.post(uri, headers: headers, body: body);
 
       debugPrint(response.body);
       final responseData = json.decode(response.body);

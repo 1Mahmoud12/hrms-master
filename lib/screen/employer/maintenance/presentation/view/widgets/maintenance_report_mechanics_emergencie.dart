@@ -4,7 +4,7 @@ import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/oneEmergencyCubit/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/oneEmergencyCubit/state.dart';
-import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/products_need_mechanics.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/product_need_emrgency.dart';
 import 'package:cnattendance/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +38,7 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
               style: Styles.style14400.copyWith(color: AppColors.white),
             ),
           ),
-        )
+        ),
       ],
       body: BlocProvider(
         create: (context) => GetOneEmergencyCubit()
@@ -56,8 +56,9 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.r)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -66,12 +67,13 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
                                 style: Styles.style14400,
                               ),
                               Text(
-                                status,
+                                ' ${oneEmergencyCache!.data!.report == null ? status : oneEmergencyCache!.data!.report!.status}',
                                 style: Styles.style14500.copyWith(
-                                    color: status == 'In Progress'
-                                        ? AppColors.green
-                                        : AppColors.subTextColor,
-                                    fontWeight: FontWeight.w600),
+                                  color: status == 'In Progress'.tr
+                                      ? AppColors.green
+                                      : AppColors.subTextColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ],
                           ),
@@ -79,9 +81,11 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.r)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 mainAxisAlignment:
@@ -106,8 +110,9 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
                         ),
                         if (oneEmergencyCache!.data!.report != null)
                           MaintenanceReport(
-                              report: oneEmergencyCache!.data!.report!),
-                        const ProductsNeed(),
+                            report: oneEmergencyCache!.data!.report,
+                          ),
+                        const ProductsNeedErmergency(),
                       ].paddingDirectional(bottom: 10.h),
                     ),
         ),

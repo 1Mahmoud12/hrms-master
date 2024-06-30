@@ -11,13 +11,14 @@ class CustomDropDownMenuTechnical extends StatefulWidget {
   final List<String> items;
   final double? width;
   final ProductsNeedTechnicalBloc cubit;
-
+  final ValueChanged<String>? onItemSelected;
   const CustomDropDownMenuTechnical({
     super.key,
     required this.selectedItem,
     required this.items,
     this.width,
     required this.cubit,
+    this.onItemSelected,
   });
 
   @override
@@ -60,8 +61,7 @@ class _CustomDropDownMenuTechnicalState
         ),
         onChanged: (String? newValue) {
           newSelected = newValue!;
-          BlocProvider.of<ReportMalfunctionCubit>(context).selectedProduct =
-              newValue;
+          widget.onItemSelected!(newValue);
 
           ProductsNeedTechnicalBloc.of(context).addProduct(product: newValue);
           debugPrint(newValue);

@@ -70,8 +70,7 @@ class ReportMalfunctionDataSource {
     debugPrint(headers.toString());
     debugPrint(json.encode(body));
     try {
-      final response =
-          await http.post(uri, headers: headers, body: json.encode(body));
+      final response = await http.post(uri, headers: headers, body: body);
 
       debugPrint(response.body);
       final responseData = json.decode(response.body);
@@ -79,7 +78,6 @@ class ReportMalfunctionDataSource {
       debugPrint(responseData.toString());
       if (responseData['status'] == false) throw responseData['message'];
       final responseJson = OneReportMalfunctionModel.fromJson(responseData);
-
       return Right(responseJson);
     } catch (error) {
       if (error is DioException) {

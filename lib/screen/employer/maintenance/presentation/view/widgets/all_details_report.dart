@@ -22,7 +22,7 @@ class AllDetailsReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = context.getArguments;
-    final Report report = arguments['Report'];
+    final  report = arguments['Report'];
     ReportMalfunctionCubit.of(context).maintenanceEngineerController.text = report.technical!.name ?? 'N/A';
     ReportMalfunctionCubit.of(context).customerNameController.text = userCache!.name ?? 'N/A';
     ReportMalfunctionCubit.of(context).phoneController.text = '${report.technical!.phone ?? 'N / A'}';

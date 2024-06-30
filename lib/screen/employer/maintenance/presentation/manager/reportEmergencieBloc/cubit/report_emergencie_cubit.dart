@@ -47,7 +47,7 @@ class ReportEmergencieCubit extends Cubit<ReportEmergencieState> {
   }
 
   void addReport({
-    required String malfunctionId,
+    required String emergencyId,
     required String description,
     required String price,
     required String status,
@@ -57,7 +57,7 @@ class ReportEmergencieCubit extends Cubit<ReportEmergencieState> {
 
     try {
       await ReportEmergencieDataSource.addReport(
-        emrgencieId: malfunctionId,
+        emrgencieId: emergencyId,
         description: description,
         price: price,
         status: status,

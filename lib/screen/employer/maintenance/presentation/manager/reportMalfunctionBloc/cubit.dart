@@ -79,18 +79,6 @@ class ReportMalfunctionCubit extends Cubit<ReportState> {
         product: product,
       );
       emit(ReportSuccessState());
-      // result.fold(
-      //   (failure) {
-      //     debugPrint('Error: ${failure.errMessage}');
-      //     showToast(failure.errMessage);
-      //     emit(EmergencieErrorState(failure.errMessage));
-      //   },
-      //   (r) {
-      //     debugPrint('Success: ${r.toJson()}');
-      //     emit(EmergencieAddedState()); // Emit this state first
-      //     emit(EmergencieSuccessState()); // Then emit success state
-      //   },
-      // );
     } catch (error) {
       debugPrint('Error: $error');
       emit(ReportErrorState(error.toString()));

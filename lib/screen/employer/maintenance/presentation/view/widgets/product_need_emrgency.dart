@@ -13,8 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProductsNeedMalfunction extends StatelessWidget {
-  const ProductsNeedMalfunction({super.key});
+class ProductsNeedErmergency extends StatelessWidget {
+  const ProductsNeedErmergency({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class ProductsNeedMalfunction extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${oneMalfunctioCache!.data!.report == null ? 'N/A' : oneMalfunctioCache!.data!.report!.product}',
+                '${oneEmergencyCache!.data!.report == null ? 'N/A' : oneEmergencyCache!.data!.report!.product}',
                 style:
                     Styles.style14400.copyWith(color: AppColors.subTextColor),
               ),
@@ -74,7 +74,7 @@ class ProductsNeedMalfunction extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    '${oneMalfunctioCache!.data!.report == null ? 'N/A' : oneMalfunctioCache!.data!.report!.price}',
+                    '${oneEmergencyCache!.data!.report == null ? 'N/A' : oneEmergencyCache!.data!.report!.price}',
                   ),
 
                   // Text(
