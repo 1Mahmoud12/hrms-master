@@ -3,7 +3,6 @@ import 'package:cnattendance/core/component/custom_drop_down_menu.dart';
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
-import 'package:cnattendance/core/utils/constants.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/state.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/products_need_technical.dart';
@@ -47,7 +46,7 @@ class _MaintenanceReportTechnicalEmergincieState
                 print('Eregncie ID======>${arguments['emrgencie_id']}');
 
                 BlocProvider.of<ReportMalfunctionCubit>(context).addReport(
-                  malfunctionId: userCache!.id.toString(),
+                  malfunctionId: arguments['id'],
                   description: reportDescription.text,
                   price: '2000',
                   status: selectedItem,

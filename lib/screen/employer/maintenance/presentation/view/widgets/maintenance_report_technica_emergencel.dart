@@ -45,7 +45,7 @@ class _MaintenanceReportTechnicalEmergincieState
                 // technical
                 print('Eregncie ID======>${arguments['emrgencie_id']}');
                 BlocProvider.of<ReportEmergencieCubit>(context).addReport(
-                  emergencyId: 61.toString(),
+                  emergencyId: arguments['id'],
                   description: reportDescription.text,
                   price: '2000',
                   status: selectedItem,

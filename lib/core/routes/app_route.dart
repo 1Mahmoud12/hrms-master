@@ -34,4 +34,5 @@ class AppRoute {
   static const String malfunctionScreenItems = '/MalFunctionScreenItems';
   static const String proposalScreen = '/ProposalScreen';
   static const String detailsProposalScreen = '/DetailsProposalScreen';
+  static const String ForgetPasswordScreen = '/ForgetPasswordScreen';
 }

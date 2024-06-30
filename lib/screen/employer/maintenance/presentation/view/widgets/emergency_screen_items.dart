@@ -31,7 +31,8 @@ class EmergencyScreenItems extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) => EmergencieCubit()..getAllEmergencies(context: context),
+        create: (context) =>
+            EmergencieCubit()..getAllEmergencies(context: context),
         child: BlocBuilder<EmergencieCubit, EmergencieState>(
           builder: (context, state) => state is EmergencieLoadingState
               ? const Center(
@@ -54,8 +55,10 @@ class EmergencyScreenItems extends StatelessWidget {
                                 'status': index > 4
                                     ? Malfunction.In_Progress.name
                                     : Malfunction.Pending.name,
-                                'index':index,
-                                'id': allEmergenciesCache!.data!.emergencie![index].id.toString(),
+                                'index': index,
+                                'id': allEmergenciesCache!
+                                    .data!.emergencie![index].id
+                                    .toString(),
                               };
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
