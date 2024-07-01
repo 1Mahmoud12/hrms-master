@@ -48,8 +48,8 @@ class ProposalScreen extends StatelessWidget {
                           return InkWell(
                           onTap: () async {
                             await ProposalCubit.of(context)
-                                .getOneProposals(context: context, idProposal: allProposalsModelCache!.data!.requests![index].propasalId!);
-                            final arguments = {
+                                  .getOneProposals(context: context, idProposal: allProposalsModelCache!.data!.requests![index].id!);
+                              final arguments = {
                               'index': index,
                               'formRequestId': allProposalsModelCache!.data!.requests![index].propasalId,
                               'oneProposal': ProposalCubit.of(context).proposalOneModel,

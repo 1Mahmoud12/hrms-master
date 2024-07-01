@@ -90,29 +90,12 @@ class _DetailsProposalScreenState extends State<DetailsProposalScreen> {
                         'Details',
                         style: Styles.style14500.copyWith(color: Colors.black),
                       ),
-                      DetailsElevatorRow(
-                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userNameLabel ?? '',
-                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userNameValue ?? 'N/A',
-                      ),
-                      DetailsElevatorRow(
-                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userEmailLabel ?? '',
-                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userEmailValue ?? 'N/A',
-                      ),
-                      DetailsElevatorRow(
-                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.phoneNumberLabel ?? '',
-                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.phoneNumberValue ?? 'N/A',
-                      ),
-                      DetailsElevatorRow(
-                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userAgeLabel ?? '',
-                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userAgeValue ?? 'N/A',
-                      ),
-                      DetailsElevatorRow(
-                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userGenderLabel ?? '',
-                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userGenderValue ?? 'N/A',
-                      ),
-                      DetailsElevatorRow(
-                        nameDetails: proposalOneModel!.data!.formRequest!.formData!.userAddressLabel ?? '',
-                        executeDetails: proposalOneModel!.data!.formRequest!.formData!.userAddressValue ?? 'N/A',
+                      ...List.generate(
+                        proposalOneModel!.data!.products!.length,
+                        (index) => DetailsElevatorRow(
+                          nameDetails: proposalOneModel!.data!.products![index].name ?? 'N/A',
+                          executeDetails: proposalOneModel!.data!.products![index].sku ?? 'N/A',
+                        ),
                       ),
                     ].paddingDirectional(bottom: context.screenHeight * .01),
                   ),

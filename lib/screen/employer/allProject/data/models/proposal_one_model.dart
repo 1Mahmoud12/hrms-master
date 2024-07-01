@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class ProposalOneModel {
   bool? success;
   Data? data;
@@ -14,7 +12,7 @@ class ProposalOneModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -24,15 +22,15 @@ class ProposalOneModel {
 }
 
 class Data {
-  FormRequest? formRequest;
+  Formrequest? formrequest;
   List<Products>? products;
   List<int>? allprdids;
   Report? report;
 
-  Data({this.formRequest, this.products, this.allprdids, this.report});
+  Data({this.formrequest, this.products, this.allprdids, this.report});
 
   Data.fromJson(Map<String, dynamic> json) {
-    formRequest = json['formrequest'] != null ? FormRequest.fromJson(json['formrequest']) : null;
+    formrequest = json['formrequest'] != null ? Formrequest.fromJson(json['formrequest']) : null;
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
@@ -44,14 +42,14 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (formRequest != null) {
-      data['formrequest'] = formRequest!.toJson();
+    final Map<String, dynamic> data = {};
+    if (formrequest != null) {
+      data['formrequest'] = formrequest!.toJson();
     }
     if (products != null) {
-      data['products'] = products!.map((v) => v.toJson()).toList();
+      data['products'] = this.products!.map((v) => v.toJson()).toList();
     }
-    data['allprdids'] = allprdids;
+    data['allprdids'] = this.allprdids;
     if (report != null) {
       data['report'] = report!.toJson();
     }
@@ -59,19 +57,169 @@ class Data {
   }
 }
 
-class FormRequest {
+class FormDataModel {
+  PassengersNumber? passengersNumber;
+  PassengersNumber? floorsNumber;
+  PassengersNumber? machineLocation;
+  PassengersNumber? depthField;
+  PassengersNumber? widthField;
+  PassengersNumber? holeDepth;
+  PassengersNumber? areaLfloor;
+  AllDoors? allDoors;
+  AllDoors? allColumns;
+  AllDoors? allMachines;
+  AllDoors? allControls;
+
+  FormDataModel(
+      {this.passengersNumber,
+      this.floorsNumber,
+      this.machineLocation,
+      this.depthField,
+      this.widthField,
+      this.holeDepth,
+      this.areaLfloor,
+      this.allDoors,
+      this.allColumns,
+      this.allMachines,
+      this.allControls});
+
+  FormDataModel.fromJson(Map<String, dynamic> json) {
+    passengersNumber = json['passengers_number'] != null ? PassengersNumber.fromJson(json['passengers_number']) : null;
+    floorsNumber = json['floors_number'] != null ? PassengersNumber.fromJson(json['floors_number']) : null;
+    machineLocation = json['Machine_location'] != null ? PassengersNumber.fromJson(json['Machine_location']) : null;
+    depthField = json['Depth_field'] != null ? PassengersNumber.fromJson(json['Depth_field']) : null;
+    widthField = json['Width_field'] != null ? PassengersNumber.fromJson(json['Width_field']) : null;
+    holeDepth = json['Hole_depth'] != null ? PassengersNumber.fromJson(json['Hole_depth']) : null;
+    areaLfloor = json['area_lfloor'] != null ? PassengersNumber.fromJson(json['area_lfloor']) : null;
+    allDoors = json['all_doors'] != null ? AllDoors.fromJson(json['all_doors']) : null;
+    allColumns = json['all_columns'] != null ? AllDoors.fromJson(json['all_columns']) : null;
+    allMachines = json['all_machines'] != null ? AllDoors.fromJson(json['all_machines']) : null;
+    allControls = json['all_controls'] != null ? AllDoors.fromJson(json['all_controls']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    if (passengersNumber != null) {
+      data['passengers_number'] = passengersNumber!.toJson();
+    }
+    if (floorsNumber != null) {
+      data['floors_number'] = floorsNumber!.toJson();
+    }
+    if (machineLocation != null) {
+      data['Machine_location'] = machineLocation!.toJson();
+    }
+    if (depthField != null) {
+      data['Depth_field'] = depthField!.toJson();
+    }
+    if (widthField != null) {
+      data['Width_field'] = widthField!.toJson();
+    }
+    if (holeDepth != null) {
+      data['Hole_depth'] = holeDepth!.toJson();
+    }
+    if (areaLfloor != null) {
+      data['area_lfloor'] = areaLfloor!.toJson();
+    }
+    if (allDoors != null) {
+      data['all_doors'] = allDoors!.toJson();
+    }
+    if (allColumns != null) {
+      data['all_columns'] = allColumns!.toJson();
+    }
+    if (allMachines != null) {
+      data['all_machines'] = allMachines!.toJson();
+    }
+    if (allControls != null) {
+      data['all_controls'] = allControls!.toJson();
+    }
+    return data;
+  }
+}
+
+class PassengersNumber {
+  String? label;
+  String? module;
+  String? value;
+
+  PassengersNumber({this.label, this.module, this.value});
+
+  PassengersNumber.fromJson(Map<String, dynamic> json) {
+    label = json['label'];
+    module = json['module'];
+    value = json['value'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['label'] = label;
+    data['module'] = module;
+    data['value'] = value;
+    return data;
+  }
+}
+
+class AllDoors {
+  String? label;
+  String? module;
+  List<Value>? value;
+
+  AllDoors({this.label, this.module, this.value});
+
+  AllDoors.fromJson(Map<String, dynamic> json) {
+    label = json['label'];
+    module = json['module'];
+    if (json['value'] != null) {
+      value = <Value>[];
+      json['value'].forEach((v) {
+        value!.add(Value.fromJson(jsonDecode('$v')));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['label'] = label;
+    data['module'] = module;
+    if (value != null) {
+      data['value'] = value!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Value {
+  String? id;
+  String? name;
+
+  Value({this.id, this.name});
+
+  Value.fromJson(Map<String, dynamic> json) {
+    id = '${json['id']}';
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    return data;
+  }
+}
+
+class Formrequest {
   int? id;
   int? propasalId;
   int? userId;
-  String? formCustomfields;
-  FormData? formData;
+  List<String>? formCustomfields;
+  FormDataModel? formData;
   String? totalCost;
   String? createdAt;
   String? updatedAt;
-  Proposal? propasal;
+  int? status;
+  Propasal? propasal;
   User? user;
 
-  FormRequest({
+  Formrequest({
     this.id,
     this.propasalId,
     this.userId,
@@ -80,25 +228,35 @@ class FormRequest {
     this.totalCost,
     this.createdAt,
     this.updatedAt,
+    this.status,
     this.propasal,
     this.user,
   });
 
-  FormRequest.fromJson(Map<String, dynamic> json) {
+  Formrequest.fromJson(Map<String, dynamic> json) {
+    print('object form_data ======>${jsonDecode(json['form_data'])}\n');
     id = json['id'];
     propasalId = json['propasal_id'];
     userId = json['user_id'];
-    formCustomfields = json['form_customfields'];
-    formData = FormData.fromJson(jsonDecode(json['form_data']));
+    if (json['form_customfields'] != null) {
+      formCustomfields = [];
+      jsonDecode(json['form_customfields']).forEach((element) {
+        final String cleanedElement = element.replaceAll('{', '').replaceAll('}', '');
+        formCustomfields!.add(cleanedElement);
+      });
+    }
+
+    formData = FormDataModel.fromJson(jsonDecode(json['form_data']));
     totalCost = json['total_cost'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    propasal = json['propasal'] != null ? Proposal.fromJson(json['propasal']) : null;
+    status = json['status'];
+    propasal = json['propasal'] != null ? Propasal.fromJson(json['propasal']) : null;
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['propasal_id'] = propasalId;
     data['user_id'] = userId;
@@ -107,6 +265,7 @@ class FormRequest {
     data['total_cost'] = totalCost;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['status'] = status;
     if (propasal != null) {
       data['propasal'] = propasal!.toJson();
     }
@@ -117,116 +276,38 @@ class FormRequest {
   }
 }
 
-class FormData {
-  String? userNameValue;
-  String? userNameLabel;
-
-  String? userAgeValue;
-  String? userAgeLabel;
-
-  String? phoneNumberValue;
-  String? phoneNumberLabel;
-
-  String? userAddressValue;
-  String? userAddressLabel;
-
-  String? userEmailValue;
-  String? userEmailLabel;
-
-  String? userGenderValue;
-  String? userGenderLabel;
-
-  FormData({
-    this.userNameValue,
-    this.userNameLabel,
-    this.userAgeValue,
-    this.userAgeLabel,
-    this.phoneNumberValue,
-    this.phoneNumberLabel,
-    this.userAddressValue,
-    this.userAddressLabel,
-    this.userEmailValue,
-    this.userEmailLabel,
-    this.userGenderValue,
-    this.userGenderLabel,
-  });
-
-  FormData.fromJson(Map<String, dynamic> json) {
-    userNameValue = json['user_name']['value'];
-    userNameLabel = json['user_name']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
-    debugPrint('userName $userNameValue $userNameLabel');
-
-    userAgeValue = json['user_age']['value'];
-    userAgeLabel = json['user_age']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
-    debugPrint('userAge $userAgeValue $userAgeLabel');
-
-    phoneNumberValue = json['phone_number']['value'];
-    phoneNumberLabel = json['phone_number']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
-    debugPrint('phoneNumber $phoneNumberValue $phoneNumberLabel');
-
-    userAddressValue = json['user_address']['value'];
-    userAddressLabel = json['user_address']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
-    debugPrint('userAddress $userAddressValue $userAddressLabel');
-
-    userEmailValue = json['user_email']['value'];
-    userEmailLabel = json['user_email']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
-    debugPrint('userEmail $userEmailValue $userEmailLabel');
-
-    userGenderValue = json['user_gender']['value'];
-    userGenderLabel = json['user_gender']['label'].replaceAll('_', '').replaceAll('Enter', '').replaceAll('Your', '');
-    debugPrint('userGender $userGenderValue $userGenderLabel');
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'user_name': {
-        'value': userNameValue,
-        'label': userGenderLabel,
-      },
-      'user_age': {
-        'value': userAgeValue,
-        'label': userAgeLabel,
-      },
-      'phone_number': {
-        'value': phoneNumberValue,
-        'label': phoneNumberLabel,
-      },
-      'user_address': {
-        'value': userAddressValue,
-        'label': userAddressLabel,
-      },
-      'user_email': {
-        'value': userEmailValue,
-        'label': userEmailLabel,
-      },
-      'user_gender': {
-        'value': userGenderValue,
-        'label': userGenderLabel,
-      },
-    };
-  }
-}
-
-class Proposal {
+class Propasal {
   int? id;
   String? name;
-  int? numberOfSteps;
+  String? nameAr;
+  String? descriptionAr;
+  String? descriptionEn;
+  String? img;
+  String? numberOfSteps;
   int? userId;
   String? createdAt;
   String? updatedAt;
 
-  Proposal({
+  Propasal({
     this.id,
     this.name,
+    this.nameAr,
+    this.descriptionAr,
+    this.descriptionEn,
+    this.img,
     this.numberOfSteps,
     this.userId,
     this.createdAt,
     this.updatedAt,
   });
 
-  Proposal.fromJson(Map<String, dynamic> json) {
+  Propasal.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    nameAr = json['name_ar'];
+    descriptionAr = json['description_ar'];
+    descriptionEn = json['description_en'];
+    img = json['img'];
     numberOfSteps = json['number_of_steps'];
     userId = json['user_id'];
     createdAt = json['created_at'];
@@ -234,9 +315,13 @@ class Proposal {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
+    data['name_ar'] = nameAr;
+    data['description_ar'] = descriptionAr;
+    data['description_en'] = descriptionEn;
+    data['img'] = img;
     data['number_of_steps'] = numberOfSteps;
     data['user_id'] = userId;
     data['created_at'] = createdAt;
@@ -271,11 +356,11 @@ class User {
   int? logoutStatus;
   String? remarks;
   int? companyId;
-  String? branchId;
-  String? departmentId;
-  String? postId;
+  int? branchId;
+  int? departmentId;
+  int? postId;
   String? supervisorId;
-  String? officeTimeId;
+  int? officeTimeId;
   String? createdBy;
   String? updatedBy;
   String? deletedBy;
@@ -292,6 +377,7 @@ class User {
   String? contractend;
   String? accumodation;
   String? workingdate;
+  String? clientId;
   String? userProfileImg;
 
   User({
@@ -341,6 +427,7 @@ class User {
     this.contractend,
     this.accumodation,
     this.workingdate,
+    this.clientId,
     this.userProfileImg,
   });
 
@@ -391,11 +478,12 @@ class User {
     contractend = json['contractend'];
     accumodation = json['accumodation'];
     workingdate = json['workingdate'];
+    clientId = json['client_id'];
     userProfileImg = json['user_profile_img'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
@@ -442,6 +530,7 @@ class User {
     data['contractend'] = contractend;
     data['accumodation'] = accumodation;
     data['workingdate'] = workingdate;
+    data['client_id'] = clientId;
     data['user_profile_img'] = userProfileImg;
     return data;
   }
@@ -460,6 +549,8 @@ class Products {
   String? type;
   String? description;
   String? proImage;
+  int? vectorFloor;
+  String? country;
   int? createdBy;
   String? createdAt;
   String? updatedAt;
@@ -477,6 +568,8 @@ class Products {
     this.type,
     this.description,
     this.proImage,
+    this.vectorFloor,
+    this.country,
     this.createdBy,
     this.createdAt,
     this.updatedAt,
@@ -495,13 +588,15 @@ class Products {
     type = json['type'];
     description = json['description'];
     proImage = json['pro_image'];
+    vectorFloor = json['vector_floor'];
+    country = json['country'];
     createdBy = json['created_by'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
     data['sku'] = sku;
@@ -514,6 +609,8 @@ class Products {
     data['type'] = type;
     data['description'] = description;
     data['pro_image'] = proImage;
+    data['vector_floor'] = vectorFloor;
+    data['country'] = country;
     data['created_by'] = createdBy;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
@@ -554,7 +651,7 @@ class Report {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['form_request_id'] = formRequestId;
     data['report_technical'] = reportTechnical;
