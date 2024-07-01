@@ -234,7 +234,6 @@ class Formrequest {
   });
 
   Formrequest.fromJson(Map<String, dynamic> json) {
-    print('object form_data ======>${jsonDecode(json['form_data'])}\n');
     id = json['id'];
     propasalId = json['propasal_id'];
     userId = json['user_id'];
@@ -247,7 +246,7 @@ class Formrequest {
     }
 
     formData = FormDataModel.fromJson(jsonDecode(json['form_data']));
-    totalCost = json['total_cost'];
+    totalCost = json['total_cost'] ?? '';
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     status = json['status'];
