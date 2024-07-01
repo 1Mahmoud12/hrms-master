@@ -43,7 +43,7 @@ class _ChatScreenViewState extends State<ChatScreenView> {
             },
             child: RefreshIndicator(
               onRefresh: () {
-                return chatScreenController.GetAllChatUsers();
+                return chatScreenController.getAllChatUsers();
               },
               child: ListView.builder(
                 itemCount: chatScreenController.userdata.length,

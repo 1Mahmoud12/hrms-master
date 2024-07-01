@@ -115,7 +115,7 @@ class EditReportScreen extends StatelessWidget {
               TextField(
                 controller: cubit.detailsReportController,
                 cursorOpacityAnimates: true,
-                maxLines: 15,
+                maxLines: 5,
                 decoration: const InputDecoration(
                   hintText: 'Details Report',
                   fillColor: Colors.white,

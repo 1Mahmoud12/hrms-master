@@ -144,7 +144,7 @@ class MenuScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
-          Get.to(ChatScreenView());
+          Get.to(const ChatScreenView());
           // Get.to(CustomChatui());
         },
         child: SvgPicture.asset(

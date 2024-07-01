@@ -11,12 +11,22 @@ class ChatViewScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    GetAllChatUsers();
+    getAllChatUsers();
   }
 
   List userdata = [];
 
-  Future<List> GetAllChatUsers() async {
+  void goTo() {
+    if (userdata.isNotEmpty && genderUser == RoleId.eight.name.tr) {
+      final String username = userdata[0]['name'];
+
+      final int id = userdata[0]['id'];
+
+      Get.to(ChatUi(userid: id, userName: username));
+    }
+  }
+
+  Future<List> getAllChatUsers() async {
     isLoading = true;
     //EasyLoading.show(status: 'Loading', maskType: EasyLoadingMaskType.black);
 
@@ -26,16 +36,13 @@ class ChatViewScreenController extends GetxController {
     final url = Uri.parse(baseUrl);
     final res = await http.get(url);
     final jsonRes = jsonDecode(res.body);
-    if (jsonRes['status'] == 'ok') {
-      for (final i in jsonRes['data']) {
-        userdata.add(i);
-      }
+    if (jsonRes['status'] == 'ok' && jsonRes['data'] != null) {
       if (genderUser == RoleId.eight.name.tr) {
-        final String username = userdata[0]['name'];
-
-        final int id = userdata[0]['id'];
-
-        Get.to(ChatUi(userid: id, userName: username));
+        userdata.add(jsonRes['data'].first);
+      } else {
+        for (int i = 0; i < (jsonRes['data'] ?? []).length; i++) {
+          userdata.add(i);
+        }
       }
     }
     isLoading = false;

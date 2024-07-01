@@ -63,7 +63,7 @@ class MainBlocHomeCubit extends Cubit<MainBlocHomeState> {
   List<Widget> screenList = [
     const HomeScreen(),
     const MaintenanceScreen(),
-    ChatScreenView(),
+    const ChatScreenView(),
     const ProjectsScreen(),
     const MoreScreenNew(),
   ];
