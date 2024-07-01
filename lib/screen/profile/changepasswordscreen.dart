@@ -1,4 +1,5 @@
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
+import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/provider/changepasswordprovider.dart';
@@ -17,7 +18,8 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => ChangePasswordProvider(), child: const ChangePassword());
+    return ChangeNotifierProvider(
+        create: (_) => ChangePasswordProvider(), child: const ChangePassword());
   }
 }
 
@@ -56,12 +58,17 @@ class ChangePasswordState extends State<ChangePassword> {
 
     if (validate) {
       setState(() {
-        EasyLoading.show(status: 'Please wait..', maskType: EasyLoadingMaskType.clear);
+        EasyLoading.show(
+            status: 'Please wait..', maskType: EasyLoadingMaskType.clear);
       });
 
       try {
-        final response = await Provider.of<ChangePasswordProvider>(context, listen: false)
-            .changePassword(_oldPasswordController.text, _newPasswordController.text, _confirmPasswordController.text);
+        final response =
+            await Provider.of<ChangePasswordProvider>(context, listen: false)
+                .changePassword(
+                    _oldPasswordController.text,
+                    _newPasswordController.text,
+                    _confirmPasswordController.text);
 
         if (!mounted) {
           return;
@@ -111,7 +118,8 @@ class ChangePasswordState extends State<ChangePassword> {
           style: TextButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
             padding: EdgeInsets.zero,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(29))),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(29))),
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
@@ -126,6 +134,9 @@ class ChangePasswordState extends State<ChangePassword> {
           ),
         ),
       ),
+    
+    
+    
       body: Form(
         key: _form,
         child: Container(
@@ -184,9 +195,17 @@ class ChangePasswordState extends State<ChangePassword> {
                 10.ESH(),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Forgot Password?'.tr,
-                    style: Styles.style14500.copyWith(color: AppColors.red),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoute.ForgetPasswordScreen,
+                      );
+                    },
+                    child: Text(
+                      'Forgot Password?'.tr,
+                      style: Styles.style14500.copyWith(color: AppColors.red),
+                    ),
                   ),
                 ),
               ],

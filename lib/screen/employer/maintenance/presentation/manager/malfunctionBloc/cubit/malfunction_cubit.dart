@@ -102,6 +102,30 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
     }
   }
 
+  void updateMalfunction({
+    required String malfunctionId,
+    required String name,
+    required String description,
+    required String location,
+    required File imageFile,
+  }) async {
+    emit(MalfunctionLoadingState());
+
+    try {
+      await MalfunctionDataSource.updateMalfunction(
+        malfunctionId: malfunctionId,
+        name: name,
+        description: description,
+        location: location,
+        imageFile: imageFile,
+      );
+      emit(MalfunctionUpdatedState());
+    } catch (error) {
+      debugPrint('Error: $error');
+      emit(MalfunctionErrorState(error.toString()));
+    }
+  }
+
   void uploadPayment({
     required String malfunctionId,
     required File imageFile,
@@ -130,5 +154,35 @@ class MalfunctionCubit extends Cubit<MalfunctionState> {
       debugPrint('Error: $error');
       emit(MalfunctionErrorState(error.toString()));
     }
+  }
+
+  void getAllPaymentMalfunction({
+    required BuildContext context,
+    required String idMalfunction,
+  }) async {
+    emit(GetAllPaymentMalfunctionLoadingState());
+
+    await MalfunctionDataSource.getAllPaymentMalfunction(
+            idMalfunction: idMalfunction)
+        .then((value) async {
+      value.fold((l) {
+        debugPrint(l.errMessage);
+        showToast(l.errMessage);
+        debugPrint('=== Error ====');
+        emit(GetAllPaymentMalfunctionErrorState(l.errMessage));
+      }, (r) async {
+        debugPrint('=== Success ====');
+        debugPrint(jsonEncode(r.toJson()));
+
+        await Preferences.setSaved(
+          value: jsonEncode(r.toJson()),
+          key: oneMalfunctionKey,
+        );
+        oneMalfunctioCache = r;
+        debugPrint('=== hhhhh ====   $oneMalfunctioCache');
+
+        emit(GetAllPaymentMalfunctionSuccessState());
+      });
+    });
   }
 }

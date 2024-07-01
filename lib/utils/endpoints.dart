@@ -36,9 +36,11 @@ class EndPoints {
   static const updateReport = '$API_URL/peridics/report/update/';
   static const getEmergencie = '$API_URL/emergencies';
   static const getMalfunction = '$API_URL/malfunctions';
+  static const getPaymentMalfunction = '$API_URL/malfunctions/payment/';
   static const getPayment = '$API_URL/emergencies';
   static const addEmergencie = '$API_URL/emergencies/add';
   static const addMalfunction = '$API_URL/malfunctions/add';
+  static const UpdateMalfunction = '$API_URL/malfunctions/update/';
   static const uploadMalfunctionPayment = '$API_URL/malfunctions/payment';
   static const addPayment = '$API_URL/emergencies/payment';
   //  static const getEmergencie = '$API_URL/emergencies';

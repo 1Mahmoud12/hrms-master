@@ -22,11 +22,13 @@ class MaintenanceReportTechnicalMalfunction extends StatefulWidget {
 class _MaintenanceReportTechnicalEmergincieState
     extends State<MaintenanceReportTechnicalMalfunction> {
   TextEditingController reportDescription = TextEditingController();
-
+  String selectedItem = 'Choose Status'.tr;
+  String selectedProduct = '';
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> arguments =
         ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
+
     return BlocListener<ReportMalfunctionCubit, ReportState>(
       listener: (context, state) {},
       child: Scaffold(
@@ -41,14 +43,16 @@ class _MaintenanceReportTechnicalEmergincieState
             child: CustomTextButton(
               onPress: () {
                 // technical
-                // print('Eregncie ID======>${arguments['emrgencie_id']}');
-                // BlocProvider.of<ReportBloc>(context).addReport(
-                //   emergencyId: 61.toString(),
-                //   description: reportDescription.text,
-                //   price: '2000',
-                //   status: BlocProvider.of<ReportBloc>(context).selectedStatus,
-                //   product: BlocProvider.of<ReportBloc>(context).selectedProduct,
-                // );
+                print('Eregncie ID======>${arguments['emrgencie_id']}');
+
+                BlocProvider.of<ReportMalfunctionCubit>(context).addReport(
+                  malfunctionId: arguments['id'],
+                  description: reportDescription.text,
+                  price: '2000',
+                  status: selectedItem,
+                  product: selectedProduct,
+                );
+                Navigator.pop(context);
               },
               backgroundColor: AppColors.primaryColor,
               child: Text(
@@ -62,7 +66,12 @@ class _MaintenanceReportTechnicalEmergincieState
           padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .02),
           children: [
             CustomDropDownMenu(
-              selectedItem: 'Choose Status'.tr,
+              onItemSelected: (value) {
+                setState(() {
+                  selectedItem = value;
+                });
+              },
+              selectedItem: selectedItem,
               items: ['In progress'.tr, 'Pending'.tr, 'Finished'.tr],
             ),
             CustomTextFormField(
@@ -71,7 +80,13 @@ class _MaintenanceReportTechnicalEmergincieState
               maxLines: 6,
               fillColor: AppColors.white,
             ),
-            const ProductsNeedTechnical(),
+            ProductsNeedTechnical(
+              onItemSelected: (value) {
+                setState(() {
+                  selectedProduct = value;
+                });
+              },
+            ),
           ].paddingDirectional(bottom: context.screenHeight * .01),
         ),
       ),

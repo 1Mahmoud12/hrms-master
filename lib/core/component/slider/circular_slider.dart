@@ -80,7 +80,7 @@ class PieChart2State extends State<PieChartSample2> {
                       PieChartSectionData(
                         color: AppColors.primaryColor,
                         value: valueSliderWidget,
-                        title: '$valueSliderWidget%',
+                        //  title: '$valueSliderWidget%',
                         radius: radius,
                         borderSide: const BorderSide(color: AppColors.white),
                         badgeWidget: Container(

@@ -7,9 +7,9 @@ class MalfunctionInitial extends MalfunctionState {}
 class MalfunctionLoadingState extends MalfunctionState {}
 
 class MalfunctionSuccessState extends MalfunctionState {}
+
 // Add malfunction
 class MalfunctionAddedState extends MalfunctionState {}
-
 
 // add payment
 class MalfunctionPaymentAddedState extends MalfunctionState {}
@@ -25,13 +25,24 @@ class GetOneMalfunctionErrorState extends MalfunctionState {
   GetOneMalfunctionErrorState(this.error);
 }
 
-
-
-
-
-
 class MalfunctionErrorState extends MalfunctionState {
   final String error;
 
   MalfunctionErrorState(this.error);
+}
+
+// update malfunction
+
+class MalfunctionUpdatedState extends MalfunctionState {}
+
+// get all payment
+
+class GetAllPaymentMalfunctionLoadingState extends MalfunctionState {}
+
+class GetAllPaymentMalfunctionSuccessState extends MalfunctionState {}
+
+class GetAllPaymentMalfunctionErrorState extends MalfunctionState {
+  final String error;
+
+  GetAllPaymentMalfunctionErrorState(this.error);
 }

@@ -127,6 +127,57 @@ class MalfunctionDataSource {
     }
   }
 
+  static Future<Either<Failure, MalfunctionModel>> updateMalfunction({
+    required String malfunctionId,
+    required String name,
+    required String description,
+    required String location,
+    required File imageFile,
+  }) async {
+    final uri = Uri.parse('${EndPoints.UpdateMalfunction}$malfunctionId');
+
+    final Map<String, String> headers = {
+      'Authorization': 'Bearer $tokenCache',
+    };
+
+    final request = http.MultipartRequest('Put', uri);
+    request.headers.addAll(headers);
+
+    request.fields['name'] = name;
+    request.fields['description'] = description;
+    request.fields['location'] = location;
+
+    final stream = http.ByteStream(imageFile.openRead());
+    final length = await imageFile.length();
+    final multipartFile = http.MultipartFile(
+      'img',
+      stream,
+      length,
+      filename: basename(imageFile.path),
+    );
+
+    request.files.add(multipartFile);
+
+    try {
+      final response = await request.send();
+      final responseData = await http.Response.fromStream(response);
+
+      if (response.statusCode == 201) {
+        final responseDataDecoded = json.decode(responseData.body);
+        final responseJson = MalfunctionModel.fromJson(responseDataDecoded);
+        return Right(responseJson);
+      } else {
+        final responseDataDecoded = json.decode(responseData.body);
+        return Left(ServerFailure(responseDataDecoded['message']));
+      }
+    } catch (error) {
+      if (error is DioException) {
+        return Left(ServerFailure.fromDioException(error));
+      }
+      return Left(ServerFailure(error.toString()));
+    }
+  }
+
   static Future<Either<Failure, MalfunctionModel>> uploadPayment({
     required String malfunctionId,
     required File imageFile,
@@ -174,4 +225,41 @@ class MalfunctionDataSource {
       return Left(ServerFailure(error.toString()));
     }
   }
+
+   static Future<Either<Failure, OneMalfunctionModel>> getAllPaymentMalfunction({
+    required String idMalfunction,
+  }) async {
+    final uri = Uri.parse('${EndPoints.getPaymentMalfunction}$idMalfunction');
+    debugPrint('${EndPoints.getPaymentMalfunction}$idMalfunction');
+
+    final Map<String, String> headers = {
+      'Accept': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $tokenCache',
+    };
+    debugPrint(headers.toString());
+    try {
+      // debugPrint('working');
+      // var fcm = await FirebaseMessaging.instance.getToken();
+
+      final response = await http.get(
+        uri,
+        headers: headers,
+      );
+      debugPrint(response.body);
+      final responseData = json.decode(response.body);
+
+      debugPrint(responseData.toString());
+      if (responseData['status'] == false) throw responseData['message'];
+      final responseJson = OneMalfunctionModel.fromJson(responseData);
+
+      return Right(responseJson);
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioException(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+
 }

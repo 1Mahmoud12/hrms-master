@@ -10,8 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ProductsNeedTechnical extends StatelessWidget {
-  const ProductsNeedTechnical({super.key});
-
+  const ProductsNeedTechnical({super.key, this.onItemSelected});
+ final ValueChanged<String>? onItemSelected;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -34,6 +34,7 @@ class ProductsNeedTechnical extends StatelessWidget {
             ),
             BlocBuilder<ProductsNeedTechnicalBloc, ProductsNeedTechnicalState>(
               builder: (context, state) => CustomDropDownMenuTechnical(
+                onItemSelected:onItemSelected ,
                 selectedItem: 'choose Product'.tr,
                 items:  ['Engine'.tr, 'Cabin'.tr],
                 width: context.screenWidth,

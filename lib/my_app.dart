@@ -40,6 +40,7 @@ import 'package:cnattendance/screen/employer/home_dashboard_screen.dart';
 import 'package:cnattendance/screen/employer/main_screen_employer/manager/maniBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/emergencieBloc/cubit/emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/malfunctionBloc/cubit/malfunction_cubit.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportEmergencieBloc/cubit/report_emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/add_malfunction_request.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
@@ -51,6 +52,7 @@ import 'package:cnattendance/screen/employer/maintenance/presentation/view/widge
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/malfunction_screen_item.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/periodic_maintenance_screen_item.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
+import 'package:cnattendance/screen/profile/forget_password_screen.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
 import 'package:cnattendance/screen/profile/payslipdetailscreen.dart';
 import 'package:cnattendance/screen/profile/profilescreen.dart';
@@ -218,6 +220,9 @@ class _MyAppState extends State<MyApp> {
               create: (context) => MainBlocHomeCustomerCubit(),
             ),
             BlocProvider(
+              create: (context) => ReportEmergencieCubit(),
+            ),
+            BlocProvider(
               create: (context) => MainBlocMaintenanceCubit(),
             ),
             BlocProvider(
@@ -304,10 +309,13 @@ class _MyAppState extends State<MyApp> {
                     '/': (_) => const SplashScreen(),
                     HomeDashboardScreen.routeName: (_) =>
                         const HomeDashboardScreen(),
+
                     LoginScreen.routeName: (_) => const LoginScreen(),
                     // AppRoute.dashboardScreen: (_) => DashboardScreen(),
                     AppRoute.cardDetailsProject: (_) =>
                         const AllProjectDetails(),
+                    AppRoute.ForgetPasswordScreen: (_) =>
+                        const ForgetPasswordScreen(),
                     AppRoute.knowUs: (_) => const KnowUs(),
                     AppRoute.detailsMaintenanceWidget: (_) =>
                         const DetailsMaintenanceWidget(),
