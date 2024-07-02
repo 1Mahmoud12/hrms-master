@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class ItemToggle extends StatelessWidget {
   final int index;
@@ -68,7 +69,7 @@ class ItemToggle extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Text(
-                    cubit.maintenanceLabels[index],
+                    cubit.maintenanceLabels[index].tr,
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: Colors.black,

@@ -27,7 +27,7 @@ class EmergencScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          nameRequest,
+          nameRequest.tr,
           style: Styles.styleHeader,
         ),
       ),
@@ -146,6 +146,7 @@ class EmergencScreen extends StatelessWidget {
                         if (oneEmergencyCache!.data!.report != null)
                           MaintenanceReport(
                             report: oneEmergencyCache!.data!.report,
+                            type: 'Emergency',
                           ),
                         const ProductsUsed(),
                         CustomTextButton(

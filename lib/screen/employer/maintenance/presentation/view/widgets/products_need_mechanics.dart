@@ -30,7 +30,7 @@ class ProductsNeedMalfunction extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${oneMalfunctioCache!.data!.report == null ? 'N/A' : oneMalfunctioCache!.data!.report!.product}',
+                '${oneMalfunctioCache!.data!.report == null || oneMalfunctioCache == null ? 'N/A' : oneMalfunctioCache!.data!.report!.product}',
                 style:
                     Styles.style14400.copyWith(color: AppColors.subTextColor),
               ),
@@ -69,12 +69,12 @@ class ProductsNeedMalfunction extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Total',
+                    'Total'.tr,
                     style: Styles.style16700,
                   ),
                   const Spacer(),
                   Text(
-                    '${oneMalfunctioCache!.data!.report == null ? 'N/A' : oneMalfunctioCache!.data!.report!.price}',
+                    '${oneMalfunctioCache!.data!.report == null || oneMalfunctioCache == null ? 'N/A' : oneMalfunctioCache!.data!.report!.price}',
                   ),
 
                   // Text(
@@ -123,7 +123,7 @@ Widget confirmCancelButton({required BuildContext context}) {
         backgroundColor: AppColors.cBackGroundDeleteButton,
         borderColor: Colors.transparent,
         child: Text(
-          'Cancel',
+          'Cancel'.tr,
           style: TextStyle(color: AppColors.white, fontSize: 10.sp),
         ),
       ),
@@ -141,7 +141,7 @@ Widget confirmCancelButton({required BuildContext context}) {
         backgroundColor: AppColors.cBackGroundConfirmButton,
         borderColor: Colors.transparent,
         child: Text(
-          'Confirm',
+          'Confirm'.tr,
           style: TextStyle(
             color: AppColors.white,
             fontSize: 10.sp,
@@ -191,7 +191,7 @@ Widget trashConfirmPrice({required BuildContext context}) {
       ),
       4.ESW(),
       Text(
-        'Price',
+        'Price'.tr,
         style: TextStyle(
           fontSize: 11.sp,
           fontWeight: FontWeight.w400,

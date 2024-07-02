@@ -7,6 +7,7 @@ import 'package:cnattendance/utils/extensions.dart';
 import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class EditReportScreen extends StatelessWidget {
   const EditReportScreen({super.key});
@@ -16,7 +17,7 @@ class EditReportScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Report Edit',
+          'Report Edit'.tr,
           style: Styles.styleHeader,
         ),
       ),
@@ -27,32 +28,33 @@ class EditReportScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             children: [
               Text(
-                'Maintenance Engineer',
+                'Maintenance Engineer'.tr,
                 style: Styles.style16700,
               ),
               TextField(
                 controller: cubit.maintenanceEngineerController,
                 cursorOpacityAnimates: true,
-                decoration: const InputDecoration(
-                  hintText: 'Maintenance Engineer',
+                decoration: InputDecoration(
+                  hintText: 'Maintenance Engineer'.tr,
                   fillColor: Colors.white,
                   filled: true,
-                  border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor)),
+                  border: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.primaryColor),
+                  ),
                   hoverColor: AppColors.primaryColor,
                   enabledBorder: InputBorder.none,
                 ),
               ),
               5.ESH(),
               Text(
-                'Report Date',
+                'Report Date'.tr,
                 style: Styles.style16700,
               ),
               TextField(
                 controller: cubit.reportDateController,
                 cursorOpacityAnimates: true,
-                decoration: const InputDecoration(
-                  hintText: 'Report Date',
+                decoration: InputDecoration(
+                  hintText: 'Report Date'.tr,
                   fillColor: Colors.white,
                   filled: true,
                   focusColor: AppColors.primaryColor,
@@ -61,14 +63,14 @@ class EditReportScreen extends StatelessWidget {
               ),
               5.ESH(),
               Text(
-                'Customer Name',
+                'Customer Name'.tr,
                 style: Styles.style16700,
               ),
               TextField(
                 controller: cubit.customerNameController,
                 cursorOpacityAnimates: true,
-                decoration: const InputDecoration(
-                  hintText: 'Customer Name',
+                decoration: InputDecoration(
+                  hintText: 'Customer Name'.tr,
                   fillColor: Colors.white,
                   filled: true,
                   focusColor: AppColors.primaryColor,
@@ -77,14 +79,14 @@ class EditReportScreen extends StatelessWidget {
               ),
               5.ESH(),
               Text(
-                'phone',
+                'phone'.tr,
                 style: Styles.style16700,
               ),
               TextField(
                 controller: cubit.phoneController,
                 cursorOpacityAnimates: true,
-                decoration: const InputDecoration(
-                  hintText: 'phone',
+                decoration: InputDecoration(
+                  hintText: 'phone'.tr,
                   fillColor: Colors.white,
                   filled: true,
                   focusColor: AppColors.primaryColor,
@@ -93,14 +95,14 @@ class EditReportScreen extends StatelessWidget {
               ),
               5.ESH(),
               Text(
-                'address',
+                'address'.tr,
                 style: Styles.style16700,
               ),
               TextField(
                 controller: cubit.addressController,
                 cursorOpacityAnimates: true,
-                decoration: const InputDecoration(
-                  hintText: 'address',
+                decoration: InputDecoration(
+                  hintText: 'address'.tr,
                   fillColor: Colors.white,
                   filled: true,
                   focusColor: AppColors.primaryColor,
@@ -109,15 +111,15 @@ class EditReportScreen extends StatelessWidget {
               ),
               5.ESH(),
               Text(
-                'Details Report',
+                'Details Report'.tr,
                 style: Styles.style16700,
               ),
               TextField(
                 controller: cubit.detailsReportController,
                 cursorOpacityAnimates: true,
                 maxLines: 5,
-                decoration: const InputDecoration(
-                  hintText: 'Details Report',
+                decoration: InputDecoration(
+                  hintText: 'Details Report'.tr,
                   fillColor: Colors.white,
                   filled: true,
                   focusColor: AppColors.primaryColor,
@@ -186,7 +188,7 @@ class EditReportScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  'submit',
+                  'submit'.tr,
                   style: Styles.style14400.copyWith(color: AppColors.white),
                 ),
               ),

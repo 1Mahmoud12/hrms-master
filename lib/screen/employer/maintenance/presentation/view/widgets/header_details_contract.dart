@@ -10,6 +10,7 @@ import 'package:cnattendance/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class HeaderDetailsContract extends StatelessWidget {
@@ -42,14 +43,29 @@ class HeaderDetailsContract extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Details',
+                'Details'.tr,
                 style: Styles.style14500.copyWith(color: Colors.black),
               ),
-              const DetailsElevatorRow(nameDetails: 'Maintenance Engineer ', executeDetails: 'Eman Saber'),
-              const DetailsElevatorRow(nameDetails: 'contract Date ', executeDetails: '24th Sep 2023'),
-              const DetailsElevatorRow(nameDetails: 'Customer Name', executeDetails: 'Jane Doe'),
-              const DetailsElevatorRow(nameDetails: 'Phone', executeDetails: '01127260336'),
-              const DetailsElevatorRow(nameDetails: 'Examination Date:', executeDetails: '24th Sep 2023'),
+              DetailsElevatorRow(
+                nameDetails: 'Maintenance Engineer'.tr,
+                executeDetails: 'Eman Saber',
+              ),
+              DetailsElevatorRow(
+                nameDetails: 'contract Date'.tr,
+                executeDetails: '24th Sep 2023',
+              ),
+              DetailsElevatorRow(
+                nameDetails: 'Customer Name'.tr,
+                executeDetails: 'Jane Doe',
+              ),
+              DetailsElevatorRow(
+                nameDetails: 'Phone'.tr,
+                executeDetails: '01127260336',
+              ),
+              DetailsElevatorRow(
+                nameDetails: 'Examination Date:'.tr,
+                executeDetails: '24th Sep 2023',
+              ),
             ].paddingDirectional(bottom: context.screenHeight * .01),
           ),
         ),
@@ -70,9 +86,10 @@ class HeaderDetailsContract extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.screenWidth * .03),
+            padding:
+                EdgeInsets.symmetric(horizontal: context.screenWidth * .03),
             child: Text(
-              'Elevator report History',
+              'Elevator report History'.tr,
               style: Styles.styleHeader,
             ),
           ),
@@ -81,8 +98,11 @@ class HeaderDetailsContract extends StatelessWidget {
           children: List.generate(
             reports != null ? reports!.length : 0,
             (index) {
-              final DateTime parsedDate = Utils.convertDateFromBackEnd(dateBackEnd: reports![index].updatedAt!);
-              final String formattedDate = DateFormat('MMM yyyy').format(parsedDate);
+              final DateTime parsedDate = Utils.convertDateFromBackEnd(
+                dateBackEnd: reports![index].updatedAt!,
+              );
+              final String formattedDate =
+                  DateFormat('MMM yyyy').format(parsedDate);
 
               return InkWell(
                 onTap: () {
@@ -96,7 +116,11 @@ class HeaderDetailsContract extends StatelessWidget {
                     'elevatorName': 'Elevator 1',
                     'Report': reports![index],
                   };
-                  Navigator.pushNamed(context, AppRoute.allDetailsReport, arguments: arguments);
+                  Navigator.pushNamed(
+                    context,
+                    AppRoute.allDetailsReport,
+                    arguments: arguments,
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -109,7 +133,8 @@ class HeaderDetailsContract extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.cBorderDecoration),
+                          border:
+                              Border.all(color: AppColors.cBorderDecoration),
                           shape: BoxShape.circle,
                         ),
                         padding: EdgeInsets.all(10.w),
@@ -122,13 +147,14 @@ class HeaderDetailsContract extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Report $index',
+                                '${'Report'.tr}$index',
                                 style: Styles.style18700,
                               ),
                               5.ESW(),
                               Text(
                                 reports![index].technicalId.toString(),
-                                style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                                style: Styles.style12400
+                                    .copyWith(color: AppColors.subTextColor),
                               ),
                             ],
                           ),
@@ -139,7 +165,8 @@ class HeaderDetailsContract extends StatelessWidget {
                               children: [
                                 Text(
                                   formattedDate,
-                                  style: Styles.style12400.copyWith(color: AppColors.subTextColor),
+                                  style: Styles.style12400
+                                      .copyWith(color: AppColors.subTextColor),
                                 ),
                               ],
                             ),

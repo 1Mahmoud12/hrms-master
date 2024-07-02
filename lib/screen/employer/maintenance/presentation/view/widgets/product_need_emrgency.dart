@@ -69,7 +69,7 @@ class ProductsNeedErmergency extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Total',
+                    'Total'.tr,
                     style: Styles.style16700,
                   ),
                   const Spacer(),
@@ -123,7 +123,7 @@ Widget confirmCancelButton({required BuildContext context}) {
         backgroundColor: AppColors.cBackGroundDeleteButton,
         borderColor: Colors.transparent,
         child: Text(
-          'Cancel',
+          'Cancel'.tr,
           style: TextStyle(color: AppColors.white, fontSize: 10.sp),
         ),
       ),
@@ -141,7 +141,7 @@ Widget confirmCancelButton({required BuildContext context}) {
         backgroundColor: AppColors.cBackGroundConfirmButton,
         borderColor: Colors.transparent,
         child: Text(
-          'Confirm',
+          'Confirm'.tr,
           style: TextStyle(
             color: AppColors.white,
             fontSize: 10.sp,

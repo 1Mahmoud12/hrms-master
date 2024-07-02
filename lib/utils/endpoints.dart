@@ -19,6 +19,7 @@ class EndPoints {
   static const proposalSalesUpdate = '$API_URL/proposals/sales/update';
   static const proposalEngineerStore = '$API_URL/proposals/engineer/store';
   static const proposalEngineerUpdate = '$API_URL/proposals/engineer/update';
+  static const forgetPassword = '$API_URL/forget-password';
 
 
   static const getPeridics = '$API_URL/peridics';

@@ -38,7 +38,7 @@ class AllDetailsReportMalfunction extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Report',
+          'Report'.tr,
           style: Styles.styleHeader,
         ),
         actions: [
@@ -87,7 +87,7 @@ class AllDetailsReportMalfunction extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Text(
-            'submit',
+            'submit'.tr,
             style: Styles.style14400.copyWith(color: AppColors.white),
           ),
         ),
@@ -108,34 +108,34 @@ class AllDetailsReportMalfunction extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Details',
+                    'Details'.tr,
                     style: Styles.style14500.copyWith(color: Colors.black),
                   ),
                   DetailsElevatorRow(
-                    nameDetails: 'Maintenance Engineer ',
+                    nameDetails: 'Maintenance Engineer'.tr,
                     executeDetails: ReportMalfunctionCubit.of(context)
                         .maintenanceEngineerController
                         .text,
                   ),
                   DetailsElevatorRow(
-                    nameDetails: 'Report Date ',
+                    nameDetails: 'Report Date'.tr,
                     executeDetails: ReportMalfunctionCubit.of(context)
                         .reportDateController
                         .text,
                   ),
                   DetailsElevatorRow(
-                    nameDetails: 'Customer Name',
+                    nameDetails: 'Customer Name'.tr,
                     executeDetails: ReportMalfunctionCubit.of(context)
                         .customerNameController
                         .text,
                   ),
                   DetailsElevatorRow(
-                    nameDetails: 'Phone',
+                    nameDetails: 'Phone'.tr,
                     executeDetails:
                         ReportMalfunctionCubit.of(context).phoneController.text,
                   ),
                   DetailsElevatorRow(
-                    nameDetails: 'address',
+                    nameDetails: 'address'.tr,
                     executeDetails: ReportMalfunctionCubit.of(context)
                         .addressController
                         .text,
@@ -155,7 +155,7 @@ class AllDetailsReportMalfunction extends StatelessWidget {
                 child: Wrap(
                   children: [
                     Text(
-                      'Description:- \n',
+                      'Description:-'.tr,
                       style: Styles.style12400.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w700,
@@ -164,7 +164,7 @@ class AllDetailsReportMalfunction extends StatelessWidget {
                     ),
                     ExpandableText(
                       report.description ?? 'N/A',
-                      expandText: 'see more',
+                      expandText: 'see more'.tr,
                       linkStyle: Styles.style12400.copyWith(
                         fontWeight: FontWeight.w700,
                         color: Colors.black,
@@ -175,7 +175,7 @@ class AllDetailsReportMalfunction extends StatelessWidget {
                         color: AppColors.subTextColor,
                       ),
                       maxLines: 22,
-                      collapseText: 'see less',
+                      collapseText: 'see less'.tr,
                     ),
                   ],
                 ),

@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class ProductsNeedTechnical extends StatelessWidget {
   const ProductsNeedTechnical({super.key, this.onItemSelected});
- final ValueChanged<String>? onItemSelected;
+  final ValueChanged<String>? onItemSelected;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -21,22 +21,23 @@ class ProductsNeedTechnical extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Products Needed'.tr,
+              'Products Need'.tr,
               style: Styles.style16700,
             ),
             ...List.generate(
               ProductsNeedTechnicalBloc.of(context).products.length,
               (index) => selectedItem(
                 context: context,
-                nameProduct: ProductsNeedTechnicalBloc.of(context).products[index],
+                nameProduct:
+                    ProductsNeedTechnicalBloc.of(context).products[index],
                 index: index,
               ),
             ),
             BlocBuilder<ProductsNeedTechnicalBloc, ProductsNeedTechnicalState>(
               builder: (context, state) => CustomDropDownMenuTechnical(
-                onItemSelected:onItemSelected ,
+                onItemSelected: onItemSelected,
                 selectedItem: 'choose Product'.tr,
-                items:  ['Engine'.tr, 'Cabin'.tr],
+                items: ['Engine'.tr, 'Cabin'.tr],
                 width: context.screenWidth,
                 cubit: ProductsNeedTechnicalBloc(),
               ),
@@ -48,7 +49,10 @@ class ProductsNeedTechnical extends StatelessWidget {
   }
 }
 
-Widget selectedItem({required BuildContext context, required String nameProduct, required int index}) {
+Widget selectedItem(
+    {required BuildContext context,
+    required String nameProduct,
+    required int index}) {
   return Column(
     children: [
       Row(
@@ -59,11 +63,13 @@ Widget selectedItem({required BuildContext context, required String nameProduct,
             style: Styles.style14400,
           ),
           InkWell(
-            onTap: () => ProductsNeedTechnicalBloc.of(context).removeProduct(index: index),
+            onTap: () => ProductsNeedTechnicalBloc.of(context)
+                .removeProduct(index: index),
             child: SvgPicture.asset(
               Assets.trash,
               height: 15,
-              colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+              colorFilter:
+                  const ColorFilter.mode(Colors.black, BlendMode.srcIn),
             ),
           ),
         ],

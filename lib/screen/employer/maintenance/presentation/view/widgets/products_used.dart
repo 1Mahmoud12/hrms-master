@@ -6,6 +6,7 @@ import 'package:cnattendance/utils/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class ProductsUsed extends StatelessWidget {
   const ProductsUsed({super.key});
@@ -19,7 +20,7 @@ class ProductsUsed extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Products used',
+              'Products used'.tr,
               style: Styles.style16700,
             ),
             Text(
@@ -29,7 +30,8 @@ class ProductsUsed extends StatelessWidget {
           ],
         ),
         Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r), color: Colors.white),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.r), color: Colors.white),
           padding: EdgeInsets.all(10.w),
           child: Row(
             children: [
@@ -43,7 +45,7 @@ class ProductsUsed extends StatelessWidget {
               ),
               10.ESW(),
               Text(
-                'Engine',
+                'Engine'.tr,
                 style: Styles.style16700.copyWith(color: Colors.black),
               ),
               const Spacer(),

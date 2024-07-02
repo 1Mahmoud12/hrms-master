@@ -43,6 +43,7 @@ import 'package:cnattendance/screen/employer/maintenance/presentation/manager/ma
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportEmergencieBloc/cubit/report_emergencie_cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/manager/reportMalfunctionBloc/cubit.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/add_malfunction_request.dart';
+import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_detailes_report_malfunction.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/all_details_report.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/edit_report_screen.dart';
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/emergency_screen_items.dart';
@@ -53,6 +54,7 @@ import 'package:cnattendance/screen/employer/maintenance/presentation/view/widge
 import 'package:cnattendance/screen/employer/maintenance/presentation/view/widgets/periodic_maintenance_screen_item.dart';
 import 'package:cnattendance/screen/profile/editprofilescreen.dart';
 import 'package:cnattendance/screen/profile/forget_password_screen.dart';
+import 'package:cnattendance/screen/profile/manager/resetPasswordBloc/cubit/reset_password_cubit.dart';
 import 'package:cnattendance/screen/profile/meetingdetailscreen.dart';
 import 'package:cnattendance/screen/profile/payslipdetailscreen.dart';
 import 'package:cnattendance/screen/profile/profilescreen.dart';
@@ -267,6 +269,9 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => EmergencieCubit(),
             ),
+            BlocProvider(
+              create: (context) => ResetPasswordCubit(),
+            ),
           ],
           child: Portal(
             child: InAppNotification(
@@ -369,6 +374,8 @@ class _MyAppState extends State<MyApp> {
                         const MalFunctionScreenItems(),
                     AppRoute.malfunctionScreen: (_) =>
                         const MalfunctionScreen(),
+                              AppRoute.allDetailsReportMalfunction: (_) =>
+                        const AllDetailsReportMalfunction(),
                     ProfileScreen.routeName: (_) => const ProfileScreen(),
                     EditProfileScreen.routeName: (_) =>
                         const EditProfileScreen(),

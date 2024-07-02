@@ -28,18 +28,6 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
           style: Styles.styleHeader,
         ),
       ),
-      persistentFooterButtons: [
-        Center(
-          child: CustomTextButton(
-            onPress: () {},
-            backgroundColor: AppColors.primaryColor,
-            child: Text(
-              'submit'.tr,
-              style: Styles.style14400.copyWith(color: AppColors.white),
-            ),
-          ),
-        ),
-      ],
       body: BlocProvider(
         create: (context) => GetOneEmergencyCubit()
           ..getOneEmergency(context: context, idEmergency: idEmergency),
@@ -111,8 +99,8 @@ class MaintenanceReportMechanicsEmergencie extends StatelessWidget {
                         if (oneEmergencyCache!.data!.report != null)
                           MaintenanceReport(
                             report: oneEmergencyCache!.data!.report,
+                            type: 'Emergency',
                           ),
-                        const ProductsNeedErmergency(),
                       ].paddingDirectional(bottom: 10.h),
                     ),
         ),

@@ -28,18 +28,6 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
           style: Styles.styleHeader,
         ),
       ),
-      persistentFooterButtons: [
-        Center(
-          child: CustomTextButton(
-            onPress: () {},
-            backgroundColor: AppColors.primaryColor,
-            child: Text(
-              'submit'.tr,
-              style: Styles.style14400.copyWith(color: AppColors.white),
-            ),
-          ),
-        ),
-      ],
       body: BlocProvider(
         create: (context) => MalfunctionCubit()
           ..getOneMalfunction(context: context, idMalfunction: idMalfunction),
@@ -111,8 +99,8 @@ class MaintenanceReportMechanicsMalfunction extends StatelessWidget {
                         if (oneMalfunctioCache!.data!.report != null)
                           MaintenanceReport(
                             report: oneMalfunctioCache!.data!.report,
+                            type: 'Malfunction',
                           ),
-                        const ProductsNeedMalfunction(),
                       ].paddingDirectional(bottom: 10.h),
                     ),
         ),

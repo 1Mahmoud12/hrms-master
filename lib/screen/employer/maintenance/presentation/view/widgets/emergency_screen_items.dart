@@ -17,7 +17,7 @@ class EmergencyScreenItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String nameMaintenanceReport = 'Name Contract';
+    final String nameMaintenanceReport = 'Name Contract'.tr;
     const String location = 'Cairo';
     const int numberElevators = 15;
     final arguments = context.getArguments;
@@ -26,7 +26,7 @@ class EmergencyScreenItems extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          nameEmergency,
+          nameEmergency.tr,
           style: Styles.styleHeader,
         ),
       ),

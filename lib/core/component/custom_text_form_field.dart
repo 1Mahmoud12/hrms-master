@@ -128,6 +128,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
         errorBorder: const OutlineInputBorder(
+        
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),

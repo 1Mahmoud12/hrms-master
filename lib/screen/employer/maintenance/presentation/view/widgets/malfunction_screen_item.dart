@@ -19,7 +19,7 @@ class MalFunctionScreenItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String nameMaintenanceReport = 'Name Contract';
+    final String nameMaintenanceReport = 'Name Contract'.tr;
     const String location = 'Cairo';
     const int numberElevators = 15;
     final arguments = context.getArguments;
@@ -73,42 +73,43 @@ class MalFunctionScreenItems extends StatelessWidget {
                                 'id': allMalfunctionCache!
                                     .data!.malfunction![index].id
                                     .toString(),
-                          
                               };
 
-                              final customerArguments = {
-                                'nameMaintenanceReport': nameMaintenanceReport,
-                                'location': oneMalfunctioCache!
-                                    .data!.malfunction!.location,
-                                'name': oneMalfunctioCache!.data!.report == null
-                                    ? 'N/A'
-                                    : oneMalfunctioCache!
-                                        .data!.report!.technical!.name,
-                                'description': oneMalfunctioCache!
-                                    .data!.malfunction!.description,
-                                'image':
-                                    oneMalfunctioCache!.data!.malfunction!.img,
-                                'id': allMalfunctionCache!
-                                    .data!.malfunction![index].id
-                                    .toString(),
-                              };
+                              // final customerArguments = {
+                              //   'nameMaintenanceReport': nameMaintenanceReport,
+                              //   'location': oneMalfunctioCache!
+                              //       .data!.malfunction!.location,
+                              //   'name': oneMalfunctioCache!.data!.report == null
+                              //       ? 'N/A'
+                              //       : oneMalfunctioCache!
+                              //           .data!.report!.technical!.name,
+                              //   'description': oneMalfunctioCache!
+                              //       .data!.malfunction!.description,
+                              //   'image':
+                              //       oneMalfunctioCache!.data!.malfunction!.img,
+                              //   'id': allMalfunctionCache!
+                              //       .data!.malfunction![index].id
+                              //       .toString(),
+                              // };
 
                               if (genderUser == RoleId.eight.name.tr) {
                                 Navigator.pushNamed(
                                   context,
                                   AppRoute.malfunctionScreen,
-                                  arguments: customerArguments,
+                                  arguments: arguments,
                                 );
                               } else if (genderUser == RoleId.nine.name.tr) {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.MaintenanceReportMechanicsMalfunction,
+                                  AppRoute
+                                      .MaintenanceReportMechanicsMalfunction,
                                   arguments: arguments,
                                 );
                               } else {
                                 Navigator.pushNamed(
                                   context,
-                                  AppRoute.maintenanceReportTechnicalMalfunction,
+                                  AppRoute
+                                      .maintenanceReportTechnicalMalfunction,
                                   arguments: arguments,
                                 );
                               }

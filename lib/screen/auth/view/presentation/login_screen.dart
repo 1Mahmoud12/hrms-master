@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cnattendance/core/component/custom_text_form_field.dart';
 import 'package:cnattendance/core/component/loading_widget.dart';
+import 'package:cnattendance/core/routes/app_route.dart';
 import 'package:cnattendance/core/theme/color_constraint.dart';
 import 'package:cnattendance/core/theme/styles.dart';
 import 'package:cnattendance/screen/auth/view/manager/login/cubit.dart';
@@ -9,6 +10,7 @@ import 'package:cnattendance/screen/auth/view/manager/login/state.dart';
 import 'package:cnattendance/screen/auth/view/presentation/signup_screen.dart';
 import 'package:cnattendance/utils/assets.dart';
 import 'package:cnattendance/utils/extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -48,7 +50,11 @@ class LoginScreenState extends State<LoginScreen> {
     final value = _form.currentState!.validate();
 
     if (value) {
-      LoginCubit.of(context).loginUser(userName: _usernameController.text, password: _passwordController.text, context: context);
+      LoginCubit.of(context).loginUser(
+        userName: _usernameController.text,
+        password: _passwordController.text,
+        context: context,
+      );
     }
   }
 
@@ -84,13 +90,32 @@ class LoginScreenState extends State<LoginScreen> {
 
                       //textHeading('Username'),
                       //gaps(10),
-                      CustomTextFormField(controller: _usernameController, hintText: 'Username or Email'),
+                      CustomTextFormField(
+                        controller: _usernameController,
+                        hintText: 'Username or Email',
+                      ),
 
                       //  textHeading('Password'),
                       CustomTextFormField(
                         controller: _passwordController,
                         hintText: 'Password',
                         password: true,
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoute.ForgetPasswordScreen),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            'Forget Password ?'.tr,
+                            style: Styles.style16700.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.red,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
                       ),
                       /*TextFormField(
                       obscureText: _obscureText,
@@ -202,16 +227,26 @@ class LoginScreenState extends State<LoginScreen> {
                               );
                             },
                             child: Text.rich(
-                              TextSpan(text: "Don't Have An Account ?".tr, children: [
-                                const TextSpan(text: '  '),
-                                TextSpan(text: ' Create Account'.tr, style: Styles.style16700.copyWith(fontWeight: FontWeight.w500))
-                              ]),
+                              TextSpan(
+                                text: "Don't Have An Account ?".tr,
+                                children: [
+                                  const TextSpan(text: '  '),
+                                  TextSpan(
+                                    text: ' Create Account'.tr,
+                                    style: Styles.style16700.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               textAlign: TextAlign.center,
-                              style: Styles.style16700.copyWith(fontWeight: FontWeight.w500),
+                              style: Styles.style16700
+                                  .copyWith(fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],
                       ),
+
                       // Center(
                       //   child: GestureDetector(
                       //     onTap: () {
@@ -286,7 +321,9 @@ class LoginScreenState extends State<LoginScreen> {
           style: TextButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
             padding: EdgeInsets.zero,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(40))),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(40)),
+            ),
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
